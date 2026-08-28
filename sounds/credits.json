@@ -1,0 +1,436 @@
+[
+ {
+  "animal": "cat",
+  "title": "Felis silvestris catus meows.ogg",
+  "license": "CC BY-SA 3.0",
+  "author": "Tobias Puderer",
+  "page": "https://commons.wikimedia.org/wiki/File:Felis_silvestris_catus_meows.ogg"
+ },
+ {
+  "animal": "dog",
+  "title": "Barking of a dog.ogg",
+  "license": "CC BY-SA 3.0",
+  "author": "Amada44",
+  "page": "https://commons.wikimedia.org/wiki/File:Barking_of_a_dog.ogg"
+ },
+ {
+  "animal": "pig",
+  "title": "Mudchute pig 1.ogg, 2 and 3 (joined)",
+  "license": "CC BY-SA 3.0",
+  "author": "Secretlondon",
+  "page": "https://commons.wikimedia.org/wiki/File:Mudchute_pig_1.ogg"
+ },
+ {
+  "animal": "frog",
+  "title": "Single Frog Croak.oga",
+  "license": "CC BY-SA 4.0",
+  "author": "MichaeltheFox8621",
+  "page": "https://commons.wikimedia.org/wiki/File:Single_Frog_Croak.oga"
+ },
+ {
+  "animal": "lion",
+  "title": "Lion raring-sound1TamilNadu178.ogg",
+  "license": "Public domain",
+  "author": "த*உழவன்",
+  "page": "https://commons.wikimedia.org/wiki/File:Lion_raring-sound1TamilNadu178.ogg"
+ },
+ {
+  "animal": "cow",
+  "title": "Single Cow Moo.ogg",
+  "license": "CC BY-SA 4.0",
+  "author": "MichaeltheFox8621",
+  "page": "https://commons.wikimedia.org/wiki/File:Single_Cow_Moo.ogg"
+ },
+ {
+  "animal": "sheep",
+  "title": "Sheep bleating.ogg",
+  "license": "Public domain",
+  "author": "earthcalling",
+  "page": "https://commons.wikimedia.org/wiki/File:Sheep_bleating.ogg"
+ },
+ {
+  "animal": "goat",
+  "title": "Herd of goats bleating.ogg (one bleat)",
+  "license": "Public domain",
+  "author": "stephan",
+  "page": "https://commons.wikimedia.org/wiki/File:Herd_of_goats_bleating.ogg"
+ },
+ {
+  "animal": "duck",
+  "title": "Mallard (Anas platyrhynchos) (W1CDR0001518 BD17).ogg",
+  "license": "CC BY-SA 4.0",
+  "author": "",
+  "page": "https://commons.wikimedia.org/wiki/File:Mallard_(Anas_platyrhynchos)_(W1CDR0001518_BD17).ogg"
+ },
+ {
+  "animal": "horse",
+  "title": "Wiehern.ogg",
+  "license": "Public domain",
+  "author": "Hü.",
+  "page": "https://commons.wikimedia.org/wiki/File:Wiehern.ogg"
+ },
+ {
+  "animal": "chicken",
+  "title": "Rooster crowing.ogg",
+  "license": "CC BY-SA 4.0",
+  "author": "Filo gèn'",
+  "page": "https://commons.wikimedia.org/wiki/File:Rooster_crowing.ogg"
+ },
+ {
+  "animal": "bee",
+  "title": "Bee buzzing sound (animal noises).opus",
+  "license": "CC BY 3.0",
+  "author": "Free Sounds Library User Spanac",
+  "page": "https://commons.wikimedia.org/wiki/File:Bee_buzzing_sound_(animal_noises).opus"
+ },
+ {
+  "animal": "owl",
+  "title": "Strix aluco male.oga",
+  "license": "CC BY-SA 4.0",
+  "author": "Vianney Bajart",
+  "page": "https://commons.wikimedia.org/wiki/File:Strix_aluco_male.oga"
+ },
+ {
+  "animal": "elephant",
+  "title": "Elephant voice - trumpeting.ogg",
+  "license": "CC0",
+  "author": "தகவலுழவன்",
+  "page": "https://commons.wikimedia.org/wiki/File:Elephant_voice_-_trumpeting.ogg"
+ },
+ {
+  "animal": "monkey",
+  "title": "Brown woolly monkey alarm call.wav",
+  "license": "CC BY-SA 4.0",
+  "author": "Kai Medina (Mk170101)",
+  "page": "https://commons.wikimedia.org/wiki/File:Brown_woolly_monkey_alarm_call.wav"
+ },
+ {
+  "animal": "tiger",
+  "title": "439280_schots_angry-tiger.wav",
+  "license": "CC0",
+  "author": "schots",
+  "page": "https://commons.wikimedia.org/wiki/File:439280_schots_angry-tiger.wav"
+ },
+ {
+  "bangla": 1,
+  "word": "এক",
+  "title": "LL-Q9610 (ben)-Titodutta-এক.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%8F%E0%A6%95.wav"
+ },
+ {
+  "bangla": 2,
+  "word": "দুই",
+  "title": "LL-Q9610 (ben)-Titodutta-দুই.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%A6%E0%A7%81%E0%A6%87.wav"
+ },
+ {
+  "bangla": 3,
+  "word": "তিন",
+  "title": "LL-Q9610 (ben)-Titodutta-তিন.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%A4%E0%A6%BF%E0%A6%A8.wav"
+ },
+ {
+  "bangla": 4,
+  "word": "চার",
+  "title": "LL-Q9610 (ben)-Titodutta-চার.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%9A%E0%A6%BE%E0%A6%B0.wav"
+ },
+ {
+  "bangla": 5,
+  "word": "পাঁচ",
+  "title": "LL-Q9610 (ben)-Titodutta-পাঁচ.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%AA%E0%A6%BE%E0%A6%81%E0%A6%9A.wav"
+ },
+ {
+  "bangla": 6,
+  "word": "ছয়",
+  "title": "LL-Q9610 (ben)-Titodutta-ছয়.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%9B%E0%A6%AF%E0%A6%BC.wav"
+ },
+ {
+  "bangla": 7,
+  "word": "সাত",
+  "title": "LL-Q9610 (ben)-Titodutta-সাত.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%B8%E0%A6%BE%E0%A6%A4.wav"
+ },
+ {
+  "bangla": 8,
+  "word": "আট",
+  "title": "LL-Q9610 (ben)-Titodutta-আট.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%86%E0%A6%9F.wav"
+ },
+ {
+  "bangla": 9,
+  "word": "নয়",
+  "title": "LL-Q9610 (ben)-Titodutta-নয়.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%A8%E0%A6%AF%E0%A6%BC.wav"
+ },
+ {
+  "bangla": 10,
+  "word": "দশ",
+  "title": "LL-Q9610 (ben)-Titodutta-দশ.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%A6%E0%A6%B6.wav"
+ },
+ {
+  "bangla": 11,
+  "word": "এগারো",
+  "title": "LL-Q9610 (ben)-Titodutta-এগারো.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%8F%E0%A6%97%E0%A6%BE%E0%A6%B0%E0%A7%8B.wav"
+ },
+ {
+  "bangla": 12,
+  "word": "বারো",
+  "title": "LL-Q9610 (ben)-Titodutta-বারো.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%AC%E0%A6%BE%E0%A6%B0%E0%A7%8B.wav"
+ },
+ {
+  "bangla": 13,
+  "word": "তেরো",
+  "title": "LL-Q9610 (ben)-Galpadattya-তেরো.wav",
+  "license": "CC0",
+  "author": "Galpadattya",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Galpadattya-%E0%A6%A4%E0%A7%87%E0%A6%B0%E0%A7%8B.wav"
+ },
+ {
+  "bangla": 14,
+  "word": "চৌদ্দ",
+  "title": "LL-Q9610 (ben)-Titodutta-চৌদ্দ.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%9A%E0%A7%8C%E0%A6%A6%E0%A7%8D%E0%A6%A6.wav"
+ },
+ {
+  "bangla": 15,
+  "word": "পনেরো",
+  "title": "LL-Q9610 (ben)-Galpadattya-পনেরো.wav",
+  "license": "CC0",
+  "author": "Galpadattya",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Galpadattya-%E0%A6%AA%E0%A6%A8%E0%A7%87%E0%A6%B0%E0%A7%8B.wav"
+ },
+ {
+  "bangla": 16,
+  "word": "ষোলো",
+  "title": "LL-Q9610 (ben)-Titodutta-ষোল.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%B7%E0%A7%8B%E0%A6%B2.wav"
+ },
+ {
+  "bangla": 17,
+  "word": "সতেরো",
+  "title": "LL-Q9610 (ben)-Galpadattya-সতেরো.wav",
+  "license": "CC0",
+  "author": "Galpadattya",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Galpadattya-%E0%A6%B8%E0%A6%A4%E0%A7%87%E0%A6%B0%E0%A7%8B.wav"
+ },
+ {
+  "bangla": 18,
+  "word": "আঠারো",
+  "title": "LL-Q9610 (ben)-Galpadattya-আঠারো.wav",
+  "license": "CC0",
+  "author": "Galpadattya",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Galpadattya-%E0%A6%86%E0%A6%A0%E0%A6%BE%E0%A6%B0%E0%A7%8B.wav"
+ },
+ {
+  "bangla": 19,
+  "word": "উনিশ",
+  "title": "LL-Q9610 (ben)-Galpadattya-উনিশ.wav",
+  "license": "CC0",
+  "author": "Galpadattya",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Galpadattya-%E0%A6%89%E0%A6%A8%E0%A6%BF%E0%A6%B6.wav"
+ },
+ {
+  "bangla": 20,
+  "word": "বিশ",
+  "title": "LL-Q9610 (ben)-Titodutta-বিশ.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%AC%E0%A6%BF%E0%A6%B6.wav"
+ },
+ {
+  "bodyPart": "head",
+  "english": "Head",
+  "word": "মাথা",
+  "title": "LL-Q9610 (ben)-Titodutta-মাথা.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%AE%E0%A6%BE%E0%A6%A5%E0%A6%BE.wav"
+ },
+ {
+  "bodyPart": "hair",
+  "english": "Hair",
+  "word": "চুল",
+  "title": "LL-Q9610 (ben)-Titodutta-চুল.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%9A%E0%A7%81%E0%A6%B2.wav"
+ },
+ {
+  "bodyPart": "eyes",
+  "english": "Eyes",
+  "word": "চোখ",
+  "title": "LL-Q9610 (ben)-Titodutta-চোখ.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%9A%E0%A7%8B%E0%A6%96.wav"
+ },
+ {
+  "bodyPart": "ears",
+  "english": "Ears",
+  "word": "কান",
+  "title": "LL-Q9610 (ben)-Titodutta-কান.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%95%E0%A6%BE%E0%A6%A8.wav"
+ },
+ {
+  "bodyPart": "nose",
+  "english": "Nose",
+  "word": "নাক",
+  "title": "LL-Q9610 (ben)-Titodutta-নাক.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%A8%E0%A6%BE%E0%A6%95.wav"
+ },
+ {
+  "bodyPart": "mouth",
+  "english": "Mouth",
+  "word": "মুখ",
+  "title": "LL-Q9610 (ben)-Titodutta-মুখ.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%AE%E0%A7%81%E0%A6%96.wav"
+ },
+ {
+  "bodyPart": "teeth",
+  "english": "Teeth",
+  "word": "দাঁত",
+  "title": "LL-Q9610 (ben)-Titodutta-দাঁত.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%A6%E0%A6%BE%E0%A6%81%E0%A6%A4.wav"
+ },
+ {
+  "bodyPart": "neck",
+  "english": "Neck",
+  "word": "গলা",
+  "title": "LL-Q9610 (ben)-Titodutta-গলা.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%97%E0%A6%B2%E0%A6%BE.wav"
+ },
+ {
+  "bodyPart": "shoulders",
+  "english": "Shoulders",
+  "word": "কাঁধ",
+  "title": "LL-Q9610 (ben)-Titodutta-কাঁধ.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%95%E0%A6%BE%E0%A6%81%E0%A6%A7.wav"
+ },
+ {
+  "bodyPart": "arms",
+  "english": "Arms",
+  "word": "বাহু",
+  "title": "LL-Q9610 (ben)-Titodutta-বাহু.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%AC%E0%A6%BE%E0%A6%B9%E0%A7%81.wav"
+ },
+ {
+  "bodyPart": "elbows",
+  "english": "Elbows",
+  "word": "কনুই",
+  "title": "LL-Q9610 (ben)-Symoum Syfullah Priyo-কনুই.wav",
+  "license": "CC0",
+  "author": "Symoum Syfullah Priyo",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Symoum_Syfullah_Priyo-%E0%A6%95%E0%A6%A8%E0%A7%81%E0%A6%87.wav"
+ },
+ {
+  "bodyPart": "hands",
+  "english": "Hands",
+  "word": "হাত",
+  "title": "LL-Q9610 (ben)-Titodutta-হাত.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%B9%E0%A6%BE%E0%A6%A4.wav"
+ },
+ {
+  "bodyPart": "fingers",
+  "english": "Fingers",
+  "word": "আঙুল",
+  "title": "LL-Q9610 (ben)-Titodutta-আঙুল.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%86%E0%A6%99%E0%A7%81%E0%A6%B2.wav"
+ },
+ {
+  "bodyPart": "tummy",
+  "english": "Tummy",
+  "word": "পেট",
+  "title": "LL-Q9610 (ben)-Titodutta-পেট.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%AA%E0%A7%87%E0%A6%9F.wav"
+ },
+ {
+  "bodyPart": "legs",
+  "english": "Legs",
+  "word": "পা",
+  "title": "LL-Q9610 (ben)-Titodutta-পা.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%AA%E0%A6%BE.wav"
+ },
+ {
+  "bodyPart": "knees",
+  "english": "Knees",
+  "word": "হাঁটু",
+  "title": "LL-Q9610 (ben)-Titodutta-হাঁটু.wav",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%B9%E0%A6%BE%E0%A6%81%E0%A6%9F%E0%A7%81.wav"
+ },
+ {
+  "bodyPart": "feet",
+  "english": "Feet",
+  "word": "পায়ের পাতা",
+  "title": "LL-Q9610 (ben)-Titodutta-পায়ের.wav, LL-Q9610 (ben)-Titodutta-পাতা.wav (joined)",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%AA%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%B0.wav"
+ },
+ {
+  "bodyPart": "toes",
+  "english": "Toes",
+  "word": "পায়ের আঙুল",
+  "title": "LL-Q9610 (ben)-Titodutta-পায়ের.wav, LL-Q9610 (ben)-Titodutta-আঙুল.wav (joined)",
+  "license": "CC0",
+  "author": "Titodutta",
+  "page": "https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%AA%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%B0.wav"
+ }
+]

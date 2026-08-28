@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#E7ECF2">
+<meta name="color-scheme" content="light">
+<meta name="description" content="Letters, numbers and body parts in English, বাংলা, Español and Français, plus photographs, colours and shapes. Built for a 3–6 year old with a grown-up nearby.">
+<title>Magnet Board — Letters &amp; Numbers</title>
+<link rel="canonical" href="https://kiddo.page/">
+
+<!-- Installable. The manifest carries the name, the icons and the two
+     screenshots Chrome shows in its install sheet; iOS reads none of it
+     and wants the three apple- tags below instead. -->
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="icons/favicon-64.png" sizes="64x64" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Magnet Board">
+<meta name="application-name" content="Magnet Board">
+<!-- A number in text on a kids' page is a phone number as far as Safari
+     is concerned, and it turns it into a blue link. -->
+<meta name="format-detection" content="telephone=no">
+
+<!-- The card that gets pasted into a chat. Absolute, because a crawler
+     reads the page from somewhere else and has no base to resolve
+     against; see brand/og.html for the drawing. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Magnet Board">
+<meta property="og:title" content="Magnet Board — Letters &amp; Numbers">
+<meta property="og:description" content="Letters, numbers and body parts in English, বাংলা, Español and Français, plus photographs, colours and shapes. Built for a 3–6 year old with a grown-up nearby.">
+<meta property="og:url" content="https://kiddo.page/">
+<meta property="og:image" content="https://kiddo.page/og.png?v=2">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Four fridge magnets: a red A, a green অ, a purple Ñ and a photograph of a lion, beside the words Magnet Board, a language switch reading English, বাংলা, Español and Français under their flags, and the address kiddo.page.">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="bn_BD">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Magnet Board — Letters &amp; Numbers">
+<meta name="twitter:description" content="Letters, numbers and body parts in English, বাংলা, Español and Français, plus photographs, colours and shapes. Built for a 3–6 year old with a grown-up nearby.">
+<meta name="twitter:image" content="https://kiddo.page/og.png?v=2">
+<meta name="twitter:image:alt" content="Four fridge magnets: a red A, a green অ, a purple Ñ and a photograph of a lion, beside the words Magnet Board, a language switch reading English, বাংলা, Español and Français under their flags, and the address kiddo.page.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Baloo+Da+2:wght@600;800&family=Andika:wght@400;700&display=swap" rel="stylesheet">
+<!-- Bump ?v= whenever styles.css or app.js changes, and bump VERSION in
+     sw.js to the same number. Without it a browser happily pairs a new
+     index.html with a cached old app.js, and a screen the old script has
+     never heard of just stays hidden — a blank board, no error. Changing
+     the URL is the only thing a web-clip on an iPad reliably notices. -->
+<link rel="stylesheet" href="styles.css?v=8">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Magnetic strip along the top: score, sound, parent controls -->
+  <header class="rail">
+    <div class="score" id="score" aria-live="polite">
+      <span class="score-star" aria-hidden="true">★</span>
+      <span class="score-num" id="scoreNum">0</span>
+      <span class="score-label">stars</span>
+    </div>
+    <div class="rail-actions">
+      <button class="icon-btn" id="soundBtn" aria-pressed="false" title="Turn sound off">
+        <span class="icon-on" aria-hidden="true">🔊</span>
+        <span class="icon-off" aria-hidden="true">🔇</span>
+        <span class="sr-only">Sound</span>
+      </button>
+      <button class="icon-btn" id="parentBtn" title="Grown-ups">
+        <span aria-hidden="true">⚙</span>
+        <span class="sr-only">Grown-ups</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- The fridge door -->
+  <main class="board" id="board">
+
+    <section class="screen" id="screen-letters" aria-label="Letters">
+      <!-- Filled in by app.js from the languages switched on, and
+           hidden altogether when there is only one of them. -->
+      <div class="pics-switch">
+        <div class="segmented segmented--lang" role="group" aria-label="Language"></div>
+        <p class="screen-hint" id="lettersHint">Tap a letter to hear it.</p>
+      </div>
+      <button class="showcase" id="letterView" aria-live="polite">
+        <span class="sc-pair">
+          <span class="sc-main" id="letterMain">A</span>
+          <!-- Hidden for a script with no lowercase. -->
+          <span class="sc-sub" id="letterSub">a</span>
+        </span>
+        <!-- Hidden for a letter that begins no word a child meets. -->
+        <span class="sc-word" id="letterPair">
+          <span class="sc-emoji" id="letterEmoji">🍎</span>
+          <span id="letterWord">Apple</span>
+        </span>
+      </button>
+      <div class="grid" id="lettersGrid"></div>
+    </section>
+
+    <section class="screen is-hidden" id="screen-numbers" aria-label="Numbers">
+      <div class="pics-switch">
+        <div class="segmented segmented--lang" role="group" aria-label="Language"></div>
+        <p class="screen-hint" id="numbersHint">Tap a number to hear it.</p>
+      </div>
+      <button class="showcase" id="numView" aria-live="polite">
+        <span class="sc-main" id="numFace">1</span>
+        <span class="sc-word" id="numWord">one</span>
+        <span class="sc-count" id="numPics"></span>
+      </button>
+      <div class="grid" id="numbersGrid"></div>
+    </section>
+
+    <section class="screen is-hidden" id="screen-pictures" aria-label="Fruits, animals, birds, flowers and things at home">
+      <div class="pics-switch">
+        <div class="segmented segmented--pics" role="group" aria-label="What to look at">
+          <button class="seg is-on" data-group="fruit">Fruits</button>
+          <button class="seg" data-group="animal">Animals</button>
+          <button class="seg" data-group="bird">Birds</button>
+          <button class="seg" data-group="flower">Flowers</button>
+          <button class="seg" data-group="home">At home</button>
+        </div>
+        <p class="screen-hint" id="picsHint">Tap a fruit to hear its name.</p>
+      </div>
+      <button class="showcase showcase--pic" id="picView" aria-live="polite">
+        <span class="sc-pic" id="picEmoji">🍎</span>
+        <span class="sc-text">
+          <span class="sc-word" id="picWord">Apple</span>
+          <span class="sc-line" id="picLine">Apples are red and crunchy.</span>
+        </span>
+      </button>
+      <div class="grid grid--pics" id="fruitGrid"></div>
+      <div class="grid grid--pics is-hidden" id="animalGrid"></div>
+      <div class="grid grid--pics is-hidden" id="birdGrid"></div>
+      <div class="grid grid--pics is-hidden" id="flowerGrid"></div>
+      <div class="grid grid--pics is-hidden" id="homeGrid"></div>
+    </section>
+
+    <section class="screen screen--colors is-hidden" id="screen-colors" aria-label="Colors">
+      <p class="screen-hint">Tap a color to hear its name.</p>
+      <button class="showcase showcase--color" id="colorView" aria-live="polite">
+        <span class="sc-color" id="colorName">Red</span>
+      </button>
+      <div class="grid grid--colors" id="colorsGrid"></div>
+    </section>
+
+    <section class="screen is-hidden" id="screen-shapes" aria-label="Shapes">
+      <p class="screen-hint">Tap a shape and watch it draw itself.</p>
+      <button class="showcase showcase--shape" id="shapeView" aria-live="polite">
+        <span class="sc-shape" id="shapeArt"></span>
+        <span class="sc-text">
+          <span class="sc-word" id="shapeWord">Circle</span>
+          <span class="sc-chip" id="shapeCount">no corners</span>
+          <span class="sc-line" id="shapeLine">Like a ball, a cookie and a big wheel.</span>
+          <span class="sc-pics" id="shapePics" aria-hidden="true"></span>
+        </span>
+      </button>
+      <div class="grid grid--shapes" id="shapesGrid"></div>
+    </section>
+
+    <section class="screen is-hidden" id="screen-body" aria-label="Body">
+      <div class="pics-switch">
+        <div class="segmented segmented--lang" role="group" aria-label="Language"></div>
+        <p class="screen-hint" id="bodyHint">Tap the boy — his nose, his hand, his toes.</p>
+      </div>
+      <button class="showcase showcase--body" id="bodyView" aria-live="polite">
+        <span class="sc-body" id="bodyArt"></span>
+        <span class="sc-text">
+          <span class="sc-word" id="bodyWord"></span>
+        </span>
+      </button>
+      <div class="grid grid--body" id="bodyGrid"></div>
+    </section>
+
+    <section class="screen is-hidden" id="screen-play" aria-label="Play">
+      <div class="play">
+        <div class="segmented segmented--play" role="group" aria-label="What to practise">
+          <button class="seg is-on" data-set="letters">Letters</button>
+          <button class="seg" data-set="numbers">Numbers</button>
+          <button class="seg" data-set="pictures">Pictures</button>
+          <button class="seg" data-set="colors">Colors</button>
+          <button class="seg" data-set="shapes">Shapes</button>
+          <button class="seg" data-set="body">Body</button>
+          <button class="seg" data-set="all">All</button>
+        </div>
+
+        <div class="dots" id="dots" aria-hidden="true"></div>
+
+        <h2 class="ask" id="ask">Find the letter A</h2>
+        <button class="repeat-btn" id="repeatAsk">
+          <span aria-hidden="true">🔊</span> Say it again
+        </button>
+
+        <div class="choices" id="choices"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="nav" aria-label="Sections">
+    <button class="tab is-on" data-screen="letters" aria-label="Letters">
+      <span class="tab-mark" aria-hidden="true">A</span><span class="tab-label" aria-hidden="true">Letters</span>
+    </button>
+    <button class="tab" data-screen="numbers" aria-label="Numbers">
+      <span class="tab-mark" aria-hidden="true">1</span><span class="tab-label" aria-hidden="true">Numbers</span>
+    </button>
+    <button class="tab" data-screen="pictures" aria-label="Fruits, animals, birds, flowers and things at home">
+      <span class="tab-mark tab-mark--emoji" aria-hidden="true">🍓</span><span class="tab-label" aria-hidden="true">Pictures</span>
+    </button>
+    <button class="tab" data-screen="colors" aria-label="Colors">
+      <span class="tab-mark tab-mark--emoji" aria-hidden="true">🌈</span><span class="tab-label" aria-hidden="true">Colors</span>
+    </button>
+    <button class="tab" data-screen="shapes" aria-label="Shapes">
+      <span class="tab-mark tab-mark--emoji" aria-hidden="true">🔷</span><span class="tab-label" aria-hidden="true">Shapes</span>
+    </button>
+    <button class="tab" data-screen="body" aria-label="Body">
+      <span class="tab-mark tab-mark--emoji" aria-hidden="true">🙋</span><span class="tab-label" aria-hidden="true">Body</span>
+    </button>
+    <button class="tab" data-screen="play" aria-label="Play">
+      <span class="tab-mark" aria-hidden="true">★</span><span class="tab-label" aria-hidden="true">Play</span>
+    </button>
+  </nav>
+
+</div>
+
+<!-- Confetti for a right answer -->
+<div class="party" id="party" aria-hidden="true"></div>
+
+<!-- End of a game round set -->
+<div class="cheer-wrap is-hidden" id="cheerWrap">
+  <div class="cheer" role="dialog" aria-modal="true" aria-labelledby="cheerTitle">
+    <div class="cheer-burst" id="cheerBurst" aria-hidden="true"></div>
+    <h2 class="cheer-title" id="cheerTitle">You did it!</h2>
+    <p class="cheer-sub" id="cheerSub">10 out of 10</p>
+    <button class="big-btn" id="againBtn">Play again</button>
+    <button class="text-btn" id="cheerDone">Back to letters</button>
+  </div>
+</div>
+
+<!-- Which languages, asked once, before anything else. No scrim to
+     tap away and no close button: the button below is the way out, and
+     it works without anything being touched. -->
+<div class="overlay is-hidden" id="langWrap">
+  <div class="overlay-scrim"></div>
+  <div class="panel panel--lang" role="dialog" aria-modal="true" aria-labelledby="langTitle">
+    <h2 class="panel-title" id="langTitle">Which languages?</h2>
+    <p class="panel-note">
+      Letters, numbers and the body screen can be in any of these, one
+      at a time, with a switch at the top to change between them.
+      Pictures, colours, shapes and Play are in English.
+    </p>
+    <div class="lang-list" id="langList"></div>
+    <p class="panel-note">
+      A grown-up can change this later under ⚙.
+    </p>
+    <button class="big-btn" id="langDone">Start</button>
+  </div>
+</div>
+
+<!-- Grown-ups only -->
+<div class="overlay is-hidden" id="parentWrap">
+  <div class="overlay-scrim" id="parentScrim"></div>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="parentTitle">
+    <h2 class="panel-title" id="parentTitle">Grown-ups</h2>
+    <!-- One row per thing to explore, built by app.js — which rows
+         there are depends on which languages are switched on. -->
+    <dl class="stats" id="stats"></dl>
+
+    <!-- Turning a language off hides its tiles and its row of stats.
+         It does not clear anything: off is not reset. -->
+    <h3 class="panel-sub">Languages</h3>
+    <div class="lang-list" id="parentLangList"></div>
+    <p class="panel-note">
+      Letters, numbers and the body screen follow this. Pictures,
+      colours, shapes and Play are in English whatever is chosen here.
+    </p>
+
+    <!-- Installing and downloading are grown-up jobs, so they live in
+         the grown-up drawer. Both rows stay hidden until the browser
+         says they are possible — an "Add to home screen" button that
+         does nothing is worse than no button. -->
+    <button class="soft-btn is-hidden" id="installBtn">
+      <span aria-hidden="true">⬇</span> Add to home screen
+    </button>
+
+    <div class="offline is-hidden" id="offlineBox">
+      <div class="offline-say">
+        <span class="offline-title" id="offlineTitle">Keep it offline</span>
+        <span class="offline-note" id="offlineNote">Checking…</span>
+      </div>
+      <div class="offline-bar"><i id="offlineFill"></i></div>
+      <button class="soft-btn" id="offlineBtn">Download the photos and sounds</button>
+    </div>
+
+    <button class="danger-btn" id="resetBtn">Reset progress</button>
+    <button class="text-btn" id="parentClose">Close</button>
+  </div>
+</div>
+
+<script src="app.js?v=8"></script>
+</body>
+</html>

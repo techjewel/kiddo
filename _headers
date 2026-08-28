@@ -1,0 +1,46 @@
+# Cloudflare Workers static assets reads this. Content-addressed things
+# — a photograph named for the animal in it, a recording named for the
+# word — never change, so they may as well be kept for a year. The two
+# files that decide what version everything else is must never be.
+
+/photos/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/sounds/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/icons/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/apple-touch-icon.png
+  Cache-Control: public, max-age=604800
+
+# Not linked from anywhere; browsers ask for it by themselves. A week,
+# like the other two that aren't content-addressed.
+/favicon.ico
+  Cache-Control: public, max-age=604800
+
+/og.png
+  Cache-Control: public, max-age=604800
+
+# styles.css and app.js are asked for with a ?v= on them, so a bump is a
+# different URL and a year is safe.
+/styles.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/app.js
+  Cache-Control: public, max-age=31536000, immutable
+
+# The page names the versions, and the worker decides what is cached.
+# Either one held onto pins the app to an old release.
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/sw.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/manifest.webmanifest
+  Cache-Control: public, max-age=3600

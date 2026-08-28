@@ -1,0 +1,794 @@
+[
+ {
+  "slug": "cat",
+  "article": "Cat",
+  "file": "Cat November 2010-1a.jpg",
+  "license": "CC BY-SA 3.0",
+  "author": "Alvesgaspar",
+  "page": "https://commons.wikimedia.org/wiki/File:Cat_November_2010-1a.jpg"
+ },
+ {
+  "slug": "dog",
+  "article": "Dog",
+  "file": "Golden Retriever Dukedestiny01 drvd.jpg",
+  "license": "Public domain",
+  "author": "Dukedestiny01.jpg: \"Janneke Vreugdenhil\"\nderivative work: Anka Friedrich ([[User talk:Ankaaswe\nTrix Friedrich|talk]])",
+  "page": "https://commons.wikimedia.org/wiki/File:Golden_Retriever_Dukedestiny01_drvd.jpg"
+ },
+ {
+  "slug": "cow",
+  "article": "Cattle",
+  "file": "Cow_(Fleckvieh_breed)_Oeschinensee_Slaunger_2009-07-07.jpg",
+  "license": "CC BY-SA 3.0",
+  "author": "Kim Hansen",
+  "page": "https://commons.wikimedia.org/wiki/File:Cow_(Fleckvieh_breed)_Oeschinensee_Slaunger_2009-07-07.jpg"
+ },
+ {
+  "slug": "sheep",
+  "article": "Sheep",
+  "file": "Flock_of_sheep.jpg",
+  "license": "Public domain",
+  "author": "Keith Weller",
+  "page": "https://commons.wikimedia.org/wiki/File:Flock_of_sheep.jpg"
+ },
+ {
+  "slug": "goat",
+  "article": "Goat",
+  "file": "Hausziege_04.jpg",
+  "license": "CC BY-SA 3.0",
+  "author": "Kuebi = Armin Kübelbeck",
+  "page": "https://commons.wikimedia.org/wiki/File:Hausziege_04.jpg"
+ },
+ {
+  "slug": "duck",
+  "article": "Duck",
+  "file": "Anas platyrhynchos male female quadrat.jpg",
+  "license": "CC BY-SA 2.5",
+  "author": "This picture was realized by  Richard Bartz  by using a Canon EF 70-300mm f/4-5.6 IS USM Lens",
+  "page": "https://commons.wikimedia.org/wiki/File:Anas_platyrhynchos_male_female_quadrat.jpg"
+ },
+ {
+  "slug": "horse",
+  "article": "Horse",
+  "file": "Nokota_Horses_cropped.jpg",
+  "license": "CC BY-SA 3.0",
+  "author": "Nokota_Horses.jpg: François Marchal\nderivative work: Dana boomer (talk)",
+  "page": "https://commons.wikimedia.org/wiki/File:Nokota_Horses_cropped.jpg"
+ },
+ {
+  "slug": "chicken",
+  "article": "Chicken",
+  "file": "Male_and_female_chicken_sitting_together.jpg",
+  "license": "CC BY-SA 2.0",
+  "author": "Andrei Niemimäki from Turku, Finland",
+  "page": "https://commons.wikimedia.org/wiki/File:Male_and_female_chicken_sitting_together.jpg"
+ },
+ {
+  "slug": "frog",
+  "article": "Frog",
+  "file": "Red-eyed_Leaf_Frog_(49661076226).jpg",
+  "license": "CC BY 2.0",
+  "author": "Charlie Jackson",
+  "page": "https://commons.wikimedia.org/wiki/File:Red-eyed_Leaf_Frog_(49661076226).jpg"
+ },
+ {
+  "slug": "bee",
+  "article": "Honey bee",
+  "file": "The_Lone_Pollinator.jpg",
+  "license": "CC BY 4.0",
+  "author": "Tanner Smida",
+  "page": "https://commons.wikimedia.org/wiki/File:The_Lone_Pollinator.jpg"
+ },
+ {
+  "slug": "owl",
+  "article": "Owl",
+  "file": "Bubo_bubo_sibiricus_-_01.JPG",
+  "license": "CC BY-SA 4.0",
+  "author": "Carlos Delgado",
+  "page": "https://commons.wikimedia.org/wiki/File:Bubo_bubo_sibiricus_-_01.JPG"
+ },
+ {
+  "slug": "mouse",
+  "article": "Mouse",
+  "file": "Mouse white background.jpg",
+  "license": "Public domain",
+  "author": "Unknown authorUnknown author (original) / Ilmari Karonen (editing)",
+  "page": "https://commons.wikimedia.org/wiki/File:Mouse_white_background.jpg"
+ },
+ {
+  "slug": "snake",
+  "article": "Snake",
+  "file": "Trimeresurus_sabahi_fucatus,_Banded_pit_viper_-_Takua_Pa_District,_Phang-nga_Province_(46710893582).jpg",
+  "license": "CC BY-SA 2.0",
+  "author": "Rushenb",
+  "page": "https://commons.wikimedia.org/wiki/File:Trimeresurus_sabahi_fucatus,_Banded_pit_viper_-_Takua_Pa_District,_Phang-nga_Province_(46710893582).jpg"
+ },
+ {
+  "slug": "lion",
+  "article": "Lion",
+  "file": "020_The_lion_king_Snyggve_in_the_Serengeti_National_Park_Photo_by_Giles_Laurent.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Giles Laurent",
+  "page": "https://commons.wikimedia.org/wiki/File:020_The_lion_king_Snyggve_in_the_Serengeti_National_Park_Photo_by_Giles_Laurent.jpg"
+ },
+ {
+  "slug": "tiger",
+  "article": "Tiger",
+  "file": "Bengal_tiger_(Panthera_tigris_tigris)_female_3_crop.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Charles J. Sharp",
+  "page": "https://commons.wikimedia.org/wiki/File:Bengal_tiger_(Panthera_tigris_tigris)_female_3_crop.jpg"
+ },
+ {
+  "slug": "elephant",
+  "article": "Elephant",
+  "file": "African_Bush_Elephant.jpg",
+  "license": "GFDL 1.2",
+  "author": "Muhammad Mahdi Karim Facebook\n\n\n\n\n\nThe making of this document was supported by Wikimedia CH. (Submit your project!)\nFor",
+  "page": "https://commons.wikimedia.org/wiki/File:African_Bush_Elephant.jpg"
+ },
+ {
+  "slug": "monkey",
+  "article": "Monkey",
+  "file": "Ubud_Monkey_Family.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Deerpeter",
+  "page": "https://commons.wikimedia.org/wiki/File:Ubud_Monkey_Family.jpg"
+ },
+ {
+  "slug": "penguin",
+  "article": "Penguin",
+  "file": "South_Shetland-2016-Deception_Island–Chinstrap_penguin_(Pygoscelis_antarctica)_04.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Godot13",
+  "page": "https://commons.wikimedia.org/wiki/File:South_Shetland-2016-Deception_Island%E2%80%93Chinstrap_penguin_(Pygoscelis_antarctica)_04.jpg"
+ },
+ {
+  "slug": "rabbit",
+  "article": "Rabbit",
+  "file": "Oryctolagus_cuniculus_Rcdo.jpg",
+  "license": "CC BY 3.0",
+  "author": "JM Ligero Loarte",
+  "page": "https://commons.wikimedia.org/wiki/File:Oryctolagus_cuniculus_Rcdo.jpg"
+ },
+ {
+  "slug": "turtle",
+  "article": "Turtle",
+  "file": "Chelonia mydas is going for the air edit.jpg",
+  "license": "CC BY-SA 3.0",
+  "author": "Brocken Inaglory",
+  "page": "https://commons.wikimedia.org/wiki/File:Chelonia_mydas_is_going_for_the_air_edit.jpg"
+ },
+ {
+  "slug": "panda",
+  "article": "Giant panda",
+  "file": "Grosser_Panda.JPG",
+  "license": "CC BY-SA 3.0",
+  "author": "J. Patrick Fischer",
+  "page": "https://commons.wikimedia.org/wiki/File:Grosser_Panda.JPG"
+ },
+ {
+  "slug": "zebra",
+  "article": "Zebra",
+  "file": "Plains_Zebra_Equus_quagga_cropped.jpg",
+  "license": "GFDL 1.2",
+  "author": "Muhammad Mahdi Karim",
+  "page": "https://commons.wikimedia.org/wiki/File:Plains_Zebra_Equus_quagga_cropped.jpg"
+ },
+ {
+  "slug": "fish",
+  "article": "Goldfish",
+  "file": "Gold_fish1.jpg",
+  "license": "CC BY-SA 3.0",
+  "author": "לינה אבוגוש",
+  "page": "https://commons.wikimedia.org/wiki/File:Gold_fish1.jpg"
+ },
+ {
+  "slug": "apple",
+  "article": "Apple",
+  "file": "Pink_lady_and_cross_section.jpg",
+  "license": "GFDL 1.2",
+  "author": "fir0002  flagstaffotos [at] gmail.com\n\t\tCanon 20D + Sigma 150mm f/2.8",
+  "page": "https://commons.wikimedia.org/wiki/File:Pink_lady_and_cross_section.jpg"
+ },
+ {
+  "slug": "banana",
+  "article": "Banana",
+  "file": "Bananavarieties.jpg",
+  "license": "CC BY-SA 3.0",
+  "author": "TimothyPilgrim",
+  "page": "https://commons.wikimedia.org/wiki/File:Bananavarieties.jpg"
+ },
+ {
+  "slug": "orange",
+  "article": "Orange (fruit)",
+  "file": "Oranges_-_whole-halved-segment.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Ivar Leidus",
+  "page": "https://commons.wikimedia.org/wiki/File:Oranges_-_whole-halved-segment.jpg"
+ },
+ {
+  "slug": "grapes",
+  "article": "Grape",
+  "file": "Grapes,_Rostov-on-Don,_Russia.jpg",
+  "license": "CC BY 4.0",
+  "author": "Vyacheslav Argenberg",
+  "page": "https://commons.wikimedia.org/wiki/File:Grapes,_Rostov-on-Don,_Russia.jpg"
+ },
+ {
+  "slug": "strawberry",
+  "article": "Strawberry",
+  "file": "Garden_strawberry_(Fragaria_×_ananassa)_single2.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Ivar Leidus",
+  "page": "https://commons.wikimedia.org/wiki/File:Garden_strawberry_(Fragaria_%C3%97_ananassa)_single2.jpg"
+ },
+ {
+  "slug": "watermelon",
+  "article": "Watermelon",
+  "file": "Liat Portal for Foodie Disorder - Watermelon slices.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "HaJunkiyada",
+  "page": "https://commons.wikimedia.org/wiki/File:Liat_Portal_for_Foodie_Disorder_-_Watermelon_slices.jpg"
+ },
+ {
+  "slug": "pineapple",
+  "article": "Pineapple",
+  "file": "Pineapple and cross section.jpg",
+  "license": "GFDL 1.2",
+  "author": "fir0002    flagstaffotos [at] gmail.com   \n\t\t Canon 20D + Sigma 150mm f/2.8",
+  "page": "https://commons.wikimedia.org/wiki/File:Pineapple_and_cross_section.jpg"
+ },
+ {
+  "slug": "mango",
+  "article": "Mango",
+  "file": "Mangos_-_single_and_halved.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Ivar Leidus",
+  "page": "https://commons.wikimedia.org/wiki/File:Mangos_-_single_and_halved.jpg"
+ },
+ {
+  "slug": "peach",
+  "article": "Peach",
+  "file": "Liat Portal for Foodie Disorder - Peach.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "HaJunkiyada",
+  "page": "https://commons.wikimedia.org/wiki/File:Liat_Portal_for_Foodie_Disorder_-_Peach.jpg"
+ },
+ {
+  "slug": "pear",
+  "article": "Pear",
+  "file": "Pears.jpg",
+  "license": "Public domain",
+  "author": "Keith Weller",
+  "page": "https://commons.wikimedia.org/wiki/File:Pears.jpg"
+ },
+ {
+  "slug": "cherries",
+  "article": "Cherry",
+  "file": "Cherry_season_(48216568227).jpg",
+  "license": "CC BY 2.0",
+  "author": "spurekar",
+  "page": "https://commons.wikimedia.org/wiki/File:Cherry_season_(48216568227).jpg"
+ },
+ {
+  "slug": "lemon",
+  "article": "Lemon",
+  "file": "Lemon - whole and split.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Ivar Leidus",
+  "page": "https://commons.wikimedia.org/wiki/File:Lemon_-_whole_and_split.jpg"
+ },
+ {
+  "slug": "kiwi",
+  "article": "Kiwifruit",
+  "file": "Kiwi.jpg",
+  "license": "Public domain",
+  "author": "Renee Comet (Photographer)",
+  "page": "https://commons.wikimedia.org/wiki/File:Kiwi.jpg"
+ },
+ {
+  "slug": "coconut",
+  "article": "Coconut",
+  "file": "Coconuts - single and cracked open.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Ivar Leidus",
+  "page": "https://commons.wikimedia.org/wiki/File:Coconuts_-_single_and_cracked_open.jpg"
+ },
+ {
+  "slug": "melon",
+  "article": "Melon",
+  "file": "Cucumis melo var. reticulatus (photo by Scott Bauer).jpg",
+  "license": "Public domain",
+  "author": "USDA photo by Scott Bauer. Image Number K7355-11.",
+  "page": "https://commons.wikimedia.org/wiki/File:Cucumis_melo_var._reticulatus_(photo_by_Scott_Bauer).jpg"
+ },
+ {
+  "slug": "blueberries",
+  "article": "Blueberry",
+  "file": "Blueberries.jpg",
+  "license": "Public domain",
+  "author": "The original Uploader was Oven Fresh at English Wikipedia",
+  "page": "https://commons.wikimedia.org/wiki/File:Blueberries.jpg"
+ },
+ {
+  "slug": "avocado",
+  "article": "Avocado",
+  "file": "Avocado Hass - single and halved.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Ivar Leidus",
+  "page": "https://commons.wikimedia.org/wiki/File:Avocado_Hass_-_single_and_halved.jpg"
+ },
+ {
+  "slug": "tomato",
+  "article": "Tomato",
+  "file": "Tomato_je.jpg",
+  "license": "CC BY-SA 3.0",
+  "author": "Softeis",
+  "page": "https://commons.wikimedia.org/wiki/File:Tomato_je.jpg"
+ },
+ {
+  "slug": "pig",
+  "article": "",
+  "file": "Pig farm Vampula 1.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "kallerna",
+  "page": "https://commons.wikimedia.org/wiki/File:Pig_farm_Vampula_1.jpg"
+ },
+ {
+  "slug": "basket",
+  "file": "Plastic laundry basket.jpg",
+  "author": "Dodger67",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Plastic_laundry_basket.jpg",
+  "article": ""
+ },
+ {
+  "slug": "bed",
+  "file": "EFTA00001760 - Modern bedroom with a blue vaulted ceiling white bed wooden cabinet and a large artwork on the wall.jpg",
+  "author": "Federal Bureau of Investigation",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:EFTA00001760_-_Modern_bedroom_with_a_blue_vaulted_ceiling_white_bed_wooden_cabinet_and_a_large_artwork_on_the_wall.jpg",
+  "article": ""
+ },
+ {
+  "slug": "book",
+  "file": "Open Internal Pages of the Book Detrás del espejo 02.png",
+  "author": "HonysTorresArt",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Open_Internal_Pages_of_the_Book_Detr%C3%A1s_del_espejo_02.png",
+  "article": ""
+ },
+ {
+  "slug": "bottle",
+  "file": "Bouteille.jpg",
+  "license": "CC BY-SA 3.0",
+  "author": "Aurélien Mole",
+  "page": "https://commons.wikimedia.org/wiki/File:Bouteille.jpg",
+  "article": ""
+ },
+ {
+  "slug": "bowl",
+  "file": "China,_Jiangxi_province,_Jingdezhen,_Ming_dynasty_(1368-1644),_Xuande_mark_-_Bowl_with_Decoration_of_the_\"Three_Friends\"_-_1953.631_-_Cleveland_Museum_of_Art.tif",
+  "license": "CC0",
+  "author": "Unknown",
+  "page": "https://commons.wikimedia.org/wiki/File:China,_Jiangxi_province,_Jingdezhen,_Ming_dynasty_(1368-1644),_Xuande_mark_-_Bowl_with_Decoration_of_the_%22Three_Friends%22_-_1953.631_-_Cleveland_Museum_of_Art.tif",
+  "article": ""
+ },
+ {
+  "slug": "broom",
+  "file": "Hue Vietnam Broom-in-Càn-Thành-Palace-01.jpg",
+  "author": "CEphoto, Uwe Aranas",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Hue_Vietnam_Broom-in-C%C3%A0n-Th%C3%A0nh-Palace-01.jpg",
+  "article": ""
+ },
+ {
+  "slug": "bucket",
+  "file": "Lime green bucket 5.jpg",
+  "author": "DracoEssentialis",
+  "license": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Lime_green_bucket_5.jpg",
+  "article": ""
+ },
+ {
+  "slug": "chair",
+  "file": "Set_of_fourteen_side_chairs_MET_DP110780.jpg",
+  "license": "CC0",
+  "author": "Thomas Chippendale",
+  "page": "https://commons.wikimedia.org/wiki/File:Set_of_fourteen_side_chairs_MET_DP110780.jpg",
+  "article": ""
+ },
+ {
+  "slug": "clock",
+  "file": "2010-07-20_Black_windup_alarm_clock_face.jpg",
+  "license": "CC BY-SA 3.0",
+  "author": "Sun Ladder",
+  "page": "https://commons.wikimedia.org/wiki/File:2010-07-20_Black_windup_alarm_clock_face.jpg",
+  "article": ""
+ },
+ {
+  "slug": "comb",
+  "file": "Plastic_comb,_2015-06-07.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Crisco 1492",
+  "page": "https://commons.wikimedia.org/wiki/File:Plastic_comb,_2015-06-07.jpg",
+  "article": ""
+ },
+ {
+  "slug": "cup",
+  "file": "Flat white coffee Five Valleys Shopping Centre market Stroud Gloucestershire.jpg",
+  "author": "Acabashi",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Flat_white_coffee_Five_Valleys_Shopping_Centre_market_Stroud_Gloucestershire.jpg",
+  "article": ""
+ },
+ {
+  "slug": "door",
+  "file": "Rome (Italy), Door -- 2013 -- 3554.jpg",
+  "author": "Dietmar Rabich",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Rome_(Italy),_Door_--_2013_--_3554.jpg",
+  "article": ""
+ },
+ {
+  "slug": "fan",
+  "file": "Hatari_18_inch_fan.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Peachyo",
+  "page": "https://commons.wikimedia.org/wiki/File:Hatari_18_inch_fan.jpg",
+  "article": ""
+ },
+ {
+  "slug": "fork",
+  "file": "Assorted_forks.jpg",
+  "license": "CC BY-SA 3.0 us",
+  "author": "Unknown",
+  "page": "https://commons.wikimedia.org/wiki/File:Assorted_forks.jpg",
+  "article": ""
+ },
+ {
+  "slug": "fridge",
+  "file": "US Domestic Refrigerator GE.jpg",
+  "author": "Infrogmation of New Orleans",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:US_Domestic_Refrigerator_GE.jpg",
+  "article": ""
+ },
+ {
+  "slug": "kettle",
+  "file": "Bernadotte_Wasserkessel.jpg",
+  "license": "CC BY-SA 3.0",
+  "author": "Holger Ellgaard",
+  "page": "https://commons.wikimedia.org/wiki/File:Bernadotte_Wasserkessel.jpg",
+  "article": ""
+ },
+ {
+  "slug": "key",
+  "file": "Lada 110 keys.jpg",
+  "author": "Вазовик110",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Lada_110_keys.jpg",
+  "article": ""
+ },
+ {
+  "slug": "lamp",
+  "file": "Lamp with a lampshade illuminated by sunlight.jpg",
+  "author": "LoMit",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Lamp_with_a_lampshade_illuminated_by_sunlight.jpg",
+  "article": ""
+ },
+ {
+  "slug": "mirror",
+  "file": "Stichting Onze Woning toilet and bathroom, Hillegersberg, Rotterdam (2020) 02.jpg",
+  "author": "Donald Trung Quoc Don (Chữ Hán: 徵國單) - Wikimedia Commons - © CC BY-SA 4.0 International.(Want to use this image?)Original publication 📤: --Donald Trung 『徵國單』 (No Fake News 💬) (WikiProject Numismatics 💴) (Articles 📚) 23:01, 11 January 2021 (UTC)",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Stichting_Onze_Woning_toilet_and_bathroom,_Hillegersberg,_Rotterdam_(2020)_02.jpg",
+  "article": ""
+ },
+ {
+  "slug": "pillow",
+  "file": "Pillows_on_a_hotel_bed.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Amin",
+  "page": "https://commons.wikimedia.org/wiki/File:Pillows_on_a_hotel_bed.jpg",
+  "article": ""
+ },
+ {
+  "slug": "plate",
+  "file": "Botanical_plate_with_spray_of_fruiting_Indian_Bean_Tree_MET_DP-1687-038_(cropped).jpg",
+  "license": "CC0",
+  "author": "Chelsea porcelain factory",
+  "page": "https://commons.wikimedia.org/wiki/File:Botanical_plate_with_spray_of_fruiting_Indian_Bean_Tree_MET_DP-1687-038_(cropped).jpg",
+  "article": ""
+ },
+ {
+  "slug": "scissors",
+  "file": "Standard_household_scissors.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Doggerelblogger",
+  "page": "https://commons.wikimedia.org/wiki/File:Standard_household_scissors.jpg",
+  "article": ""
+ },
+ {
+  "slug": "shoe",
+  "file": "Paar sneakers, Onitsuka, Tiger, objectnr 91283-1-2.JPG",
+  "author": "Onitsuka",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Paar_sneakers,_Onitsuka,_Tiger,_objectnr_91283-1-2.JPG",
+  "article": ""
+ },
+ {
+  "slug": "soap",
+  "file": "Handmade_soap_cropped_and_simplified.jpg",
+  "license": "CC BY 2.5",
+  "author": "Malene Thyssen, simplified by HLHJ",
+  "page": "https://commons.wikimedia.org/wiki/File:Handmade_soap_cropped_and_simplified.jpg",
+  "article": ""
+ },
+ {
+  "slug": "sofa",
+  "file": "Couch-furniture-living-room-sofa (24300293356).jpg",
+  "author": "www.Pixel.la Free Stock Photos",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Couch-furniture-living-room-sofa_(24300293356).jpg",
+  "article": ""
+ },
+ {
+  "slug": "spoon",
+  "file": "Soup_Spoon.jpg",
+  "license": "CC BY-SA 3.0",
+  "author": "Donovan Govan.",
+  "page": "https://commons.wikimedia.org/wiki/File:Soup_Spoon.jpg",
+  "article": ""
+ },
+ {
+  "slug": "table",
+  "file": "Wright dining table - HNT.jpg",
+  "author": "Eric Polk",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Wright_dining_table_-_HNT.jpg",
+  "article": ""
+ },
+ {
+  "slug": "television",
+  "file": "A Flat Screen Television.jpg",
+  "author": "Kid Keen 47",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:A_Flat_Screen_Television.jpg",
+  "article": ""
+ },
+ {
+  "slug": "toothbrush",
+  "file": "Toothbrush_20050716_004.jpg",
+  "license": "Public domain",
+  "author": "Jonas Bergsten",
+  "page": "https://commons.wikimedia.org/wiki/File:Toothbrush_20050716_004.jpg",
+  "article": ""
+ },
+ {
+  "slug": "towel",
+  "file": "Zusammengelegte_Handtücher.jpg",
+  "license": "Public domain",
+  "author": "User:Mattes",
+  "page": "https://commons.wikimedia.org/wiki/File:Zusammengelegte_Handt%C3%BCcher.jpg",
+  "article": ""
+ },
+ {
+  "slug": "umbrella",
+  "file": "M0354_000727-005_1.jpg",
+  "license": "CC BY-SA 3.0",
+  "author": "MONNIN Jacques",
+  "page": "https://commons.wikimedia.org/wiki/File:M0354_000727-005_1.jpg",
+  "article": ""
+ },
+ {
+  "slug": "window",
+  "file": "Gordijnen aan venster.JPG",
+  "author": "Nieuw~commonswiki",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Gordijnen_aan_venster.JPG",
+  "article": ""
+ },
+ {
+  "slug": "rose",
+  "article": "Rose",
+  "file": "Beautiful Red Rose Flower.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Gkv.kannan21",
+  "page": "https://commons.wikimedia.org/wiki/File:Beautiful_Red_Rose_Flower.jpg"
+ },
+ {
+  "slug": "sunflower",
+  "article": "Common sunflower",
+  "file": "Sunflower_sky_backdrop.jpg",
+  "license": "GFDL 1.2",
+  "author": "Fir0002",
+  "page": "https://commons.wikimedia.org/wiki/File:Sunflower_sky_backdrop.jpg"
+ },
+ {
+  "slug": "tulip",
+  "article": "Tulip",
+  "file": "צבעונים.JPG",
+  "license": "CC0",
+  "author": "Dina L",
+  "page": "https://commons.wikimedia.org/wiki/File:%D7%A6%D7%91%D7%A2%D7%95%D7%A0%D7%99%D7%9D.JPG"
+ },
+ {
+  "slug": "daisy",
+  "article": "Bellis perennis",
+  "file": "Daisy flower close up.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Claire Pearcy",
+  "page": "https://commons.wikimedia.org/wiki/File:Daisy_flower_close_up.jpg"
+ },
+ {
+  "slug": "lily",
+  "article": "Lilium",
+  "file": "Lilium_candidum_1.jpg",
+  "license": "CC BY-SA 3.0",
+  "author": "Stan Shebs",
+  "page": "https://commons.wikimedia.org/wiki/File:Lilium_candidum_1.jpg"
+ },
+ {
+  "slug": "lotus",
+  "article": "Nelumbo nucifera",
+  "file": "Sacred_lotus_Nelumbo_nucifera.jpg",
+  "license": "CC BY-SA 3.0",
+  "author": "T.Voekler",
+  "page": "https://commons.wikimedia.org/wiki/File:Sacred_lotus_Nelumbo_nucifera.jpg"
+ },
+ {
+  "slug": "marigold",
+  "article": "Tagetes",
+  "file": "Tagetes_erecta_chendumalli_chedi.jpg",
+  "license": "CC BY-SA 3.0",
+  "author": "Ezhuttukari",
+  "page": "https://commons.wikimedia.org/wiki/File:Tagetes_erecta_chendumalli_chedi.jpg"
+ },
+ {
+  "slug": "hibiscus",
+  "article": "Chinese hibiscus",
+  "file": "Hibiscus_Brilliant.jpg",
+  "license": "CC BY 2.0",
+  "author": "Andy / Andrew Fogg from near Cambridge, UK",
+  "page": "https://commons.wikimedia.org/wiki/File:Hibiscus_Brilliant.jpg"
+ },
+ {
+  "slug": "jasmine",
+  "article": "Jasminum sambac",
+  "file": "Arabian_jasmin,_Tunisia_2010.jpg",
+  "license": "CC BY-SA 3.0",
+  "author": "Habib M'henni",
+  "page": "https://commons.wikimedia.org/wiki/File:Arabian_jasmin,_Tunisia_2010.jpg"
+ },
+ {
+  "slug": "orchid",
+  "article": "Orchid",
+  "file": "Plant_Orchid_Cymbidium_aloifolium_P1110661_05_-_cropped.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Rohit Naniwadekar",
+  "page": "https://commons.wikimedia.org/wiki/File:Plant_Orchid_Cymbidium_aloifolium_P1110661_05_-_cropped.jpg"
+ },
+ {
+  "slug": "daffodil",
+  "article": "Narcissus pseudonarcissus",
+  "file": "Narcissus pseudonarcissus flower – front.jpg",
+  "license": "CC BY-SA 3.0",
+  "author": "Agadez",
+  "page": "https://commons.wikimedia.org/wiki/File:Narcissus_pseudonarcissus_flower_%E2%80%93_front.jpg"
+ },
+ {
+  "slug": "lavender",
+  "article": "Lavandula",
+  "file": "Single_lavender_flower02.jpg",
+  "license": "GFDL 1.2",
+  "author": "User:Fir0002",
+  "page": "https://commons.wikimedia.org/wiki/File:Single_lavender_flower02.jpg"
+ },
+ {
+  "slug": "crow",
+  "article": "House crow",
+  "file": "Corvus splendens.jpg",
+  "license": "CC BY 4.0",
+  "author": "Pkspks",
+  "page": "https://commons.wikimedia.org/wiki/File:Corvus_splendens.jpg"
+ },
+ {
+  "slug": "pigeon",
+  "article": "Rock dove",
+  "file": "Columba livia (Rock Dove, wild), Duncansby Head, Caithness, Scotland 1.jpg",
+  "license": "CC BY 4.0",
+  "author": "william_stephens",
+  "page": "https://commons.wikimedia.org/wiki/File:Columba_livia_(Rock_Dove,_wild),_Duncansby_Head,_Caithness,_Scotland_1.jpg"
+ },
+ {
+  "slug": "sparrow",
+  "article": "House sparrow",
+  "file": "House sparrow male in Prospect Park (53532).jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Rhododendrites",
+  "page": "https://commons.wikimedia.org/wiki/File:House_sparrow_male_in_Prospect_Park_(53532).jpg"
+ },
+ {
+  "slug": "eagle",
+  "article": "Bald eagle",
+  "file": "Bald eagle about to fly in Alaska (2016).jpg",
+  "license": "CC BY 2.0",
+  "author": "Andy Morffew from Itchen Abbas, Hampshire, UK",
+  "page": "https://commons.wikimedia.org/wiki/File:Bald_eagle_about_to_fly_in_Alaska_(2016).jpg"
+ },
+ {
+  "slug": "kingfisher",
+  "article": "Common kingfisher",
+  "file": "Alcedo atthis -England-8 (cropped).jpg",
+  "license": "CC BY 2.0",
+  "author": "Tony Wood",
+  "page": "https://commons.wikimedia.org/wiki/File:Alcedo_atthis_-England-8_(cropped).jpg"
+ },
+ {
+  "slug": "swan",
+  "article": "Mute swan",
+  "file": "CygneVaires.jpg",
+  "license": "CC BY-SA 3.0",
+  "author": "Sanchezn",
+  "page": "https://commons.wikimedia.org/wiki/File:CygneVaires.jpg"
+ },
+ {
+  "slug": "cuckoo",
+  "article": "Common cuckoo",
+  "file": "Cuckoo (51169010335).jpg",
+  "license": "CC BY 2.0",
+  "author": "Andy  Morffew from Itchen Abbas, Hampshire, UK",
+  "page": "https://commons.wikimedia.org/wiki/File:Cuckoo_(51169010335).jpg"
+ },
+ {
+  "slug": "woodpecker",
+  "article": "Great spotted woodpecker",
+  "file": "Great spotted woodpecker (Dendrocopos major) male Drenthe.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Charles J. Sharp",
+  "page": "https://commons.wikimedia.org/wiki/File:Great_spotted_woodpecker_(Dendrocopos_major)_male_Drenthe.jpg"
+ },
+ {
+  "slug": "flamingo",
+  "article": "American flamingo",
+  "file": "American Flamingo JG.jpg",
+  "license": "CC BY 4.0",
+  "author": "JeffreyGammon",
+  "page": "https://commons.wikimedia.org/wiki/File:American_Flamingo_JG.jpg"
+ },
+ {
+  "slug": "peacock",
+  "article": "Indian peafowl",
+  "file": "Majestic Peacock Display at Pench National Park, India.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Rohit Sharma",
+  "page": "https://commons.wikimedia.org/wiki/File:Majestic_Peacock_Display_at_Pench_National_Park,_India.jpg"
+ },
+ {
+  "slug": "myna",
+  "article": "Common myna",
+  "file": "Acridotheres tristis @ Kuala Lumpur 2.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "GerifalteDelSabana",
+  "page": "https://commons.wikimedia.org/wiki/File:Acridotheres_tristis_@_Kuala_Lumpur_2.jpg"
+ },
+ {
+  "slug": "parrot",
+  "article": "Rose-ringed parakeet",
+  "file": "Halsbandsittich (Psittacula krameri) im Garten.jpg",
+  "license": "CC BY 4.0",
+  "author": "Stephan Sprinz",
+  "page": "https://commons.wikimedia.org/wiki/File:Halsbandsittich_(Psittacula_krameri)_im_Garten.jpg"
+ },
+ {
+  "slug": "ostrich",
+  "article": "Common ostrich",
+  "file": "Autruche d'Afrique (Struthio camelus) (2).jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Gzen92",
+  "page": "https://commons.wikimedia.org/wiki/File:Autruche_d%27Afrique_(Struthio_camelus)_(2).jpg"
+ }
+]

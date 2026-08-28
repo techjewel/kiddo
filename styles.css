@@ -1,0 +1,1483 @@
+/* ============================================================
+   Magnet Board — a fridge door you can learn from.
+   Surface: cool brushed white. Magnets: six saturated tiles.
+   ============================================================ */
+
+:root {
+  /* Magnet colours — saturated but tuned, not raw primaries */
+  --m1: #E24A3F;   /* tomato   */
+  --m2: #F2A122;   /* marigold */
+  --m3: #34A05B;   /* grass    */
+  --m4: #2E6BD4;   /* cobalt   */
+  --m5: #8B4FCF;   /* grape    */
+  --m6: #12A0A0;   /* teal     */
+
+  /* Door + ink */
+  --door-hi: #F4F7FA;
+  --door-lo: #DDE4EC;
+  --ink: #21252C;
+  --ink-soft: #5A6472;
+  --hairline: rgba(33, 37, 44, 0.10);
+
+  --font-display: 'Baloo 2', 'Trebuchet MS', 'Segoe UI', system-ui, sans-serif;
+  --font-letter: 'Andika', 'Comic Sans MS', 'Trebuchet MS', system-ui, sans-serif;
+  --font-emoji: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+  /* Baloo Da 2 is the Bengali member of the same family as the display
+     face, drawn by the same hands — so ৭ next to 7 reads as one set of
+     numerals in two scripts, not as a system font pasted in beside a
+     designed one. Neither Baloo 2 nor Andika covers Bengali at all. */
+  --font-bangla: 'Baloo Da 2', 'Noto Sans Bengali', 'Kohinoor Bangla',
+    'Bangla MN', 'Nirmala UI', sans-serif;
+
+  /* The drawn child. One skin tone, one shade under it for the bits
+     that overlap it and would otherwise vanish — ears against the
+     head, toes against the foot. */
+  --skin: #F0BF95;
+  --skin-2: #DFA274;
+  --hair: #4A342A;
+  --face-ink: #33261F;
+  --mouth: #C1554C;
+  --shorts: #3F7FC4;
+  --lit: #E24A3F;
+
+  --rail-h: 60px;
+  --nav-h: 76px;
+  --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overscroll-behavior: none;
+}
+
+body {
+  font-family: var(--font-display);
+  color: var(--ink);
+  background: var(--door-lo);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  /* A child holds a magnet down rather than tapping it, and iOS reads
+     that as "select this text" or "save this image" and throws up a
+     grey callout over the board. Nothing here is meant to be selected
+     or dragged; the panel gets its text back below. */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Photographs are the other half of the same problem: a long press on
+   an <img> opens the share sheet, and a slow drag peels it off the
+   tile and carries it around. */
+img {
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+/* The grown-up's panel is the one place with anything worth copying. */
+.panel { -webkit-user-select: text; user-select: text; }
+
+button {
+  font: inherit;
+  color: inherit;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+:focus-visible {
+  outline: 3px solid var(--m4);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.is-hidden { display: none !important; }
+
+/* Flex/grid display values otherwise beat the hidden attribute. */
+[hidden] { display: none !important; }
+
+/* ---------- The door ---------------------------------------- */
+
+.app {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  /* Hairline vertical brushing over a soft steel gradient.
+     Barely there — the magnets are the loud part. */
+  background-color: var(--door-hi);
+  background-image:
+    repeating-linear-gradient(90deg,
+      rgba(255, 255, 255, 0.28) 0 3px,
+      rgba(33, 37, 44, 0.008) 3px 7px),
+    linear-gradient(158deg, var(--door-hi) 0%, var(--door-lo) 58%, #EAEFF5 100%);
+  transition: background-color 0.45s ease;
+}
+
+/* Pick a colour and the door gets painted it, brushing and all.
+   Cheaper than a separate screen and it teaches the same thing. */
+.app.is-tinted {
+  background-color: var(--page);
+  background-image:
+    repeating-linear-gradient(90deg,
+      rgba(255, 255, 255, 0.13) 0 3px,
+      rgba(0, 0, 0, 0.02) 3px 7px);
+}
+
+.app.is-tinted .screen--colors .screen-hint { color: var(--page-ct); opacity: 0.82; }
+
+/* The nav is dark ink, which vanishes on a black door. */
+.app.is-tinted .nav { box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.22), 0 8px 24px rgba(33, 37, 44, 0.3); }
+
+/* ---------- Top magnetic strip ------------------------------- */
+
+.rail {
+  flex: none;
+  height: calc(var(--rail-h) + env(safe-area-inset-top));
+  padding: env(safe-area-inset-top) 14px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border-bottom: 1px solid var(--hairline);
+  background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.25));
+  backdrop-filter: blur(6px);
+}
+
+.score {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 15px 7px 12px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #FFCF52, var(--m2));
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -2px 0 rgba(140, 78, 0, 0.22),
+    0 2px 5px rgba(33, 37, 44, 0.18);
+  color: #40260A;
+}
+
+.score-star { font-size: 17px; line-height: 1; }
+.score-num  { font-weight: 800; font-size: 19px; line-height: 1; font-variant-numeric: tabular-nums; }
+.score-label { font-size: 12.5px; font-weight: 600; opacity: 0.72; }
+
+.score.is-bumped { animation: bump 0.45s var(--ease-pop); }
+@keyframes bump {
+  40% { transform: scale(1.18) rotate(-3deg); }
+  100% { transform: scale(1); }
+}
+
+.rail-actions { display: flex; gap: 8px; }
+
+.icon-btn {
+  width: 42px; height: 42px;
+  display: grid;
+  place-items: center;
+  font-size: 19px;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: inset 0 0 0 1px var(--hairline), 0 1px 3px rgba(33, 37, 44, 0.10);
+  transition: transform 0.12s var(--ease-pop);
+}
+.icon-btn:active { transform: scale(0.9); }
+.icon-btn .icon-off { display: none; }
+.icon-btn[aria-pressed="true"] .icon-on { display: none; }
+.icon-btn[aria-pressed="true"] .icon-off { display: block; }
+
+/* ---------- Scrolling door area ------------------------------ */
+
+.board {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 18px 16px calc(var(--nav-h) + 28px);
+}
+
+/* The switch and the line telling you what to tap share one band. They
+   used to be stacked, which cost a whole row of vertical space above
+   every grid, and the row was mostly empty — a switch is a few words
+   wide and a hint is one line. Side by side on anything with the width
+   for it; wrapped back into two rows on a phone, where they were both
+   full-width anyway. */
+.pics-switch {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px 16px;
+  margin-bottom: 10px;
+}
+
+.screen-hint {
+  margin: 2px 0 12px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+/* Inside the band it is one of two things on a line, not a paragraph
+   with room above and below it. */
+.pics-switch .screen-hint { margin: 0; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));
+  gap: 14px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ---------- The magnet ---------------------------------------
+   Signature element. Beveled, tilted, and it peels off the
+   door when pressed. Everything else stays quiet.
+   ------------------------------------------------------------ */
+
+.magnet {
+  position: relative;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 19%;
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(30px, 8.5vw, 42px);
+  line-height: 1;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--c) 100%, white 26%),
+    var(--c) 52%,
+    color-mix(in srgb, var(--c) 100%, black 12%));
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.18),
+    0 3px 0 color-mix(in srgb, var(--c) 100%, black 30%),
+    0 5px 9px rgba(33, 37, 44, 0.22);
+  text-shadow: 0 1.5px 0 rgba(0, 0, 0, 0.16);
+  transform: rotate(var(--tilt));
+  transition: transform 0.18s var(--ease-pop), box-shadow 0.18s ease;
+}
+
+.magnet:active {
+  transform: rotate(0deg) scale(1.09);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.18),
+    0 5px 0 color-mix(in srgb, var(--c) 100%, black 30%),
+    0 14px 22px rgba(33, 37, 44, 0.26);
+}
+
+/* Picture magnets sit on a white face — a red apple on a red tile
+   disappears. The colour moves to the rim and the edge, so these
+   still read as magnets and still carry a colour identity. Shape
+   magnets take the same face for the same reason: the outline has to
+   have something to stand against. */
+.magnet--pic,
+.magnet--shape,
+.magnet--body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 8px;
+  color: var(--ink);
+  background: linear-gradient(180deg, #FFFFFF, #F7F4ED);
+  box-shadow:
+    inset 0 0 0 2.5px color-mix(in srgb, var(--c) 100%, white 48%),
+    inset 0 2px 0 rgba(255, 255, 255, 0.9),
+    0 3px 0 color-mix(in srgb, var(--c) 100%, black 14%),
+    0 5px 9px rgba(33, 37, 44, 0.2);
+}
+
+.magnet--pic:active,
+.magnet--shape:active,
+.magnet--body:active {
+  box-shadow:
+    inset 0 0 0 2.5px color-mix(in srgb, var(--c) 100%, white 48%),
+    inset 0 2px 0 rgba(255, 255, 255, 0.9),
+    0 5px 0 color-mix(in srgb, var(--c) 100%, black 14%),
+    0 14px 22px rgba(33, 37, 44, 0.26);
+}
+
+.magnet--pic .magnet-cap,
+.magnet--shape .magnet-cap {
+  color: color-mix(in srgb, var(--c) 100%, black 26%);
+  text-shadow: none;
+}
+
+.magnet--pic.is-known::after,
+.magnet--shape.is-known::after {
+  background: color-mix(in srgb, var(--c) 100%, white 20%);
+  box-shadow: none;
+}
+
+/* The shape fills the tile above its name. `overflow: visible` because
+   a corner sits exactly on the edge of the 100×100 box and a round
+   join would otherwise be shaved off. */
+.magnet-shape {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+  overflow: visible;
+}
+
+.magnet-shape .shape-face {
+  fill: var(--c);
+  stroke: color-mix(in srgb, var(--c) 100%, black 26%);
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+/* The photo takes the whole tile above the name. object-fit keeps
+   every animal the same shape however the original was framed. */
+.magnet-photo {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+  object-fit: cover;
+  border-radius: 13%;
+  background: #E7EBF0;
+}
+
+.magnet-photo.is-fallback {
+  display: grid;
+  place-items: center;
+  background: none;
+  font-family: var(--font-emoji);
+  font-size: clamp(38px, 11vw, 60px);
+  text-shadow: none;
+}
+
+/* Bengali digits sit lower in the em box than Latin ones and carry
+   their weight along the top, so a ৭ set at the Latin size reads small
+   and floats high on a square tile. A nudge up in size and a hair of
+   optical centring, and nothing else about the magnet changes. */
+.magnet--bn {
+  font-family: var(--font-bangla);
+  font-size: clamp(34px, 9.5vw, 48px);
+  padding-top: 0.06em;
+}
+
+.magnet-cap {
+  flex: none;
+  font-family: var(--font-letter);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.22);
+}
+
+/* ---------- The answer stays on the page ----------------------
+   Every screen shows what was tapped in a panel above its grid.
+   Nothing opens over the page, so nothing has to be dismissed —
+   he can tap twenty things in a row without a single close button.
+   Sticky, so it stays visible however far down he scrolls. Tapping
+   the panel repeats it.
+   -------------------------------------------------------------- */
+
+.showcase {
+  position: sticky;
+  top: -4px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto 12px;
+  padding: 10px 16px;
+  border-radius: 18px;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  box-shadow:
+    inset 0 0 0 1px rgba(33, 37, 44, 0.08),
+    0 4px 14px rgba(33, 37, 44, 0.12);
+}
+
+.showcase.is-bumped { animation: bump 0.4s var(--ease-pop); }
+
+.sc-pair {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+/* Uppercase in the chunky display face, lowercase in the literacy
+   face — two letterforms, two jobs. */
+.sc-main {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 46px;
+  line-height: 1;
+  color: var(--c, var(--m4));
+  font-variant-numeric: tabular-nums;
+}
+
+.sc-sub {
+  font-family: var(--font-letter);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1;
+  color: color-mix(in srgb, var(--c, var(--m4)) 100%, white 26%);
+}
+
+.sc-word {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-letter);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--ink);
+}
+
+/* The Bangla panel is the number panel with the script swapped — same
+   numeral, same name, same counting pictures underneath. Only the
+   typeface changes, because only the typeface has to. */
+.sc-main--bn { font-family: var(--font-bangla); font-size: 50px; }
+
+.sc-word--bn { font-family: var(--font-bangla); font-weight: 600; font-size: 25px; }
+
+.sc-emoji { font-family: var(--font-emoji); font-size: 28px; line-height: 1; }
+
+/* Counting pictures wrap onto their own line and take whatever room is
+   left, so twenty of them never squeeze the numeral. The row keeps one
+   height whatever the count, because a panel that grew by half between
+   8 and 9 would shove the whole grid down under a finger mid-tap. */
+.sc-count {
+  flex: 1 1 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-height: 26px;
+}
+
+.showcase--pic { gap: 14px; flex-wrap: nowrap; }
+
+.sc-pic { flex: none; display: block; }
+
+.sc-photo {
+  display: block;
+  width: 76px;
+  height: 76px;
+  object-fit: cover;
+  border-radius: 15px;
+  background: #E7EBF0;
+}
+
+.sc-photo.is-fallback {
+  display: grid;
+  place-items: center;
+  background: none;
+  font-family: var(--font-emoji);
+  font-size: 44px;
+}
+
+.sc-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.sc-line {
+  font-family: var(--font-letter);
+  font-size: 14.5px;
+  line-height: 1.35;
+  color: var(--ink-soft);
+}
+
+.showcase--color { justify-content: center; }
+
+.sc-color {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 1.1;
+  color: var(--ci, var(--m4));
+}
+
+/* Two big photos per row on a phone. A postage-stamp animal is no
+   easier to recognise than a cartoon one. */
+.grid--pics { grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); }
+.grid--colors { grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); }
+.grid--shapes { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); }
+
+/* ---------- The shape panel -----------------------------------
+   Tapping a shape redraws this: the outline walks itself round the
+   path, the colour floods in behind it, then a dot lands on each
+   corner in turn — one per beat, so they can be counted out loud.
+   -------------------------------------------------------------- */
+
+.showcase--shape { gap: 15px; flex-wrap: nowrap; align-items: center; }
+
+.sc-shape {
+  flex: none;
+  width: 82px;
+  height: 82px;
+}
+
+.sc-shape-art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.sc-shape-art .shape-face {
+  fill: var(--c, var(--m4));
+  stroke: none;
+  animation: shape-fill 0.5s ease 0.55s both;
+}
+
+.sc-shape-art .shape-line {
+  fill: none;
+  stroke: color-mix(in srgb, var(--c, var(--m4)) 100%, black 28%);
+  stroke-width: 4.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* The dash is the length of the path, so it can only be set once the
+   path has been measured — the class goes on at that moment. */
+.sc-shape-art .shape-line.is-drawing {
+  stroke-dasharray: var(--len);
+  animation: shape-draw 0.75s ease both;
+}
+
+@keyframes shape-draw {
+  from { stroke-dashoffset: var(--len); }
+  to   { stroke-dashoffset: 0; }
+}
+
+@keyframes shape-fill { from { opacity: 0; } }
+
+.sc-shape-art .shape-pip {
+  fill: #fff;
+  stroke: rgba(33, 37, 44, 0.5);
+  stroke-width: 2;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pip-in 0.34s var(--ease-pop) both;
+}
+
+@keyframes pip-in { from { opacity: 0; transform: scale(0.2); } }
+
+/* ---------- The body -----------------------------------------
+   One child, big enough to poke. The part being named keeps its colour
+   and everything else fades, so the answer is the only thing still
+   bright.
+   -------------------------------------------------------------- */
+
+/* The one panel that isn't a header. Everywhere else the showcase sits
+   at the top and reports what was tapped below it; here it IS the thing
+   being tapped, so it stops sticking and stands up straight, with the
+   name underneath the boy where a caption goes. */
+.showcase--body {
+  position: static;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 8px;
+  padding: 14px 16px 16px;
+  text-align: center;
+}
+
+/* Sized off the viewport's height, not its width: he's a tall drawing
+   in a tall box, and it's the height that decides whether the word list
+   below him is still on the screen. */
+.sc-body {
+  flex: none;
+  height: min(58vh, 460px);
+  width: auto;
+  aspect-ratio: 240 / 450;
+}
+
+.sc-body-art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  touch-action: manipulation;
+}
+
+.showcase--body .sc-text { align-items: center; }
+.showcase--body .sc-word { font-size: 27px; min-height: 32px; }
+
+/* The invisible half of the drawing: shapes with no paint, laid over
+   the boy so a nose has a target the size of a fingertip rather than
+   the size of a nose. `transparent` still counts as painted, which is
+   exactly why the tap lands. */
+.bd-hit {
+  fill: transparent;
+  stroke: transparent;
+  cursor: pointer;
+}
+
+/* In the game each choice is the whole boy with one part ringed —
+   four of him, and the question is which ring is in the right place. */
+.magnet-body {
+  display: block;
+  flex: 1 1 auto;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: visible;
+}
+
+/* A word, not a picture. Wide enough for "Shoulders" and short enough
+   that six of them still fit above the fold. */
+.magnet--word {
+  aspect-ratio: auto;
+  padding: 13px 8px;
+  font-size: clamp(15px, 4.2vw, 19px);
+  letter-spacing: 0.01em;
+  hyphens: none;
+}
+
+/* The same tile with the Bangla name on it. Bengali hangs its matras
+   off a headline above the letters and drops the tail of কনুই below,
+   so the line needs more room than "Elbows" does, and the type wants
+   a touch more size to read at the same weight. The tile keeps its
+   shape either way — only the word inside it changed. */
+.magnet--bn-word {
+  font-family: var(--font-bangla);
+  font-size: clamp(16px, 4.6vw, 21px);
+  line-height: 1.5;
+  padding: 11px 8px;
+}
+
+.grid--body { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); }
+
+/* Bangla on the panel under the boy: same size as the English, more
+   line box, because the matra above and the tail below both need
+   somewhere to go. */
+.showcase--body .sc-word--bn { line-height: 1.45; min-height: 40px; }
+
+/* Each side of the language switch is written in its own language, so
+   the Bangla one needs the Bangla face — a button labelled "Bangla" in
+   Latin type is a grown-up's label for it. */
+.seg--bn { font-family: var(--font-bangla); font-size: 14px; }
+
+.bd { transition: opacity 0.25s ease; }
+/* Faded, not erased. The rest of the boy is the answer to "where" —
+   dim him too far and the ring is floating in an empty box. */
+.has-lit .bd:not(.is-lit) { opacity: 0.42; }
+
+.bd-skin   { fill: var(--skin); }
+.bd-ear    { fill: var(--skin-2); }
+.bd-hair   { fill: var(--hair); }
+.bd-eye    { fill: var(--face-ink); }
+.bd-nose   { fill: var(--skin-2); }
+.bd-mouth  { fill: var(--mouth); }
+.bd-teeth  { fill: #fff; }
+.bd-shorts { fill: var(--shorts); }
+
+.bd-limb {
+  fill: none;
+  stroke: var(--skin);
+  stroke-linecap: round;
+}
+.bd-arm { stroke-width: 26; }
+.bd-leg { stroke-width: 32; }
+
+.bd-finger {
+  fill: none;
+  stroke: var(--skin);
+  stroke-linecap: round;
+  stroke-width: 9;
+}
+
+/* A knee is a bulge on a leg, not a separate object — barely there
+   until it's the one being asked for. */
+.bd-joint {
+  fill: var(--skin);
+  stroke: rgba(120, 72, 34, 0.22);
+  stroke-width: 2;
+}
+
+.bd-bump { fill: var(--skin-2); }
+
+/* The ring is what actually finds a nose. Two of them for the parts
+   there are two of, landing one after the other. */
+.bd-ring {
+  fill: none;
+  stroke: var(--lit);
+  stroke-width: 6;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ring-in 0.4s var(--ease-pop) both,
+             ring-beat 1.5s ease-in-out infinite;
+}
+
+/* Four boys side by side in the game, each ringed somewhere different.
+   A ring that pulses on all four is four things moving and nothing
+   pointing, so here it holds still and just marks the spot. */
+.bd-ring.is-still {
+  animation: none;
+  stroke-width: 7;
+  opacity: 0.85;
+}
+
+@keyframes ring-in { from { opacity: 0; transform: scale(0.45); } }
+@keyframes ring-beat {
+  50% { opacity: 0.72; transform: scale(1.06); }
+}
+
+.sc-chip {
+  align-self: flex-start;
+  padding: 3px 11px;
+  border-radius: 999px;
+  font-family: var(--font-letter);
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--c, var(--m4)) 100%, black 30%);
+  background: color-mix(in srgb, var(--c, var(--m4)) 17%, #fff);
+}
+
+.sc-pics {
+  font-family: var(--font-emoji);
+  font-size: 19px;
+  line-height: 1.4;
+  letter-spacing: 3px;
+}
+
+.showcase--shape .sc-text { gap: 5px; }
+
+/* Colour magnets ARE the lesson, so the face stays as close to the true
+   colour as a bevel allows — barely any gradient, and a hairline ring so
+   white still has an edge on a white door. */
+.magnet--color {
+  flex-direction: column;
+  place-items: center;
+  align-content: center;
+  padding: 6px;
+  color: var(--ct);
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--c) 100%, white 9%),
+    var(--c) 42%,
+    color-mix(in srgb, var(--c) 100%, black 7%));
+  box-shadow:
+    inset 0 0 0 1px rgba(33, 37, 44, 0.11),
+    inset 0 2px 0 rgba(255, 255, 255, 0.34),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.12),
+    0 3px 0 color-mix(in srgb, var(--c) 100%, black 26%),
+    0 5px 9px rgba(33, 37, 44, 0.2);
+}
+
+.magnet--color:active {
+  box-shadow:
+    inset 0 0 0 1px rgba(33, 37, 44, 0.11),
+    inset 0 2px 0 rgba(255, 255, 255, 0.34),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.12),
+    0 5px 0 color-mix(in srgb, var(--c) 100%, black 26%),
+    0 14px 22px rgba(33, 37, 44, 0.26);
+}
+
+.magnet-cap--color { font-size: 13px; text-shadow: none; }
+
+.magnet--color.is-known::after {
+  background: currentColor;
+  opacity: 0.55;
+  box-shadow: none;
+}
+
+/* The picked colour lifts off the door with a double ring — white so
+   it shows on dark colours, dark so it shows on white and yellow. */
+.magnet.is-picked {
+  transform: rotate(0deg) scale(1.07);
+  box-shadow:
+    inset 0 0 0 1px rgba(33, 37, 44, 0.11),
+    inset 0 2px 0 rgba(255, 255, 255, 0.34),
+    0 0 0 4px rgba(255, 255, 255, 0.95),
+    0 0 0 7px rgba(33, 37, 44, 0.28),
+    0 10px 20px rgba(33, 37, 44, 0.3);
+}
+
+/* A dog-eared corner marks the ones already explored */
+.magnet.is-known::after {
+  content: '';
+  position: absolute;
+  top: 7px; right: 7px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.09);
+}
+
+.magnet.is-wrong { animation: shake 0.4s ease; }
+@keyframes shake {
+  0%, 100% { transform: rotate(var(--tilt)); }
+  20% { transform: rotate(-7deg) translateX(-7px); }
+  50% { transform: rotate(7deg) translateX(7px); }
+  80% { transform: rotate(-4deg) translateX(-3px); }
+}
+
+.magnet.is-right { animation: right-pop 0.55s var(--ease-pop); }
+@keyframes right-pop {
+  35% { transform: rotate(0deg) scale(1.22); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+/* ---------- Bottom nav ---------------------------------------- */
+
+.nav {
+  position: absolute;
+  left: 50%;
+  bottom: calc(14px + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+  padding: 6px;
+  border-radius: 999px;
+  background: var(--ink);
+  box-shadow: 0 8px 24px rgba(33, 37, 44, 0.30);
+}
+
+/* Seven tabs. On a phone the symbol is the whole button — bigger
+   targets, and a child who can't read navigates by symbol anyway.
+   The words come back as soon as there's room. */
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 15px;
+  border-radius: 999px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.62);
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.tab-label { display: none; }
+
+.tab-mark {
+  display: grid;
+  place-items: center;
+  width: 28px; height: 28px;
+  border-radius: 9px;
+  font-size: 16px;
+  font-weight: 800;
+  background: rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.tab-mark--emoji { font-family: var(--font-emoji); font-size: 15px; }
+
+.tab.is-on { color: #fff; background: rgba(255, 255, 255, 0.14); }
+.tab.is-on .tab-mark { background: var(--m2); color: #40260A; }
+
+/* Seven tabs is one more than a narrow phone has room for at the
+   comfortable padding, so the bar tightens rather than spilling off
+   the screen. The 28px symbol — the actual target — doesn't shrink.
+   It was eight until language stopped being a tab of its own. */
+@media (max-width: 560px) {
+  .nav { gap: 1px; padding: 5px; }
+  .tab { padding: 9px 8px; }
+}
+
+/* The narrowest phones still in use. The pill is centred and clipped
+   rather than scrollable, so an overflow doesn't hide the last tab —
+   it shaves the first and the last. Squeeze the space between the
+   symbols; the 28px symbol itself, which is what a finger aims at,
+   never gets smaller. */
+@media (max-width: 400px) {
+  .nav { gap: 0; padding: 4px; }
+  .tab { padding: 9px 5px; }
+}
+
+/* A worded bar this wide ran past a 768px tablet — the pill is centred
+   and unscrollable, so overflowing doesn't hide a tab, it drags the
+   whole page sideways. Words wait until there's honestly room. */
+@media (min-width: 900px) {
+  .tab { padding: 10px 14px; }
+  .tab-label { display: inline; }
+  .tab-mark { width: 23px; height: 23px; border-radius: 7px; font-size: 13px; }
+  .tab-mark--emoji { font-size: 12px; }
+}
+
+.count-item {
+  font-family: var(--font-emoji);
+  font-size: 24px;
+  line-height: 1;
+  animation: pop-in 0.3s var(--ease-pop);
+}
+@keyframes pop-in {
+  from { opacity: 0; transform: scale(0.3); }
+}
+@keyframes fade { from { opacity: 0; } }
+
+.repeat-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 22px;
+  border-radius: 15px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--ink);
+  transition: transform 0.12s var(--ease-pop);
+}
+.repeat-btn:active { transform: scale(0.95); }
+
+/* ---------- Play ---------------------------------------------- */
+
+.play {
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.segmented {
+  display: inline-flex;
+  gap: 3px;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(33, 37, 44, 0.07);
+}
+
+/* Six things to practise stopped fitting on one phone line, so this
+   one wraps. The corner softens to match a two-row block. */
+.segmented--play,
+/* Birds made a fifth shelf, which is one too many for a narrow phone. */
+.segmented--pics,
+/* Four languages don't fit on one phone line either, and how many
+   sides this one has is a setting now — so it wraps on principle,
+   not because this particular list happens to be long. */
+.segmented--lang {
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 100%;
+  border-radius: 22px;
+}
+
+.seg {
+  padding: 8px 11px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  white-space: nowrap;
+  font-weight: 600;
+  color: var(--ink-soft);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.seg.is-on {
+  color: var(--ink);
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(33, 37, 44, 0.16);
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin: 22px 0 18px;
+}
+
+.dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: rgba(33, 37, 44, 0.14);
+  transition: background-color 0.25s ease, transform 0.25s var(--ease-pop);
+}
+.dot.is-done {
+  background: var(--m2);
+  transform: scale(1.28);
+}
+
+.ask {
+  margin: 0 0 14px;
+  font-size: clamp(24px, 6.5vw, 32px);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.ask-target {
+  font-family: var(--font-letter);
+  font-weight: 700;
+  color: var(--m4);
+}
+
+.repeat-btn {
+  padding: 11px 18px;
+  font-size: 14.5px;
+  background: rgba(33, 37, 44, 0.08);
+  color: var(--ink);
+}
+
+/* Four big targets. Small hands, and a picture a child has to
+   recognise across the room. */
+.choices {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  max-width: 460px;
+  margin: 26px auto 0;
+}
+
+.choices .magnet { font-size: clamp(60px, 19vw, 96px); }
+/* No caption in the game, so the photo — or the shape — takes the
+   whole tile. A shape with its name printed under it wouldn't be a
+   question. */
+.choices .magnet--pic,
+.choices .magnet--shape { padding: 12px; }
+/* A body choice is a whole boy, and a boy is twice as tall as he is
+   wide, so the tile leans taller than the square ones to give him the
+   room. Only a little taller: all four still have to be on the screen
+   at once, because a child won't think to scroll to find the answer. */
+.choices .magnet--body { aspect-ratio: 0.9; padding: 8px; }
+.choices .magnet-photo.is-fallback { font-size: clamp(64px, 20vw, 100px); }
+
+/* On a short window all four choices should still be reachable
+   without scrolling — a child won't think to scroll for the answer. */
+@media (max-height: 800px) and (min-width: 620px) {
+  .dots { margin: 12px 0 10px; }
+  .ask { margin-bottom: 10px; }
+  .choices { max-width: 320px; margin-top: 12px; }
+  .choices .magnet { font-size: clamp(40px, 8vh, 66px); }
+  .choices .magnet-photo.is-fallback { font-size: clamp(48px, 10vh, 80px); }
+}
+
+/* A phone held upright is the tightest case there is, and the rule
+   above — written for exactly this problem — excluded it, because a
+   375px screen is never 620px wide. It needs the same shrink and more
+   of it: the switch wraps onto two rows here, which the wide case
+   never has to pay for. */
+@media (max-width: 619px) and (max-height: 820px) {
+  .segmented--play { gap: 2px; padding: 3px; }
+  .segmented--play .seg { padding: 7px 9px; font-size: 12px; }
+  .dots { gap: 5px; margin: 10px 0 8px; }
+  .dot { width: 8px; height: 8px; }
+  .ask { margin-bottom: 9px; font-size: clamp(21px, 5.8vw, 27px); }
+  .repeat-btn { padding: 9px 15px; font-size: 13.5px; }
+  .choices { gap: 12px; margin-top: 12px; max-width: 284px; }
+  .choices .magnet { font-size: clamp(34px, 7.4vh, 58px); }
+  .choices .magnet-photo.is-fallback { font-size: clamp(40px, 9vh, 66px); }
+}
+
+/* ---------- Confetti ------------------------------------------- */
+
+.party {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.party-bit {
+  position: absolute;
+  font-family: var(--font-emoji);
+  line-height: 1;
+  animation: burst 1.2s cubic-bezier(0.16, 0.7, 0.3, 1) forwards;
+}
+@keyframes burst {
+  0%   { opacity: 1; transform: translate(-50%, -50%) scale(0.35) rotate(0deg); }
+  65%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.2) rotate(var(--rot)); }
+}
+
+.party-word {
+  position: absolute;
+  font-size: clamp(46px, 14vw, 84px);
+  font-weight: 800;
+  color: var(--m3);
+  -webkit-text-stroke: 3px #FFFDF7;
+  paint-order: stroke fill;
+  text-shadow: 0 5px 0 rgba(33, 37, 44, 0.16);
+  animation: yay 1.4s var(--ease-pop) forwards;
+}
+@keyframes yay {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.3) rotate(-10deg); }
+  22%  { opacity: 1; transform: translate(-50%, -50%) scale(1.16) rotate(4deg); }
+  40%  { transform: translate(-50%, -55%) scale(1) rotate(0deg); }
+  72%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -125%) scale(1.06); }
+}
+
+/* ---------- Cheer --------------------------------------------- */
+
+.cheer-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: rgba(24, 28, 35, 0.5);
+  backdrop-filter: blur(4px);
+  animation: fade 0.25s ease;
+}
+
+.cheer {
+  position: relative;
+  width: min(360px, 100%);
+  padding: 34px 26px 26px;
+  border-radius: 22px;
+  text-align: center;
+  background: #FFFDF7;
+  box-shadow: 0 22px 55px rgba(20, 24, 30, 0.4);
+  animation: drop-in 0.4s var(--ease-pop);
+}
+
+.cheer-burst {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  border-radius: 22px;
+}
+
+.spark {
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  font-size: 22px;
+  animation: fly 1.1s ease-out forwards;
+}
+@keyframes fly {
+  from { opacity: 1; transform: translate(-50%, -50%) scale(0.3); }
+  to   { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.1) rotate(var(--rot)); }
+}
+
+.cheer-title { margin: 0 0 4px; font-size: 30px; font-weight: 800; }
+.cheer-sub { margin: 0 0 22px; font-size: 16px; font-weight: 600; color: var(--ink-soft); }
+
+.big-btn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+  font-size: 17px;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(180deg, #46B972, var(--m3));
+  box-shadow: inset 0 1.5px 0 rgba(255,255,255,0.4), 0 3px 0 #24743F;
+  transition: transform 0.12s var(--ease-pop);
+}
+.big-btn:active { transform: translateY(2px); box-shadow: inset 0 1.5px 0 rgba(255,255,255,0.4), 0 1px 0 #24743F; }
+
+.text-btn {
+  margin-top: 12px;
+  padding: 10px;
+  width: 100%;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+/* ---------- Grown-ups panel -----------------------------------
+   The only thing left that opens over the page, and it's for the
+   grown-up, not the child.
+   -------------------------------------------------------------- */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  display: grid;
+  place-items: center;
+  /* The notch and the home bar, because this is the one thing that
+     covers the whole screen. */
+  padding: calc(20px + env(safe-area-inset-top)) 20px
+           calc(20px + env(safe-area-inset-bottom));
+}
+
+.overlay-scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(24, 28, 35, 0.44);
+  backdrop-filter: blur(3px);
+  animation: fade 0.2s ease;
+}
+
+@keyframes drop-in {
+  from { opacity: 0; transform: translateY(-26px) rotate(-2deg); }
+}
+
+.panel {
+  position: relative;
+  width: min(340px, 100%);
+  /* A row of stats per language per thing, a list of languages, an
+     install button and a download do not fit on a phone held upright —
+     and how many rows there are is a setting now. The panel scrolls
+     inside itself rather than running off the bottom of the screen,
+     and keeps the scroll to itself so flicking past the end doesn't
+     drag the door behind it. */
+  max-height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 26px 24px 20px;
+  border-radius: 20px;
+  background: #FFFDF7;
+  box-shadow: 0 20px 50px rgba(20, 24, 30, 0.34);
+  animation: drop-in 0.3s var(--ease-pop);
+}
+
+.panel-title { margin: 0 0 18px; font-size: 21px; font-weight: 800; }
+
+.stats { margin: 0 0 22px; }
+
+.stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+.stat:last-child { border-bottom: 0; }
+.stat dt { font-size: 14.5px; font-weight: 600; color: var(--ink-soft); }
+.stat dd { margin: 0; font-size: 15.5px; font-weight: 800; font-variant-numeric: tabular-nums; }
+
+/* Install, and the offline download. Quiet next to the reset button —
+   they are things to do once, not things to be drawn to. */
+.soft-btn {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 12px;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--m4);
+  background: rgba(46, 107, 212, 0.10);
+  transition: opacity 0.15s ease;
+}
+.soft-btn:disabled { opacity: 0.45; cursor: default; }
+
+.offline { margin-bottom: 12px; }
+
+/* Label over sentence, not label beside sentence: "239 pictures and
+   sounds to fetch" is a whole line on a phone, and pushing it onto the
+   right-hand half only breaks the two-word title in half instead. */
+.offline-say { margin-bottom: 9px; }
+.offline-title { display: block; font-size: 14.5px; font-weight: 700; }
+.offline-note {
+  display: block;
+  margin-top: 2px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Always there, even at nothing — a bar that appears when the download
+   starts moves everything under it down at the moment a thumb is on
+   the button. */
+.offline-bar {
+  height: 8px;
+  margin-bottom: 12px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(33, 37, 44, 0.09);
+}
+.offline-bar i {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--m4);
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+.offline.is-done .offline-bar i { background: var(--m3); }
+.offline.is-done .offline-note { color: var(--m3); }
+
+.danger-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--m1);
+  background: rgba(226, 74, 63, 0.10);
+}
+
+/* ---------- Choosing the languages -----------------------------
+   One list of rows, in two places: over the whole screen the first
+   time the board is opened, and in the grown-ups drawer forever
+   after. This is a grown-up's control, so it is set in the reading
+   face and labelled in English — except each language's own name,
+   which is written the way that language writes it.
+   -------------------------------------------------------------- */
+
+.panel-sub {
+  margin: 24px 0 10px;
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.panel-note {
+  margin: 12px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+/* On the first-run panel the notes are what explain the choice, so
+   they sit above and below the list rather than trailing it. */
+.panel--lang .panel-title { margin-bottom: 10px; }
+.panel--lang .panel-note { margin: 0 0 16px; }
+.panel--lang .lang-list + .panel-note { margin: 14px 0 18px; }
+
+.lang-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* A whole row is the target, not a checkbox with a label beside it —
+   this gets used one-handed, with a child in the other arm. */
+.lang-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  text-align: left;
+  background: rgba(33, 37, 44, 0.05);
+  box-shadow: inset 0 0 0 1.5px transparent;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.lang-row.is-on {
+  background: rgba(46, 107, 212, 0.10);
+  box-shadow: inset 0 0 0 1.5px rgba(46, 107, 212, 0.34);
+}
+
+/* Off and unavailable have to look different. Off is a choice and
+   invites being changed back; unavailable is a fact about the device,
+   and the note underneath says which fact. The last language on can't
+   be switched off either, and that row stays lit — it is on, it just
+   can't be turned off. */
+.lang-row:disabled { cursor: default; }
+.lang-row:not(.is-on):disabled { opacity: 0.5; }
+
+.lang-text {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 3px 8px;
+}
+
+.lang-native {
+  font-family: var(--font-letter);
+  font-size: 16.5px;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+/* Bengali hangs its matras off a headline above the letters, so বাংলা
+   set at the Latin size reads small beside English. */
+.lang-native--bn {
+  font-family: var(--font-bangla);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.lang-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+/* Its own line, because "This device has no Spanish voice" is a whole
+   line on a phone and squeezing it beside the name only breaks the
+   name in half instead. */
+.lang-note {
+  flex-basis: 100%;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink-soft);
+}
+
+.lang-tick {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 24px; height: 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  background: rgba(33, 37, 44, 0.13);
+}
+
+.lang-row.is-on .lang-tick { background: var(--m4); }
+
+/* ---------- A phone on its side -------------------------------
+   390 points of height, and the rail and the nav pill take 140 of
+   them. Everything above the tiles gives some back so that a row of
+   magnets is on screen when the board opens rather than one panel and
+   the top of a magnet.
+   -------------------------------------------------------------- */
+
+@media (max-height: 460px) and (orientation: landscape) {
+  .board { padding: 10px 16px calc(var(--nav-h) + 20px); }
+  .screen-hint { margin: 0 0 8px; font-size: 13.5px; }
+  .showcase { margin-bottom: 10px; padding: 8px 14px; }
+  .sc-main { font-size: 40px; }
+  .sc-main--bn { font-size: 38px; }
+  .pics-switch { margin-bottom: 8px; }
+}
+
+/* ---------- Wider screens ------------------------------------- */
+
+@media (min-width: 640px) {
+  .grid { grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 18px; }
+  .magnet { font-size: 46px; }
+  .board { padding: 26px 24px calc(var(--nav-h) + 34px); }
+}
+
+/* ---------- Calm mode ----------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .magnet { transform: none; }
+  .magnet:active { transform: scale(1.04); }
+
+  /* Zeroing the duration alone would still leave the shape and its
+     corner dots waiting out their staggered delays before appearing.
+     Here everything is simply already drawn. */
+  .sc-shape-art .shape-face,
+  .sc-shape-art .shape-line,
+  .sc-shape-art .shape-pip { animation-delay: 0s !important; }
+
+  /* The ring still has to land — it's the answer, not decoration. It
+     just arrives already there, and stops beating. */
+  .bd-ring {
+    animation: none !important;
+    opacity: 1;
+  }
+}

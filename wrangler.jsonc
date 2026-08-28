@@ -1,0 +1,20 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "abcd-learning",
+  "account_id": "4b5c678d39713cad840c2983dbce27e1",
+  "compatibility_date": "2026-08-19",
+  "assets": {
+    "directory": "./",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "single-page-application"
+  },
+  // The apex is the address on the card and in the og: tags. A custom
+  // domain needs kiddo.page to be a zone on this account; Cloudflare
+  // makes the DNS record and the certificate itself.
+  "routes": [
+    { "pattern": "kiddo.page", "custom_domain": true }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}

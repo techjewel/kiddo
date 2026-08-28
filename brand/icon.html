@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Magnet Board icon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@800&family=Baloo+Da+2:wght@800&display=swap" rel="stylesheet">
+<style>
+  /* Rendered by brand/render.sh with headless Chrome. Not shipped —
+     see .assetsignore. The magnets are the app's own recipe, scaled
+     up: same gradient, same bevel, same 19% corner.
+
+     Three alphabets and the star, which is the same thing the social
+     card says, in the same colours: A red, অ green, Ñ purple. The 1
+     gave up its slot to Ñ — numbers are still a screen and still on
+     the card's rail, but at 192px a launcher icon gets to say one
+     thing, and the one worth saying is that this board is not only in
+     English. Four tiles is also the ceiling: see favicon-src.html for
+     what happens at 16. */
+  :root {
+    --m1: #E24A3F; --m2: #F2A122; --m3: #34A05B; --m5: #8B4FCF;
+    --door-hi: #F4F7FA; --door-lo: #DDE4EC;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 512px; height: 512px; }
+  body {
+    display: grid; place-items: center;
+    background-color: var(--door-hi);
+    background-image:
+      repeating-linear-gradient(90deg,
+        rgba(255,255,255,0.30) 0 4px, rgba(33,37,44,0.010) 4px 9px),
+      linear-gradient(158deg, #FBFCFE 0%, var(--door-hi) 44%, var(--door-lo) 100%);
+  }
+  /* The pad is the only difference between the two icons: `any` sits
+     close to the edge the way an iOS icon does, `maskable` pulls in to
+     the 80% safe circle Android crops to. */
+  body.pad-tight  { --pad: 44px; }
+  body.pad-mask   { --pad: 92px; }
+
+  .cluster {
+    width: calc(512px - var(--pad) * 2);
+    height: calc(512px - var(--pad) * 2);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: calc((512px - var(--pad) * 2) * 0.075);
+  }
+
+  .m {
+    display: grid; place-items: center;
+    border-radius: 19%;
+    color: #fff;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: calc((512px - var(--pad) * 2) * 0.30);
+    line-height: 1;
+    padding-bottom: 0.06em;
+    background: linear-gradient(180deg,
+      color-mix(in srgb, var(--c) 100%, white 26%),
+      var(--c) 52%,
+      color-mix(in srgb, var(--c) 100%, black 12%));
+    box-shadow:
+      inset 0 0.045em 0 rgba(255,255,255,0.5),
+      inset 0 -0.07em 0 rgba(0,0,0,0.18),
+      0 0.06em 0 color-mix(in srgb, var(--c) 100%, black 30%),
+      0 0.10em 0.18em rgba(33,37,44,0.22);
+    text-shadow: 0 0.03em 0 rgba(0,0,0,0.16);
+    transform: rotate(var(--t));
+  }
+  .m--bn { font-family: 'Baloo Da 2', sans-serif; }
+  /* The star glyph sits lower on its baseline than a letter does, so
+     it gets its own optical nudge rather than the shared one. */
+  .m--star { font-size: calc((512px - var(--pad) * 2) * 0.34); padding-bottom: 0; }
+  /* Ñ is the only face here carrying anything above the cap height, and
+     at the shared size the tilde crowds the bevel. It comes down until
+     the letter reads the same weight as the A opposite it. */
+  .m--tilde { font-size: calc((512px - var(--pad) * 2) * 0.265); padding-bottom: 0.02em; }
+</style>
+</head>
+<body class="pad-tight">
+  <div class="cluster">
+    <div class="m"          style="--c: var(--m1); --t: -3.5deg">A</div>
+    <div class="m m--bn"    style="--c: var(--m3); --t:  3deg">অ</div>
+    <div class="m m--tilde" style="--c: var(--m5); --t:  2.5deg">Ñ</div>
+    <div class="m m--star"  style="--c: var(--m2); --t: -2.5deg">★</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+wrangler.jsonc
+wrangler.toml
+.assetsignore
+.gstack
+.git
+README.md
+node_modules
+.wrangler
+brand
