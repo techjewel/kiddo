@@ -112,6 +112,132 @@
   "page": "https://commons.wikimedia.org/wiki/File:439280_schots_angry-tiger.wav"
  },
  {
+  "animal": "crow",
+  "title": "XC24828 - Zwarte Kraai - Corvus corone.ogg",
+  "license": "CC BY-SA 4.0",
+  "author": "Sander Pieterse",
+  "page": "https://commons.wikimedia.org/wiki/File:XC24828_-_Zwarte_Kraai_-_Corvus_corone.ogg"
+ },
+ {
+  "animal": "pigeon",
+  "title": "Dove cooing.ogg",
+  "license": "Public domain",
+  "author": "mary905",
+  "page": "https://commons.wikimedia.org/wiki/File:Dove_cooing.ogg"
+ },
+ {
+  "animal": "sparrow",
+  "title": "Joseph Sardin - Passer domesticus tschilp call.oga",
+  "license": "CC0",
+  "author": "Joseph Sardin",
+  "page": "https://commons.wikimedia.org/wiki/File:Joseph_Sardin_-_Passer_domesticus_tschilp_call.oga"
+ },
+ {
+  "animal": "woodpecker",
+  "title": "Woodpecker tapping.ogg",
+  "license": "Public domain",
+  "author": "U.S. Fish and Wildlife Service",
+  "page": "https://commons.wikimedia.org/wiki/File:Woodpecker_tapping.ogg"
+ },
+ {
+  "animal": "parrot",
+  "title": "Mealy Amazon (Amazona farinosa) (W AMAZONA FARINOSA R1 C5).ogg",
+  "license": "CC BY 4.0",
+  "author": "British Library",
+  "page": "https://commons.wikimedia.org/wiki/File:Mealy_Amazon_(Amazona_farinosa)_(W_AMAZONA_FARINOSA_R1_C5).ogg"
+ },
+ {
+  "animal": "myna",
+  "title": "CommonMynaCalls.ogg",
+  "license": "CC BY-SA 2.5",
+  "author": "L. Shyamal",
+  "page": "https://commons.wikimedia.org/wiki/File:CommonMynaCalls.ogg"
+ },
+ {
+  "animal": "cuckoo",
+  "title": "Cuculus canorus.ogg",
+  "license": "CC BY-SA 3.0",
+  "author": "Vladimir Yu. Arkhipov, Arkhivov",
+  "page": "https://commons.wikimedia.org/wiki/File:Cuculus_canorus.ogg"
+ },
+ {
+  "animal": "kingfisher",
+  "title": "Alcedo atthis - Common Kingfisher XC476785.mp3",
+  "license": "CC BY-SA 4.0",
+  "author": "Marie-Lan Taÿ Pamart",
+  "page": "https://commons.wikimedia.org/wiki/File:Alcedo_atthis_-_Common_Kingfisher_XC476785.mp3"
+ },
+ {
+  "animal": "swan",
+  "title": "Tundra swans.ogg",
+  "license": "Public domain",
+  "author": "U.S. Fish and Wildlife Service",
+  "page": "https://commons.wikimedia.org/wiki/File:Tundra_swans.ogg"
+ },
+ {
+  "animal": "flamingo",
+  "title": "Phoenicopterus roseus (Rosaflamingo - Greater Flamingo) — Weltvogelpark Walsrode 2013.ogg",
+  "license": "CC BY-SA 3.0",
+  "author": "Olaf Oliviero Riemer",
+  "page": "https://commons.wikimedia.org/wiki/File:Phoenicopterus_roseus_(Rosaflamingo_-_Greater_Flamingo)_%E2%80%94_Weltvogelpark_Walsrode_2013.ogg"
+ },
+ {
+  "animal": "penguin",
+  "title": "Little Penguin (Eudyptula minor).ogg",
+  "license": "CC BY 3.0",
+  "author": "Benchill",
+  "page": "https://commons.wikimedia.org/wiki/File:Little_Penguin_(Eudyptula_minor).ogg"
+ },
+ {
+  "animal": "panda",
+  "title": "Giant panda twittering.ogg",
+  "license": "Public domain",
+  "author": "Mizunoryu",
+  "page": "https://commons.wikimedia.org/wiki/File:Giant_panda_twittering.ogg"
+ },
+ {
+  "animal": "zebra",
+  "title": "Grévys zebra (Sound Effects).ogg",
+  "license": "CC BY-SA 4.0",
+  "author": "DiegoC472",
+  "page": "https://commons.wikimedia.org/wiki/File:Gr%C3%A9vys_zebra_(Sound_Effects).ogg"
+ },
+ {
+  "animal": "donkey",
+  "title": "157763 felix-blume a-donkey-is-braying-in-his-enclosure-in-south-of-france.wav",
+  "license": "CC0",
+  "author": "felix-blume",
+  "page": "https://commons.wikimedia.org/wiki/File:157763_felix-blume_a-donkey-is-braying-in-his-enclosure-in-south-of-france.wav"
+ },
+ {
+  "animal": "bear",
+  "title": "Bear growl.ogg",
+  "license": "CC BY 3.0",
+  "author": "Shizhao",
+  "page": "https://commons.wikimedia.org/wiki/File:Bear_growl.ogg"
+ },
+ {
+  "animal": "goose",
+  "title": "Geese Honking (loud).ogg",
+  "license": "Public domain",
+  "author": "U.S. Fish and Wildlife Service",
+  "page": "https://commons.wikimedia.org/wiki/File:Geese_Honking_(loud).ogg"
+ },
+ {
+  "animal": "fox",
+  "title": "Red Fox (Vulpes vulpes) (W1CDR0001529 BD12).ogg",
+  "license": "CC BY-SA 4.0",
+  "author": "British Library",
+  "page": "https://commons.wikimedia.org/wiki/File:Red_Fox_(Vulpes_vulpes)_(W1CDR0001529_BD12).ogg"
+ },
+ {
+  "animal": "turkey",
+  "title": "Meleagris gallopavo - Wild Turkey XC136045.ogg",
+  "license": "CC BY-SA 3.0",
+  "author": "Jonathon Jongsma",
+  "page": "https://commons.wikimedia.org/wiki/File:Meleagris_gallopavo_-_Wild_Turkey_XC136045.ogg"
+ },
+ {
   "bangla": 1,
   "word": "এক",
   "title": "LL-Q9610 (ben)-Titodutta-এক.wav",

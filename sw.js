@@ -16,7 +16,7 @@
 
 /* Bump with the ?v= in index.html. Same number, one thing to change:
    a new SHELL name is what throws away the old CSS and JS. */
-const VERSION = 'v8';
+const VERSION = 'v9';
 
 const SHELL = `magnet-shell-${VERSION}`;
 const MEDIA = 'magnet-media';   /* Photographs and recordings. They are
@@ -33,17 +33,17 @@ const FONTS = 'magnet-fonts';
    old one forever, so name it here and this worker drops it once on
    activation and refetches on the next look. Entries can be deleted
    again a release or two later, once the stale copies are gone. */
-const STALE_MEDIA = ['./photos/rose.jpg'];
+const STALE_MEDIA = ['./photos/rose.jpg', './photos/sheep.jpg', './photos/mouse.jpg', './photos/monkey.jpg', './photos/chicken.jpg', './photos/horse.jpg'];
 
 /* Everything needed to draw the first screen. The two versioned URLs
    have to match index.html exactly, query string and all — a cache is
    keyed by the whole URL, and `app.js` is a different entry from
-   `app.js?v=8`. */
+   `app.js?v=9`. */
 const SHELL_URLS = [
   './',
   './index.html',
-  './styles.css?v=8',
-  './app.js?v=8',
+  './styles.css?v=9',
+  './app.js?v=9',
   './manifest.webmanifest',
   './icons/icon-192.png',
   './icons/icon-512.png',

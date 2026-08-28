@@ -86,6 +86,108 @@ From *439280_schots_angry-tiger.wav* by schots
 License: CC0  
 Source: https://commons.wikimedia.org/wiki/File:439280_schots_angry-tiger.wav
 
+
+**Crow** — `crow.m4a`  
+From *XC24828 - Zwarte Kraai - Corvus corone.ogg* by Sander Pieterse  
+License: CC BY-SA 4.0  
+Source: https://commons.wikimedia.org/wiki/File:XC24828_-_Zwarte_Kraai_-_Corvus_corone.ogg
+
+**Pigeon** — `pigeon.m4a`  
+From *Dove cooing.ogg* by mary905  
+License: Public domain  
+Source: https://commons.wikimedia.org/wiki/File:Dove_cooing.ogg
+
+**Sparrow** — `sparrow.m4a`  
+From *Joseph Sardin - Passer domesticus tschilp call.oga* by Joseph Sardin  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:Joseph_Sardin_-_Passer_domesticus_tschilp_call.oga
+
+**Woodpecker** — `woodpecker.m4a`  
+From *Woodpecker tapping.ogg* by U.S. Fish and Wildlife Service  
+License: Public domain  
+Source: https://commons.wikimedia.org/wiki/File:Woodpecker_tapping.ogg
+
+**Parrot** — `parrot.m4a`  
+From *Mealy Amazon (Amazona farinosa) (W AMAZONA FARINOSA R1 C5).ogg* by the British Library  
+License: CC BY 4.0  
+Source: https://commons.wikimedia.org/wiki/File:Mealy_Amazon_(Amazona_farinosa)_(W_AMAZONA_FARINOSA_R1_C5).ogg
+
+**Myna** — `myna.m4a`  
+From *CommonMynaCalls.ogg* by L. Shyamal  
+License: CC BY-SA 2.5  
+Source: https://commons.wikimedia.org/wiki/File:CommonMynaCalls.ogg
+
+**Cuckoo** — `cuckoo.m4a`  
+From *Cuculus canorus.ogg* by Vladimir Yu. Arkhipov, Arkhivov  
+License: CC BY-SA 3.0  
+Source: https://commons.wikimedia.org/wiki/File:Cuculus_canorus.ogg
+
+**Kingfisher** — `kingfisher.m4a`  
+From *Alcedo atthis - Common Kingfisher XC476785.mp3* by Marie-Lan Taÿ Pamart  
+License: CC BY-SA 4.0  
+Source: https://commons.wikimedia.org/wiki/File:Alcedo_atthis_-_Common_Kingfisher_XC476785.mp3
+
+**Swan** — `swan.m4a`  
+From *Tundra swans.ogg* by U.S. Fish and Wildlife Service  
+License: Public domain  
+Source: https://commons.wikimedia.org/wiki/File:Tundra_swans.ogg
+
+**Flamingo** — `flamingo.m4a`  
+From *Phoenicopterus roseus (Rosaflamingo - Greater Flamingo) — Weltvogelpark Walsrode 2013.ogg* by Olaf Oliviero Riemer  
+License: CC BY-SA 3.0  
+Source: https://commons.wikimedia.org/wiki/File:Phoenicopterus_roseus_(Rosaflamingo_-_Greater_Flamingo)_%E2%80%94_Weltvogelpark_Walsrode_2013.ogg
+
+**Penguin** — `penguin.m4a`  
+From *Little Penguin (Eudyptula minor).ogg* by Benchill  
+License: CC BY 3.0  
+Source: https://commons.wikimedia.org/wiki/File:Little_Penguin_(Eudyptula_minor).ogg
+
+**Panda** — `panda.m4a`  
+From *Giant panda twittering.ogg* by Mizunoryu  
+License: Public domain  
+Source: https://commons.wikimedia.org/wiki/File:Giant_panda_twittering.ogg
+
+**Zebra** — `zebra.m4a`  
+From *Grévys zebra (Sound Effects).ogg* by DiegoC472  
+License: CC BY-SA 4.0  
+Source: https://commons.wikimedia.org/wiki/File:Gr%C3%A9vys_zebra_(Sound_Effects).ogg
+
+**Donkey** — `donkey.m4a`  
+From *157763 felix-blume a-donkey-is-braying-in-his-enclosure-in-south-of-france.wav* by felix-blume  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:157763_felix-blume_a-donkey-is-braying-in-his-enclosure-in-south-of-france.wav
+
+**Bear** — `bear.m4a`  
+From *Bear growl.ogg* by Shizhao  
+License: CC BY 3.0  
+Source: https://commons.wikimedia.org/wiki/File:Bear_growl.ogg
+
+**Goose** — `goose.m4a`  
+From *Geese Honking (loud).ogg* by U.S. Fish and Wildlife Service  
+License: Public domain  
+Source: https://commons.wikimedia.org/wiki/File:Geese_Honking_(loud).ogg
+
+**Fox** — `fox.m4a`  
+From *Red Fox (Vulpes vulpes) (W1CDR0001529 BD12).ogg* by the British Library  
+License: CC BY-SA 4.0  
+Source: https://commons.wikimedia.org/wiki/File:Red_Fox_(Vulpes_vulpes)_(W1CDR0001529_BD12).ogg
+
+**Turkey** — `turkey.m4a`  
+From *Meleagris gallopavo - Wild Turkey XC136045.ogg* by Jonathon Jongsma  
+License: CC BY-SA 3.0  
+Source: https://commons.wikimedia.org/wiki/File:Meleagris_gallopavo_-_Wild_Turkey_XC136045.ogg
+
+
+## Spoken-name fallbacks
+
+The files in `sounds/voice/en/`, `sounds/voice/es/` and `sounds/voice/fr/`
+are not recordings of a person. They were made with [Piper](https://github.com/rhasspy/piper)
+so a television browser with no speech engine still says the word.
+
+English uses *en_US-amy-medium*. Spanish uses *es_ES-davefx-medium*.
+French uses *fr_FR-siwis-medium*. Piper and those voices are MIT-licensed.
+Each clip was levelled the same way as the animal recordings.
+
 ## Reusing these
 
 The CC BY and CC BY-SA files require attribution if you redistribute

@@ -59,9 +59,9 @@ License: CC BY 2.0
 Source: https://commons.wikimedia.org/wiki/File:Cherry_season_(48216568227).jpg
 
 **Chicken** — `chicken.jpg`  
-From *Male_and_female_chicken_sitting_together.jpg* by Andrei Niemimäki from Turku, Finland  
+From *Rhode Island Red hen - geograph.org.uk - 5455945.jpg* by Evelyn Simak  
 License: CC BY-SA 2.0  
-Source: https://commons.wikimedia.org/wiki/File:Male_and_female_chicken_sitting_together.jpg
+Source: https://commons.wikimedia.org/wiki/File:Rhode_Island_Red_hen_-_geograph.org.uk_-_5455945.jpg
 
 **Coconut** — `coconut.jpg`  
 From *Coconuts - single and cracked open.jpg* by Ivar Leidus  
@@ -118,10 +118,9 @@ License: CC BY 4.0
 Source: https://commons.wikimedia.org/wiki/File:Grapes,_Rostov-on-Don,_Russia.jpg
 
 **Horse** — `horse.jpg`  
-From *Nokota_Horses_cropped.jpg* by Nokota_Horses.jpg: François Marchal
-derivative work: Dana boomer (talk)  
-License: CC BY-SA 3.0  
-Source: https://commons.wikimedia.org/wiki/File:Nokota_Horses_cropped.jpg
+From *Chestnut head.jpg* by Rachel C  
+License: CC BY 2.0  
+Source: https://commons.wikimedia.org/wiki/File:Chestnut_head.jpg
 
 **Kiwi** — `kiwi.jpg`  
 From *Kiwi.jpg* by Renee Comet (Photographer)  
@@ -149,14 +148,14 @@ License: Public domain
 Source: https://commons.wikimedia.org/wiki/File:Cucumis_melo_var._reticulatus_(photo_by_Scott_Bauer).jpg
 
 **Monkey** — `monkey.jpg`  
-From *Ubud_Monkey_Family.jpg* by Deerpeter  
+From *Rhesus macaque closeup.jpg* by Adhish dulal  
 License: CC BY-SA 4.0  
-Source: https://commons.wikimedia.org/wiki/File:Ubud_Monkey_Family.jpg
+Source: https://commons.wikimedia.org/wiki/File:Rhesus_macaque_closeup.jpg
 
 **Mouse** — `mouse.jpg`  
-From *Mouse white background.jpg* by Unknown authorUnknown author (original) / Ilmari Karonen (editing)  
-License: Public domain  
-Source: https://commons.wikimedia.org/wiki/File:Mouse_white_background.jpg
+From *Apodemus sylvaticus bosmuis.jpg* by Rasbak  
+License: CC BY-SA 3.0  
+Source: https://commons.wikimedia.org/wiki/File:Apodemus_sylvaticus_bosmuis.jpg
 
 **Orange** — `orange.jpg`  
 From *Oranges_-_whole-halved-segment.jpg* by Ivar Leidus  
@@ -205,9 +204,9 @@ License: CC BY 3.0
 Source: https://commons.wikimedia.org/wiki/File:Oryctolagus_cuniculus_Rcdo.jpg
 
 **Sheep** — `sheep.jpg`  
-From *Flock_of_sheep.jpg* by Keith Weller  
-License: Public domain  
-Source: https://commons.wikimedia.org/wiki/File:Flock_of_sheep.jpg
+From *Mouton (image carrée).jpg* by MaCRoEco  
+License: CC BY-SA 2.5  
+Source: https://commons.wikimedia.org/wiki/File:Mouton_(image_carr%C3%A9e).jpg
 
 **Snake** — `snake.jpg`  
 From *Trimeresurus_sabahi_fucatus,_Banded_pit_viper_-_Takua_Pa_District,_Phang-nga_Province_(46710893582).jpg* by Rushenb  
@@ -243,6 +242,32 @@ Source: https://commons.wikimedia.org/wiki/File:Liat_Portal_for_Foodie_Disorder_
 From *Plains_Zebra_Equus_quagga_cropped.jpg* by Muhammad Mahdi Karim  
 License: GFDL 1.2  
 Source: https://commons.wikimedia.org/wiki/File:Plains_Zebra_Equus_quagga_cropped.jpg
+
+
+**Bear** — `bear.jpg`  
+From *Brown bear ursus arctos big bear.jpg* by Karen Laubenstein, U.S. Fish and Wildlife Service  
+License: Public domain  
+Source: https://commons.wikimedia.org/wiki/File:Brown_bear_ursus_arctos_big_bear.jpg
+
+**Donkey** — `donkey.jpg`  
+From *Equus asinus Kadzidłowo 001.jpg* by Lilly M  
+License: CC BY-SA 3.0  
+Source: https://commons.wikimedia.org/wiki/File:Equus_asinus_Kadzid%C5%82owo_001.jpg
+
+**Fox** — `fox.jpg`  
+From *Red Fox (Vulpes vulpes) (48490223071).jpg* by GlacierNPS  
+License: Public domain  
+Source: https://commons.wikimedia.org/wiki/File:Red_Fox_(Vulpes_vulpes)_(48490223071).jpg
+
+**Guava** — `guava.jpg`  
+From *Guava - Psidium guajava fruit of Cuba.jpg* by Sarang  
+License: Public domain  
+Source: https://commons.wikimedia.org/wiki/File:Guava_-_Psidium_guajava_fruit_of_Cuba.jpg
+
+**Pomegranate** — `pomegranate.jpg`  
+From *Pomegranate fruit - whole and piece with arils.jpg* by Ivar Leidus  
+License: CC BY-SA 4.0  
+Source: https://commons.wikimedia.org/wiki/File:Pomegranate_fruit_-_whole_and_piece_with_arils.jpg
 
 ## Household things
 
@@ -548,6 +573,17 @@ Source: https://commons.wikimedia.org/wiki/File:CygneVaires.jpg
 From *Great spotted woodpecker (Dendrocopos major) male Drenthe.jpg* by Charles J. Sharp  
 License: CC BY-SA 4.0  
 Source: https://commons.wikimedia.org/wiki/File:Great_spotted_woodpecker_(Dendrocopos_major)_male_Drenthe.jpg
+
+
+**Goose** — `goose.jpg`  
+From *Ánsar común (Anser anser), Tierpark Hellabrunn, Múnich, Alemania, 2012-06-17, DD 01.JPG* by Diego Delso  
+License: CC BY-SA 3.0  
+Source: https://commons.wikimedia.org/wiki/File:%C3%81nsar_com%C3%BAn_(Anser_anser),_Tierpark_Hellabrunn,_M%C3%BAnich,_Alemania,_2012-06-17,_DD_01.JPG
+
+**Turkey** — `turkey.jpg`  
+From *Meleagris gallopavo (wild) - Hamburg, Tierpark Hagenbeck.jpg* by Ggonnell  
+License: CC BY-SA 3.0  
+Source: https://commons.wikimedia.org/wiki/File:Meleagris_gallopavo_(wild)_-_Hamburg,_Tierpark_Hagenbeck.jpg
 
 ## Reusing these
 

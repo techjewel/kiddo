@@ -42,10 +42,11 @@ language already ticked and a **Start** button that works without anything
 being touched. After that it lives in the grown-ups panel, and a language
 switched off keeps its stars — off is not reset.
 
-A language is only offered if the device can actually say it. বাংলা always can,
-because it is recorded; Español and Français are read out by the device's own
-voice, and a tablet without one says so in the picker rather than mispronouncing
-the words confidently.
+A language is only offered if the device can actually say it. বাংলা, Español
+and Français always can, because they are recorded. English prefers the
+device's own voice, and if that voice is missing — a television browser is
+the usual case — it plays a spoken-name file instead, so the board is never
+silent.
 
 **Letters** — 26 in English, each with its lowercase partner, a word and a
 picture. Tap a magnet and it says the letter and the word out loud. The other
@@ -66,13 +67,13 @@ changed; the counting pictures are deliberately identical, because counting is
 the part that doesn't change between languages. The Bangla words are recordings
 — এক, দুই, তিন.
 
-**Pictures** — 18 fruits, 20 animals, 17 birds, 12 flowers and 32 things around
+**Pictures** — 20 fruits, 23 animals, 19 birds, 12 flowers and 32 things around
 the house, all as **real photographs**, two big ones per row. Fruits, flowers and
 household things say only their name — "Lemon." Nothing else. Animals say their
-name and then the animal: thirteen of them play a **real recording** — an actual
-cow, goat, frog, lion, elephant. Mouse and snake have no recording worth having,
-so they say the noise instead — "Mouse. Squeak." A rabbit, a turtle, a panda, a
-zebra and a fish stop at the name.
+name and then the animal: most of them play a **real recording** — an actual
+cow, goat, frog, lion, elephant, donkey, bear, fox. Mouse and snake have no
+recording worth having, so they say the noise instead — "Mouse. Squeak." A
+rabbit, a turtle and a fish stop at the name.
 
 The panda, the zebra and the fish are on that shelf because they are on the
 letter board — P is for Panda, Z is for Zebra, F is for Fish — and an animal a
@@ -81,10 +82,12 @@ child meets under a letter should be findable where the animals live.
 Birds are their own shelf, and the duck, the chicken, the owl and the penguin
 moved onto it — a shelf a child browses has to mean what it says, and those four
 were the only birds sitting under Animals. The three recordings came with them,
-so the duck still quacks. The crow caws, the pigeon coos, the sparrow chirps and
-the woodpecker taps in the browser's voice; a peacock's scream and an eagle's
-cry are not sounds a three-year-old repeats, so those birds give their name and
-stop.
+so the duck still quacks. The crow, the pigeon, the sparrow, the woodpecker,
+the parrot, the myna, the cuckoo, the kingfisher, the swan, the flamingo, the
+penguin, the goose and the turkey play real recordings too. A peacock's scream
+and an eagle's cry are not sounds a three-year-old repeats, so those birds
+give their name and stop. An ostrich has no recording here, so it stops at
+the name as well.
 
 **Colours** — 11 of them. Tapping one paints the whole page that colour, rings
 the tile you picked, and says just the word: "Green." The name shows above the
@@ -101,9 +104,9 @@ on it, the rest of him fades, and he says "Nose." 18 parts, from head and hair
 down to knees, feet and toes; under him the same 18 as words, for the ones a
 finger has trouble finding. The same switch as the letters
 and the numbers puts the whole screen into another language — নাক, হাত, পায়ের
-আঙুল, spoken by a real Bangla speaker; Nariz, Mano, Dedos del pie read out by
-the device — and the choice is the board's, remembered across all three
-screens.
+আঙুল, spoken by a real Bangla speaker; Nariz, Mano, Dedos del pie spoken from
+files when the device has no voice of its own — and the choice is the board's,
+remembered across all three screens.
 
 **Play** — "Find the lion" with four big magnets to choose from. Ten rounds,
 each ending in confetti and a stretched "Yaaay!". Letters, numbers, pictures,
@@ -338,7 +341,8 @@ disappears. The colour moves to the rim and bottom edge, so the tiles still look
 like magnets and keep a colour identity, but the photo always reads clearly.
 
 **A shelf of photographs is built when it is first looked at.** All five of them
-at start-up was ninety-nine `<img>` elements and 5.8 MB of photographs, asked
+at start-up would be a hundred-odd `<img>` elements and several megabytes of
+photographs, asked
 for before a child had tapped anything, on tabs he might never open — a browser
 fetches an image the moment the element exists, even on a screen hidden with
 `display: none`, because deferring it needs a layout box and a hidden screen
@@ -424,16 +428,20 @@ word.
 
 ## Sound
 
-Two kinds. Speech uses the browser's built-in voice (Web Speech API) — nothing
-downloaded, nothing sent anywhere. The recordings are real audio files in
-`sounds/`: the animal noises, about 550 kB, the twenty Bangla number words in
-`sounds/bangla/`, about 230 kB, the eighteen Bangla body parts in
-`sounds/bangla/body/`, about 220 kB, and the eighty-six letter and word clips of
-the বর্ণমালা in `sounds/bangla/letters/`, about 1.1 MB. All of them are trimmed
-and levelled to the
-same loudness so none startles anyone. Sources and licences are in
-[`sounds/CREDITS.md`](sounds/CREDITS.md); the photos have their own in
-[`photos/CREDITS.md`](photos/CREDITS.md).
+Two kinds. Speech prefers the browser's built-in voice (Web Speech API).
+When that voice is missing, English plays a spoken-name file from
+`sounds/voice/en/` instead — the same words, already on the device, so a
+television that has no speech engine is never silent. Español and Français
+are spoken from files in `sounds/voice/es/` and `sounds/voice/fr/` the way
+বাংলা already was.
+
+The other recordings are real audio files in `sounds/`: the animal noises,
+the twenty Bangla number words in `sounds/bangla/`, the eighteen Bangla body
+parts in `sounds/bangla/body/`, and the eighty-six letter and word clips of
+the বর্ণমালা in `sounds/bangla/letters/`. All of them are trimmed and
+levelled to the same loudness so none startles anyone. Sources and licences
+are in [`sounds/CREDITS.md`](sounds/CREDITS.md); the photos have their own
+in [`photos/CREDITS.md`](photos/CREDITS.md).
 
 The 🔊 button mutes everything. If a tablet stays silent, tap the screen once
 first — mobile browsers block audio until the page has been touched.
@@ -449,9 +457,10 @@ Installed, it opens with no address bar, its own icon and its own name.
 
 **Keeping it offline.** The service worker caches the shell — the page, the CSS,
 the script, the fonts — the first time it loads, so the app opens with no signal
-at all. The photographs and recordings are 8 MB and are cached as they're
-tapped, which means a child who has never met the flamingo can't meet it on a
-plane. So the grown-ups panel has a **Download the photos and sounds** button
+at all. The photographs, the animal recordings and the spoken-name files are
+cached as they're tapped, which means a child who has never met the flamingo
+can't meet it on a plane. So the grown-ups panel has a **Download the photos
+and sounds** button
 that fetches all of them on purpose, with a progress bar, and says "All of it
 is on this device" when it's done.
 
@@ -459,8 +468,9 @@ The list it downloads is built in `mediaUrls()` from the same arrays the tiles
 are drawn from, so adding a photograph adds it to the download too. There is no
 second list to keep in step. It also follows the languages: only the ones
 switched on, and of those only the ones spoken from files, so a household with
-বাংলা switched off is never asked to download 1.5 MB of it and a synthesised
-language adds nothing at all.
+বাংলা switched off is never asked to download 1.5 MB of it. English spoken-name
+files come with the board because English is always on; Español and Français
+add theirs only when those languages are switched on.
 
 **Releasing a change.** Bump the `?v=` on both tags in `index.html` *and*
 `VERSION` in `sw.js` to the same number, and update `SHELL_URLS` to match. A new

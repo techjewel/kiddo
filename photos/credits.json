@@ -26,10 +26,10 @@
  {
   "slug": "sheep",
   "article": "Sheep",
-  "file": "Flock_of_sheep.jpg",
-  "license": "Public domain",
-  "author": "Keith Weller",
-  "page": "https://commons.wikimedia.org/wiki/File:Flock_of_sheep.jpg"
+  "file": "Mouton (image carrée).jpg",
+  "license": "CC BY-SA 2.5",
+  "author": "MaCRoEco",
+  "page": "https://commons.wikimedia.org/wiki/File:Mouton_(image_carr%C3%A9e).jpg"
  },
  {
   "slug": "goat",
@@ -50,18 +50,18 @@
  {
   "slug": "horse",
   "article": "Horse",
-  "file": "Nokota_Horses_cropped.jpg",
-  "license": "CC BY-SA 3.0",
-  "author": "Nokota_Horses.jpg: François Marchal\nderivative work: Dana boomer (talk)",
-  "page": "https://commons.wikimedia.org/wiki/File:Nokota_Horses_cropped.jpg"
+  "file": "Chestnut head.jpg",
+  "license": "CC BY 2.0",
+  "author": "Rachel C",
+  "page": "https://commons.wikimedia.org/wiki/File:Chestnut_head.jpg"
  },
  {
   "slug": "chicken",
   "article": "Chicken",
-  "file": "Male_and_female_chicken_sitting_together.jpg",
+  "file": "Rhode Island Red hen - geograph.org.uk - 5455945.jpg",
   "license": "CC BY-SA 2.0",
-  "author": "Andrei Niemimäki from Turku, Finland",
-  "page": "https://commons.wikimedia.org/wiki/File:Male_and_female_chicken_sitting_together.jpg"
+  "author": "Evelyn Simak",
+  "page": "https://commons.wikimedia.org/wiki/File:Rhode_Island_Red_hen_-_geograph.org.uk_-_5455945.jpg"
  },
  {
   "slug": "frog",
@@ -89,11 +89,11 @@
  },
  {
   "slug": "mouse",
-  "article": "Mouse",
-  "file": "Mouse white background.jpg",
-  "license": "Public domain",
-  "author": "Unknown authorUnknown author (original) / Ilmari Karonen (editing)",
-  "page": "https://commons.wikimedia.org/wiki/File:Mouse_white_background.jpg"
+  "article": "Wood mouse",
+  "file": "Apodemus sylvaticus bosmuis.jpg",
+  "license": "CC BY-SA 3.0",
+  "author": "Rasbak",
+  "page": "https://commons.wikimedia.org/wiki/File:Apodemus_sylvaticus_bosmuis.jpg"
  },
  {
   "slug": "snake",
@@ -129,11 +129,11 @@
  },
  {
   "slug": "monkey",
-  "article": "Monkey",
-  "file": "Ubud_Monkey_Family.jpg",
+  "article": "Rhesus macaque",
+  "file": "Rhesus macaque closeup.jpg",
   "license": "CC BY-SA 4.0",
-  "author": "Deerpeter",
-  "page": "https://commons.wikimedia.org/wiki/File:Ubud_Monkey_Family.jpg"
+  "author": "Adhish dulal",
+  "page": "https://commons.wikimedia.org/wiki/File:Rhesus_macaque_closeup.jpg"
  },
  {
   "slug": "penguin",
@@ -790,5 +790,61 @@
   "license": "CC BY-SA 4.0",
   "author": "Gzen92",
   "page": "https://commons.wikimedia.org/wiki/File:Autruche_d%27Afrique_(Struthio_camelus)_(2).jpg"
+ },
+ {
+  "slug": "donkey",
+  "article": "Donkey",
+  "file": "Equus asinus Kadzidłowo 001.jpg",
+  "license": "CC BY-SA 3.0",
+  "author": "Lilly M",
+  "page": "https://commons.wikimedia.org/wiki/File:Equus_asinus_Kadzid%C5%82owo_001.jpg"
+ },
+ {
+  "slug": "bear",
+  "article": "Brown bear",
+  "file": "Brown bear ursus arctos big bear.jpg",
+  "license": "Public domain",
+  "author": "Karen Laubenstein, U.S. Fish and Wildlife Service",
+  "page": "https://commons.wikimedia.org/wiki/File:Brown_bear_ursus_arctos_big_bear.jpg"
+ },
+ {
+  "slug": "fox",
+  "article": "Red fox",
+  "file": "Red Fox (Vulpes vulpes) (48490223071).jpg",
+  "license": "Public domain",
+  "author": "GlacierNPS",
+  "page": "https://commons.wikimedia.org/wiki/File:Red_Fox_(Vulpes_vulpes)_(48490223071).jpg"
+ },
+ {
+  "slug": "goose",
+  "article": "Greylag goose",
+  "file": "Ánsar común (Anser anser), Tierpark Hellabrunn, Múnich, Alemania, 2012-06-17, DD 01.JPG",
+  "license": "CC BY-SA 3.0",
+  "author": "Diego Delso",
+  "page": "https://commons.wikimedia.org/wiki/File:%C3%81nsar_com%C3%BAn_(Anser_anser),_Tierpark_Hellabrunn,_M%C3%BAnich,_Alemania,_2012-06-17,_DD_01.JPG"
+ },
+ {
+  "slug": "turkey",
+  "article": "Wild turkey",
+  "file": "Meleagris gallopavo (wild) - Hamburg, Tierpark Hagenbeck.jpg",
+  "license": "CC BY-SA 3.0",
+  "author": "Ggonnell",
+  "page": "https://commons.wikimedia.org/wiki/File:Meleagris_gallopavo_(wild)_-_Hamburg,_Tierpark_Hagenbeck.jpg"
+ },
+ {
+  "slug": "guava",
+  "article": "Guava",
+  "file": "Guava - Psidium guajava fruit of Cuba.jpg",
+  "license": "Public domain",
+  "author": "Sarang",
+  "page": "https://commons.wikimedia.org/wiki/File:Guava_-_Psidium_guajava_fruit_of_Cuba.jpg"
+ },
+ {
+  "slug": "pomegranate",
+  "article": "Pomegranate",
+  "file": "Pomegranate fruit - whole and piece with arils.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Ivar Leidus",
+  "page": "https://commons.wikimedia.org/wiki/File:Pomegranate_fruit_-_whole_and_piece_with_arils.jpg"
  }
 ]

@@ -161,11 +161,12 @@ const FRUITS = [
   ['Kiwi',        '🥝'], ['Coconut',     '🥥'],
   ['Melon',       '🍈'], ['Blueberries', '🫐'],
   ['Avocado',     '🥑'], ['Tomato',      '🍅'],
+  ['Guava',        '🍏'], ['Pomegranate', '🟠'],
 ];
 
-/* The third column is the noise itself, not a sentence about it. Thirteen of
-   these have a real recording and play that instead — the written noise is
-   for the panel, and is only spoken by the ones with no recording. The two
+/* The third column is the noise itself, not a sentence about it. Where a
+   real recording exists it plays that instead — the written noise is for
+   the panel, and is only spoken by the ones with no recording. The ones
    that make no noise a child can say leave it empty. */
 const ANIMALS = [
   ['Cat',      '🐱', 'Meow.'],
@@ -190,10 +191,16 @@ const ANIMALS = [
      where the animals live. Appended rather than slotted in beside the other
      wild ones: `seedFor` is the position in this list, so inserting in the
      middle would repaint and re-tilt every animal after it, and he knows
-     these tiles by colour. None of the three has a noise a child says back. */
+     these tiles by colour. The panda and the zebra now have recordings;
+     the fish still has none a child says back. */
   ['Panda',    '🐼'],
   ['Zebra',    '🦓'],
   ['Fish',     '🐟'],
+  /* Same rule: append only. A donkey, a bear and a fox keep the colours
+     he already knows on the tiles above them. */
+  ['Donkey',   '🫏', 'Hee-haw.'],
+  ['Bear',     '🐻', 'Grrr.'],
+  ['Fox',      '🦊', 'Yip yip.'],
 ];
 
 /* Birds get their own shelf, and the duck, the chicken, the owl and the
@@ -223,6 +230,8 @@ const BIRDS = [
   ['Flamingo',   '🦩'],
   ['Penguin',    '🐧'],
   ['Ostrich',    '🐦'],
+  ['Goose',      '🪿', 'Honk honk.'],
+  ['Turkey',     '🦃', 'Gobble gobble.'],
 ];
 
 /* Things in the house. A chair is just a chair, and it has nothing to say
@@ -575,7 +584,9 @@ const LANGS = {
        colour is a letter a child has to learn again. */
     seedLetter: 0,
     seedNumber: 2,
-    /* Synthesised. Every device that can speak at all can speak this. */
+    /* Spoken by the device when it has a voice. When it hasn't — a TV
+       browser is the usual case — `speak()` plays a file from
+       sounds/voice/en/ instead, so English is never silent. */
     clips: null,
     hint: {
       letters: 'Tap a letter to hear it.',
@@ -638,7 +649,14 @@ const LANGS = {
     numberId: (n) => 'Nes' + n,
     seedLetter: 3,
     seedNumber: 5,
-    clips: null,
+    /* Spoken from files, the way বাংলা is, so a tablet with no Spanish
+       voice can still offer the language. */
+    clips: {
+      letter: (it) => `sounds/voice/es/letters/${it.n}.m4a`,
+      letterWord: (it) => (it.word ? `sounds/voice/es/letters/${it.n}-word.m4a` : null),
+      number: (it) => `sounds/voice/es/${it.n}.m4a`,
+      body: (it) => `sounds/voice/es/body/${it.key}.m4a`,
+    },
     hint: {
       letters: 'Toca una letra para oírla.',
       numbers: 'Toca un número para oírlo.',
@@ -660,7 +678,12 @@ const LANGS = {
     numberId: (n) => 'Nfr' + n,
     seedLetter: 4,
     seedNumber: 0,
-    clips: null,
+    clips: {
+      letter: (it) => `sounds/voice/fr/letters/${it.n}.m4a`,
+      letterWord: (it) => (it.word ? `sounds/voice/fr/letters/${it.n}-word.m4a` : null),
+      number: (it) => `sounds/voice/fr/${it.n}.m4a`,
+      body: (it) => `sounds/voice/fr/body/${it.key}.m4a`,
+    },
     hint: {
       letters: 'Touche une lettre pour l’entendre.',
       numbers: 'Touche un chiffre pour l’entendre.',
@@ -983,14 +1006,10 @@ const state = {
 };
 
 /* ---------- Which languages are on ---------------------------
-   Switched on is not the same as usable. Bangla is always usable
-   because it is recorded; the synthesised ones depend on what voices
-   the device has, and a tablet with no Spanish voice would hand
-   "Abeja" to an English engine and mispronounce it with confidence.
-   That is the same wrong-answer-said-confidently the Bangla letters
-   refuse to give, so a language the device can't say isn't offered at
-   all — the picker says why, and it comes back by itself if the voice
-   turns up later.
+   Switched on is not the same as usable. A language with recordings
+   is always usable; a synthesised one depends on what voices the
+   device has. English is the exception that is always offered, and
+   it falls back to a spoken-name file when the device has no voice.
    -------------------------------------------------------------- */
 
 function langAvailable(code) {
@@ -1064,10 +1083,43 @@ if ('speechSynthesis' in window) {
   pickVoice();
 }
 
-/* Slow and a touch bright — easier for small ears to copy. */
+/* A spoken line maps to a file in sounds/voice/en/ by the same slug
+   the generator used — "Cat." is cat.m4a, "Find the red one" is
+   find-the-red-one.m4a. Accents fold away so "Éléphant" and "Elephant"
+   would share a name if they ever had to. */
+function voiceSlug(text) {
+  return String(text).toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[.!?]+/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function voiceClipFor(text) {
+  const s = voiceSlug(text);
+  return s ? `sounds/voice/en/${s}.m4a` : null;
+}
+
+/* Slow and a touch bright — easier for small ears to copy.
+
+   A TV browser often has no speechSynthesis, or has the API and an
+   empty voice list. English must still speak, so the matching file
+   plays when there is no usable voice. Mute still wins. */
 function speak(text, opts = {}) {
   const { rate = 0.82, pitch = 1.12, then, lang = 'en-US', voice } = opts;
-  if (state.muted || !('speechSynthesis' in window)) {
+  if (state.muted) {
+    if (then) setTimeout(then, 340);
+    return;
+  }
+  const v = voice || pickVoice();
+  const clip = voiceClipFor(text);
+  if (!('speechSynthesis' in window) || !v) {
+    if (clip) {
+      const go = then || null;
+      playClip('voice-' + voiceSlug(text), clip, go, go);
+      return;
+    }
     if (then) setTimeout(then, 340);
     return;
   }
@@ -1076,7 +1128,6 @@ function speak(text, opts = {}) {
   u.rate = rate;
   u.pitch = pitch;
   u.lang = lang;
-  const v = voice || pickVoice();
   if (v) u.voice = v;
   let finished = false;
   const done = () => { if (!finished) { finished = true; if (then) then(); } };
@@ -1513,6 +1564,9 @@ function onGridTap(e) {
 const ANIMAL_SOUNDS = new Set([
   'bee', 'cat', 'chicken', 'cow', 'dog', 'duck', 'elephant', 'frog',
   'goat', 'horse', 'lion', 'monkey', 'owl', 'pig', 'sheep', 'tiger',
+  'crow', 'pigeon', 'sparrow', 'woodpecker', 'parrot', 'myna', 'cuckoo',
+  'kingfisher', 'swan', 'flamingo', 'penguin', 'panda',
+  'zebra', 'donkey', 'bear', 'goose', 'fox', 'turkey',
 ]);
 
 const soundCache = new Map();
@@ -1573,12 +1627,11 @@ function playAnimal(name) {
 }
 
 /* এক to বিশ, অ to ৎ, নাক to পায়ের আঙুল — spoken by a person, from a
-   file. A language declares `clips` for exactly one reason: the
-   browser's own voice can't say it. Almost no device ships a bn voice,
-   and one handed সাত either says nothing or guesses in English, so
-   those words arrive the way the animal noises do. Every other
-   language here is synthesised, because every device that speaks at
-   all can speak them. */
+   file. A language declares `clips` when the browser's own voice
+   can't be trusted to say it — Bangla almost never ships, and
+   Spanish and French often don't on a TV. Those words arrive the
+   way the animal noises do. English is the one that still prefers
+   the device voice, and plays a file only when that voice is missing. */
 function playNumberClip(item, onFail) {
   const L = LANGS[item.lang];
   playClip(`${item.lang}n${item.n}`, L.clips.number(item), onFail);
@@ -1663,7 +1716,8 @@ function showPicture(item) {
   /* Name, then the animal itself. Where a real recording exists it does the
      second half — a spoken "meow" on top of an actual cat is a worse cat.
      Mouse and snake have no recording worth having and say their noise
-     instead, which is why the written one is still there. */
+     instead, which is why the written one is still there. A peacock and
+     an eagle stay name-only — those cries are not for a three-year-old. */
   if (hasSound(item.word)) speak(`${item.word}.`, { then: () => playAnimal(item.word) });
   else speak(item.say);
 }
@@ -2541,10 +2595,37 @@ el('resetBtn').addEventListener('click', () => {
    list to keep in step.
    -------------------------------------------------------------- */
 
+function englishVoiceUrls() {
+  const texts = [];
+  const add = (s) => { if (s) texts.push(s); };
+  pictureAll.forEach((it) => {
+    add(`${it.word}.`);
+    add(askOf(it));
+    if (it.line) add(it.say);
+  });
+  colorItems.forEach((it) => { add(it.word); add(askOf(it)); });
+  shapeItems.forEach((it) => { add(it.say); add(askOf(it)); });
+  LETTERS_BY_LANG.en.forEach((it) => { add(it.say); add(askOf(it)); });
+  NUMBERS_BY_LANG.en.forEach((it) => { add(it.word); add(askOf(it)); });
+  bodyItems.forEach((it) => { add(it.say); add(askOf(it)); });
+  ['Yaaay!', 'Woohoo!', 'Hooray!', 'Yippee!', 'You did it! Well done!']
+    .forEach(add);
+  const seen = new Set();
+  const urls = [];
+  texts.forEach((text) => {
+    const s = voiceSlug(text);
+    if (!s || seen.has(s)) return;
+    seen.add(s);
+    urls.push(`sounds/voice/en/${s}.m4a`);
+  });
+  return urls;
+}
+
 function mediaUrls() {
   const urls = [];
   pictureAll.forEach((it) => urls.push(`photos/${it.slug}.jpg`));
   ANIMAL_SOUNDS.forEach((name) => urls.push(`sounds/${name}.m4a`));
+  englishVoiceUrls().forEach((u) => urls.push(u));
   /* Only the languages that are switched on, and of those only the
      ones spoken from files. A household with Bangla off should not be
      asked to download 1.5 MB of it; a synthesised language has nothing
