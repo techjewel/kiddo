@@ -92,11 +92,13 @@ the name as well.
 Jobs is the newest shelf, and he asked for it: a doctor, a nurse, a teacher, a
 dentist, a firefighter, a police officer, a pilot, a farmer, a chef, an
 engineer, a plumber, a carpenter, an electrician, a mechanic, a painter, a
-barber, a fisherman, a scientist and an astronaut. These are the one set of
-photographs where the second line earns its keep — "Plumber" is a sound, not a
-picture, and what makes it stick is what a plumber does: "A plumber mends the
-pipes." Every line is about the job rather than the person in the photograph,
-because the photograph is one plumber and the word is all of them.
+barber, a fisherman, a scientist and an astronaut. Each one says its name and stops —
+"Plumber." What the job does is printed under the name, for a grown-up to read
+out when it helps: "A plumber mends the pipes." Spoken on every tap it would
+turn a tap into a lecture, which is the same reason a shape says "Triangle" and
+leaves the corner count on the page. Every line is about the job rather than
+the person in the photograph, because the photograph is one plumber and the
+word is all of them.
 
 Each shelf has a **Shuffle** button beside the hint. A shelf that never moves
 gets learned as an order rather than as a set of pictures — the apple is first

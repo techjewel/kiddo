@@ -806,8 +806,15 @@ NUMBERS_BY_LANG.en.forEach((it) => {
 
 /* A row with no third entry has nothing to add out loud, and says so by
    leaving `line` empty — the panel drops the second line and the voice
-   stops after the name. Only animals carry one, and it is their noise. */
-function pictureItems(rows, group, prefix) {
+   stops after the name.
+
+   `sayName` splits the two: the line stays on the panel to be read and
+   is kept out of the voice. Jobs use it. What a plumber does is worth
+   printing under his name, and worth a grown-up reading aloud, but
+   spoken on every single tap it turns a tap into a lecture — the same
+   reason a shape says "Triangle" and leaves the corner count on the
+   page. */
+function pictureItems(rows, group, prefix, { sayName = false } = {}) {
   return rows.map(([name, emoji, line], i) => ({
     kind: 'picture',
     group,
@@ -819,7 +826,7 @@ function pictureItems(rows, group, prefix) {
     emoji,
     slug: name.toLowerCase().replace(/\s+/g, '-'),
     line: line || '',
-    say: line ? `${name}. ${line}` : `${name}.`,
+    say: line && !sayName ? `${name}. ${line}` : `${name}.`,
     askPrefix: 'Find the ',
     askFace: name.toLowerCase(),
   }));
@@ -834,7 +841,7 @@ const homeItems = pictureItems(HOUSEHOLD, 'home', 'H');
 const flowerItems = pictureItems(FLOWERS, 'flower', 'W');
 /* 'J' for job: P is free but reads as picture, and the ids in this map
    are read by a grown-up looking at saved progress. */
-const jobItems = pictureItems(PROFESSIONS, 'job', 'J');
+const jobItems = pictureItems(PROFESSIONS, 'job', 'J', { sayName: true });
 const pictureAll = [...fruitItems, ...animalItems, ...birdItems,
                     ...flowerItems, ...homeItems, ...jobItems];
 
