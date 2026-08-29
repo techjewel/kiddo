@@ -235,6 +235,43 @@ button {
    with room above and below it. */
 .pics-switch .screen-hint { margin: 0; }
 
+/* The third thing on that line: a pill, not a magnet. It is a control
+   a grown-up reaches for, so it sits back and lets the shelf below it
+   be the colourful part. */
+.shuffle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 13px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: inset 0 0 0 1px var(--hairline), 0 1px 3px rgba(33, 37, 44, 0.12);
+  transition: transform 0.12s var(--ease-pop);
+}
+.shuffle-btn:active { transform: scale(0.93); }
+.shuffle-btn .shuffle-ico { font-size: 14px; }
+
+/* The tiles land rather than teleport, so a child can see that the
+   same pictures moved and none of them went away. Each one waits its
+   own moment — `--settle`, set on the tile as it is dealt out — and
+   keeps its tilt through the drop, because a magnet that straightens
+   itself to bounce is a different magnet. No fill mode: through its
+   delay a tile simply sits where it already is, so nothing is missing
+   from the shelf while the ripple crosses it. */
+.grid.is-settling .magnet {
+  animation: settle 0.32s var(--ease-pop);
+  animation-delay: var(--settle, 0s);
+}
+
+@keyframes settle {
+  0%   { transform: rotate(var(--tilt)) scale(0.8); opacity: 0.3; }
+  62%  { transform: rotate(var(--tilt)) scale(1.05); opacity: 1; }
+  100% { transform: rotate(var(--tilt)) scale(1); opacity: 1; }
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));
@@ -961,7 +998,8 @@ button {
 /* Six things to practise stopped fitting on one phone line, so this
    one wraps. The corner softens to match a two-row block. */
 .segmented--play,
-/* Birds made a fifth shelf, which is one too many for a narrow phone. */
+/* Birds made a fifth shelf and jobs a sixth, which is more than a narrow
+   phone fits on one line. */
 .segmented--pics,
 /* Four languages don't fit on one phone line either, and how many
    sides this one has is a setting now — so it wraps on principle,
@@ -1473,6 +1511,9 @@ button {
   .sc-shape-art .shape-face,
   .sc-shape-art .shape-line,
   .sc-shape-art .shape-pip { animation-delay: 0s !important; }
+
+  /* Shuffled tiles are simply already in their new places. */
+  .grid.is-settling .magnet { animation: none !important; }
 
   /* The ring still has to land — it's the answer, not decoration. It
      just arrives already there, and stops beating. */

@@ -67,8 +67,8 @@ changed; the counting pictures are deliberately identical, because counting is
 the part that doesn't change between languages. The Bangla words are recordings
 — এক, দুই, তিন.
 
-**Pictures** — 20 fruits, 23 animals, 19 birds, 12 flowers and 32 things around
-the house, all as **real photographs**, two big ones per row. Fruits, flowers and
+**Pictures** — 20 fruits, 23 animals, 19 birds, 12 flowers, 32 things around
+the house and 19 jobs, all as **real photographs**, two big ones per row. Fruits, flowers and
 household things say only their name — "Lemon." Nothing else. Animals say their
 name and then the animal: most of them play a **real recording** — an actual
 cow, goat, frog, lion, elephant, donkey, bear, fox. Mouse and snake have no
@@ -88,6 +88,25 @@ penguin, the goose and the turkey play real recordings too. A peacock's scream
 and an eagle's cry are not sounds a three-year-old repeats, so those birds
 give their name and stop. An ostrich has no recording here, so it stops at
 the name as well.
+
+Jobs is the newest shelf, and he asked for it: a doctor, a nurse, a teacher, a
+dentist, a firefighter, a police officer, a pilot, a farmer, a chef, an
+engineer, a plumber, a carpenter, an electrician, a mechanic, a painter, a
+barber, a fisherman, a scientist and an astronaut. These are the one set of
+photographs where the second line earns its keep — "Plumber" is a sound, not a
+picture, and what makes it stick is what a plumber does: "A plumber mends the
+pipes." Every line is about the job rather than the person in the photograph,
+because the photograph is one plumber and the word is all of them.
+
+Each shelf has a **Shuffle** button beside the hint. A shelf that never moves
+gets learned as an order rather than as a set of pictures — the apple is first
+and top-left every time, and a child who has met it twenty times can find it
+with the photograph covered up. Shuffle moves the furniture, so what is left to
+go on is the picture. The tiles on screen are reordered rather than rebuilt, so
+nothing is downloaded twice, no photograph blinks, and the ticks stay on the
+tiles that earned them. The new order lasts as long as the page is open;
+tomorrow starts from the written order again, which is the one a grown-up
+naming things down the shelf can follow.
 
 **Colours** — 11 of them. Tapping one paints the whole page that colour, rings
 the tile you picked, and says just the word: "Green." The name shows above the
@@ -236,7 +255,7 @@ Spanish and French *could* carry it, being synthesised — an `es` voice will sa
 things Play asks about have Spanish words at all. A Spanish game that can ask
 about letters, numbers and elbows but not about lions, circles or the colour red
 is a worse game than an English one that asks about all seven. Translating the
-99 pictures is what would change that, and it is a much bigger job than
+125 pictures is what would change that, and it is a much bigger job than
 translating an alphabet.
 
 **Eight letters carry no word.** ঙ, ঞ, ণ, য, ড়, ঢ়, য় and ৎ sit inside words
@@ -340,7 +359,7 @@ corners" is a fact about a circle worth learning, not a missing field.
 disappears. The colour moves to the rim and bottom edge, so the tiles still look
 like magnets and keep a colour identity, but the photo always reads clearly.
 
-**A shelf of photographs is built when it is first looked at.** All five of them
+**A shelf of photographs is built when it is first looked at.** All six of them
 at start-up would be a hundred-odd `<img>` elements and several megabytes of
 photographs, asked
 for before a child had tapped anything, on tabs he might never open — a browser
@@ -379,6 +398,19 @@ things.** Article leads illustrate a genus, not the flower a child meets:
 with a hillside of white poet's narcissus when a daffodil, to a child, is the
 big yellow trumpet. Each of the twelve is one ordinary flower, filling the
 frame, in the colour he expects.
+
+**The jobs are not from Wikipedia at all.** An encyclopaedia illustrates
+"physician" with a Victorian surgeon and "mail carrier" with a 1969 retirement
+photograph — accurate, and not a picture of a job to a three-year-old. The
+nineteen were found through Openverse and Wikimedia Commons against the
+household rule, with one addition: the person has to be wearing what the job
+wears. The coat and the stethoscope, the helmet and the hose, the toque, the
+hard hat, the orange launch suit. That is the part a child reads before he
+reads the face.
+
+Two jobs he asked about aren't there. Nothing free and current showed a postman
+or a tailor clearly enough to be worth a tile, and a photograph that has to be
+explained teaches nothing. They go in the day a good picture turns up.
 
 **The household photos had to be picked by hand.** The same trick fails on
 objects: Wikipedia leads "Chair" with a Chippendale, "Book" with the Gutenberg
@@ -582,8 +614,8 @@ there are no accounts, servers, or ads.
 - `favicon.ico` — the path browsers ask for unprompted; generated, see `brand/`
 - `icons/`, `apple-touch-icon.png`, `og.png` — generated; see `brand/`
 - `brand/` — the artwork sources and the render script. Not deployed.
-- `photos/` — the fruit, animal, bird, flower and household photographs, and
-  their credits
+- `photos/` — the fruit, animal, bird, flower, household and job photographs,
+  and their credits
 - `sounds/` — animal recordings and their credits
 - `sounds/bangla/` — এক to বিশ, one file per number, named by the English
   numeral (`7.m4a` says সাত)

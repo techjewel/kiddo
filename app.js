@@ -267,6 +267,37 @@ const FLOWERS = [
   ['Daffodil',  '🌼'], ['Lavender',  '💜'],
 ];
 
+/* People with jobs — the shelf he asked for, because a three-year-old
+   meets these before he meets a flamingo: the doctor who looks in his
+   ear, the man on the ladder outside, the woman driving the fire engine.
+
+   The third column earns its place here in a way it doesn't on the fruit
+   shelf. "Plumber" is a sound, not a picture; what makes it stick is what
+   a plumber does, said in one short sentence a child can repeat. Every
+   line is the job, not the person — no "he", no "she", because the
+   photograph is one plumber and the word is all of them. */
+const PROFESSIONS = [
+  ['Doctor',         '🩺', 'A doctor helps you get better.'],
+  ['Nurse',          '💉', 'A nurse takes care of you.'],
+  ['Teacher',        '🍎', 'A teacher shows you how to read.'],
+  ['Dentist',        '🦷', 'A dentist looks after your teeth.'],
+  ['Firefighter',    '🚒', 'A firefighter puts out fires.'],
+  ['Police Officer', '🚓', 'A police officer keeps us safe.'],
+  ['Pilot',          '✈️', 'A pilot flies the aeroplane.'],
+  ['Farmer',         '🚜', 'A farmer grows our food.'],
+  ['Chef',           '🍳', 'A chef cooks the food.'],
+  ['Engineer',       '⚙️', 'An engineer builds machines and bridges.'],
+  ['Plumber',        '🔧', 'A plumber mends the pipes.'],
+  ['Carpenter',      '🪚', 'A carpenter makes things out of wood.'],
+  ['Electrician',    '💡', 'An electrician mends the wires.'],
+  ['Mechanic',       '🔩', 'A mechanic fixes the car.'],
+  ['Painter',        '🖌️', 'A painter paints the walls.'],
+  ['Barber',         '✂️', 'A barber cuts your hair.'],
+  ['Fisherman',      '🎣', 'A fisherman catches the fish.'],
+  ['Scientist',      '🔬', 'A scientist finds out how things work.'],
+  ['Astronaut',      '🚀', 'An astronaut flies up into space.'],
+];
+
 /* Each colour carries two values. `hex` is the true colour and fills the
    swatch — no gradient over it, or the child learns the wrong colour.
    `ink` is a darkened version used for the name, which has to stay
@@ -786,7 +817,7 @@ function pictureItems(rows, group, prefix) {
     caption: name,
     word: name,
     emoji,
-    slug: name.toLowerCase(),
+    slug: name.toLowerCase().replace(/\s+/g, '-'),
     line: line || '',
     say: line ? `${name}. ${line}` : `${name}.`,
     askPrefix: 'Find the ',
@@ -801,8 +832,11 @@ const animalItems = pictureItems(ANIMALS, 'animal', 'A');
 const birdItems = pictureItems(BIRDS, 'bird', 'R');
 const homeItems = pictureItems(HOUSEHOLD, 'home', 'H');
 const flowerItems = pictureItems(FLOWERS, 'flower', 'W');
+/* 'J' for job: P is free but reads as picture, and the ids in this map
+   are read by a grown-up looking at saved progress. */
+const jobItems = pictureItems(PROFESSIONS, 'job', 'J');
 const pictureAll = [...fruitItems, ...animalItems, ...birdItems,
-                    ...flowerItems, ...homeItems];
+                    ...flowerItems, ...homeItems, ...jobItems];
 
 const PICTURE_GROUPS = {
   fruit:  { list: fruitItems,  grid: 'fruitGrid',
@@ -815,6 +849,8 @@ const PICTURE_GROUPS = {
             hint: 'Tap a flower to hear its name.' },
   home:   { list: homeItems,   grid: 'homeGrid',
             hint: 'Tap a thing to hear its name.' },
+  job:    { list: jobItems,    grid: 'jobGrid',
+            hint: 'Tap someone to hear what they do.' },
 };
 
 const colorItems = COLORS.map((c, i) => ({
@@ -1205,7 +1241,7 @@ const PALETTE = ['--m1', '--m2', '--m3', '--m4', '--m5', '--m6'];
    being read as translations of each other — see `seedLetter` and
    `seedNumber` in the registry. */
 const SEED_OFFSET = {
-  fruit: 4, animal: 1, bird: 5, flower: 0, home: 3,
+  fruit: 4, animal: 1, bird: 5, flower: 0, home: 3, job: 6,
   color: 3, shape: 5, body: 2,
 };
 
@@ -1462,6 +1498,7 @@ const animalGrid = el('animalGrid');
 const birdGrid = el('birdGrid');
 const flowerGrid = el('flowerGrid');
 const homeGrid = el('homeGrid');
+const jobGrid = el('jobGrid');
 const colorsGrid = el('colorsGrid');
 const shapesGrid = el('shapesGrid');
 const bodyGrid = el('bodyGrid');
@@ -1507,7 +1544,7 @@ function buildBodyGrid() {
 }
 
 /* A shelf of photographs is built the first time it is looked at, not
-   at start-up. Five shelves is ninety-nine <img> elements and 5.8 MB,
+   at start-up. Six shelves is 125 <img> elements and 7.4 MB,
    and a browser asks for every one of them the moment they exist, even
    on a screen that is hidden — so a child who opened the board and
    tapped a letter used to pay for four shelves of pictures he never
@@ -1525,6 +1562,43 @@ function buildPictureGrid(group) {
   const shelf = PICTURE_GROUPS[group];
   el(shelf.grid).replaceChildren(
     ...shelf.list.map((it) => makeMagnet(it, { known: true, caption: true })));
+}
+
+/* Mix up the shelf that is open. A shelf in the order it was written
+   gets learned as an order rather than as a set of pictures — the
+   apple is first and top-left every time, and a child who has met it
+   twenty times can find it with the photograph covered up. Moving the
+   tiles takes the crutch away and leaves the picture.
+
+   The tiles already on the shelf are reordered, not rebuilt: appending
+   a node that is already in the document moves it, so no photograph is
+   fetched twice, none of them blink, and the tick marking a tile
+   explored travels with the tile that owns it. A shelf nobody has
+   opened yet has no tiles to move, so it is built first — the same
+   build first sight would have done.
+
+   The new order lives only in the page. Coming back tomorrow starts
+   from the written order again, which is the right place to start
+   from: it is the one a grown-up naming things down the shelf can
+   follow. */
+function shuffleShelf(group) {
+  buildPictureGrid(group);
+  const grid = el(PICTURE_GROUPS[group].grid);
+  const tiles = shuffled([...grid.children]);
+  grid.replaceChildren(...tiles);
+
+  /* Let them land in a ripple rather than all at once, and cap the
+     stagger so the last tile of a thirty-two tile shelf doesn't keep
+     a child waiting half a second for it. Taking the class off and
+     reading the layout back is what starts the animation over on a
+     second tap — the browser skips a class that goes on and off
+     within one frame. */
+  grid.classList.remove('is-settling');
+  void grid.offsetWidth;
+  tiles.forEach((tile, i) => {
+    tile.style.setProperty('--settle', `${Math.min(i, 14) * 0.022}s`);
+  });
+  grid.classList.add('is-settling');
 }
 
 /* Which shelf the switch is left on — the fruit until something moves it. */
@@ -1549,7 +1623,7 @@ function onGridTap(e) {
 }
 
 [lettersGrid, numbersGrid, fruitGrid, animalGrid,
- birdGrid, flowerGrid, homeGrid, colorsGrid, shapesGrid, bodyGrid]
+ birdGrid, flowerGrid, homeGrid, jobGrid, colorsGrid, shapesGrid, bodyGrid]
   .forEach((grid) => grid.addEventListener('click', onGridTap));
 
 /* ---------- Real recordings ----------------------------------
@@ -2167,6 +2241,11 @@ document.querySelectorAll('.segmented--pics .seg').forEach((seg) => {
     sfx.pop();
     showPictureGroup(seg.dataset.group);
   });
+});
+
+el('shuffleBtn').addEventListener('click', () => {
+  sfx.pop();
+  shuffleShelf(currentPicGroup());
 });
 
 /* ---------- The language switch ------------------------------

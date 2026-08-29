@@ -585,6 +585,117 @@ From *Meleagris gallopavo (wild) - Hamburg, Tierpark Hagenbeck.jpg* by Ggonnell
 License: CC BY-SA 3.0  
 Source: https://commons.wikimedia.org/wiki/File:Meleagris_gallopavo_(wild)_-_Hamburg,_Tierpark_Hagenbeck.jpg
 
+## Jobs
+
+The people are not from Wikipedia. An encyclopaedia illustrates
+"physician" with a portrait of a Victorian surgeon and "mail carrier"
+with a 1969 retirement photograph, neither of which is a picture of a
+job to a three-year-old. These are contemporary photographs found
+through Openverse and Wikimedia Commons under the same one rule as the
+household things: one ordinary person doing the job, big in the frame,
+wearing whatever it is the job wears — the coat, the helmet, the toque,
+the hard hat.
+
+Two of the jobs he asked about are not here. Nothing free and current
+showed a postman or a tailor clearly enough to be worth a tile, and a
+photograph a child has to have explained to him teaches him nothing.
+They go in the day a good picture turns up.
+
+**Doctor** — `doctor.jpg`  
+From *Nurse* by Walt Stoneburner  
+License: CC BY 2.0  
+Source: https://www.flickr.com/photos/8404611@N06/3373248256
+
+**Nurse** — `nurse.jpg`  
+From *508105306* by Fort George G. Meade  
+License: CC BY 2.0  
+Source: https://www.flickr.com/photos/64000826@N08/43609482355
+
+**Teacher** — `teacher.jpg`  
+From *students-in-class-with-teacher-reading* by www.ilmicrofono.it  
+License: CC BY 2.0  
+Source: https://www.flickr.com/photos/115089924@N02/12212474014
+
+**Dentist** — `dentist.jpg`  
+From *200501-N-LW757-4005 (49890828716).jpg* by Navy Medicine from Washington, DC, USA  
+License: Public domain  
+Source: https://commons.wikimedia.org/wiki/File:200501-N-LW757-4005_(49890828716).jpg
+
+**Firefighter** — `firefighter.jpg`  
+From *US Navy 080730-N-5277R-003 A Commander, Naval Forces Japan firefighter douses a fire on a dummy aircraft during the annual off-station mishap drill at Naval Support Facility Kamiseya.jpg* by U.S. Navy photo by Mass Communication Seaman Barry Riley  
+License: Public domain  
+Source: https://commons.wikimedia.org/wiki/File:US_Navy_080730-N-5277R-003_A_Commander,_Naval_Forces_Japan_firefighter_douses_a_fire_on_a_dummy_aircraft_during_the_annual_off-station_mishap_drill_at_Naval_Support_Facility_Kamiseya.jpg
+
+**Police Officer** — `police-officer.jpg`  
+From *LAPD Officer walking the beat* by Chris Yarzab  
+License: CC BY 2.0  
+Source: https://www.flickr.com/photos/10957255@N08/5230012926
+
+**Pilot** — `pilot.jpg`  
+From *Airarabia Lady Captain makes A320 beautiful landing Bandaranaike International Airport* by AirlineLadypilot  
+License: CC0 1.0  
+Source: https://www.flickr.com/photos/160622784@N05/41097581712
+
+**Farmer** — `farmer.jpg`  
+From *Annadatha* by antkriz  
+License: CC BY 2.0  
+Source: https://www.flickr.com/photos/58925091@N00/136310496
+
+**Chef** — `chef.jpg`  
+From *Chef Lorenzo.jpg* by Jesus Guillermo Lorenzo  
+License: CC BY-SA 3.0  
+Source: https://commons.wikimedia.org/wiki/File:Chef_Lorenzo.jpg
+
+**Engineer** — `engineer.jpg`  
+From *Lt. Gen. Bostick Visits the Everglades* by JacksonvilleDistrict  
+License: CC BY 2.0  
+Source: https://www.flickr.com/photos/40175145@N02/8077300754
+
+**Plumber** — `plumber.jpg`  
+From *File:Plumber uses two wrenches to tighten a fitting.jpg* by Tomwsulcer  
+License: CC0 1.0  
+Source: https://commons.wikimedia.org/w/index.php?curid=24565327
+
+**Carpenter** — `carpenter.jpg`  
+From *Assembling the Draper 53210 Woodworking Bench* by toolstop  
+License: CC BY 2.0  
+Source: https://www.flickr.com/photos/42408834@N06/4860328000
+
+**Electrician** — `electrician.jpg`  
+From *electrician* by www.ilmicrofono.it  
+License: CC BY 2.0  
+Source: https://www.flickr.com/photos/115089924@N02/45076568615
+
+**Mechanic** — `mechanic.jpg`  
+From *Car mechanic working on an old engine under hood* by Ivan Radic  
+License: CC BY 2.0  
+Source: https://www.flickr.com/photos/26344495@N05/33864245788
+
+**Painter** — `painter.jpg`  
+From *27-12-06_1155* by Andre Queiroz  
+License: CC BY 2.0  
+Source: https://www.flickr.com/photos/58513094@N00/1813415211
+
+**Barber** — `barber.jpg`  
+From *Man getting his beard shaved in a barber shop* by Phan Văn Công  
+License: Public domain  
+Source: https://www.flickr.com/photos/139645204@N07/25977211961
+
+**Fisherman** — `fisherman.jpg`  
+From *Fraser with the 21kg common* by radcarper  
+License: CC BY 2.0  
+Source: https://www.flickr.com/photos/17544526@N00/2056474677
+
+**Scientist** — `scientist.jpg`  
+From *Laboratory broadens student's horizons* by U.S. Army Combat Capabilities Development Command  
+License: CC BY 2.0  
+Source: https://www.flickr.com/photos/34402227@N03/4968163345
+
+**Astronaut** — `astronaut.jpg`  
+From *Portrait Astronaut Don Pettit* by Oregon State University  
+License: CC BY-SA 2.0  
+Source: https://www.flickr.com/photos/33247428@N08/49558404273
+
 ## Reusing these
 
 The CC BY, CC BY-SA and GFDL files require attribution if you

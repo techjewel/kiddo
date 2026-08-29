@@ -5,7 +5,7 @@
    the wifi drops, which on a tablet in a back seat is most of the
    time. Two: let a grown-up put the whole thing — every photograph,
    every recording — on the device on purpose, from the panel, rather
-   than hoping the child happened to tap all 101 pictures while there
+   than hoping the child happened to tap all 125 pictures while there
    was a signal.
 
    Nothing here is generated. The shell list is short enough to read,
@@ -16,7 +16,7 @@
 
 /* Bump with the ?v= in index.html. Same number, one thing to change:
    a new SHELL name is what throws away the old CSS and JS. */
-const VERSION = 'v9';
+const VERSION = 'v11';
 
 const SHELL = `magnet-shell-${VERSION}`;
 const MEDIA = 'magnet-media';   /* Photographs and recordings. They are
@@ -38,12 +38,12 @@ const STALE_MEDIA = ['./photos/rose.jpg', './photos/sheep.jpg', './photos/mouse.
 /* Everything needed to draw the first screen. The two versioned URLs
    have to match index.html exactly, query string and all — a cache is
    keyed by the whole URL, and `app.js` is a different entry from
-   `app.js?v=9`. */
+   `app.js?v=10`. */
 const SHELL_URLS = [
   './',
   './index.html',
-  './styles.css?v=9',
-  './app.js?v=9',
+  './styles.css?v=11',
+  './app.js?v=11',
   './manifest.webmanifest',
   './icons/icon-192.png',
   './icons/icon-512.png',
