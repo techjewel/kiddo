@@ -1572,6 +1572,7 @@ function makeMagnet(item, { known = false, caption = false, quiz = false } = {})
     if (LANGS[item.lang].script === 'bangla') btn.classList.add('magnet--bn');
     if (LANGS[item.lang].script === 'arabic') btn.classList.add('magnet--ar');
     btn.lang = item.lang;
+    btn.dir = LANGS[item.lang].dir || 'ltr';
     btn.textContent = item.face;
   }
   return btn;
@@ -1620,8 +1621,13 @@ function buildGrids() {
    puts it back from `state.seen`, so a fresh set of tiles arrives
    already knowing what he has met. */
 function buildLetterGrid() {
+  const L = cur();
+  /* Arabic charts start on the right. The tiles are still in dictionary
+     order; dir is what puts أ on the first cell a finger meets. */
+  lettersGrid.dir = L.dir || 'ltr';
+  lettersGrid.lang = L.code;
   lettersGrid.replaceChildren(
-    ...LETTERS_BY_LANG[curLang()].map((it) => makeMagnet(it, { known: true })));
+    ...LETTERS_BY_LANG[L.code].map((it) => makeMagnet(it, { known: true })));
 }
 
 function buildNumberGrid() {

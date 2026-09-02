@@ -286,6 +286,13 @@ button {
   margin: 0 auto;
 }
 
+/* dir=rtl on the letters grid is the Arabic chart: first letter sits
+   at the right, rows still fill top to bottom. Isolated letter tiles
+   inherit it so a lone أ is not treated as a left-to-right character. */
+.grid[dir="rtl"] {
+  direction: rtl;
+}
+
 /* ---------- The magnet ---------------------------------------
    Signature element. Beveled, tilted, and it peels off the
    door when pressed. Everything else stays quiet.
