@@ -317,9 +317,9 @@ License: CC0
 Source: https://commons.wikimedia.org/wiki/File:China,_Jiangxi_province,_Jingdezhen,_Ming_dynasty_(1368-1644),_Xuande_mark_-_Bowl_with_Decoration_of_the_%22Three_Friends%22_-_1953.631_-_Cleveland_Museum_of_Art.tif
 
 **Broom** — `broom.jpg`  
-From *Hue Vietnam Broom-in-Càn-Thành-Palace-01.jpg* by CEphoto, Uwe Aranas  
-License: CC BY-SA 3.0  
-Source: https://commons.wikimedia.org/wiki/File:Hue_Vietnam_Broom-in-C%C3%A0n-Th%C3%A0nh-Palace-01.jpg
+From *New_brooms_-_02.jpg* by Oto Zapletal  
+License: CC BY 4.0  
+Source: https://commons.wikimedia.org/wiki/File:New_brooms_-_02.jpg
 
 **Bucket** — `bucket.jpg`  
 From *Lime green bucket 5.jpg* by DracoEssentialis  
@@ -327,9 +327,9 @@ License: CC BY 3.0
 Source: https://commons.wikimedia.org/wiki/File:Lime_green_bucket_5.jpg
 
 **Chair** — `chair.jpg`  
-From *Set_of_fourteen_side_chairs_MET_DP110780.jpg* by Thomas Chippendale  
-License: CC0  
-Source: https://commons.wikimedia.org/wiki/File:Set_of_fourteen_side_chairs_MET_DP110780.jpg
+From *Kitchen_chair_made_by_Lübke._Germany.jpeg* by Ditigibt  
+License: Public domain  
+Source: https://commons.wikimedia.org/wiki/File:Kitchen_chair_made_by_L%C3%BCbke._Germany.jpeg
 
 **Clock** — `clock.jpg`  
 From *2010-07-20_Black_windup_alarm_clock_face.jpg* by Sun Ladder  
