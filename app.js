@@ -105,6 +105,29 @@ ALPHABETS.fr = [
   ['Y', 'Yaourt',    '🥛'], ['Z', 'Zèbre',     '🦓'],
 ];
 
+/* Twenty-eight letters in dictionary order, أ to ي, written the way a
+   children's chart writes them — the alif carries its hamza because
+   أرنب does. Arabic joins its letters up inside a word, but a tile
+   shows the letter alone, which is the isolated form every chart
+   teaches first. The words are the chart classics wherever the
+   classic is something a finger can point at. */
+ALPHABETS.ar = [
+  ['أ', 'أرنب',   '🐰'], ['ب', 'بطة',    '🦆'],
+  ['ت', 'تفاحة',  '🍎'], ['ث', 'ثعلب',   '🦊'],
+  ['ج', 'جمل',    '🐫'], ['ح', 'حصان',   '🐴'],
+  ['خ', 'خروف',   '🐑'], ['د', 'دب',     '🐻'],
+  ['ذ', 'ذرة',    '🌽'], ['ر', 'ريشة',   '🪶'],
+  ['ز', 'زرافة',  '🦒'], ['س', 'سمكة',   '🐟'],
+  ['ش', 'شمس',    '☀️'], ['ص', 'صقر',    '🦅'],
+  ['ض', 'ضفدع',   '🐸'], ['ط', 'طائرة',  '✈️'],
+  ['ظ', 'ظرف',    '✉️'], ['ع', 'عنب',    '🍇'],
+  ['غ', 'غزال',   '🦌'], ['ف', 'فيل',    '🐘'],
+  ['ق', 'قمر',    '🌙'], ['ك', 'كتاب',   '📕'],
+  ['ل', 'ليمون',  '🍋'], ['م', 'موز',    '🍌'],
+  ['ن', 'نحلة',   '🐝'], ['ه', 'هدهد',   '🐦'],
+  ['و', 'وردة',   '🌹'], ['ي', 'يد',     '✋'],
+];
+
 /* ---------- Content: the numbers ------------------------------
    One to twenty, named. The numerals themselves are built rather than
    listed — every script here writes them with the same positional
@@ -134,6 +157,11 @@ const NUMBER_NAMES = {
     'dix', 'onze', 'douze', 'treize', 'quatorze', 'quinze',
     'seize', 'dix-sept', 'dix-huit', 'dix-neuf', 'vingt',
   ],
+  ar: [
+    '', 'واحد', 'اثنان', 'ثلاثة', 'أربعة', 'خمسة', 'ستة', 'سبعة', 'ثمانية', 'تسعة',
+    'عشرة', 'أحد عشر', 'اثنا عشر', 'ثلاثة عشر', 'أربعة عشر', 'خمسة عشر',
+    'ستة عشر', 'سبعة عشر', 'ثمانية عشر', 'تسعة عشر', 'عشرون',
+  ],
 };
 
 /* What gets counted out under a numeral. Deliberately the same in every
@@ -144,10 +172,17 @@ const NUMBER_EMOJI = [
   '🌵', '🥕', '🍄', '🐬', '🍋', '🐞', '🌻', '🐙', '🍒', '🎈',
 ];
 
-const BANGLA_DIGITS = '০১২৩৪৫৬৭৮৯';
+/* One row of digit faces per script that has its own. Both of these
+   write numbers with the same positional system as Latin, so ১৭ and
+   ١٧ are derived from 17 rather than listed — twenty hand-typed
+   strings per script is twenty chances to mistype ৯ for ৮. */
+const SCRIPT_DIGITS = {
+  bangla: '০১২৩৪৫৬৭৮৯',
+  arabic: '٠١٢٣٤٥٦٧٨٩',
+};
 
-const banglaNumeral = (n) =>
-  String(n).replace(/\d/g, (d) => BANGLA_DIGITS[+d]);
+const numeralIn = (script, n) =>
+  String(n).replace(/\d/g, (d) => SCRIPT_DIGITS[script][+d]);
 
 /* The name is the whole lesson here — he is collecting the word, and a
    sentence after it is one more thing to sit through before the next tap. */
@@ -529,41 +564,45 @@ const HITS = [
    loud in English. */
 const BODY = [
   { key: 'head', ring: [[120, 86, 66]],
-    names: { en: 'Head', bn: 'মাথা', es: 'Cabeza', fr: 'Tête' } },
+    names: { en: 'Head', bn: 'মাথা', es: 'Cabeza', fr: 'Tête', ar: 'رأس' } },
   { key: 'hair', ring: [[120, 56, 62]],
-    names: { en: 'Hair', bn: 'চুল', es: 'Pelo', fr: 'Cheveux' } },
+    names: { en: 'Hair', bn: 'চুল', es: 'Pelo', fr: 'Cheveux', ar: 'شعر' } },
+  /* The Arabic pairs are duals — عينان, not the plural عيون — because
+     the boy has exactly two of each, and the dual is how a grown-up
+     pointing at both of them would say it. */
   { key: 'eyes', ring: [[99, 84, 17], [141, 84, 17]],
-    names: { en: 'Eyes', bn: 'চোখ', es: 'Ojos', fr: 'Yeux' } },
+    names: { en: 'Eyes', bn: 'চোখ', es: 'Ojos', fr: 'Yeux', ar: 'عينان' } },
   { key: 'ears', ring: [[60, 94, 21], [180, 94, 21]],
-    names: { en: 'Ears', bn: 'কান', es: 'Orejas', fr: 'Oreilles' } },
+    names: { en: 'Ears', bn: 'কান', es: 'Orejas', fr: 'Oreilles', ar: 'أذنان' } },
   { key: 'nose', ring: [[120, 99, 19]],
-    names: { en: 'Nose', bn: 'নাক', es: 'Nariz', fr: 'Nez' } },
+    names: { en: 'Nose', bn: 'নাক', es: 'Nariz', fr: 'Nez', ar: 'أنف' } },
   { key: 'mouth', ring: [[120, 124, 27]],
-    names: { en: 'Mouth', bn: 'মুখ', es: 'Boca', fr: 'Bouche' } },
+    names: { en: 'Mouth', bn: 'মুখ', es: 'Boca', fr: 'Bouche', ar: 'فم' } },
   { key: 'teeth', ring: [[120, 124, 27]],
-    names: { en: 'Teeth', bn: 'দাঁত', es: 'Dientes', fr: 'Dents' } },
+    names: { en: 'Teeth', bn: 'দাঁত', es: 'Dientes', fr: 'Dents', ar: 'أسنان' } },
   { key: 'neck', ring: [[120, 152, 25]],
-    names: { en: 'Neck', bn: 'গলা', es: 'Cuello', fr: 'Cou' } },
+    names: { en: 'Neck', bn: 'গলা', es: 'Cuello', fr: 'Cou', ar: 'رقبة' } },
   { key: 'shoulders', ring: [[86, 182, 27], [154, 182, 27]],
-    names: { en: 'Shoulders', bn: 'কাঁধ', es: 'Hombros', fr: 'Épaules' } },
+    names: { en: 'Shoulders', bn: 'কাঁধ', es: 'Hombros', fr: 'Épaules', ar: 'كتفان' } },
   { key: 'arms', ring: [[71, 224, 46], [169, 224, 46]],
-    names: { en: 'Arms', bn: 'বাহু', es: 'Brazos', fr: 'Bras' } },
+    names: { en: 'Arms', bn: 'বাহু', es: 'Brazos', fr: 'Bras', ar: 'ذراعان' } },
   { key: 'elbows', ring: [[71, 224, 21], [169, 224, 21]],
-    names: { en: 'Elbows', bn: 'কনুই', es: 'Codos', fr: 'Coudes' } },
+    names: { en: 'Elbows', bn: 'কনুই', es: 'Codos', fr: 'Coudes', ar: 'مرفقان' } },
   { key: 'hands', ring: [[50, 268, 27], [190, 268, 27]],
-    names: { en: 'Hands', bn: 'হাত', es: 'Manos', fr: 'Mains' } },
+    names: { en: 'Hands', bn: 'হাত', es: 'Manos', fr: 'Mains', ar: 'يدان' } },
   { key: 'fingers', ring: [[48, 292, 27], [192, 292, 27]],
-    names: { en: 'Fingers', bn: 'আঙুল', es: 'Dedos', fr: 'Doigts' } },
+    names: { en: 'Fingers', bn: 'আঙুল', es: 'Dedos', fr: 'Doigts', ar: 'أصابع' } },
   { key: 'tummy', ring: [[120, 210, 46]],
-    names: { en: 'Tummy', bn: 'পেট', es: 'Barriga', fr: 'Ventre' } },
+    names: { en: 'Tummy', bn: 'পেট', es: 'Barriga', fr: 'Ventre', ar: 'بطن' } },
   { key: 'legs', ring: [[100, 336, 48], [140, 336, 48]],
-    names: { en: 'Legs', bn: 'পা', es: 'Piernas', fr: 'Jambes' } },
+    names: { en: 'Legs', bn: 'পা', es: 'Piernas', fr: 'Jambes', ar: 'ساقان' } },
   { key: 'knees', ring: [[99, 340, 20], [141, 340, 20]],
-    names: { en: 'Knees', bn: 'হাঁটু', es: 'Rodillas', fr: 'Genoux' } },
+    names: { en: 'Knees', bn: 'হাঁটু', es: 'Rodillas', fr: 'Genoux', ar: 'ركبتان' } },
   { key: 'feet', ring: [[90, 412, 32], [150, 412, 32]],
-    names: { en: 'Feet', bn: 'পায়ের পাতা', es: 'Pies', fr: 'Pieds' } },
+    names: { en: 'Feet', bn: 'পায়ের পাতা', es: 'Pies', fr: 'Pieds', ar: 'قدمان' } },
   { key: 'toes', ring: [[90, 419, 28], [150, 419, 28]],
-    names: { en: 'Toes', bn: 'পায়ের আঙুল', es: 'Dedos del pie', fr: 'Orteils' } },
+    names: { en: 'Toes', bn: 'পায়ের আঙুল', es: 'Dedos del pie', fr: 'Orteils',
+             ar: 'أصابع القدم' } },
 ];
 
 /* ---------- The languages ------------------------------------
@@ -721,6 +760,38 @@ const LANGS = {
       body: 'Touche le garçon — son nez, sa main, ses orteils.',
     },
   },
+
+  /* Spoken by the device, the way English is — there are no Arabic
+     recordings yet, so the language is only offered where the device
+     has an Arabic voice to say it with (see `langAvailable`). Two
+     things are new here and neither is a special case elsewhere:
+     `dir`, because Arabic runs right to left and the panels and hints
+     have to run with it, and the numerals, which come out of
+     SCRIPT_DIGITS as the Eastern Arabic ٧ a child in an Arabic
+     classroom actually meets — not the Western 7 that only shares an
+     ancestor with it. */
+  ar: {
+    code: 'ar',
+    native: 'العربية',
+    label: 'Arabic',
+    voice: 'ar',
+    speech: 'ar-SA',
+    script: 'arabic',
+    dir: 'rtl',
+    hasCase: false,
+    letters: ALPHABETS.ar,
+    numbers: NUMBER_NAMES.ar,
+    letterId: (face, i) => 'Lar' + i,
+    numberId: (n) => 'Nar' + n,
+    seedLetter: 5,
+    seedNumber: 3,
+    clips: null,
+    hint: {
+      letters: 'المس حرفًا لتسمعه.',
+      numbers: 'المس رقمًا لتسمعه.',
+      body: 'المس الولد — أنفه ويده وأصابع قدميه.',
+    },
+  },
 };
 
 /* Registry order, which is the order the switch and the picker use.
@@ -771,7 +842,7 @@ function numbersFor(code) {
       id: L.numberId(n),
       index: i,
       n,
-      face: L.script === 'bangla' ? banglaNumeral(n) : String(n),
+      face: SCRIPT_DIGITS[L.script] ? numeralIn(L.script, n) : String(n),
       word: L.numbers[n],
       lower: L.numbers[n],
       emoji: NUMBER_EMOJI[n],
@@ -1471,7 +1542,9 @@ function makeMagnet(item, { known = false, caption = false, quiz = false } = {})
       btn.classList.add('magnet--word');
       const L = cur();
       if (L.script === 'bangla') btn.classList.add('magnet--bn-word');
+      if (L.script === 'arabic') btn.classList.add('magnet--ar-word');
       btn.lang = L.code;
+      btn.dir = L.dir || '';
       btn.textContent = bodyName(item);
     }
   } else if (item.kind === 'picture') {
@@ -1488,6 +1561,7 @@ function makeMagnet(item, { known = false, caption = false, quiz = false } = {})
        language in the corner to fall back on, because the fallback is
        what gets read. */
     if (LANGS[item.lang].script === 'bangla') btn.classList.add('magnet--bn');
+    if (LANGS[item.lang].script === 'arabic') btn.classList.add('magnet--ar');
     btn.lang = item.lang;
     btn.textContent = item.face;
   }
@@ -1625,6 +1699,7 @@ function markSeen(item) {
 function onGridTap(e) {
   const btn = e.target.closest('.magnet');
   if (!btn) return;
+  clearCue();
   sfx.pop();
   showItem(byId.get(btn.dataset.id));
 }
@@ -1845,7 +1920,9 @@ function renderBody(item) {
   const word = el('bodyWord');
   word.textContent = item ? bodyName(item) : '';
   word.classList.toggle('sc-word--bn', bn);
+  word.classList.toggle('sc-word--ar', L.script === 'arabic');
   word.lang = L.code;
+  word.dir = L.dir || '';
 }
 
 /* A recorded language plays a person saying it; a synthesised one is
@@ -1883,12 +1960,15 @@ function bump(node) {
 function renderLetter(item) {
   const L = LANGS[item.lang];
   const bn = L.script === 'bangla';
+  const ar = L.script === 'arabic';
   letterView.style.setProperty('--c', colorFor(item));
   letterView.lang = item.lang;
+  letterView.dir = L.dir || '';
 
   const main = el('letterMain');
   main.textContent = item.face;
   main.classList.toggle('sc-main--bn', bn);
+  main.classList.toggle('sc-main--ar', ar);
 
   const sub = el('letterSub');
   sub.textContent = item.lower;
@@ -1898,6 +1978,7 @@ function renderLetter(item) {
   el('letterWord').textContent = item.word;
   const pair = el('letterPair');
   pair.classList.toggle('sc-word--bn', bn);
+  pair.classList.toggle('sc-word--ar', ar);
   pair.classList.toggle('is-hidden', !item.word);
 }
 
@@ -1909,17 +1990,22 @@ function renderLetter(item) {
    pictures. Identical on purpose: counting is the part that doesn't
    change between scripts, so it shouldn't look like it has. */
 function renderNumber(item) {
-  const bn = LANGS[item.lang].script === 'bangla';
+  const L = LANGS[item.lang];
+  const bn = L.script === 'bangla';
+  const ar = L.script === 'arabic';
   numView.style.setProperty('--c', colorFor(item));
   numView.lang = item.lang;
+  numView.dir = L.dir || '';
 
   const face = el('numFace');
   face.textContent = item.face;
   face.classList.toggle('sc-main--bn', bn);
+  face.classList.toggle('sc-main--ar', ar);
 
   const word = el('numWord');
   word.textContent = item.word;
   word.classList.toggle('sc-word--bn', bn);
+  word.classList.toggle('sc-word--ar', ar);
 
   el('numPics').replaceChildren(...countPics(item));
 }
@@ -2278,7 +2364,8 @@ function renderLangSwitches() {
       const L = LANGS[c];
       const b = document.createElement('button');
       b.className = 'seg' + (c === code ? ' is-on' : '')
-        + (L.script === 'bangla' ? ' seg--bn' : '');
+        + (L.script === 'bangla' ? ' seg--bn' : '')
+        + (L.script === 'arabic' ? ' seg--ar' : '');
       b.dataset.lang = c;
       b.lang = c;
       b.setAttribute('aria-pressed', String(c === code));
@@ -2328,6 +2415,9 @@ function applyLang() {
       const hint = el(id);
       hint.textContent = L.hint[key];
       hint.lang = code;
+      /* An Arabic sentence in a left-to-right box parks its full stop
+         on the wrong end. */
+      hint.dir = L.dir || '';
     });
 
   buildLetterGrid();
@@ -2435,7 +2525,8 @@ function renderLangList(box) {
 
     const native = document.createElement('span');
     native.className = 'lang-native'
-      + (L.script === 'bangla' ? ' lang-native--bn' : '');
+      + (L.script === 'bangla' ? ' lang-native--bn' : '')
+      + (L.script === 'arabic' ? ' lang-native--ar' : '');
     native.lang = code;
     native.textContent = L.native;
 
@@ -2838,10 +2929,131 @@ window.addEventListener('appinstalled', () => {
   installBtn.classList.add('is-hidden');
 });
 
-/* ---------- Keyboard ----------------------------------------- */
+/* ---------- Keyboard -----------------------------------------
+   For the grown-up teaching from beside the screen. A finger on a tile
+   covers the tile; an arrow key walks the board to the next thing and
+   names it while both of you look at it. So the arrows step through
+   whatever screen is open, Enter and Space say the current thing
+   again, a typed letter jumps the letters screen straight to it, and a
+   typed digit does the same on the numbers.
+
+   The game is deliberately deaf to all of it. The game is a question,
+   and a key that picked an answer would be a grown-up's hand on the
+   child's turn. The drawers are skipped too — a key pressed under a
+   dialog should not move the board behind it. */
+
+function keyboardTarget() {
+  if (state.screen === 'letters') {
+    return { list: LETTERS_BY_LANG[curLang()], item: state.letterItem };
+  }
+  if (state.screen === 'numbers') {
+    return { list: NUMBERS_BY_LANG[curLang()], item: state.numberItem };
+  }
+  if (state.screen === 'pictures') {
+    const group = currentPicGroup();
+    const it = state.pictureItem;
+    /* The arrows walk the shelf that is showing — a cat left on the
+       panel must not make → step through animals on the fruit shelf. */
+    return { list: PICTURE_GROUPS[group].list,
+             item: it && it.group === group ? it : null };
+  }
+  if (state.screen === 'colors') return { list: colorItems, item: state.colorItem };
+  if (state.screen === 'shapes') return { list: shapeItems, item: state.shapeItem };
+  if (state.screen === 'body') return { list: bodyItems, item: state.bodyItem };
+  return null;
+}
+
+/* The keys need to show where they are standing. The panel names the
+   thing, but on a grid of forty-seven tiles a voice alone doesn't say
+   which tile just spoke — so the current one wears the picked-colour
+   ring and is kept scrolled into sight. A tap takes the ring away: a
+   finger is its own pointer, and a ring left behind on the tile the
+   keys last visited would be two answers to "which one?". */
+function clearCue() {
+  document.querySelectorAll('.magnet.is-cued')
+    .forEach((m) => m.classList.remove('is-cued'));
+}
+
+function cueTile(item) {
+  clearCue();
+  const tile = document.querySelector(`.grid .magnet[data-id="${item.id}"]`);
+  if (!tile) return;
+  tile.classList.add('is-cued');
+  const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  tile.scrollIntoView({ block: 'nearest', behavior: calm ? 'auto' : 'smooth' });
+}
+
+/* Wraps at both ends, so holding → tours the whole alphabet and comes
+   home. Before anything is picked the first press lands on the first
+   tile — the place a grown-up reading down the chart would start. */
+function stepItem(dir) {
+  const t = keyboardTarget();
+  if (!t) return;
+  const at = t.item ? t.list.indexOf(t.item) : (dir > 0 ? -1 : 0);
+  const next = t.list[(at + dir + t.list.length) % t.list.length];
+  sfx.pop();
+  showItem(next);
+  cueTile(next);
+}
+
+function repeatItem() {
+  const t = keyboardTarget();
+  if (!t) return;
+  const item = t.item || t.list[0];
+  sfx.pop();
+  showItem(item);
+  cueTile(item);
+}
+
+/* A typed key jumps to the tile wearing it, where the screen has tiles
+   a keyboard can spell: letters by face — which finds Ñ when a Spanish
+   keyboard types it — and numbers by digit, with 0 standing for 10
+   because eleven through twenty have no key of their own. */
+function jumpToKey(key) {
+  const t = keyboardTarget();
+  if (!t) return false;
+  let found = null;
+  if (state.screen === 'letters' && /^\p{L}$/u.test(key)) {
+    /* Hamza folds away, so the plain ا an Arabic keyboard types
+       unshifted still finds the أ the chart shows. */
+    const fold = (s) => s.toLowerCase().replace(/[أإآ]/g, 'ا');
+    const want = fold(key);
+    found = t.list.find((it) => fold(it.face) === want);
+  }
+  if (state.screen === 'numbers' && /^\d$/.test(key)) {
+    found = t.list.find((it) => it.n === (+key || 10));
+  }
+  if (!found) return false;
+  sfx.pop();
+  showItem(found);
+  cueTile(found);
+  return true;
+}
 
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && !parentWrap.classList.contains('is-hidden')) closeParent();
+
+  /* Browser shortcuts keep their keys, and a covered board keeps still. */
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  if (!parentWrap.classList.contains('is-hidden')) return;
+  if (!langWrap.classList.contains('is-hidden')) return;
+  if (!cheerWrap.classList.contains('is-hidden')) return;
+
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+    e.preventDefault();
+    stepItem(1);
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+    e.preventDefault();
+    stepItem(-1);
+  } else if (e.key === 'Enter' || e.key === ' ') {
+    /* Not when a real button is focused — Enter on the sound toggle
+       has to keep meaning the sound toggle. */
+    if (e.target.closest('button')) return;
+    e.preventDefault();
+    repeatItem();
+  } else if (jumpToKey(e.key)) {
+    e.preventDefault();
+  }
 });
 
 /* ---------- Go ----------------------------------------------- */

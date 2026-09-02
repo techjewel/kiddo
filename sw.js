@@ -16,7 +16,7 @@
 
 /* Bump with the ?v= in index.html. Same number, one thing to change:
    a new SHELL name is what throws away the old CSS and JS. */
-const VERSION = 'v12';
+const VERSION = 'v15';
 
 const SHELL = `magnet-shell-${VERSION}`;
 const MEDIA = 'magnet-media';   /* Photographs and recordings. They are
@@ -42,8 +42,8 @@ const STALE_MEDIA = ['./photos/rose.jpg', './photos/sheep.jpg', './photos/mouse.
 const SHELL_URLS = [
   './',
   './index.html',
-  './styles.css?v=12',
-  './app.js?v=12',
+  './styles.css?v=15',
+  './app.js?v=15',
   './manifest.webmanifest',
   './icons/icon-192.png',
   './icons/icon-512.png',

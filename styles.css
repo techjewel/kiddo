@@ -29,6 +29,12 @@
   --font-bangla: 'Baloo Da 2', 'Noto Sans Bengali', 'Kohinoor Bangla',
     'Bangla MN', 'Nirmala UI', sans-serif;
 
+  /* Baloo Bhaijaan 2 is the Arabic member of the same family, for the
+     same reason: ٧ beside 7 should read as one set of numerals in two
+     scripts, not a system font pasted in beside a designed one. */
+  --font-arabic: 'Baloo Bhaijaan 2', 'Geeza Pro', 'Noto Naskh Arabic',
+    'Segoe UI', system-ui, sans-serif;
+
   /* The drawn child. One skin tone, one shade under it for the bits
      that overlap it and would otherwise vanish — ears against the
      head, toes against the foot. */
@@ -411,6 +417,13 @@ button {
   padding-top: 0.06em;
 }
 
+/* Arabic sits low and squat in the em box the same way, and the
+   Eastern Arabic digits are smaller still — same nudge, same reason. */
+.magnet--ar {
+  font-family: var(--font-arabic);
+  font-size: clamp(34px, 9.5vw, 48px);
+}
+
 .magnet-cap {
   flex: none;
   font-family: var(--font-letter);
@@ -493,8 +506,10 @@ button {
    numeral, same name, same counting pictures underneath. Only the
    typeface changes, because only the typeface has to. */
 .sc-main--bn { font-family: var(--font-bangla); font-size: 50px; }
+.sc-main--ar { font-family: var(--font-arabic); font-size: 50px; }
 
 .sc-word--bn { font-family: var(--font-bangla); font-weight: 600; font-size: 25px; }
+.sc-word--ar { font-family: var(--font-arabic); font-weight: 700; font-size: 25px; }
 
 .sc-emoji { font-family: var(--font-emoji); font-size: 28px; line-height: 1; }
 
@@ -704,6 +719,13 @@ button {
   padding: 11px 8px;
 }
 
+.magnet--ar-word {
+  font-family: var(--font-arabic);
+  font-size: clamp(16px, 4.6vw, 21px);
+  line-height: 1.5;
+  padding: 11px 8px;
+}
+
 .grid--body { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); }
 
 /* Bangla on the panel under the boy: same size as the English, more
@@ -715,6 +737,7 @@ button {
    the Bangla one needs the Bangla face — a button labelled "Bangla" in
    Latin type is a grown-up's label for it. */
 .seg--bn { font-family: var(--font-bangla); font-size: 14px; }
+.seg--ar { font-family: var(--font-arabic); font-size: 14px; }
 
 .bd { transition: opacity 0.25s ease; }
 /* Faded, not erased. The rest of the boy is the answer to "where" —
@@ -841,8 +864,11 @@ button {
 }
 
 /* The picked colour lifts off the door with a double ring — white so
-   it shows on dark colours, dark so it shows on white and yellow. */
-.magnet.is-picked {
+   it shows on dark colours, dark so it shows on white and yellow.
+   The tile the arrow keys are standing on wears the same ring, so
+   "this one" looks the same however it was pointed at. */
+.magnet.is-picked,
+.magnet.is-cued {
   transform: rotate(0deg) scale(1.07);
   box-shadow:
     inset 0 0 0 1px rgba(33, 37, 44, 0.11),
@@ -1439,6 +1465,12 @@ button {
   font-weight: 600;
 }
 
+.lang-native--ar {
+  font-family: var(--font-arabic);
+  font-size: 18px;
+  font-weight: 600;
+}
+
 .lang-label {
   font-size: 13px;
   font-weight: 600;
@@ -1483,6 +1515,7 @@ button {
   .showcase { margin-bottom: 10px; padding: 8px 14px; }
   .sc-main { font-size: 40px; }
   .sc-main--bn { font-size: 38px; }
+  .sc-main--ar { font-size: 38px; }
   .pics-switch { margin-bottom: 8px; }
 }
 
