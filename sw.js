@@ -38,7 +38,7 @@ const STALE_MEDIA = ['./photos/rose.jpg', './photos/sheep.jpg', './photos/mouse.
 /* Everything needed to draw the first screen. The two versioned URLs
    have to match index.html exactly, query string and all — a cache is
    keyed by the whole URL, and `app.js` is a different entry from
-   `app.js?v=10`. */
+   `app.js?v=15`. */
 const SHELL_URLS = [
   './',
   './index.html',
