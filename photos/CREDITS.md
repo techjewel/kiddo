@@ -275,9 +275,9 @@ License: CC BY-SA 3.0
 Source: https://commons.wikimedia.org/wiki/File:Pumpkin.jpg
 
 **Jackfruit** — `jackfruit.jpg`  
-From *The_jackfruit_is_holding_on_to_the_tree.jpg* by Tushar Hossain  
-License: CC BY-SA 4.0  
-Source: https://commons.wikimedia.org/wiki/File:The_jackfruit_is_holding_on_to_the_tree.jpg
+From *Ripe_jackfruit.jpg* by Chandana12  
+License: CC BY-SA 3.0  
+Source: https://commons.wikimedia.org/wiki/File:Ripe_jackfruit.jpg
 
 **Papaya** — `papaya.jpg`  
 From *Carica_papaya_Fruit.jpg* by Dinkun Chen  
@@ -285,9 +285,9 @@ License: CC BY-SA 4.0
 Source: https://commons.wikimedia.org/wiki/File:Carica_papaya_Fruit.jpg
 
 **Lychee** — `lychee.jpg`  
-From *Lychee_Fruit.jpg* by Sanjay Acharya  
-License: CC BY-SA 4.0  
-Source: https://commons.wikimedia.org/wiki/File:Lychee_Fruit.jpg
+From *Litchi_chinensis_fruits.JPG* by B.navez  
+License: CC BY-SA 3.0  
+Source: https://commons.wikimedia.org/wiki/File:Litchi_chinensis_fruits.JPG
 
 ## Household things
 
