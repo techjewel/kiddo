@@ -162,6 +162,7 @@ const FRUITS = [
   ['Melon',       '🍈'], ['Blueberries', '🫐'],
   ['Avocado',     '🥑'], ['Tomato',      '🍅'],
   ['Guava',        '🍏'], ['Pomegranate', '🟠'],
+  ['Pumpkin',      '🎃'],
 ];
 
 /* The third column is the noise itself, not a sentence about it. Where a

@@ -67,7 +67,7 @@ changed; the counting pictures are deliberately identical, because counting is
 the part that doesn't change between languages. The Bangla words are recordings
 — এক, দুই, তিন.
 
-**Pictures** — 20 fruits, 23 animals, 19 birds, 12 flowers and 32 things around
+**Pictures** — 21 fruits, 23 animals, 19 birds, 12 flowers and 32 things around
 the house, all as **real photographs**, two big ones per row. Fruits, flowers and
 household things say only their name — "Lemon." Nothing else. Animals say their
 name and then the animal: most of them play a **real recording** — an actual
