@@ -789,7 +789,14 @@ const LANGS = {
     numberId: (n) => 'Nar' + n,
     seedLetter: 5,
     seedNumber: 3,
-    clips: null,
+    /* Letter names only — split from one Commons recitation. Numbers
+       and body parts still use the device voice. */
+    clips: {
+      letter: (it) => `sounds/arabic/letters/${it.n}.m4a`,
+      letterWord: () => null,
+      number: () => null,
+      body: () => null,
+    },
     sayName: true,
     hint: {
       letters: 'المس حرفًا لتسمعه.',
@@ -1953,7 +1960,8 @@ function showBody(item) {
   stopSound();
   const code = curLang();
   const L = LANGS[code];
-  if (!L.clips) return speakIn(code, `${bodyName(item)}.`);
+  const bodyClip = L.clips && L.clips.body && L.clips.body(item);
+  if (!bodyClip) return speakIn(code, `${bodyName(item)}.`);
   playBodyClip(item, code, () => {
     if (voiceFor(L.voice)) speakIn(code, bodyName(item), { rate: 0.8 });
     else speak(item.say);
@@ -2075,7 +2083,8 @@ function showNumber(item) {
    wrong language; no English letter is অ, so "o" would just be wrong. */
 function sayNumber(item) {
   const L = LANGS[item.lang];
-  if (!L.clips) return speakIn(item.lang, item.word, { rate: 0.8 });
+  const clip = L.clips && L.clips.number && L.clips.number(item);
+  if (!clip) return speakIn(item.lang, item.word, { rate: 0.8 });
   playNumberClip(item, () => {
     if (voiceFor(L.voice)) speakIn(item.lang, item.word, { rate: 0.8 });
     else speak(NUMBER_NAMES.en[item.n], { rate: 0.8 });
@@ -2825,14 +2834,21 @@ function mediaUrls() {
   activeLangs().forEach((code) => {
     const L = LANGS[code];
     if (!L.clips) return;
-    NUMBERS_BY_LANG[code].forEach((it) => urls.push(L.clips.number(it)));
+    NUMBERS_BY_LANG[code].forEach((it) => {
+      const u = L.clips.number && L.clips.number(it);
+      if (u) urls.push(u);
+    });
     LETTERS_BY_LANG[code].forEach((it) => {
-      urls.push(L.clips.letter(it));
+      const u = L.clips.letter && L.clips.letter(it);
+      if (u) urls.push(u);
       /* A letter with no word has no second clip — see playLetterClips. */
-      const word = L.clips.letterWord(it);
+      const word = L.clips.letterWord && L.clips.letterWord(it);
       if (word) urls.push(word);
     });
-    bodyItems.forEach((it) => urls.push(L.clips.body(it)));
+    bodyItems.forEach((it) => {
+      const u = L.clips.body && L.clips.body(it);
+      if (u) urls.push(u);
+    });
   });
   return urls;
 }

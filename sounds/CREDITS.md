@@ -744,3 +744,15 @@ From *LL-Q9610 (ben)-Titodutta-আঙুল.wav* by Titodutta — second half
 License: CC0  
 Source: https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%AA%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%B0.wav
 Source: https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%86%E0%A6%99%E0%A7%81%E0%A6%B2.wav
+
+## Arabic letters
+The 28 letter names in `sounds/arabic/letters/` are split from one
+Wikimedia Commons recitation of the alphabet, أ to ي, in dictionary
+order. Trimmed to the name, a breath of silence at each end, and
+levelled to the other clips on the board. There is no second file —
+Arabic on this board speaks the letter's name, not a word it starts.
+
+**أ to ي** — `arabic/letters/1.m4a` through `arabic/letters/28.m4a`  
+From *حروف الأبجدية العربية Arabic alphabet.ogg* by Ibraheem alex  
+License: GNU Free Documentation License 1.2+  
+Source: https://commons.wikimedia.org/wiki/File:%D8%AD%D8%B1%D9%88%D9%81_%D8%A7%D9%84%D8%A3%D8%A8%D8%AC%D8%AF%D9%8A%D8%A9_%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9_Arabic_alphabet.ogg
