@@ -26,7 +26,7 @@
  {
   "slug": "sheep",
   "article": "Sheep",
-  "file": "Mouton (image carr\u00e9e).jpg",
+  "file": "Mouton (image carrée).jpg",
   "license": "CC BY-SA 2.5",
   "author": "MaCRoEco",
   "page": "https://commons.wikimedia.org/wiki/File:Mouton_(image_carr%C3%A9e).jpg"
@@ -36,7 +36,7 @@
   "article": "Goat",
   "file": "Hausziege_04.jpg",
   "license": "CC BY-SA 3.0",
-  "author": "Kuebi = Armin K\u00fcbelbeck",
+  "author": "Kuebi = Armin Kübelbeck",
   "page": "https://commons.wikimedia.org/wiki/File:Hausziege_04.jpg"
  },
  {
@@ -138,7 +138,7 @@
  {
   "slug": "penguin",
   "article": "Penguin",
-  "file": "South_Shetland-2016-Deception_Island\u2013Chinstrap_penguin_(Pygoscelis_antarctica)_04.jpg",
+  "file": "South_Shetland-2016-Deception_Island–Chinstrap_penguin_(Pygoscelis_antarctica)_04.jpg",
   "license": "CC BY-SA 4.0",
   "author": "Godot13",
   "page": "https://commons.wikimedia.org/wiki/File:South_Shetland-2016-Deception_Island%E2%80%93Chinstrap_penguin_(Pygoscelis_antarctica)_04.jpg"
@@ -180,7 +180,7 @@
   "article": "Goldfish",
   "file": "Gold_fish1.jpg",
   "license": "CC BY-SA 3.0",
-  "author": "\u05dc\u05d9\u05e0\u05d4 \u05d0\u05d1\u05d5\u05d2\u05d5\u05e9",
+  "author": "לינה אבוגוש",
   "page": "https://commons.wikimedia.org/wiki/File:Gold_fish1.jpg"
  },
  {
@@ -218,7 +218,7 @@
  {
   "slug": "strawberry",
   "article": "Strawberry",
-  "file": "Garden_strawberry_(Fragaria_\u00d7_ananassa)_single2.jpg",
+  "file": "Garden_strawberry_(Fragaria_×_ananassa)_single2.jpg",
   "license": "CC BY-SA 4.0",
   "author": "Ivar Leidus",
   "page": "https://commons.wikimedia.org/wiki/File:Garden_strawberry_(Fragaria_%C3%97_ananassa)_single2.jpg"
@@ -345,50 +345,50 @@
  },
  {
   "slug": "bed",
-  "file": "EFTA00001760 - Modern bedroom with a blue vaulted ceiling white bed wooden cabinet and a large artwork on the wall.jpg",
-  "author": "Federal Bureau of Investigation",
-  "license": "Public domain",
-  "page": "https://commons.wikimedia.org/wiki/File:EFTA00001760_-_Modern_bedroom_with_a_blue_vaulted_ceiling_white_bed_wooden_cabinet_and_a_large_artwork_on_the_wall.jpg",
-  "article": ""
+  "file": "Hotel beds.jpg",
+  "author": "Sridhar Rao",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Hotel_beds.jpg",
+  "article": "Bed"
  },
  {
   "slug": "book",
-  "file": "Open Internal Pages of the Book Detr\u00e1s del espejo 02.png",
-  "author": "HonysTorresArt",
+  "file": "New Testament Psalms and Proverbs pocket Bible.jpg",
+  "author": "FranticSpud",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Open_Internal_Pages_of_the_Book_Detr%C3%A1s_del_espejo_02.png",
-  "article": ""
+  "page": "https://commons.wikimedia.org/wiki/File:New_Testament_Psalms_and_Proverbs_pocket_Bible.jpg",
+  "article": "Book"
  },
  {
   "slug": "bottle",
-  "file": "Bouteille.jpg",
+  "file": "Water bottle.jpg",
   "license": "CC BY-SA 3.0",
-  "author": "Aur\u00e9lien Mole",
-  "page": "https://commons.wikimedia.org/wiki/File:Bouteille.jpg",
+  "author": "Tawker",
+  "page": "https://commons.wikimedia.org/wiki/File:Water_bottle.jpg",
   "article": ""
  },
  {
   "slug": "bowl",
-  "file": "China,_Jiangxi_province,_Jingdezhen,_Ming_dynasty_(1368-1644),_Xuande_mark_-_Bowl_with_Decoration_of_the_\"Three_Friends\"_-_1953.631_-_Cleveland_Museum_of_Art.tif",
-  "license": "CC0",
-  "author": "Unknown",
-  "page": "https://commons.wikimedia.org/wiki/File:China,_Jiangxi_province,_Jingdezhen,_Ming_dynasty_(1368-1644),_Xuande_mark_-_Bowl_with_Decoration_of_the_%22Three_Friends%22_-_1953.631_-_Cleveland_Museum_of_Art.tif",
+  "file": "Lu-Ray Sharron Pink Bowl.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Paul Krumrei Jr.",
+  "page": "https://commons.wikimedia.org/wiki/File:Lu-Ray_Sharron_Pink_Bowl.jpg",
   "article": ""
  },
  {
   "slug": "broom",
-  "file": "Hue Vietnam Broom-in-C\u00e0n-Th\u00e0nh-Palace-01.jpg",
-  "author": "CEphoto, Uwe Aranas",
-  "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Hue_Vietnam_Broom-in-C%C3%A0n-Th%C3%A0nh-Palace-01.jpg",
+  "file": "Broomstick.jpg",
+  "author": "சஞ்சீவி சிவகுமார்",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Broomstick.jpg",
   "article": ""
  },
  {
   "slug": "bucket",
-  "file": "Lime green bucket 5.jpg",
-  "author": "DracoEssentialis",
-  "license": "CC BY 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Lime_green_bucket_5.jpg",
+  "file": "Plastic bucket.jpg",
+  "author": "Kottakkalnet",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Plastic_bucket.jpg",
   "article": ""
  },
  {
@@ -401,18 +401,18 @@
  },
  {
   "slug": "clock",
-  "file": "2010-07-20_Black_windup_alarm_clock_face.jpg",
-  "license": "CC BY-SA 3.0",
-  "author": "Sun Ladder",
-  "page": "https://commons.wikimedia.org/wiki/File:2010-07-20_Black_windup_alarm_clock_face.jpg",
+  "file": "Classic alarm clock 20180513.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Santeri Viinamäki",
+  "page": "https://commons.wikimedia.org/wiki/File:Classic_alarm_clock_20180513.jpg",
   "article": ""
  },
  {
   "slug": "comb",
-  "file": "Plastic_comb,_2015-06-07.jpg",
-  "license": "CC BY-SA 4.0",
-  "author": "Crisco 1492",
-  "page": "https://commons.wikimedia.org/wiki/File:Plastic_comb,_2015-06-07.jpg",
+  "file": "Plastic comb 1.JPG",
+  "license": "CC BY-SA 3.0",
+  "author": "DO'Neil",
+  "page": "https://commons.wikimedia.org/wiki/File:Plastic_comb_1.JPG",
   "article": ""
  },
  {
@@ -425,26 +425,26 @@
  },
  {
   "slug": "door",
-  "file": "Rome (Italy), Door -- 2013 -- 3554.jpg",
-  "author": "Dietmar Rabich",
-  "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Rome_(Italy),_Door_--_2013_--_3554.jpg",
+  "file": "Door Bedroom rotated.jpg",
+  "author": "Corn cheese",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Door_Bedroom_rotated.jpg",
   "article": ""
  },
  {
   "slug": "fan",
-  "file": "Hatari_18_inch_fan.jpg",
+  "file": "Table fan FT-1201 II 30 cm 9186.jpg",
   "license": "CC BY-SA 4.0",
-  "author": "Peachyo",
-  "page": "https://commons.wikimedia.org/wiki/File:Hatari_18_inch_fan.jpg",
+  "author": "Gunnar Creutz",
+  "page": "https://commons.wikimedia.org/wiki/File:Table_fan_FT-1201_II_30_cm_9186.jpg",
   "article": ""
  },
  {
   "slug": "fork",
-  "file": "Assorted_forks.jpg",
-  "license": "CC BY-SA 3.0 us",
-  "author": "Unknown",
-  "page": "https://commons.wikimedia.org/wiki/File:Assorted_forks.jpg",
+  "file": "Gabel.jpg",
+  "license": "CC BY-SA 3.0",
+  "author": "acf",
+  "page": "https://commons.wikimedia.org/wiki/File:Gabel.jpg",
   "article": ""
  },
  {
@@ -465,10 +465,10 @@
  },
  {
   "slug": "key",
-  "file": "Lada 110 keys.jpg",
-  "author": "\u0412\u0430\u0437\u043e\u0432\u0438\u043a110",
-  "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Lada_110_keys.jpg",
+  "file": "House key.jpg",
+  "author": "Linuxerist",
+  "license": "CC BY-SA 2.5",
+  "page": "https://commons.wikimedia.org/wiki/File:House_key.jpg",
   "article": ""
  },
  {
@@ -481,10 +481,10 @@
  },
  {
   "slug": "mirror",
-  "file": "Stichting Onze Woning toilet and bathroom, Hillegersberg, Rotterdam (2020) 02.jpg",
-  "author": "Donald Trung Quoc Don (Ch\u1eef H\u00e1n: \u5fb5\u570b\u55ae) - Wikimedia Commons - \u00a9 CC BY-SA 4.0 International.(Want to use this image?)Original publication \ud83d\udce4: --Donald Trung \u300e\u5fb5\u570b\u55ae\u300f (No Fake News \ud83d\udcac) (WikiProject Numismatics \ud83d\udcb4) (Articles \ud83d\udcda) 23:01, 11 January 2021 (UTC)",
-  "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Stichting_Onze_Woning_toilet_and_bathroom,_Hillegersberg,_Rotterdam_(2020)_02.jpg",
+  "file": "Wall Mounted Cosmetic Mirror.jpg",
+  "author": "Stilfehler",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Wall_Mounted_Cosmetic_Mirror.jpg",
   "article": ""
  },
  {
@@ -497,10 +497,10 @@
  },
  {
   "slug": "plate",
-  "file": "Botanical_plate_with_spray_of_fruiting_Indian_Bean_Tree_MET_DP-1687-038_(cropped).jpg",
-  "license": "CC0",
-  "author": "Chelsea porcelain factory",
-  "page": "https://commons.wikimedia.org/wiki/File:Botanical_plate_with_spray_of_fruiting_Indian_Bean_Tree_MET_DP-1687-038_(cropped).jpg",
+  "file": "Empty table setting plate fork knife (42585288225).jpg",
+  "license": "CC BY 2.0",
+  "author": "Stock Catalog",
+  "page": "https://commons.wikimedia.org/wiki/File:Empty_table_setting_plate_fork_knife_(42585288225).jpg",
   "article": ""
  },
  {
@@ -513,26 +513,26 @@
  },
  {
   "slug": "shoe",
-  "file": "Paar sneakers, Onitsuka, Tiger, objectnr 91283-1-2.JPG",
-  "author": "Onitsuka",
+  "file": "Black Converse sneakers.JPG",
+  "author": "Brooke Fishwick",
   "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Paar_sneakers,_Onitsuka,_Tiger,_objectnr_91283-1-2.JPG",
+  "page": "https://commons.wikimedia.org/wiki/File:Black_Converse_sneakers.JPG",
   "article": ""
  },
  {
   "slug": "soap",
-  "file": "Handmade_soap_cropped_and_simplified.jpg",
-  "license": "CC BY 2.5",
-  "author": "Malene Thyssen, simplified by HLHJ",
-  "page": "https://commons.wikimedia.org/wiki/File:Handmade_soap_cropped_and_simplified.jpg",
+  "file": "Soap in blue dish.JPG",
+  "license": "Public domain",
+  "author": "TheLewisRepublic",
+  "page": "https://commons.wikimedia.org/wiki/File:Soap_in_blue_dish.JPG",
   "article": ""
  },
  {
   "slug": "sofa",
-  "file": "Couch-furniture-living-room-sofa (24300293356).jpg",
-  "author": "www.Pixel.la Free Stock Photos",
-  "license": "CC0",
-  "page": "https://commons.wikimedia.org/wiki/File:Couch-furniture-living-room-sofa_(24300293356).jpg",
+  "file": "Sofá.jpg",
+  "author": "Dalton Scavassa",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Sof%C3%A1.jpg",
   "article": ""
  },
  {
@@ -545,31 +545,31 @@
  },
  {
   "slug": "table",
-  "file": "Wright dining table - HNT.jpg",
-  "author": "Eric Polk",
-  "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Wright_dining_table_-_HNT.jpg",
+  "file": "IKEA Lack.jpg",
+  "author": "Juhan Sonin",
+  "license": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:IKEA_Lack.jpg",
   "article": ""
  },
  {
   "slug": "television",
-  "file": "A Flat Screen Television.jpg",
-  "author": "Kid Keen 47",
+  "file": "TV 43.jpg",
+  "author": "HASEEB ARPK",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:A_Flat_Screen_Television.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:TV_43.jpg",
   "article": ""
  },
  {
   "slug": "toothbrush",
-  "file": "Toothbrush_20050716_004.jpg",
-  "license": "Public domain",
-  "author": "Jonas Bergsten",
-  "page": "https://commons.wikimedia.org/wiki/File:Toothbrush_20050716_004.jpg",
+  "file": "Zahnbürste 2018-09-17 01 PD.JPG",
+  "license": "CC BY-SA 4.0",
+  "author": "Thirunavukkarasye-Raveendran",
+  "page": "https://commons.wikimedia.org/wiki/File:Zahnb%C3%BCrste_2018-09-17_01_PD.JPG",
   "article": ""
  },
  {
   "slug": "towel",
-  "file": "Zusammengelegte_Handt\u00fccher.jpg",
+  "file": "Zusammengelegte_Handtücher.jpg",
   "license": "Public domain",
   "author": "User:Mattes",
   "page": "https://commons.wikimedia.org/wiki/File:Zusammengelegte_Handt%C3%BCcher.jpg",
@@ -610,7 +610,7 @@
  {
   "slug": "tulip",
   "article": "Tulip",
-  "file": "\u05e6\u05d1\u05e2\u05d5\u05e0\u05d9\u05dd.JPG",
+  "file": "צבעונים.JPG",
   "license": "CC0",
   "author": "Dina L",
   "page": "https://commons.wikimedia.org/wiki/File:%D7%A6%D7%91%D7%A2%D7%95%D7%A0%D7%99%D7%9D.JPG"
@@ -674,7 +674,7 @@
  {
   "slug": "daffodil",
   "article": "Narcissus pseudonarcissus",
-  "file": "Narcissus pseudonarcissus flower \u2013 front.jpg",
+  "file": "Narcissus pseudonarcissus flower – front.jpg",
   "license": "CC BY-SA 3.0",
   "author": "Agadez",
   "page": "https://commons.wikimedia.org/wiki/File:Narcissus_pseudonarcissus_flower_%E2%80%93_front.jpg"
@@ -794,7 +794,7 @@
  {
   "slug": "donkey",
   "article": "Donkey",
-  "file": "Equus asinus Kadzid\u0142owo 001.jpg",
+  "file": "Equus asinus Kadzidłowo 001.jpg",
   "license": "CC BY-SA 3.0",
   "author": "Lilly M",
   "page": "https://commons.wikimedia.org/wiki/File:Equus_asinus_Kadzid%C5%82owo_001.jpg"
@@ -818,7 +818,7 @@
  {
   "slug": "goose",
   "article": "Greylag goose",
-  "file": "\u00c1nsar com\u00fan (Anser anser), Tierpark Hellabrunn, M\u00fanich, Alemania, 2012-06-17, DD 01.JPG",
+  "file": "Ánsar común (Anser anser), Tierpark Hellabrunn, Múnich, Alemania, 2012-06-17, DD 01.JPG",
   "license": "CC BY-SA 3.0",
   "author": "Diego Delso",
   "page": "https://commons.wikimedia.org/wiki/File:%C3%81nsar_com%C3%BAn_(Anser_anser),_Tierpark_Hellabrunn,_M%C3%BAnich,_Alemania,_2012-06-17,_DD_01.JPG"

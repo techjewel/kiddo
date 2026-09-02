@@ -297,34 +297,34 @@ License: CC0
 Source: https://commons.wikimedia.org/wiki/File:Plastic_laundry_basket.jpg
 
 **Bed** — `bed.jpg`  
-From *EFTA00001760 - Modern bedroom with a blue vaulted ceiling white bed wooden cabinet and a large artwork on the wall.jpg* by Federal Bureau of Investigation  
-License: Public domain  
-Source: https://commons.wikimedia.org/wiki/File:EFTA00001760_-_Modern_bedroom_with_a_blue_vaulted_ceiling_white_bed_wooden_cabinet_and_a_large_artwork_on_the_wall.jpg
+From *Hotel_beds.jpg* by Sridhar Rao  
+License: CC BY-SA 4.0  
+Source: https://commons.wikimedia.org/wiki/File:Hotel_beds.jpg
 
 **Book** — `book.jpg`  
-From *Open Internal Pages of the Book Detrás del espejo 02.png* by HonysTorresArt  
+From *New_Testament_Psalms_and_Proverbs_pocket_Bible.jpg* by FranticSpud  
 License: CC BY-SA 4.0  
-Source: https://commons.wikimedia.org/wiki/File:Open_Internal_Pages_of_the_Book_Detr%C3%A1s_del_espejo_02.png
+Source: https://commons.wikimedia.org/wiki/File:New_Testament_Psalms_and_Proverbs_pocket_Bible.jpg
 
 **Bottle** — `bottle.jpg`  
-From *Bouteille.jpg* by Aurélien Mole  
+From *Water_bottle.jpg* by Tawker  
 License: CC BY-SA 3.0  
-Source: https://commons.wikimedia.org/wiki/File:Bouteille.jpg
+Source: https://commons.wikimedia.org/wiki/File:Water_bottle.jpg
 
 **Bowl** — `bowl.jpg`  
-From *China,_Jiangxi_province,_Jingdezhen,_Ming_dynasty_(1368-1644),_Xuande_mark_-_Bowl_with_Decoration_of_the_"Three_Friends"_-_1953.631_-_Cleveland_Museum_of_Art.tif* by Unknown  
-License: CC0  
-Source: https://commons.wikimedia.org/wiki/File:China,_Jiangxi_province,_Jingdezhen,_Ming_dynasty_(1368-1644),_Xuande_mark_-_Bowl_with_Decoration_of_the_%22Three_Friends%22_-_1953.631_-_Cleveland_Museum_of_Art.tif
+From *Lu-Ray_Sharron_Pink_Bowl.jpg* by Paul Krumrei Jr.  
+License: CC BY-SA 4.0  
+Source: https://commons.wikimedia.org/wiki/File:Lu-Ray_Sharron_Pink_Bowl.jpg
 
 **Broom** — `broom.jpg`  
-From *New_brooms_-_02.jpg* by Oto Zapletal  
-License: CC BY 4.0  
-Source: https://commons.wikimedia.org/wiki/File:New_brooms_-_02.jpg
+From *Broomstick.jpg* by சஞ்சீவி சிவகுமார்  
+License: CC BY-SA 4.0  
+Source: https://commons.wikimedia.org/wiki/File:Broomstick.jpg
 
 **Bucket** — `bucket.jpg`  
-From *Lime green bucket 5.jpg* by DracoEssentialis  
-License: CC BY 3.0  
-Source: https://commons.wikimedia.org/wiki/File:Lime_green_bucket_5.jpg
+From *Plastic_bucket.jpg* by Kottakkalnet  
+License: CC BY-SA 4.0  
+Source: https://commons.wikimedia.org/wiki/File:Plastic_bucket.jpg
 
 **Chair** — `chair.jpg`  
 From *Kitchen_chair_made_by_Lübke._Germany.jpeg* by Ditigibt  
@@ -332,14 +332,14 @@ License: Public domain
 Source: https://commons.wikimedia.org/wiki/File:Kitchen_chair_made_by_L%C3%BCbke._Germany.jpeg
 
 **Clock** — `clock.jpg`  
-From *2010-07-20_Black_windup_alarm_clock_face.jpg* by Sun Ladder  
-License: CC BY-SA 3.0  
-Source: https://commons.wikimedia.org/wiki/File:2010-07-20_Black_windup_alarm_clock_face.jpg
+From *Classic_alarm_clock_20180513.jpg* by Santeri Viinamäki  
+License: CC BY-SA 4.0  
+Source: https://commons.wikimedia.org/wiki/File:Classic_alarm_clock_20180513.jpg
 
 **Comb** — `comb.jpg`  
-From *Plastic_comb,_2015-06-07.jpg* by Crisco 1492  
-License: CC BY-SA 4.0  
-Source: https://commons.wikimedia.org/wiki/File:Plastic_comb,_2015-06-07.jpg
+From *Plastic_comb_1.JPG* by DO'Neil  
+License: CC BY-SA 3.0  
+Source: https://commons.wikimedia.org/wiki/File:Plastic_comb_1.JPG
 
 **Cup** — `cup.jpg`  
 From *Flat white coffee Five Valleys Shopping Centre market Stroud Gloucestershire.jpg* by Acabashi  
@@ -347,19 +347,19 @@ License: CC BY-SA 4.0
 Source: https://commons.wikimedia.org/wiki/File:Flat_white_coffee_Five_Valleys_Shopping_Centre_market_Stroud_Gloucestershire.jpg
 
 **Door** — `door.jpg`  
-From *Rome (Italy), Door -- 2013 -- 3554.jpg* by Dietmar Rabich  
-License: CC BY-SA 4.0  
-Source: https://commons.wikimedia.org/wiki/File:Rome_(Italy),_Door_--_2013_--_3554.jpg
+From *Door_Bedroom_rotated.jpg* by Corn cheese  
+License: CC BY-SA 3.0  
+Source: https://commons.wikimedia.org/wiki/File:Door_Bedroom_rotated.jpg
 
 **Fan** — `fan.jpg`  
-From *Hatari_18_inch_fan.jpg* by Peachyo  
+From *Table_fan_FT-1201_II_30_cm_9186.jpg* by Gunnar Creutz  
 License: CC BY-SA 4.0  
-Source: https://commons.wikimedia.org/wiki/File:Hatari_18_inch_fan.jpg
+Source: https://commons.wikimedia.org/wiki/File:Table_fan_FT-1201_II_30_cm_9186.jpg
 
 **Fork** — `fork.jpg`  
-From *Assorted_forks.jpg* by Unknown  
-License: CC BY-SA 3.0 us  
-Source: https://commons.wikimedia.org/wiki/File:Assorted_forks.jpg
+From *Gabel.jpg* by acf  
+License: CC BY-SA 3.0  
+Source: https://commons.wikimedia.org/wiki/File:Gabel.jpg
 
 **Fridge** — `fridge.jpg`  
 From *US Domestic Refrigerator GE.jpg* by Infrogmation of New Orleans  
@@ -372,9 +372,9 @@ License: CC BY-SA 3.0
 Source: https://commons.wikimedia.org/wiki/File:Bernadotte_Wasserkessel.jpg
 
 **Key** — `key.jpg`  
-From *Lada 110 keys.jpg* by Вазовик110  
-License: CC BY-SA 4.0  
-Source: https://commons.wikimedia.org/wiki/File:Lada_110_keys.jpg
+From *House_key.jpg* by Linuxerist  
+License: CC BY-SA 2.5  
+Source: https://commons.wikimedia.org/wiki/File:House_key.jpg
 
 **Lamp** — `lamp.jpg`  
 From *Lamp with a lampshade illuminated by sunlight.jpg* by LoMit  
@@ -382,9 +382,9 @@ License: CC BY-SA 4.0
 Source: https://commons.wikimedia.org/wiki/File:Lamp_with_a_lampshade_illuminated_by_sunlight.jpg
 
 **Mirror** — `mirror.jpg`  
-From *Stichting Onze Woning toilet and bathroom, Hillegersberg, Rotterdam (2020) 02.jpg* by Donald Trung Quoc Don (Chữ Hán: 徵國單) - Wikimedia Commons - © CC BY-SA 4.0 International.(Want to use this image?)Original publication 📤: --Donald Trung 『徵國單』 (No Fake News 💬) (WikiProject Numismatics 💴) (Articles 📚) 23:01, 11 January 2021 (UTC)  
-License: CC BY-SA 4.0  
-Source: https://commons.wikimedia.org/wiki/File:Stichting_Onze_Woning_toilet_and_bathroom,_Hillegersberg,_Rotterdam_(2020)_02.jpg
+From *Wall_Mounted_Cosmetic_Mirror.jpg* by Stilfehler  
+License: CC BY-SA 3.0  
+Source: https://commons.wikimedia.org/wiki/File:Wall_Mounted_Cosmetic_Mirror.jpg
 
 **Pillow** — `pillow.jpg`  
 From *Pillows_on_a_hotel_bed.jpg* by Amin  
@@ -392,9 +392,9 @@ License: CC BY-SA 4.0
 Source: https://commons.wikimedia.org/wiki/File:Pillows_on_a_hotel_bed.jpg
 
 **Plate** — `plate.jpg`  
-From *Botanical_plate_with_spray_of_fruiting_Indian_Bean_Tree_MET_DP-1687-038_(cropped).jpg* by Chelsea porcelain factory  
-License: CC0  
-Source: https://commons.wikimedia.org/wiki/File:Botanical_plate_with_spray_of_fruiting_Indian_Bean_Tree_MET_DP-1687-038_(cropped).jpg
+From *Empty_table_setting_plate_fork_knife_(42585288225).jpg* by Stock Catalog  
+License: CC BY 2.0  
+Source: https://commons.wikimedia.org/wiki/File:Empty_table_setting_plate_fork_knife_(42585288225).jpg
 
 **Scissors** — `scissors.jpg`  
 From *Standard_household_scissors.jpg* by Doggerelblogger  
@@ -402,19 +402,19 @@ License: CC BY-SA 4.0
 Source: https://commons.wikimedia.org/wiki/File:Standard_household_scissors.jpg
 
 **Shoe** — `shoe.jpg`  
-From *Paar sneakers, Onitsuka, Tiger, objectnr 91283-1-2.JPG* by Onitsuka  
+From *Black_Converse_sneakers.JPG* by Brooke Fishwick  
 License: CC BY-SA 3.0  
-Source: https://commons.wikimedia.org/wiki/File:Paar_sneakers,_Onitsuka,_Tiger,_objectnr_91283-1-2.JPG
+Source: https://commons.wikimedia.org/wiki/File:Black_Converse_sneakers.JPG
 
 **Soap** — `soap.jpg`  
-From *Handmade_soap_cropped_and_simplified.jpg* by Malene Thyssen, simplified by HLHJ  
-License: CC BY 2.5  
-Source: https://commons.wikimedia.org/wiki/File:Handmade_soap_cropped_and_simplified.jpg
+From *Soap_in_blue_dish.JPG* by TheLewisRepublic  
+License: Public domain  
+Source: https://commons.wikimedia.org/wiki/File:Soap_in_blue_dish.JPG
 
 **Sofa** — `sofa.jpg`  
-From *Couch-furniture-living-room-sofa (24300293356).jpg* by www.Pixel.la Free Stock Photos  
-License: CC0  
-Source: https://commons.wikimedia.org/wiki/File:Couch-furniture-living-room-sofa_(24300293356).jpg
+From *Sofá.jpg* by Dalton Scavassa  
+License: CC BY-SA 4.0  
+Source: https://commons.wikimedia.org/wiki/File:Sof%C3%A1.jpg
 
 **Spoon** — `spoon.jpg`  
 From *Soup_Spoon.jpg* by Donovan Govan.  
@@ -422,19 +422,19 @@ License: CC BY-SA 3.0
 Source: https://commons.wikimedia.org/wiki/File:Soup_Spoon.jpg
 
 **Table** — `table.jpg`  
-From *Wright dining table - HNT.jpg* by Eric Polk  
-License: CC BY-SA 4.0  
-Source: https://commons.wikimedia.org/wiki/File:Wright_dining_table_-_HNT.jpg
+From *IKEA_Lack.jpg* by Juhan Sonin  
+License: CC BY 3.0  
+Source: https://commons.wikimedia.org/wiki/File:IKEA_Lack.jpg
 
 **Television** — `television.jpg`  
-From *A Flat Screen Television.jpg* by Kid Keen 47  
+From *TV_43.jpg* by HASEEB ARPK  
 License: CC BY-SA 4.0  
-Source: https://commons.wikimedia.org/wiki/File:A_Flat_Screen_Television.jpg
+Source: https://commons.wikimedia.org/wiki/File:TV_43.jpg
 
 **Toothbrush** — `toothbrush.jpg`  
-From *Toothbrush_20050716_004.jpg* by Jonas Bergsten  
-License: Public domain  
-Source: https://commons.wikimedia.org/wiki/File:Toothbrush_20050716_004.jpg
+From *Zahnbürste_2018-09-17_01_PD.JPG* by Thirunavukkarasye-Raveendran  
+License: CC BY-SA 4.0  
+Source: https://commons.wikimedia.org/wiki/File:Zahnb%C3%BCrste_2018-09-17_01_PD.JPG
 
 **Towel** — `towel.jpg`  
 From *Zusammengelegte_Handtücher.jpg* by User:Mattes  
