@@ -987,5 +987,29 @@
   "license": "CC BY-SA 2.0",
   "author": "Oregon State University",
   "page": "https://www.flickr.com/photos/33247428@N08/49558404273"
+ },
+ {
+  "slug": "jackfruit",
+  "article": "Jackfruit",
+  "file": "The jackfruit is holding on to the tree.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Tushar Hossain",
+  "page": "https://commons.wikimedia.org/wiki/File:The_jackfruit_is_holding_on_to_the_tree.jpg"
+ },
+ {
+  "slug": "papaya",
+  "article": "Papaya",
+  "file": "Carica papaya Fruit.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Dinkun Chen",
+  "page": "https://commons.wikimedia.org/wiki/File:Carica_papaya_Fruit.jpg"
+ },
+ {
+  "slug": "lychee",
+  "article": "Lychee",
+  "file": "Lychee Fruit.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Sanjay Acharya",
+  "page": "https://commons.wikimedia.org/wiki/File:Lychee_Fruit.jpg"
  }
 ]

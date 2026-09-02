@@ -198,6 +198,11 @@ const FRUITS = [
   ['Avocado',     '🥑'], ['Tomato',      '🍅'],
   ['Guava',        '🍏'], ['Pomegranate', '🟠'],
   ['Pumpkin',      '🎃'],
+  /* Same rule as the pumpkin: append only. Inserting would recolour
+     every fruit after the new one, and he knows those tiles by colour. */
+  ['Jackfruit',    '🟡'],
+  ['Papaya',       '🧡'],
+  ['Lychee',       '🔴'],
 ];
 
 /* The third column is the noise itself, not a sentence about it. Where a
