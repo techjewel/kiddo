@@ -269,6 +269,11 @@ From *Pomegranate fruit - whole and piece with arils.jpg* by Ivar Leidus
 License: CC BY-SA 4.0  
 Source: https://commons.wikimedia.org/wiki/File:Pomegranate_fruit_-_whole_and_piece_with_arils.jpg
 
+**Pumpkin** — `pumpkin.jpg`  
+From *Pumpkin.jpg* by Fredde 99  
+License: CC BY-SA 3.0  
+Source: https://commons.wikimedia.org/wiki/File:Pumpkin.jpg
+
 ## Household things
 
 **Basket** — `basket.jpg`  
