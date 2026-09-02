@@ -105,27 +105,25 @@ ALPHABETS.fr = [
   ['Y', 'Yaourt',    '🥛'], ['Z', 'Zèbre',     '🦓'],
 ];
 
-/* Twenty-eight letters in dictionary order, أ to ي, written the way a
-   children's chart writes them — the alif carries its hamza because
-   أرنب does. Arabic joins its letters up inside a word, but a tile
-   shows the letter alone, which is the isolated form every chart
-   teaches first. The words are the chart classics wherever the
-   classic is something a finger can point at. */
+/* Twenty-eight letters in dictionary order, أ to ي. A tile shows the
+   isolated form, and the second column is the letter's name — ألف,
+   باء, تاء — not a word it starts. Arabic TTS reading أ as a glottal
+   stop teaches nothing; the name is the lesson. */
 ALPHABETS.ar = [
-  ['أ', 'أرنب',   '🐰'], ['ب', 'بطة',    '🦆'],
-  ['ت', 'تفاحة',  '🍎'], ['ث', 'ثعلب',   '🦊'],
-  ['ج', 'جمل',    '🐫'], ['ح', 'حصان',   '🐴'],
-  ['خ', 'خروف',   '🐑'], ['د', 'دب',     '🐻'],
-  ['ذ', 'ذرة',    '🌽'], ['ر', 'ريشة',   '🪶'],
-  ['ز', 'زرافة',  '🦒'], ['س', 'سمكة',   '🐟'],
-  ['ش', 'شمس',    '☀️'], ['ص', 'صقر',    '🦅'],
-  ['ض', 'ضفدع',   '🐸'], ['ط', 'طائرة',  '✈️'],
-  ['ظ', 'ظرف',    '✉️'], ['ع', 'عنب',    '🍇'],
-  ['غ', 'غزال',   '🦌'], ['ف', 'فيل',    '🐘'],
-  ['ق', 'قمر',    '🌙'], ['ك', 'كتاب',   '📕'],
-  ['ل', 'ليمون',  '🍋'], ['م', 'موز',    '🍌'],
-  ['ن', 'نحلة',   '🐝'], ['ه', 'هدهد',   '🐦'],
-  ['و', 'وردة',   '🌹'], ['ي', 'يد',     '✋'],
+  ['أ', 'ألف'],  ['ب', 'باء'],
+  ['ت', 'تاء'],  ['ث', 'ثاء'],
+  ['ج', 'جيم'],  ['ح', 'حاء'],
+  ['خ', 'خاء'],  ['د', 'دال'],
+  ['ذ', 'ذال'],  ['ر', 'راء'],
+  ['ز', 'زاي'],  ['س', 'سين'],
+  ['ش', 'شين'],  ['ص', 'صاد'],
+  ['ض', 'ضاد'],  ['ط', 'طاء'],
+  ['ظ', 'ظاء'],  ['ع', 'عين'],
+  ['غ', 'غين'],  ['ف', 'فاء'],
+  ['ق', 'قاف'],  ['ك', 'كاف'],
+  ['ل', 'لام'],  ['م', 'ميم'],
+  ['ن', 'نون'],  ['ه', 'هاء'],
+  ['و', 'واو'],  ['ي', 'ياء'],
 ];
 
 /* ---------- Content: the numbers ------------------------------
@@ -792,6 +790,7 @@ const LANGS = {
     seedLetter: 5,
     seedNumber: 3,
     clips: null,
+    sayName: true,
     hint: {
       letters: 'المس حرفًا لتسمعه.',
       numbers: 'المس رقمًا لتسمعه.',
@@ -832,7 +831,11 @@ function lettersFor(code) {
     lower: L.hasCase ? face.toLowerCase() : '',
     word: word || '',
     emoji: emoji || '',
-    say: word ? `${face}. ${word}.` : face,
+    /* Arabic speaks the letter's name (ألف) and stops. Face-plus-word
+       is the English chart: "A. Apple." */
+    say: L.sayName
+      ? `${word || face}.`
+      : (word ? `${face}. ${word}.` : face),
   }));
 }
 
