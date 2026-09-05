@@ -56,7 +56,7 @@
      index.html with a cached old app.js, and a screen the old script has
      never heard of just stays hidden — a blank board, no error. Changing
      the URL is the only thing a web-clip on an iPad reliably notices. -->
-<link rel="stylesheet" href="styles.css?v=22">
+<link rel="stylesheet" href="styles.css?v=23">
 </head>
 <body>
 
@@ -120,10 +120,11 @@
       <div class="grid" id="numbersGrid"></div>
     </section>
 
-    <section class="screen is-hidden" id="screen-pictures" aria-label="Fruits, animals, birds, flowers, things at home and jobs">
+    <section class="screen is-hidden" id="screen-pictures" aria-label="Fruits, vegetables, animals, birds, flowers, things at home and jobs">
       <div class="pics-switch">
         <div class="segmented segmented--pics" role="group" aria-label="What to look at">
           <button class="seg is-on" data-group="fruit">Fruits</button>
+          <button class="seg" data-group="veg">Vegetables</button>
           <button class="seg" data-group="animal">Animals</button>
           <button class="seg" data-group="bird">Birds</button>
           <button class="seg" data-group="flower">Flowers</button>
@@ -148,6 +149,7 @@
         </span>
       </button>
       <div class="grid grid--pics" id="fruitGrid"></div>
+      <div class="grid grid--pics is-hidden" id="vegGrid"></div>
       <div class="grid grid--pics is-hidden" id="animalGrid"></div>
       <div class="grid grid--pics is-hidden" id="birdGrid"></div>
       <div class="grid grid--pics is-hidden" id="flowerGrid"></div>
@@ -223,7 +225,7 @@
     <button class="tab" data-screen="numbers" aria-label="Numbers">
       <span class="tab-mark" aria-hidden="true">1</span><span class="tab-label" aria-hidden="true">Numbers</span>
     </button>
-    <button class="tab" data-screen="pictures" aria-label="Fruits, animals, birds, flowers, things at home and jobs">
+    <button class="tab" data-screen="pictures" aria-label="Fruits, vegetables, animals, birds, flowers, things at home and jobs">
       <span class="tab-mark tab-mark--emoji" aria-hidden="true">🍓</span><span class="tab-label" aria-hidden="true">Pictures</span>
     </button>
     <button class="tab" data-screen="colors" aria-label="Colors">
@@ -316,6 +318,6 @@
   </div>
 </div>
 
-<script src="app.js?v=22"></script>
+<script src="app.js?v=23"></script>
 </body>
 </html>

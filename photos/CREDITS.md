@@ -722,3 +722,68 @@ The CC BY, CC BY-SA and GFDL files require attribution if you
 redistribute them, and the share-alike ones require derivatives to keep
 the same licence. This file is that attribution. Public domain and CC0
 files carry no such condition.
+
+
+## Vegetables (magnet board additions)
+
+
+
+**Eggplant** — `eggplant.jpg`  
+From *Aubergine.jpg* by Horst Frank  
+License: CC BY-SA 3.0  
+Source: https://commons.wikimedia.org/wiki/File:Aubergine.jpg
+
+**Okra** — `okra.jpg`  
+From *Hong_Kong_Okra_Aug_25_2012.JPG* by Earth100  
+License: CC BY-SA 3.0  
+Source: https://commons.wikimedia.org/wiki/File:Hong_Kong_Okra_Aug_25_2012.JPG
+
+**Potato** — `potato.jpg`  
+From *Potato_and_cross_section.jpg* by fir0002 / Flagstaffotos  
+License: GFDL 1.2  
+Source: https://commons.wikimedia.org/wiki/File:Potato_and_cross_section.jpg
+
+**Cauliflower** — `cauliflower.jpg`  
+From *Chou-fleur_02.jpg* by Coyau  
+License: CC BY-SA 3.0  
+Source: https://commons.wikimedia.org/wiki/File:Chou-fleur_02.jpg
+
+**Cabbage** — `cabbage.jpg`  
+From *Cabbage.jpg* by Bill Tarpenning (USDA)  
+License: Public domain  
+Source: https://commons.wikimedia.org/wiki/File:Cabbage.jpg
+
+**Cucumber** — `cucumber.jpg`  
+From *Cucumis_sativus.jpg* by Jerzy Opioła  
+License: CC BY-SA 3.0  
+Source: https://commons.wikimedia.org/wiki/File:Cucumis_sativus.jpg
+
+**Carrot** — `carrot.jpg`  
+From *Vegetable-Carrot-Bundle-wStalks.jpg* by Evan-Amos  
+License: Public domain  
+Source: https://commons.wikimedia.org/wiki/File:Vegetable-Carrot-Bundle-wStalks.jpg
+
+**Radish** — `radish.jpg`  
+From *Raphanus_sativus.jpg* by Patrickov  
+License: Public domain  
+Source: https://commons.wikimedia.org/wiki/File:Raphanus_sativus.jpg
+
+**Bottle gourd** — `bottle-gourd.jpg`  
+From *Courge_encore_verte.jpg* by カールおじさん (kusabanaph / 草花写真館)  
+License: CC BY-SA 3.0  
+Source: https://commons.wikimedia.org/wiki/File:Courge_encore_verte.jpg
+
+**Bitter gourd** — `bitter-gourd.jpg`  
+From *Green_Momordica_charantia_fruit_with_white_background_01.png* by Leo219  
+License: CC BY-SA 4.0  
+Source: https://commons.wikimedia.org/wiki/File:Green_Momordica_charantia_fruit_with_white_background_01.png
+
+**Green chili** — `green-chili.jpg`  
+From *990515_(15)_-_Green_Slim_Peppers.jpg* by Safa.daneshvar  
+License: CC BY-SA 4.0  
+Source: https://commons.wikimedia.org/wiki/File:990515_(15)_-_Green_Slim_Peppers.jpg
+
+**Bean** — `bean.jpg`  
+From *String_beans.jpg* by Renee Comet (NCI / NIH)  
+License: Public domain  
+Source: https://commons.wikimedia.org/wiki/File:String_beans.jpg

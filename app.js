@@ -203,6 +203,23 @@ const FRUITS = [
   ['Lychee',       '🔴'],
 ];
 
+/* Bangladeshi kitchen vegetables, named in English so the board stays
+   one language. Append-only if this list grows — same colour rule as fruit. */
+const VEGETABLES = [
+  ['Eggplant',       '🍆', 'Begun — purple and shiny.'],
+  ['Okra',           '🟢', 'Dherosh — slim and green.'],
+  ['Potato',         '🥔', 'Alu — brown and round.'],
+  ['Cauliflower',    '🤍', 'Fulkopi — white florets.'],
+  ['Cabbage',        '🥬', 'Badhakopi — leafy and round.'],
+  ['Cucumber',       '🥒', 'Shosha — cool and crunchy.'],
+  ['Carrot',         '🥕', 'Gajor — orange and sweet.'],
+  ['Radish',         '⚪', 'Mula — white and peppery.'],
+  ['Bottle Gourd',   '🍈', 'Lau — long and pale green.'],
+  ['Bitter Gourd',   '🟢', 'Korola — bumpy and green.'],
+  ['Green Chili',    '🌶️', 'Morich — small and hot.'],
+  ['Bean',           '🫛', 'Sheem — long green pods.'],
+];
+
 /* The third column is the noise itself, not a sentence about it. Where a
    real recording exists it plays that instead — the written noise is for
    the panel, and is only spoken by the ones with no recording. The ones
@@ -920,6 +937,7 @@ function pictureItems(rows, group, prefix, { sayName = false } = {}) {
 }
 
 const fruitItems = pictureItems(FRUITS, 'fruit', 'F');
+const vegItems = pictureItems(VEGETABLES, 'veg', 'V');
 const animalItems = pictureItems(ANIMALS, 'animal', 'A');
 /* 'R' because B is the body's and BN the Bangla numbers' — `byId` is one
    flat map and a second B0 would quietly shadow the head. */
@@ -929,12 +947,14 @@ const flowerItems = pictureItems(FLOWERS, 'flower', 'W');
 /* 'J' for job: P is free but reads as picture, and the ids in this map
    are read by a grown-up looking at saved progress. */
 const jobItems = pictureItems(PROFESSIONS, 'job', 'J', { sayName: true });
-const pictureAll = [...fruitItems, ...animalItems, ...birdItems,
+const pictureAll = [...fruitItems, ...vegItems, ...animalItems, ...birdItems,
                     ...flowerItems, ...homeItems, ...jobItems];
 
 const PICTURE_GROUPS = {
   fruit:  { list: fruitItems,  grid: 'fruitGrid',
             hint: 'Tap a fruit to hear its name.' },
+  veg:    { list: vegItems,    grid: 'vegGrid',
+            hint: 'Tap a vegetable to hear its name.' },
   animal: { list: animalItems, grid: 'animalGrid',
             hint: 'Tap an animal to hear what it says.' },
   bird:   { list: birdItems,   grid: 'birdGrid',
@@ -1335,7 +1355,7 @@ const PALETTE = ['--m1', '--m2', '--m3', '--m4', '--m5', '--m6'];
    being read as translations of each other — see `seedLetter` and
    `seedNumber` in the registry. */
 const SEED_OFFSET = {
-  fruit: 4, animal: 1, bird: 5, flower: 0, home: 3, job: 6,
+  fruit: 4, veg: 7, animal: 1, bird: 5, flower: 0, home: 3, job: 6,
   color: 3, shape: 5, body: 2,
 };
 
@@ -1592,6 +1612,7 @@ const el = (id) => document.getElementById(id);
 const lettersGrid = el('lettersGrid');
 const numbersGrid = el('numbersGrid');
 const fruitGrid = el('fruitGrid');
+const vegGrid = el('vegGrid');
 const animalGrid = el('animalGrid');
 const birdGrid = el('birdGrid');
 const flowerGrid = el('flowerGrid');
@@ -1647,10 +1668,10 @@ function buildBodyGrid() {
 }
 
 /* A shelf of photographs is built the first time it is looked at, not
-   at start-up. Six shelves is 125 <img> elements and 7.4 MB,
+   at start-up. Seven shelves is more than 125 <img> elements and 7.4 MB,
    and a browser asks for every one of them the moment they exist, even
    on a screen that is hidden — so a child who opened the board and
-   tapped a letter used to pay for four shelves of pictures he never
+   tapped a letter used to pay for several shelves of pictures he never
    saw. Now he pays for the shelf he is on.
 
    Nothing is lost by waiting: `makeMagnet` reads `state.seen`, so a
@@ -1726,7 +1747,7 @@ function onGridTap(e) {
   showItem(byId.get(btn.dataset.id));
 }
 
-[lettersGrid, numbersGrid, fruitGrid, animalGrid,
+[lettersGrid, numbersGrid, fruitGrid, vegGrid, animalGrid,
  birdGrid, flowerGrid, homeGrid, jobGrid, colorsGrid, shapesGrid, bodyGrid]
   .forEach((grid) => grid.addEventListener('click', onGridTap));
 
