@@ -793,11 +793,11 @@ Source: https://commons.wikimedia.org/wiki/File:String_beans.jpg
 
 Everyday kids clothing for the Clothes shelf. Square ~512px crops from Wikimedia Commons.
 
-**T-shirt** — `t-shirt.jpg`  
-**Shirt** — `shirt.jpg`  
+**T-shirt** — `t-shirt.jpg` — From *Ringflash Tshirt Blank Template (3214240974).jpg* (CC BY 2.0, geishaboy500 / THOR)  
+**Shirt** — `shirt.jpg` — From *Womens orvis shirt white.jpg* (CC0, Punker1999)  
 **Pants** — `pants.jpg` — From *Jeans.jpg*  
 **Shorts** — `shorts.jpg` — From *Boardshorts.jpg*  
-**Dress** — `dress.jpg`  
+**Dress** — `dress.jpg` — From *Baby girl's dress.jpg* (CC BY-SA 4.0, Nhiên Kids)  
 **Cap** — `cap.jpg` — From *Baseball_cap.jpg*  
 **Hat** — `hat.jpg` — From *Straw_hat.jpg*  
 **Shoe** — `shoe.jpg` — shared with At home  
