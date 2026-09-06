@@ -787,3 +787,21 @@ Source: https://commons.wikimedia.org/wiki/File:990515_(15)_-_Green_Slim_Peppers
 From *String_beans.jpg* by Renee Comet (NCI / NIH)  
 License: Public domain  
 Source: https://commons.wikimedia.org/wiki/File:String_beans.jpg
+
+
+## Clothes
+
+Everyday kids clothing for the Clothes shelf. Square ~512px crops from Wikimedia Commons.
+
+**T-shirt** — `t-shirt.jpg`  
+**Shirt** — `shirt.jpg`  
+**Pants** — `pants.jpg` — From *Jeans.jpg*  
+**Shorts** — `shorts.jpg` — From *Boardshorts.jpg*  
+**Dress** — `dress.jpg`  
+**Cap** — `cap.jpg` — From *Baseball_cap.jpg*  
+**Hat** — `hat.jpg` — From *Straw_hat.jpg*  
+**Shoe** — `shoe.jpg` — shared with At home  
+**Sandal** — `sandal.jpg` — From *Flip-flops.jpg*  
+**Sock** — `sock.jpg` — From *Socks.jpg*  
+**Jacket** — `jacket.jpg` — From *Denim_jacket.jpg*  
+**Sweater** — `sweater.jpg` — From *Sweater.jpg*  

@@ -220,6 +220,23 @@ const VEGETABLES = [
   ['Bean',           '🫛'],
 ];
 
+/* Everyday kids' clothes, English names. Same board language as fruit
+   and vegetables. Append-only if the shelf grows. */
+const CLOTHES = [
+  ['T-shirt',  '👕'],
+  ['Shirt',    '👔'],
+  ['Pants',    '👖'],
+  ['Shorts',   '🩳'],
+  ['Dress',    '👗'],
+  ['Cap',      '🧢'],
+  ['Hat',      '👒'],
+  ['Shoe',     '👟'],
+  ['Sandal',   '👡'],
+  ['Sock',     '🧦'],
+  ['Jacket',   '🧥'],
+  ['Sweater',  '🧶'],
+];
+
 /* The third column is the noise itself, not a sentence about it. Where a
    real recording exists it plays that instead — the written noise is for
    the panel, and is only spoken by the ones with no recording. The ones
@@ -938,6 +955,7 @@ function pictureItems(rows, group, prefix, { sayName = false } = {}) {
 
 const fruitItems = pictureItems(FRUITS, 'fruit', 'F');
 const vegItems = pictureItems(VEGETABLES, 'veg', 'V');
+const clothesItems = pictureItems(CLOTHES, 'clothes', 'K');
 const animalItems = pictureItems(ANIMALS, 'animal', 'A');
 /* 'R' because B is the body's and BN the Bangla numbers' — `byId` is one
    flat map and a second B0 would quietly shadow the head. */
@@ -947,7 +965,7 @@ const flowerItems = pictureItems(FLOWERS, 'flower', 'W');
 /* 'J' for job: P is free but reads as picture, and the ids in this map
    are read by a grown-up looking at saved progress. */
 const jobItems = pictureItems(PROFESSIONS, 'job', 'J', { sayName: true });
-const pictureAll = [...fruitItems, ...vegItems, ...animalItems, ...birdItems,
+const pictureAll = [...fruitItems, ...vegItems, ...clothesItems, ...animalItems, ...birdItems,
                     ...flowerItems, ...homeItems, ...jobItems];
 
 const PICTURE_GROUPS = {
@@ -955,6 +973,8 @@ const PICTURE_GROUPS = {
             hint: 'Tap a fruit to hear its name.' },
   veg:    { list: vegItems,    grid: 'vegGrid',
             hint: 'Tap a vegetable to hear its name.' },
+  clothes:{ list: clothesItems, grid: 'clothesGrid',
+            hint: 'Tap a piece of clothing to hear its name.' },
   animal: { list: animalItems, grid: 'animalGrid',
             hint: 'Tap an animal to hear what it says.' },
   bird:   { list: birdItems,   grid: 'birdGrid',
@@ -1355,7 +1375,7 @@ const PALETTE = ['--m1', '--m2', '--m3', '--m4', '--m5', '--m6'];
    being read as translations of each other — see `seedLetter` and
    `seedNumber` in the registry. */
 const SEED_OFFSET = {
-  fruit: 4, veg: 7, animal: 1, bird: 5, flower: 0, home: 3, job: 6,
+  fruit: 4, veg: 7, clothes: 8, animal: 1, bird: 5, flower: 0, home: 3, job: 6,
   color: 3, shape: 5, body: 2,
 };
 
@@ -1613,6 +1633,7 @@ const lettersGrid = el('lettersGrid');
 const numbersGrid = el('numbersGrid');
 const fruitGrid = el('fruitGrid');
 const vegGrid = el('vegGrid');
+const clothesGrid = el('clothesGrid');
 const animalGrid = el('animalGrid');
 const birdGrid = el('birdGrid');
 const flowerGrid = el('flowerGrid');
@@ -1747,7 +1768,7 @@ function onGridTap(e) {
   showItem(byId.get(btn.dataset.id));
 }
 
-[lettersGrid, numbersGrid, fruitGrid, vegGrid, animalGrid,
+[lettersGrid, numbersGrid, fruitGrid, vegGrid, clothesGrid, animalGrid,
  birdGrid, flowerGrid, homeGrid, jobGrid, colorsGrid, shapesGrid, bodyGrid]
   .forEach((grid) => grid.addEventListener('click', onGridTap));
 
