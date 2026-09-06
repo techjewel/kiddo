@@ -206,18 +206,18 @@ const FRUITS = [
 /* Bangladeshi kitchen vegetables, named in English so the board stays
    one language. Append-only if this list grows — same colour rule as fruit. */
 const VEGETABLES = [
-  ['Eggplant',       '🍆', 'Begun — purple and shiny.'],
-  ['Okra',           '🟢', 'Dherosh — slim and green.'],
-  ['Potato',         '🥔', 'Alu — brown and round.'],
-  ['Cauliflower',    '🤍', 'Fulkopi — white florets.'],
-  ['Cabbage',        '🥬', 'Badhakopi — leafy and round.'],
-  ['Cucumber',       '🥒', 'Shosha — cool and crunchy.'],
-  ['Carrot',         '🥕', 'Gajor — orange and sweet.'],
-  ['Radish',         '⚪', 'Mula — white and peppery.'],
-  ['Bottle Gourd',   '🍈', 'Lau — long and pale green.'],
-  ['Bitter Gourd',   '🟢', 'Korola — bumpy and green.'],
-  ['Green Chili',    '🌶️', 'Morich — small and hot.'],
-  ['Bean',           '🫛', 'Sheem — long green pods.'],
+  ['Eggplant',       '🍆'],
+  ['Okra',           '🟢'],
+  ['Potato',         '🥔'],
+  ['Cauliflower',    '🤍'],
+  ['Cabbage',        '🥬'],
+  ['Cucumber',       '🥒'],
+  ['Carrot',         '🥕'],
+  ['Radish',         '⚪'],
+  ['Bottle Gourd',   '🍈'],
+  ['Bitter Gourd',   '🟢'],
+  ['Green Chili',    '🌶️'],
+  ['Bean',           '🫛'],
 ];
 
 /* The third column is the noise itself, not a sentence about it. Where a
