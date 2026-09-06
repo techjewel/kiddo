@@ -56,7 +56,7 @@
      index.html with a cached old app.js, and a screen the old script has
      never heard of just stays hidden — a blank board, no error. Changing
      the URL is the only thing a web-clip on an iPad reliably notices. -->
-<link rel="stylesheet" href="styles.css?v=26">
+<link rel="stylesheet" href="styles.css?v=27">
 </head>
 <body>
 
@@ -141,12 +141,25 @@
           <span class="shuffle-ico" aria-hidden="true">🔀</span>
           <span>Shuffle</span>
         </button>
+        <!-- One picture at a time: parent asks "what's that?", tap for the next. -->
+        <button class="shuffle-btn" id="focusBtn" aria-pressed="false" title="One picture at a time">
+          <span class="shuffle-ico" aria-hidden="true" id="focusBtnIco">🔎</span>
+          <span id="focusBtnLabel">What's that?</span>
+        </button>
       </div>
       <button class="showcase showcase--pic" id="picView" aria-live="polite">
         <span class="sc-pic" id="picEmoji">🍎</span>
         <span class="sc-text">
           <span class="sc-word" id="picWord">Apple</span>
           <span class="sc-line" id="picLine">Apples are red and crunchy.</span>
+        </span>
+      </button>
+      <!-- Focus / "what's that?" stage — one large photo; tap advances. -->
+      <button class="focus-stage is-hidden" id="focusStage" type="button" aria-live="polite">
+        <span class="focus-card" id="focusCard">
+          <span class="focus-photo" id="focusPhoto"></span>
+          <span class="focus-word" id="focusWord"></span>
+          <span class="focus-cue" id="focusCue">Tap for the next one</span>
         </span>
       </button>
       <div class="grid grid--pics" id="fruitGrid"></div>
@@ -320,6 +333,6 @@
   </div>
 </div>
 
-<script src="app.js?v=26"></script>
+<script src="app.js?v=27"></script>
 </body>
 </html>

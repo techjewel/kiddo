@@ -260,6 +260,126 @@ button {
 .shuffle-btn:active { transform: scale(0.93); }
 .shuffle-btn .shuffle-ico { font-size: 14px; }
 
+/* ---------- "What's that?" one-at-a-time mode -----------------
+   Same shelf, one big picture. Parent asks; a tap brings the next.
+   The grid stays in the DOM (just hidden) so Shuffle's order and
+   the seen-ticks survive a round-trip in and out.
+   ------------------------------------------------------------ */
+
+#screen-pictures.is-focus .showcase--pic,
+#screen-pictures.is-focus .grid--pics,
+#screen-pictures.is-focus #shuffleBtn {
+  display: none;
+}
+
+#screen-pictures.is-focus #focusStage {
+  display: flex;
+}
+
+#screen-pictures.is-focus #focusBtn {
+  background: var(--c, #5B8DEF);
+  color: #fff;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28),
+              0 2px 6px rgba(33, 37, 44, 0.18);
+}
+
+.focus-stage {
+  display: none;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  width: 100%;
+  max-width: 520px;
+  min-height: min(62vh, 520px);
+  margin: 4px auto 12px;
+  padding: 18px 16px 22px;
+  border: 0;
+  border-radius: 24px;
+  text-align: center;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  box-shadow:
+    inset 0 0 0 1px rgba(33, 37, 44, 0.08),
+    0 6px 20px rgba(33, 37, 44, 0.12);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.focus-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  will-change: transform, opacity;
+}
+
+.focus-card.is-leave {
+  animation: focus-leave 0.28s var(--ease-pop) forwards;
+}
+.focus-card.is-hold { opacity: 0; }
+.focus-card.is-enter {
+  animation: focus-enter 0.34s var(--ease-pop) forwards;
+}
+
+@keyframes focus-leave {
+  0%   { transform: translateX(0) scale(1); opacity: 1; }
+  100% { transform: translateX(-18%) scale(0.92); opacity: 0; }
+}
+@keyframes focus-enter {
+  0%   { transform: translateX(22%) scale(0.9); opacity: 0; }
+  100% { transform: translateX(0) scale(1); opacity: 1; }
+}
+
+.focus-photo {
+  display: block;
+  width: min(72vw, 320px);
+  height: min(72vw, 320px);
+  max-width: 100%;
+}
+
+.focus-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 28px;
+  background: #E7EBF0;
+  box-shadow: 0 8px 24px rgba(33, 37, 44, 0.16);
+}
+
+.focus-img.is-fallback {
+  display: grid;
+  place-items: center;
+  background: #F3F5F8;
+  font-family: var(--font-emoji);
+  font-size: clamp(72px, 22vw, 140px);
+}
+
+.focus-word {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(28px, 8vw, 42px);
+  line-height: 1.1;
+  color: var(--c, var(--m4));
+  letter-spacing: 0.01em;
+}
+
+.focus-cue {
+  font-family: var(--font-letter);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.focus-stage:active .focus-card:not(.is-leave):not(.is-enter) {
+  transform: scale(0.97);
+}
+
+
 /* The tiles land rather than teleport, so a child can see that the
    same pictures moved and none of them went away. Each one waits its
    own moment — `--settle`, set on the tile as it is dealt out — and
@@ -1554,6 +1674,12 @@ button {
 
   /* Shuffled tiles are simply already in their new places. */
   .grid.is-settling .magnet { animation: none !important; }
+
+  /* Focus mode: no slide — the next picture is simply there. */
+  .focus-card.is-leave,
+  .focus-card.is-enter { animation: none !important; }
+  .focus-stage:active .focus-card { transform: none; }
+
 
   /* The ring still has to land — it's the answer, not decoration. It
      just arrives already there, and stops beating. */

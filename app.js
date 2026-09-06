@@ -1928,18 +1928,25 @@ function renderPicture(item) {
   paintPicture(item);
 }
 
+/* Name, then the animal itself. Where a real recording exists it does the
+   second half — a spoken "meow" on top of an actual cat is a worse cat.
+   Mouse and snake have no recording worth having and say their noise
+   instead, which is why the written one is still there. A peacock and
+   an eagle stay name-only — those cries are not for a three-year-old.
+
+   Shared by the shelf panel and the "what's that?" focus stage so a
+   tap in either place makes the same sound. */
+function sayPicture(item) {
+  stopSound();
+  if (hasSound(item.word)) speak(`${item.word}.`, { then: () => playAnimal(item.word) });
+  else speak(item.say);
+}
+
 function showPicture(item) {
   markSeen(item);
   renderPicture(item);
   bump(picView);
-  stopSound();
-  /* Name, then the animal itself. Where a real recording exists it does the
-     second half — a spoken "meow" on top of an actual cat is a worse cat.
-     Mouse and snake have no recording worth having and say their noise
-     instead, which is why the written one is still there. A peacock and
-     an eagle stay name-only — those cries are not for a three-year-old. */
-  if (hasSound(item.word)) speak(`${item.word}.`, { then: () => playAnimal(item.word) });
-  else speak(item.say);
+  sayPicture(item);
 }
 
 /* ---------- Shapes -------------------------------------------
@@ -2407,6 +2414,154 @@ el('shuffleBtn').addEventListener('click', () => {
   shuffleShelf(currentPicGroup());
 });
 
+/* ---------- "What's that?" focus mode ------------------------
+   One large photograph from the open shelf. Parent asks "what's
+   that?"; a tap speaks the next one and slides it in. The shelf
+   under it stays built and in whatever order Shuffle left it —
+   focus reads the tiles, not the written list — so coming back
+   to the grid finds everything where it was.
+
+   At the end of the shelf it wraps to the first picture again:
+   a three-year-old looping the fruit shelf is the point, not a
+   "you finished" screen. Leaving the Pictures tab, or tapping
+   "Shelf" on the same button that opened it, puts the grid back.
+   -------------------------------------------------------------- */
+
+let focusOn = false;
+let focusIndex = 0;
+let focusBusy = false;
+
+const focusStage = el('focusStage');
+const focusCard = el('focusCard');
+const focusBtn = el('focusBtn');
+const picsScreen = el('screen-pictures');
+
+/* Tile order on the open shelf, which is what Shuffle rearranges.
+   Building first keeps a never-opened shelf from arriving empty. */
+function focusList() {
+  const group = currentPicGroup();
+  buildPictureGrid(group);
+  const tiles = [...el(PICTURE_GROUPS[group].grid).children];
+  if (tiles.length) return tiles.map((t) => byId.get(t.dataset.id));
+  return PICTURE_GROUPS[group].list;
+}
+
+function paintFocus(item) {
+  const photo = makePhoto(item, 'focus-img');
+  /* The focus stage shows one picture at a time — no reason to wait
+     for a scroll that never comes. */
+  if (photo.loading) photo.loading = 'eager';
+  el('focusPhoto').replaceChildren(photo);
+  el('focusWord').textContent = item.word;
+  focusStage.style.setProperty('--c', colorFor(item));
+}
+
+function renderFocusChrome() {
+  focusBtn.setAttribute('aria-pressed', String(focusOn));
+  focusBtn.title = focusOn ? 'Back to the shelf' : 'One picture at a time';
+  el('focusBtnIco').textContent = focusOn ? '⊞' : '🔎';
+  el('focusBtnLabel').textContent = focusOn ? 'Shelf' : "What's that?";
+  picsScreen.classList.toggle('is-focus', focusOn);
+  focusStage.classList.toggle('is-hidden', !focusOn);
+  if (focusOn) {
+    el('picsHint').textContent = "What's that? Tap for the next one.";
+  } else {
+    el('picsHint').textContent = PICTURE_GROUPS[currentPicGroup()].hint;
+  }
+}
+
+function showFocusItem(item, { animate = false } = {}) {
+  markSeen(item);
+  state.pictureItem = item;
+  paintPicture(item);
+  paintFocus(item);
+  sayPicture(item);
+
+  if (!animate) {
+    focusCard.classList.remove('is-leave', 'is-enter');
+    return;
+  }
+
+  const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (calm) {
+    focusCard.classList.remove('is-leave', 'is-enter');
+    return;
+  }
+
+  focusCard.classList.remove('is-leave', 'is-enter');
+  void focusCard.offsetWidth;
+  focusCard.classList.add('is-enter');
+  focusCard.addEventListener('animationend', () => {
+    focusCard.classList.remove('is-enter');
+  }, { once: true });
+}
+
+function enterFocusMode() {
+  const list = focusList();
+  if (!list.length) return;
+  focusOn = true;
+  focusBusy = false;
+  let i = list.findIndex((it) => state.pictureItem && it.id === state.pictureItem.id);
+  if (i < 0) i = 0;
+  focusIndex = i;
+  renderFocusChrome();
+  showFocusItem(list[focusIndex], { animate: false });
+  el('board').scrollTop = 0;
+}
+
+function exitFocusMode() {
+  if (!focusOn) return;
+  focusOn = false;
+  focusBusy = false;
+  focusCard.classList.remove('is-leave', 'is-enter');
+  renderFocusChrome();
+  if (state.pictureItem) paintPicture(state.pictureItem);
+}
+
+function advanceFocus() {
+  if (!focusOn || focusBusy) return;
+  const list = focusList();
+  if (!list.length) return;
+
+  sfx.pop();
+  focusIndex = (focusIndex + 1) % list.length; /* wrap to the start */
+  const next = list[focusIndex];
+  const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (calm) {
+    showFocusItem(next, { animate: false });
+    return;
+  }
+
+  /* Leave the current picture, swap while it is gone, then enter the
+     next — so the new photo never flashes at full opacity mid-way. */
+  focusBusy = true;
+  focusCard.classList.remove('is-enter');
+  focusCard.classList.add('is-leave');
+  focusCard.addEventListener('animationend', () => {
+    focusCard.classList.remove('is-leave');
+    focusCard.classList.add('is-hold');
+    showFocusItem(next, { animate: false });
+    void focusCard.offsetWidth;
+    focusCard.classList.remove('is-hold');
+    focusCard.classList.add('is-enter');
+    focusCard.addEventListener('animationend', () => {
+      focusCard.classList.remove('is-enter');
+      focusBusy = false;
+    }, { once: true });
+  }, { once: true });
+}
+
+focusBtn.addEventListener('click', () => {
+  sfx.pop();
+  if (focusOn) exitFocusMode();
+  else enterFocusMode();
+});
+
+focusStage.addEventListener('click', () => {
+  advanceFocus();
+});
+
 /* ---------- The language switch ------------------------------
    One switch, and one current language for the whole board. It appears
    on the three screens that have more than English to say — letters,
@@ -2679,10 +2834,19 @@ function showPictureGroup(group) {
     el(g.grid).classList.toggle('is-hidden', name !== group);
   });
   const chosen = PICTURE_GROUPS[group];
-  el('picsHint').textContent = chosen.hint;
   /* Don't leave a cat sitting on the fruit screen. */
   if (!state.pictureItem || state.pictureItem.group !== group) {
     renderPicture(chosen.list[0]);
+  }
+  if (focusOn) {
+    /* New shelf, same mode: start at the first tile of this shelf. */
+    const list = focusList();
+    focusIndex = 0;
+    focusBusy = false;
+    renderFocusChrome();
+    if (list.length) showFocusItem(list[0], { animate: false });
+  } else {
+    el('picsHint').textContent = chosen.hint;
   }
   el('board').scrollTop = 0;
 }
@@ -2727,6 +2891,10 @@ function showScreen(name) {
     t.classList.toggle('is-on', t.dataset.screen === name);
   });
   el('board').scrollTop = 0;
+
+  /* Leaving Pictures drops focus mode so Letters/Numbers/etc. never
+     inherit a half-hidden shelf. Coming back starts on the grid. */
+  if (name !== 'pictures') exitFocusMode();
 
   /* The door only wears a colour while he's on the colours screen. */
   appEl.classList.toggle('is-tinted', name === 'colors' && !!state.colorItem);
