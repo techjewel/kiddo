@@ -368,6 +368,14 @@ button {
   letter-spacing: 0.01em;
 }
 
+.focus-word.sc-word--bn {
+  font-family: var(--font-bangla);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+
+
 .focus-cue {
   font-family: var(--font-letter);
   font-weight: 700;
@@ -490,6 +498,16 @@ button {
   color: color-mix(in srgb, var(--c) 100%, black 26%);
   text-shadow: none;
 }
+
+/* Bangla caption under a vegetable photo — Baloo 2, a touch more
+   line box for matras, same weight as the Latin caption beside it. */
+.magnet-cap--bn {
+  font-family: var(--font-bangla);
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
 
 .magnet--pic.is-known::after,
 .magnet--shape.is-known::after {
@@ -859,6 +877,7 @@ button {
    line box, because the matra above and the tail below both need
    somewhere to go. */
 .showcase--body .sc-word--bn { line-height: 1.45; min-height: 40px; }
+.showcase--pic .sc-word--bn { line-height: 1.4; }
 
 /* Each side of the language switch is written in its own language, so
    the Bangla one needs the Bangla face — a button labelled "Bangla" in

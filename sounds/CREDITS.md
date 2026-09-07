@@ -745,6 +745,77 @@ License: CC0
 Source: https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%AA%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%B0.wav
 Source: https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%86%E0%A6%99%E0%A7%81%E0%A6%B2.wav
 
+## Bangla vegetables
+The twelve kitchen-vegetable words in `sounds/bangla/veg/` are Lingua Libre
+recordings from Wikimedia Commons, cut the same way as the body parts:
+trimmed to the word, a breath of silence at each end, levelled to the same
+loudness. All CC0 (public domain).
+
+Ten are read by **Titodutta**, the same speaker as most of the numbers and
+body parts. Lingua Libre has no শসা or মরিচ from him, so *cucumber* and
+*green chili* are read by **Yahya** — the smallest seam available, and it
+falls on those two words rather than on the shelf as a whole.
+
+**বেগুন** (Eggplant) — `bangla/veg/eggplant.m4a`  
+From *LL-Q9610 (ben)-Titodutta-বেগুন.wav* by Titodutta  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%AC%E0%A7%87%E0%A6%97%E0%A7%81%E0%A6%A8.wav
+
+**ঢেঁড়স** (Okra) — `bangla/veg/okra.m4a`  
+From *LL-Q9610 (ben)-Titodutta-ঢেঁড়স.wav* by Titodutta  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%A2%E0%A7%87%E0%A6%81%E0%A6%A1%E0%A6%BC%E0%A6%B8.wav
+
+**আলু** (Potato) — `bangla/veg/potato.m4a`  
+From *LL-Q9610 (ben)-Titodutta-আলু.wav* by Titodutta  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%86%E0%A6%B2%E0%A7%81.wav
+
+**ফুলকপি** (Cauliflower) — `bangla/veg/cauliflower.m4a`  
+From *LL-Q9610 (ben)-Titodutta-ফুলকপি.wav* by Titodutta  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%AB%E0%A7%81%E0%A6%B2%E0%A6%95%E0%A6%AA%E0%A6%BF.wav
+
+**বাঁধাকপি** (Cabbage) — `bangla/veg/cabbage.m4a`  
+From *LL-Q9610 (ben)-Titodutta-বাঁধাকপি.wav* by Titodutta  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%AC%E0%A6%BE%E0%A6%81%E0%A6%A7%E0%A6%BE%E0%A6%95%E0%A6%AA%E0%A6%BF.wav
+
+**শসা** (Cucumber) — `bangla/veg/cucumber.m4a`  
+From *LL-Q9610 (ben)-Yahya-শসা.wav* by Yahya  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Yahya-%E0%A6%B6%E0%A6%B8%E0%A6%BE.wav
+
+**গাজর** (Carrot) — `bangla/veg/carrot.m4a`  
+From *LL-Q9610 (ben)-Titodutta-গাজর.wav* by Titodutta  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%97%E0%A6%BE%E0%A6%9C%E0%A6%B0.wav
+
+**মুলা** (Radish) — `bangla/veg/radish.m4a`  
+From *LL-Q9610 (ben)-Titodutta-মূলা.wav* by Titodutta — recording labelled মূলা; the board shows মুলা  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%AE%E0%A7%82%E0%A6%B2%E0%A6%BE.wav
+
+**লাউ** (Bottle gourd) — `bangla/veg/bottle-gourd.m4a`  
+From *LL-Q9610 (ben)-Titodutta-লাউ.wav* by Titodutta  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%B2%E0%A6%BE%E0%A6%89.wav
+
+**করলা** (Bitter gourd) — `bangla/veg/bitter-gourd.m4a`  
+From *LL-Q9610 (ben)-Titodutta-করলা.wav* by Titodutta  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%95%E0%A6%B0%E0%A6%B2%E0%A6%BE.wav
+
+**কাঁচা মরিচ** (Green chili) — `bangla/veg/green-chili.m4a`  
+From *LL-Q9610 (ben)-Yahya-মরিচ.wav* by Yahya — clip says মরিচ; the board shows কাঁচা মরিচ  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Yahya-%E0%A6%AE%E0%A6%B0%E0%A6%BF%E0%A6%9A.wav
+
+**শিম** (Bean) — `bangla/veg/bean.m4a`  
+From *LL-Q9610 (ben)-Titodutta-শিম.wav* by Titodutta  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%B6%E0%A6%BF%E0%A6%AE.wav
+
 ## Arabic letters
 The 28 letter names in `sounds/arabic/letters/` are split from one
 Wikimedia Commons recitation of the alphabet, أ to ي, in dictionary

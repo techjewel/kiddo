@@ -203,21 +203,23 @@ const FRUITS = [
   ['Lychee',       '🔴'],
 ];
 
-/* Bangladeshi kitchen vegetables, named in English so the board stays
-   one language. Append-only if this list grows — same colour rule as fruit. */
+/* Bangladeshi kitchen vegetables. English name + emoji stay the photo
+   slug and the game's ask-word; the third entry is the Bangla kitchen
+   name shown and spoken when the board is set to বাংলা. Append-only if
+   this list grows — same colour rule as fruit. */
 const VEGETABLES = [
-  ['Eggplant',       '🍆'],
-  ['Okra',           '🟢'],
-  ['Potato',         '🥔'],
-  ['Cauliflower',    '🤍'],
-  ['Cabbage',        '🥬'],
-  ['Cucumber',       '🥒'],
-  ['Carrot',         '🥕'],
-  ['Radish',         '⚪'],
-  ['Bottle Gourd',   '🍈'],
-  ['Bitter Gourd',   '🟢'],
-  ['Green Chili',    '🌶️'],
-  ['Bean',           '🫛'],
+  ['Eggplant',       '🍆', { bn: 'বেগুন' }],
+  ['Okra',           '🟢', { bn: 'ঢেঁড়স' }],
+  ['Potato',         '🥔', { bn: 'আলু' }],
+  ['Cauliflower',    '🤍', { bn: 'ফুলকপি' }],
+  ['Cabbage',        '🥬', { bn: 'বাঁধাকপি' }],
+  ['Cucumber',       '🥒', { bn: 'শসা' }],
+  ['Carrot',         '🥕', { bn: 'গাজর' }],
+  ['Radish',         '⚪', { bn: 'মুলা' }],
+  ['Bottle Gourd',   '🍈', { bn: 'লাউ' }],
+  ['Bitter Gourd',   '🟢', { bn: 'করলা' }],
+  ['Green Chili',    '🌶️', { bn: 'কাঁচা মরিচ' }],
+  ['Bean',           '🫛', { bn: 'শিম' }],
 ];
 
 /* Everyday kids' clothes, English names. Same board language as fruit
@@ -706,8 +708,9 @@ const LANGS = {
   /* The one language here that is spoken from files rather than by the
      browser. Almost no device ships a bn voice, and one handed সাত
      either says nothing or guesses in English — so all 86 letter clips,
-     20 numbers and 18 body parts are recordings of a real person, the
-     same voice on every device, offline. See sounds/CREDITS.md.
+     20 numbers, 18 body parts and the kitchen vegetables are recordings
+     of a real person, the same voice on every device, offline. See
+     sounds/CREDITS.md.
 
      Nothing on this screen is ever labelled in English, the hints
      included: a বর্ণ with an English caption underneath is a screen
@@ -735,11 +738,14 @@ const LANGS = {
       letterWord: (it) => (it.word ? `sounds/bangla/letters/${it.n}-word.m4a` : null),
       number: (it) => `sounds/bangla/${it.n}.m4a`,
       body: (it) => `sounds/bangla/body/${it.key}.m4a`,
+      /* Kitchen vegetables: slug matches the photo filename. */
+      veg: (it) => `sounds/bangla/veg/${it.slug}.m4a`,
     },
     hint: {
       letters: 'একটি বর্ণে টোকা দাও।',
       numbers: 'একটি সংখ্যায় টোকা দাও।',
       body: 'ছেলেটিকে টোকা দাও — তার নাক, তার হাত, তার পায়ের আঙুল।',
+      veg: 'একটি সবজিতে টোকা দাও।',
     },
   },
 
@@ -936,21 +942,41 @@ NUMBERS_BY_LANG.en.forEach((it) => {
    reason a shape says "Triangle" and leaves the corner count on the
    page. */
 function pictureItems(rows, group, prefix, { sayName = false } = {}) {
-  return rows.map(([name, emoji, line], i) => ({
-    kind: 'picture',
-    group,
-    id: prefix + i,
-    index: i,
-    face: emoji,
-    caption: name,
-    word: name,
-    emoji,
-    slug: name.toLowerCase().replace(/\s+/g, '-'),
-    line: line || '',
-    say: line && !sayName ? `${name}. ${line}` : `${name}.`,
-    askPrefix: 'Find the ',
-    askFace: name.toLowerCase(),
-  }));
+  return rows.map((row, i) => {
+    const name = row[0];
+    const emoji = row[1];
+    /* A plain string in the third slot is the spoken/printed line
+       (animals, jobs). An object there is extra language names — the
+       vegetables carry `{ bn: '...' }` so বাংলা can label the shelf
+       without inventing a second English sentence. */
+    let line = '';
+    let names;
+    if (row[2] && typeof row[2] === 'object') {
+      names = { en: name, ...row[2] };
+    } else {
+      line = row[2] || '';
+      if (row[3] && typeof row[3] === 'object') {
+        names = { en: name, ...row[3] };
+      }
+    }
+    const item = {
+      kind: 'picture',
+      group,
+      id: prefix + i,
+      index: i,
+      face: emoji,
+      caption: name,
+      word: name,
+      emoji,
+      slug: name.toLowerCase().replace(/\s+/g, '-'),
+      line,
+      say: line && !sayName ? `${name}. ${line}` : `${name}.`,
+      askPrefix: 'Find the ',
+      askFace: name.toLowerCase(),
+    };
+    if (names) item.names = names;
+    return item;
+  });
 }
 
 const fruitItems = pictureItems(FRUITS, 'fruit', 'F');
@@ -1419,6 +1445,24 @@ function bodyName(item) {
   return item.names[curLang()] || item.word;
 }
 
+/* What a picture tile is called right now. Vegetables carry Bangla
+   names; every other shelf stays English until it grows its own.
+   The game still asks in English via `item.word`. */
+function pictureName(item) {
+  if (item.names && curLang() === 'bn' && item.names.bn) return item.names.bn;
+  return item.word;
+}
+
+function pictureUsesBangla(item) {
+  return !!(item.names && curLang() === 'bn' && item.names.bn);
+}
+
+function pictureHint(group) {
+  const L = cur();
+  if (group === 'veg' && L.hint && L.hint.veg) return L.hint.veg;
+  return PICTURE_GROUPS[group].hint;
+}
+
 /* ---------- Drawing a shape ----------------------------------
    One SVG builder for both places a shape appears. On the grid it's
    just the filled face. In the panel it also gets an outline that
@@ -1608,8 +1652,10 @@ function makeMagnet(item, { known = false, caption = false, quiz = false } = {})
     btn.appendChild(makePhoto(item, 'magnet-photo'));
     if (caption) {
       const cap = document.createElement('span');
-      cap.className = 'magnet-cap';
-      cap.textContent = item.caption;
+      const bn = pictureUsesBangla(item);
+      cap.className = 'magnet-cap' + (bn ? ' magnet-cap--bn' : '');
+      cap.textContent = pictureName(item);
+      if (bn) cap.lang = 'bn';
       btn.appendChild(cap);
     }
   } else {
@@ -1915,12 +1961,17 @@ function sayLetter(item) {
 function paintPicture(item) {
   picView.style.setProperty('--c', colorFor(item));
   el('picEmoji').replaceChildren(makePhoto(item, 'sc-photo'));
-  el('picWord').textContent = item.word;
+  const word = el('picWord');
+  const bn = pictureUsesBangla(item);
+  word.textContent = pictureName(item);
+  word.classList.toggle('sc-word--bn', bn);
+  word.lang = bn ? 'bn' : '';
   /* No sentence means no empty line under the name — the word gets the
-     panel to itself. */
+     panel to itself. Bangla veg names have no English sentence under. */
   const line = el('picLine');
-  line.textContent = item.line;
-  line.classList.toggle('is-hidden', !item.line);
+  const showLine = item.line && !bn;
+  line.textContent = showLine ? item.line : '';
+  line.classList.toggle('is-hidden', !showLine);
 }
 
 function renderPicture(item) {
@@ -1938,6 +1989,17 @@ function renderPicture(item) {
    tap in either place makes the same sound. */
 function sayPicture(item) {
   stopSound();
+  /* Vegetables in বাংলা play a recording — devices almost never have a
+     bn voice, the same reason the body and the numbers use files. */
+  const code = curLang();
+  const L = LANGS[code];
+  if (item.group === 'veg' && code === 'bn' && L.clips && L.clips.veg) {
+    const src = L.clips.veg(item);
+    if (src) {
+      playClip(`bnveg-${item.slug}`, src, () => speak(item.say));
+      return;
+    }
+  }
   if (hasSound(item.word)) speak(`${item.word}.`, { then: () => playAnimal(item.word) });
   else speak(item.say);
 }
@@ -2452,7 +2514,11 @@ function paintFocus(item) {
      for a scroll that never comes. */
   if (photo.loading) photo.loading = 'eager';
   el('focusPhoto').replaceChildren(photo);
-  el('focusWord').textContent = item.word;
+  const word = el('focusWord');
+  const bn = pictureUsesBangla(item);
+  word.textContent = pictureName(item);
+  word.classList.toggle('sc-word--bn', bn);
+  word.lang = bn ? 'bn' : '';
   focusStage.style.setProperty('--c', colorFor(item));
 }
 
@@ -2466,7 +2532,7 @@ function renderFocusChrome() {
   if (focusOn) {
     el('picsHint').textContent = "What's that? Tap for the next one.";
   } else {
-    el('picsHint').textContent = PICTURE_GROUPS[currentPicGroup()].hint;
+    el('picsHint').textContent = pictureHint(currentPicGroup());
   }
 }
 
@@ -2660,6 +2726,24 @@ function applyLang() {
   renderLetter(letter || letters[0]);
   renderNumber(number || numbers[0]);
   renderBody(state.bodyItem);
+
+  /* Vegetable magnets were built once with English captions. Clear the
+     veg shelf from the cache and rebuild it so বাংলা / English flip the
+     captions; leave fruit, clothes and the rest alone. */
+  if (builtShelves.has('veg')) {
+    builtShelves.delete('veg');
+    buildPictureGrid('veg');
+  }
+  if (state.pictureItem && state.pictureItem.group === 'veg') {
+    paintPicture(state.pictureItem);
+    if (typeof focusOn !== 'undefined' && focusOn) paintFocus(state.pictureItem);
+  }
+  /* Hint on the pictures screen may be the Bangla veg one. */
+  if (!document.getElementById('screen-pictures').classList.contains('is-hidden')
+      && !(typeof focusOn !== 'undefined' && focusOn)) {
+    el('picsHint').textContent = pictureHint(currentPicGroup());
+    el('picsHint').lang = curLang() === 'bn' && currentPicGroup() === 'veg' ? 'bn' : '';
+  }
 }
 
 /* Voices load asynchronously, and on some browsers the list is empty
@@ -2846,7 +2930,8 @@ function showPictureGroup(group) {
     renderFocusChrome();
     if (list.length) showFocusItem(list[0], { animate: false });
   } else {
-    el('picsHint').textContent = chosen.hint;
+    el('picsHint').textContent = pictureHint(group);
+    el('picsHint').lang = (curLang() === 'bn' && group === 'veg') ? 'bn' : '';
   }
   el('board').scrollTop = 0;
 }
@@ -3059,6 +3144,12 @@ function mediaUrls() {
       const u = L.clips.body && L.clips.body(it);
       if (u) urls.push(u);
     });
+    if (L.clips.veg) {
+      vegItems.forEach((it) => {
+        const u = L.clips.veg(it);
+        if (u) urls.push(u);
+      });
+    }
   });
   return urls;
 }
