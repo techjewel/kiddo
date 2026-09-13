@@ -2549,9 +2549,9 @@ function paintFocus(item) {
 
 function renderFocusChrome() {
   focusBtn.setAttribute('aria-pressed', String(focusOn));
+  focusBtn.setAttribute('aria-label', focusOn ? 'Back to the shelf' : 'One picture at a time');
   focusBtn.title = focusOn ? 'Back to the shelf' : 'One picture at a time';
   el('focusBtnIco').textContent = focusOn ? '⊞' : '🔎';
-  el('focusBtnLabel').textContent = focusOn ? 'Shelf' : "What's that?";
   picsScreen.classList.toggle('is-focus', focusOn);
   focusStage.classList.toggle('is-hidden', !focusOn);
   if (focusOn) {
