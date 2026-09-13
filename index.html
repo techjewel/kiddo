@@ -56,7 +56,11 @@
      index.html with a cached old app.js, and a screen the old script has
      never heard of just stays hidden — a blank board, no error. Changing
      the URL is the only thing a web-clip on an iPad reliably notices. -->
+<<<<<<< HEAD
 <link rel="stylesheet" href="styles.css?v=30">
+=======
+<link rel="stylesheet" href="styles.css?v=31">
+>>>>>>> 6f37c04 (Convert Pictures toolbar to icon-only design)
 </head>
 <body>
 
@@ -123,30 +127,24 @@
     <section class="screen is-hidden" id="screen-pictures" aria-label="Fruits, vegetables, clothes, vehicles, animals, birds, flowers, things at home and jobs">
       <div class="pics-switch">
         <div class="segmented segmented--pics" role="group" aria-label="What to look at">
-          <button class="seg is-on" data-group="fruit">Fruits</button>
-          <button class="seg" data-group="veg">Vegetables</button>
-          <button class="seg" data-group="clothes">Clothes</button>
-          <button class="seg" data-group="vehicle">Vehicles</button>
-          <button class="seg" data-group="animal">Animals</button>
-          <button class="seg" data-group="bird">Birds</button>
-          <button class="seg" data-group="flower">Flowers</button>
-          <button class="seg" data-group="home">At home</button>
-          <button class="seg" data-group="job">Jobs</button>
+          <button class="seg is-on" data-group="fruit" aria-label="Fruits" title="Fruits"><span aria-hidden="true">🍎</span></button>
+          <button class="seg" data-group="veg" aria-label="Vegetables" title="Vegetables"><span aria-hidden="true">🥕</span></button>
+          <button class="seg" data-group="clothes" aria-label="Clothes" title="Clothes"><span aria-hidden="true">👕</span></button>
+          <button class="seg" data-group="vehicle" aria-label="Vehicles" title="Vehicles"><span aria-hidden="true">🚗</span></button>
+          <button class="seg" data-group="animal" aria-label="Animals" title="Animals"><span aria-hidden="true">🐱</span></button>
+          <button class="seg" data-group="bird" aria-label="Birds" title="Birds"><span aria-hidden="true">🐦</span></button>
+          <button class="seg" data-group="flower" aria-label="Flowers" title="Flowers"><span aria-hidden="true">🌸</span></button>
+          <button class="seg" data-group="home" aria-label="At home" title="At home"><span aria-hidden="true">🏠</span></button>
+          <button class="seg" data-group="job" aria-label="Jobs" title="Jobs"><span aria-hidden="true">👷</span></button>
         </div>
         <p class="screen-hint" id="picsHint">Tap a fruit to hear its name.</p>
         <!-- A shelf never moves, so it gets learned as an order: the
              apple is first and top-left every single time, and after a
              fortnight he is pointing at a place rather than at a
              picture. This moves the furniture. -->
-        <button class="shuffle-btn" id="shuffleBtn" title="Mix up the pictures">
-          <span class="shuffle-ico" aria-hidden="true">🔀</span>
-          <span>Shuffle</span>
-        </button>
+        <button class="shuffle-btn" id="shuffleBtn" aria-label="Mix up the pictures" title="Mix up the pictures"><span aria-hidden="true">🔀</span></button>
         <!-- One picture at a time: parent asks "what's that?", tap for the next. -->
-        <button class="shuffle-btn" id="focusBtn" aria-pressed="false" title="One picture at a time">
-          <span class="shuffle-ico" aria-hidden="true" id="focusBtnIco">🔎</span>
-          <span id="focusBtnLabel">What's that?</span>
-        </button>
+        <button class="shuffle-btn" id="focusBtn" aria-pressed="false" aria-label="One picture at a time" title="One picture at a time"><span aria-hidden="true" id="focusBtnIco">🔎</span></button>
       </div>
       <button class="showcase showcase--pic" id="picView" aria-live="polite">
         <span class="sc-pic" id="picEmoji">🍎</span>
@@ -335,6 +333,10 @@
   </div>
 </div>
 
+<<<<<<< HEAD
 <script src="app.js?v=30"></script>
+=======
+<script src="app.js?v=31"></script>
+>>>>>>> 6f37c04 (Convert Pictures toolbar to icon-only design)
 </body>
 </html>
