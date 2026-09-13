@@ -1011,5 +1011,133 @@
   "license": "CC BY-SA 3.0",
   "author": "B.navez",
   "page": "https://commons.wikimedia.org/wiki/File:Litchi_chinensis_fruits.JPG"
+ },
+ {
+  "slug": "car",
+  "article": "Car",
+  "file": "2005_Toyota_Corolla_1.4_T3.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Executive4ZZ",
+  "page": "https://commons.wikimedia.org/wiki/File:2005_Toyota_Corolla_1.4_T3.jpg"
+ },
+ {
+  "slug": "bus",
+  "article": "Bus",
+  "file": "LTZ1328-19-20241030-160332.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "SIA321",
+  "page": "https://commons.wikimedia.org/wiki/File:LTZ1328-19-20241030-160332.jpg"
+ },
+ {
+  "slug": "truck",
+  "article": "Truck",
+  "file": "2001_Ford_F-250_Super_Duty_XL_regular_cab_flatbed,_front_left,_05-17-2025.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "MercurySable99",
+  "page": "https://commons.wikimedia.org/wiki/File:2001_Ford_F-250_Super_Duty_XL_regular_cab_flatbed,_front_left,_05-17-2025.jpg"
+ },
+ {
+  "slug": "van",
+  "article": "Van",
+  "file": "2018_Ford_Transit_Custom_300_Base_2.0_facelift.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Vauxford",
+  "page": "https://commons.wikimedia.org/wiki/File:2018_Ford_Transit_Custom_300_Base_2.0_facelift.jpg"
+ },
+ {
+  "slug": "bike",
+  "article": "Bicycle",
+  "file": "Left_side_of_Flying_Pigeon.jpg",
+  "license": "CC BY 2.0",
+  "author": "Pölkkyposkisolisti",
+  "page": "https://commons.wikimedia.org/wiki/File:Left_side_of_Flying_Pigeon.jpg"
+ },
+ {
+  "slug": "motorbike",
+  "article": "Motorcycle",
+  "file": "Istockphoto-114285168-612x612.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Devanand.j",
+  "page": "https://commons.wikimedia.org/wiki/File:Istockphoto-114285168-612x612.jpg"
+ },
+ {
+  "slug": "rickshaw",
+  "article": "Auto rickshaw",
+  "file": "Bajaj_auto-rickshaw_in_Sri_Lanka.jpg",
+  "license": "CC BY-SA 2.0",
+  "author": "Mr.choppers",
+  "page": "https://commons.wikimedia.org/wiki/File:Bajaj_auto-rickshaw_in_Sri_Lanka.jpg"
+ },
+ {
+  "slug": "train",
+  "article": "Train",
+  "file": "Поезд_на_фоне_горы_Шатрище._Воронежская_область.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Алексей Задонский",
+  "page": "https://commons.wikimedia.org/wiki/File:Поезд_на_фоне_горы_Шатрище._Воронежская_область.jpg"
+ },
+ {
+  "slug": "plane",
+  "article": "Airplane",
+  "file": "United_Airlines_Boeing_777-200_Meulemans.jpg",
+  "license": "GFDL",
+  "author": "Russavia",
+  "page": "https://commons.wikimedia.org/wiki/File:United_Airlines_Boeing_777-200_Meulemans.jpg"
+ },
+ {
+  "slug": "boat",
+  "article": "Sailboat",
+  "file": "Sloop_Example.svg",
+  "license": "CC BY-SA 3.0",
+  "author": "Malyszkz",
+  "page": "https://commons.wikimedia.org/wiki/File:Sloop_Example.svg"
+ },
+ {
+  "slug": "ship",
+  "article": "Cargo ship",
+  "file": "Cargo_Ship_Puerto_Cortes.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Luis Alfredo Romero",
+  "page": "https://commons.wikimedia.org/wiki/File:Cargo_Ship_Puerto_Cortes.jpg"
+ },
+ {
+  "slug": "helicopter",
+  "article": "Helicopter",
+  "file": "VH-SUF_Taking_Off.jpg",
+  "license": "CC BY 4.0",
+  "author": "Fly45yt",
+  "page": "https://commons.wikimedia.org/wiki/File:VH-SUF_Taking_Off.jpg"
+ },
+ {
+  "slug": "ambulance",
+  "article": "Ambulance",
+  "file": "Stockholm,_ambulans,_2014,_21.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "AleWi",
+  "page": "https://commons.wikimedia.org/wiki/File:Stockholm,_ambulans,_2014,_21.jpg"
+ },
+ {
+  "slug": "fire-truck",
+  "article": "Fire engine",
+  "file": "Dublin_Fire_Brigade_Pump_Ladder_D32.jpg",
+  "license": "CC BY-SA 2.0",
+  "author": "廣九直通車",
+  "page": "https://commons.wikimedia.org/wiki/File:Dublin_Fire_Brigade_Pump_Ladder_D32.jpg"
+ },
+ {
+  "slug": "tractor",
+  "article": "Tractor",
+  "file": "Ford_8N.jpg",
+  "license": "CC BY 2.0",
+  "author": "MarkusHagenlocher",
+  "page": "https://commons.wikimedia.org/wiki/File:Ford_8N.jpg"
+ },
+ {
+  "slug": "scooter",
+  "article": "Kick scooter",
+  "file": "Kickboards_Jahrhunderthalle_Probe_Zauberflöte_04-09-03.JPG",
+  "license": "CC BY-SA 3.0",
+  "author": "Maschinenjunge",
+  "page": "https://commons.wikimedia.org/wiki/File:Kickboards_Jahrhunderthalle_Probe_Zauberflöte_04-09-03.JPG"
  }
 ]
