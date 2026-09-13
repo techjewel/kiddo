@@ -1704,6 +1704,7 @@ const numbersGrid = el('numbersGrid');
 const fruitGrid = el('fruitGrid');
 const vegGrid = el('vegGrid');
 const clothesGrid = el('clothesGrid');
+const vehicleGrid = el('vehicleGrid');
 const animalGrid = el('animalGrid');
 const birdGrid = el('birdGrid');
 const flowerGrid = el('flowerGrid');
@@ -1838,7 +1839,7 @@ function onGridTap(e) {
   showItem(byId.get(btn.dataset.id));
 }
 
-[lettersGrid, numbersGrid, fruitGrid, vegGrid, clothesGrid, animalGrid,
+[lettersGrid, numbersGrid, fruitGrid, vegGrid, clothesGrid, vehicleGrid, animalGrid,
  birdGrid, flowerGrid, homeGrid, jobGrid, colorsGrid, shapesGrid, bodyGrid]
   .forEach((grid) => grid.addEventListener('click', onGridTap));
 
