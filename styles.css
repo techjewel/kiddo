@@ -1735,6 +1735,13 @@ button {
   display: none;
 }
 
+/* Hide language switches, category pickers, shuffle and focus buttons
+   on screen controls that let a child leave the current activity */
+.app.is-focus-mode .segmented,
+.app.is-focus-mode .shuffle-btn {
+  display: none;
+}
+
 /* In focus mode, extend the board to use the full height */
 .app.is-focus-mode .board {
   padding-bottom: 28px;
