@@ -1724,15 +1724,11 @@ button {
 /* When focus mode is on, hide the header and nav to prevent
    distractions during quizzes, but keep the focus toggle visible
    so the parent can restore controls. */
-.app.is-focus-mode .rail {
-  pointer-events: none;
+.app.is-focus-mode .rail .score,
+.app.is-focus-mode .rail #soundBtn,
+.app.is-focus-mode .rail #parentBtn {
   opacity: 0;
-}
-
-/* Keep only the focus toggle button reachable and visible */
-.app.is-focus-mode .rail #focusToggleBtn {
-  pointer-events: auto;
-  opacity: 1;
+  pointer-events: none;
 }
 
 .app.is-focus-mode .nav {
