@@ -1718,3 +1718,28 @@ button {
     opacity: 1;
   }
 }
+
+/* ---------- Focus mode chrome hiding -------------------------- */
+
+/* When focus mode is on, hide the header and nav to prevent
+   distractions during quizzes, but keep the focus toggle visible
+   so the parent can restore controls. */
+.app.is-focus-mode .rail {
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* Keep only the focus toggle button reachable and visible */
+.app.is-focus-mode .rail #focusToggleBtn {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.app.is-focus-mode .nav {
+  display: none;
+}
+
+/* In focus mode, extend the board to use the full height */
+.app.is-focus-mode .board {
+  padding-bottom: 28px;
+}
