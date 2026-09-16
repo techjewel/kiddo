@@ -1718,31 +1718,3 @@ button {
     opacity: 1;
   }
 }
-
-/* ---------- Focus mode chrome hiding -------------------------- */
-
-/* When focus mode is on, hide the header and nav to prevent
-   distractions during quizzes, but keep the focus toggle visible
-   so the parent can restore controls. */
-.app.is-focus-mode .rail .score,
-.app.is-focus-mode .rail #soundBtn,
-.app.is-focus-mode .rail #parentBtn {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.app.is-focus-mode .nav {
-  display: none;
-}
-
-/* Hide language switches, category pickers, shuffle and focus buttons
-   on screen controls that let a child leave the current activity */
-.app.is-focus-mode .segmented,
-.app.is-focus-mode .shuffle-btn {
-  display: none;
-}
-
-/* In focus mode, extend the board to use the full height */
-.app.is-focus-mode .board {
-  padding-bottom: 28px;
-}

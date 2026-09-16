@@ -1127,7 +1127,7 @@ function askOf(item) {
 const STORE_KEY = 'magnet-board-v1';
 
 const defaultState = {
-  stars: 0, seen: [], muted: false, focusMode: false,
+  stars: 0, seen: [], muted: false,
   /* Which languages are switched on, and which one the board is
      showing. Two settings rather than one: a household that wants
      English and বাংলা and nothing else shouldn't have to walk past
@@ -1195,7 +1195,6 @@ function save() {
       stars: state.stars,
       seen: [...state.seen],
       muted: state.muted,
-      focusMode: state.focusMode,
       langs: state.langs,
       lang: state.lang,
       chosen: state.chosen,
@@ -1210,7 +1209,6 @@ const state = {
   stars: saved.stars,
   seen: new Set(saved.seen),
   muted: saved.muted,
-  focusMode: saved.focusMode,
   langs: saved.langs,
   /* Remembered, because a household that reads the board in Bangla
      reads it in Bangla every time, and having to find the switch again
@@ -3054,28 +3052,6 @@ soundBtn.addEventListener('click', () => {
   if (!state.muted) sfx.pop();
 });
 
-/* ---------- Focus mode toggle -------------------------------- */
-
-const focusToggleBtn = el('focusToggleBtn');
-const appEl = document.querySelector('.app');
-
-function renderFocusMode() {
-  focusToggleBtn.setAttribute('aria-pressed', String(state.focusMode));
-  focusToggleBtn.title = state.focusMode ? 'Show controls' : 'Hide controls for focus';
-  if (state.focusMode) {
-    appEl.classList.add('is-focus-mode');
-  } else {
-    appEl.classList.remove('is-focus-mode');
-  }
-}
-
-focusToggleBtn.addEventListener('click', () => {
-  state.focusMode = !state.focusMode;
-  save();
-  renderFocusMode();
-  if (!state.muted) sfx.pop();
-});
-
 /* ---------- Grown-ups ---------------------------------------- */
 
 function openParent() {
@@ -3447,7 +3423,6 @@ primePanels();
 applyLang();
 el('scoreNum').textContent = state.stars;
 renderSound();
-renderFocusMode();
 booted = true;
 shownLangs = activeLangs().join(',');
 shownAvail = availKey();

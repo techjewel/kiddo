@@ -137,12 +137,6 @@ there's no way to lose.
 The ⚙ button shows stars earned and how much of each set has been explored,
 plus a reset.
 
-**Focus mode** — the ⛶ button in the header hides the top controls and bottom
-tabs to prevent a child from switching screens during quizzes. The button
-remains visible so a parent can restore the chrome. The setting persists across
-reloads, so if focus mode is left on, the board will open in focus mode next
-time.
-
 ## Deliberate choices
 
 **Nothing opens over the page.** Every screen keeps a panel above its grid that
