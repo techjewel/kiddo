@@ -56,11 +56,7 @@
      index.html with a cached old app.js, and a screen the old script has
      never heard of just stays hidden — a blank board, no error. Changing
      the URL is the only thing a web-clip on an iPad reliably notices. -->
-<<<<<<< HEAD
-<link rel="stylesheet" href="styles.css?v=30">
-=======
-<link rel="stylesheet" href="styles.css?v=31">
->>>>>>> 6f37c04 (Convert Pictures toolbar to icon-only design)
+<link rel="stylesheet" href="styles.css?v=32">
 </head>
 <body>
 
@@ -78,6 +74,11 @@
         <span class="icon-on" aria-hidden="true">🔊</span>
         <span class="icon-off" aria-hidden="true">🔇</span>
         <span class="sr-only">Sound</span>
+      </button>
+      <button class="icon-btn" id="focusToggleBtn" aria-pressed="false" title="Hide controls for focus">
+        <span class="icon-on" aria-hidden="true">⛶</span>
+        <span class="icon-off" aria-hidden="true">⛶</span>
+        <span class="sr-only">Focus</span>
       </button>
       <button class="icon-btn" id="parentBtn" title="Grown-ups">
         <span aria-hidden="true">⚙</span>
@@ -333,10 +334,6 @@
   </div>
 </div>
 
-<<<<<<< HEAD
-<script src="app.js?v=30"></script>
-=======
-<script src="app.js?v=31"></script>
->>>>>>> 6f37c04 (Convert Pictures toolbar to icon-only design)
+<script src="app.js?v=32"></script>
 </body>
 </html>
