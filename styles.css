@@ -1718,3 +1718,25 @@ button {
     opacity: 1;
   }
 }
+
+/* ---------- Focus mode ----------------------------------------
+   When focus mode is on, hide distracting chrome so a child can
+   concentrate on the current activity without switching screens
+   or languages. The focus toggle itself stays visible so a parent
+   can restore controls. */
+
+.app.is-focus-mode .rail .score,
+.app.is-focus-mode .rail #soundBtn,
+.app.is-focus-mode .rail #parentBtn {
+  display: none;
+}
+
+.app.is-focus-mode .nav {
+  display: none;
+}
+
+.app.is-focus-mode .segmented,
+.app.is-focus-mode .shuffle-btn,
+.app.is-focus-mode .screen-hint {
+  display: none;
+}
