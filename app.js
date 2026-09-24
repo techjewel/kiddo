@@ -3061,7 +3061,6 @@ soundBtn.addEventListener('click', () => {
    stays visible so a parent can restore controls. */
 
 const focusToggleBtn = el('focusToggleBtn');
-const appEl = document.querySelector('.app');
 
 function renderFocusMode() {
   focusToggleBtn.setAttribute('aria-pressed', String(state.focusMode));
