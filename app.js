@@ -850,10 +850,13 @@ const LANGS = {
     numberId: (n) => 'Nar' + n,
     seedLetter: 5,
     seedNumber: 3,
-    /* Letter names only — split from one Commons recitation. Numbers
-       and body parts still use the device voice. */
+    /* Letter names only, one Lingua Libre recording per letter (CC0 /
+       CC BY, see sounds/CREDITS.md). New folder, not new files under
+       letters/, because MEDIA never expires a filename. ب, د and و
+       are still the old recitation clips until a free recording of
+       each turns up. Numbers and body parts use the device voice. */
     clips: {
-      letter: (it) => `sounds/arabic/letters/${it.n}.m4a`,
+      letter: (it) => `sounds/arabic/names/${it.n}.m4a`,
       letterWord: () => null,
       number: () => null,
       body: () => null,
