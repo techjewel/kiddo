@@ -23,6 +23,11 @@
 /og.png
   Cache-Control: public, max-age=604800
 
+# The build names every script, stylesheet and font in /assets/ after
+# its own contents, so a new release is always a new URL.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
 # styles.css and app.js are asked for with a ?v= on them, so a bump is a
 # different URL and a year is safe.
 /styles.css

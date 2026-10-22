@@ -1,0 +1,5 @@
+/* The page's stylesheet, as Vite builds it: our own copies of the
+   fonts first, then the legacy styles.css from the repo root. Vite
+   hashes the result into /assets/, so a release never needs a ?v=. */
+@import './fonts.css';
+@import '../../styles.css';

@@ -10,5 +10,5 @@
     "noEmit": true,
     "types": []
   },
-  "include": ["src/sw-next.ts", "src/services/media-guard.ts"]
+  "include": ["src/sw.ts", "src/services/media-guard.ts"]
 }

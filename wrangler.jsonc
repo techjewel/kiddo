@@ -3,8 +3,14 @@
   "name": "abcd-learning",
   "account_id": "4b5c678d39713cad840c2983dbce27e1",
   "compatibility_date": "2026-08-19",
+  // The site is the Vite build in dist/, not the repo root. Wrangler
+  // runs this before every deploy and every preview upload, on
+  // Cloudflare's Workers Builds too, so dist/ is never stale or missing.
+  "build": {
+    "command": "npm ci --prefix app && npm --prefix app run build"
+  },
   "assets": {
-    "directory": "./",
+    "directory": "./dist",
     "html_handling": "auto-trailing-slash",
     // A missing file is a 404, never the app. With the single-page
     // fallback a missing sound came back as index.html with a 200, and

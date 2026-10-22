@@ -121,6 +121,11 @@ button {
 .app {
   position: fixed;
   inset: 0;
+  /* The sides of the safe area. Zero almost everywhere; in landscape on
+     an iPhone with a notch or a Dynamic Island it keeps the rail and the
+     tiles out from under it. The door still paints edge to edge. */
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
   display: flex;
   flex-direction: column;
   /* Hairline vertical brushing over a soft steel gradient.
@@ -191,7 +196,8 @@ button {
 .rail-actions { display: flex; gap: 8px; }
 
 .icon-btn {
-  width: 42px; height: 42px;
+  /* 44 points: Apple's smallest comfortable target. */
+  width: 44px; height: 44px;
   display: grid;
   place-items: center;
   font-size: 19px;
@@ -1176,6 +1182,7 @@ button {
 .repeat-btn {
   display: inline-flex;
   align-items: center;
+  min-height: 44px;
   gap: 8px;
   padding: 14px 22px;
   border-radius: 15px;
@@ -1220,6 +1227,12 @@ button {
 }
 
 .seg {
+  /* 44 points tall at least, for a grown-up thumb too. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
   padding: 8px 11px;
   border-radius: 999px;
   font-size: 12.5px;
@@ -1380,7 +1393,7 @@ button {
   z-index: 50;
   display: grid;
   place-items: center;
-  padding: 22px;
+  padding: 22px max(22px, env(safe-area-inset-right)) 22px max(22px, env(safe-area-inset-left));
   background: rgba(24, 28, 35, 0.5);
   backdrop-filter: blur(4px);
   animation: fade 0.25s ease;
@@ -1455,8 +1468,8 @@ button {
   place-items: center;
   /* The notch and the home bar, because this is the one thing that
      covers the whole screen. */
-  padding: calc(20px + env(safe-area-inset-top)) 20px
-           calc(20px + env(safe-area-inset-bottom));
+  padding: calc(20px + env(safe-area-inset-top)) max(20px, env(safe-area-inset-right))
+           calc(20px + env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
 }
 
 .overlay-scrim {
