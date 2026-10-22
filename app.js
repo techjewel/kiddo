@@ -126,6 +126,19 @@ ALPHABETS.ar = [
   ['و', 'واو'],  ['ي', 'ياء'],
 ];
 
+/* The same 28 names in English letters, for the grown-up reading over
+   his shoulder. Plain spellings a parent can say. The two pairs that
+   would otherwise read the same carry a dot: ت is Ta and ط is Ṭa, ه is
+   Ha and ح is Ḥa — the dot marks the heavier, deeper sound. Kept beside
+   ALPHABETS.ar rather than as a third column there, because a third
+   column on an alphabet row is its emoji. */
+const ARABIC_LATIN = [
+  'Alif', 'Ba', 'Ta', 'Tha', 'Jeem', 'Ḥa', 'Kha', 'Dal',
+  'Dhal', 'Ra', 'Zay', 'Seen', 'Sheen', 'Sad', 'Dad', 'Ṭa',
+  'Dha', 'Ain', 'Ghain', 'Fa', 'Qaf', 'Kaf', 'Lam', 'Meem',
+  'Noon', 'Ha', 'Waw', 'Ya',
+];
+
 /* ---------- Content: the numbers ------------------------------
    One to twenty, named. The numerals themselves are built rather than
    listed — every script here writes them with the same positional
@@ -845,6 +858,8 @@ const LANGS = {
     dir: 'rtl',
     hasCase: false,
     letters: ALPHABETS.ar,
+    /* English name under each letter, on the tile and in the panel. */
+    latin: ARABIC_LATIN,
     numbers: NUMBER_NAMES.ar,
     letterId: (face, i) => 'Lar' + i,
     numberId: (n) => 'Nar' + n,
@@ -901,6 +916,7 @@ function lettersFor(code) {
     lower: L.hasCase ? face.toLowerCase() : '',
     word: word || '',
     emoji: emoji || '',
+    latin: (L.latin && L.latin[i]) || '',
     /* Arabic speaks the letter's name (ألف) and stops. Face-plus-word
        is the English chart: "A. Apple." */
     say: L.sayName
@@ -1453,7 +1469,7 @@ function labelFor(item) {
   if (item.kind === 'letter') {
     return item.lang === 'en'
       ? `Letter ${item.face}`
-      : `${LANGS[item.lang].label} letter ${item.face}`;
+      : `${LANGS[item.lang].label} letter ${item.latin || item.face}`;
   }
   if (item.kind === 'number') {
     return item.lang === 'en'
@@ -1694,7 +1710,22 @@ function makeMagnet(item, { known = false, caption = false, quiz = false } = {})
     if (LANGS[item.lang].script === 'arabic') btn.classList.add('magnet--ar');
     btn.lang = item.lang;
     btn.dir = LANGS[item.lang].dir || 'ltr';
-    btn.textContent = item.face;
+    /* The English name rides under the letter on the shelf, never in
+       the game — there it would be the answer printed on the tile. */
+    if (item.latin && !quiz) {
+      btn.classList.add('magnet--latin');
+      const face = document.createElement('span');
+      face.className = 'magnet-face';
+      face.textContent = item.face;
+      const name = document.createElement('span');
+      name.className = 'magnet-latin';
+      name.lang = 'en';
+      name.dir = 'ltr';
+      name.textContent = item.latin;
+      btn.append(face, name);
+    } else {
+      btn.textContent = item.face;
+    }
   }
   return btn;
 }
@@ -2136,6 +2167,10 @@ function renderLetter(item) {
   const sub = el('letterSub');
   sub.textContent = item.lower;
   sub.classList.toggle('is-hidden', !L.hasCase);
+
+  const latin = el('letterLatin');
+  latin.textContent = item.latin;
+  latin.classList.toggle('is-hidden', !item.latin);
 
   el('letterEmoji').textContent = item.emoji;
   el('letterWord').textContent = item.word;

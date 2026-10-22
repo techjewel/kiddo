@@ -570,6 +570,32 @@ button {
   font-size: clamp(34px, 9.5vw, 48px);
 }
 
+/* An Arabic letter with its English name under it: the letter keeps
+   most of the tile, the name sits on the bottom in Andika, the
+   literacy face, big enough for a parent to read at arm's length. */
+.magnet--latin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px 4px 8px;
+}
+
+.magnet--latin .magnet-face {
+  line-height: 1.05;
+}
+
+.magnet-latin {
+  font-family: var(--font-letter);
+  font-weight: 700;
+  font-size: clamp(14px, 3.9vw, 18px);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  direction: ltr;
+}
+
 .magnet-cap {
   flex: none;
   font-family: var(--font-letter);
@@ -658,6 +684,15 @@ button {
 .sc-word--ar { font-family: var(--font-arabic); font-weight: 700; font-size: 25px; }
 
 .sc-emoji { font-family: var(--font-emoji); font-size: 28px; line-height: 1; }
+
+/* The English name in the panel, between the letter and its Arabic
+   name. Same colour as the letter, so the two read as one thing. */
+.sc-latin {
+  font-family: var(--font-letter);
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 1;
+}
 
 /* Counting pictures wrap onto their own line and take whatever room is
    left, so twenty of them never squeeze the numeral. The row keeps one
@@ -1681,6 +1716,7 @@ button {
 @media (min-width: 640px) {
   .grid { grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 18px; }
   .magnet { font-size: 46px; }
+  .magnet-latin { font-size: 19px; }
   .board { padding: 26px 24px calc(var(--nav-h) + 34px); }
 }
 
