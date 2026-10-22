@@ -14,7 +14,9 @@
     "app:install": "npm --prefix app ci",
     "app:dev": "npm --prefix app run dev",
     "app:build": "npm --prefix app run build",
-    "app:preview": "npm --prefix app run preview"
+    "app:preview": "npm --prefix app run preview",
+    "test:ios": "playwright test --project=*iphone* --project=*ipad*",
+    "test:ios:next": "KIDDO_TARGET=next playwright test --project=*iphone* --project=*ipad*"
   },
   "devDependencies": {
     "@playwright/test": "^1.40.0"

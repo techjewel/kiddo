@@ -23,7 +23,7 @@ jobs:
       - run: npm ci
       - run: npm ci
         working-directory: app
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install --with-deps chromium webkit
       - name: Unit tests (Vitest)
         run: npm run test:unit
       - name: Type check and build the new app
