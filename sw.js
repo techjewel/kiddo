@@ -16,7 +16,7 @@
 
 /* Bump with the ?v= in index.html. Same number, one thing to change:
    a new SHELL name is what throws away the old CSS and JS. */
-const VERSION = 'v34';
+const VERSION = 'v35';
 
 const SHELL = `magnet-shell-${VERSION}`;
 const MEDIA = 'magnet-media';   /* Photographs and recordings. They are
@@ -42,8 +42,8 @@ const STALE_MEDIA = ['./photos/rose.jpg', './photos/sheep.jpg', './photos/mouse.
 const SHELL_URLS = [
   './',
   './index.html',
-  './styles.css?v=34',
-  './app.js?v=34',
+  './styles.css?v=35',
+  './app.js?v=35',
   './manifest.webmanifest',
   './icons/icon-192.png',
   './icons/icon-512.png',
@@ -53,6 +53,40 @@ const SHELL_URLS = [
 
 const isMedia = (url) =>
   url.pathname.includes('/photos/') || url.pathname.includes('/sounds/');
+
+/* Only a real photograph or recording goes in MEDIA. Before v35 the
+   host answered a missing file with index.html and a 200, and
+   cacheFirst kept that page forever under the file's name, so a sound
+   that was added later never played on that tablet. The host now sends
+   a 404, and this checks the type as well, so a page can never be
+   filed as a picture again whatever the host does. */
+function isGoodMedia(url, res) {
+  if (!res || !res.ok) return false;
+  const type = (res.headers.get('content-type') || '').toLowerCase();
+  const path = url.pathname;
+  if (path.includes('/photos/') || path.includes('/images/')) return type.startsWith('image/');
+  if (path.includes('/sounds/')) return type.startsWith('audio/') || type.startsWith('video/mp4');
+  return false;
+}
+
+/* The other half: anything already filed wrongly is thrown away, so
+   the next look fetches the real file. Runs on every activation and on
+   request from the page; it is a few hundred cache lookups. */
+async function purgeBadMedia() {
+  if (!(await caches.has(MEDIA))) return 0;
+  const media = await caches.open(MEDIA);
+  let dropped = 0;
+  for (const req of await media.keys()) {
+    const url = new URL(req.url);
+    if (!isMedia(url) && !url.pathname.includes('/images/')) continue;
+    const res = await media.match(req);
+    if (!isGoodMedia(url, res)) {
+      await media.delete(req);
+      dropped += 1;
+    }
+  }
+  return dropped;
+}
 
 const isFont = (url) =>
   url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com';
@@ -86,6 +120,7 @@ self.addEventListener('activate', (e) => {
       await self.registration.navigationPreload.enable().catch(() => {});
     }
     await self.clients.claim();
+    await purgeBadMedia().catch(() => {});
   })());
 });
 
@@ -104,8 +139,12 @@ self.addEventListener('fetch', (e) => {
     e.respondWith((async () => {
       try {
         const fresh = (await e.preloadResponse) || await fetch(req);
-        const cache = await caches.open(SHELL);
-        cache.put('./index.html', fresh.clone());
+        /* Only the real page becomes the offline copy. A 404 page for a
+           mistyped address must not replace it. */
+        if (fresh.ok) {
+          const cache = await caches.open(SHELL);
+          cache.put('./index.html', fresh.clone());
+        }
         return fresh;
       } catch {
         return (await caches.match('./index.html'))
@@ -120,7 +159,7 @@ self.addEventListener('fetch', (e) => {
      This is also what the offline download fills, so a child who has
      already met an animal never waits for it twice. */
   if (url.origin === self.location.origin && isMedia(url)) {
-    e.respondWith(cacheFirst(req, MEDIA));
+    e.respondWith(cacheFirst(req, MEDIA, (res) => isGoodMedia(url, res)));
     return;
   }
 
@@ -140,12 +179,12 @@ self.addEventListener('fetch', (e) => {
   }
 });
 
-async function cacheFirst(req, cacheName) {
+async function cacheFirst(req, cacheName, keep = (res) => res.ok || res.type === 'opaque') {
   const hit = await caches.match(req);
   if (hit) return hit;
   try {
     const res = await fetch(req);
-    if (res.ok || res.type === 'opaque') {
+    if (keep(res)) {
       const cache = await caches.open(cacheName);
       cache.put(req, res.clone());
     }
@@ -182,6 +221,10 @@ self.addEventListener('message', (e) => {
   const msg = e.data || {};
   if (msg.type === 'COUNT_MEDIA') e.waitUntil(countMedia(msg.urls));
   if (msg.type === 'SAVE_MEDIA') e.waitUntil(saveMedia(msg.urls));
+  if (msg.type === 'PURGE_BAD_MEDIA') {
+    e.waitUntil(purgeBadMedia().then((dropped) =>
+      tellEveryone({ type: 'MEDIA_PURGED', dropped })));
+  }
 });
 
 async function tellEveryone(payload) {
@@ -213,7 +256,7 @@ async function saveMedia(urls = []) {
         try {
           if (await cache.match(u)) return;
           const res = await fetch(u, { cache: 'no-cache' });
-          if (res.ok) await cache.put(u, res.clone());
+          if (isGoodMedia(new URL(u, self.location.href), res)) await cache.put(u, res.clone());
           else failed += 1;
         } catch {
           failed += 1;
