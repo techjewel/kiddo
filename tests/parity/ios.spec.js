@@ -261,7 +261,6 @@ test.describe('iOS Safari', () => {
 
   test('download says done when only never-recorded files are left', async ({ page }, info) => {
     test.skip(!info.project.name.endsWith('-ipad-air'), 'Runs once, on iPad Air portrait');
-    test.fail(true, 'Known gap since v35: mediaUrls() lists 122 English voice files that were never recorded, so the download ends with "all but 122"');
     test.setTimeout(180000);
     await boot(page);
     await page.evaluate(() => navigator.serviceWorker.ready);
@@ -274,6 +273,14 @@ test.describe('iOS Safari', () => {
       navigator.serviceWorker.controller.postMessage({ type: 'SAVE_MEDIA', urls: mediaUrls() });
     }));
     expect(failed).toBe(0);
+    // And the grown-ups panel does not keep asking for them.
+    const left = await page.evaluate(() => new Promise((resolve) => {
+      navigator.serviceWorker.addEventListener('message', (e) => {
+        if (e.data?.type === 'MEDIA_COUNT') resolve(e.data.missing.length);
+      });
+      navigator.serviceWorker.controller.postMessage({ type: 'COUNT_MEDIA', urls: mediaUrls() });
+    }));
+    expect(left).toBe(0);
   });
 
   test('light speed budget on iPhone', async ({ page }, info) => {
