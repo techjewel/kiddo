@@ -26,6 +26,14 @@ const MEDIA = 'magnet-media';   /* Photographs and recordings. They are
                                    be thrown away over a CSS fix. */
 const FONTS = 'magnet-fonts';
 
+/* Files the download asked for that the server does not have (a 404):
+   English voice lines that were never recorded, say. They are not a
+   failed download, and asking again will not help, so they are noted
+   here and left out of "still to fetch". Activation deletes this cache
+   (it is not in the keep list), so every release checks again and a
+   newly recorded file is picked up. */
+const ABSENT = 'magnet-absent';
+
 /* MEDIA is keyed by filename and never expires, which is right until a
    picture turns out to be wrong. `rose.jpg` was a sweetbriar — five flat
    pink petals, nothing a child would point at and call a rose — and the
@@ -237,8 +245,11 @@ async function tellEveryone(payload) {
    photograph is four times the size of a recording. */
 async function countMedia(urls = []) {
   const cache = await caches.open(MEDIA);
+  const absent = await caches.open(ABSENT);
   const missing = [];
-  for (const u of urls) if (!(await cache.match(u))) missing.push(u);
+  for (const u of urls) {
+    if (!(await cache.match(u)) && !(await absent.match(u))) missing.push(u);
+  }
   await tellEveryone({ type: 'MEDIA_COUNT', missing, total: urls.length });
 }
 
@@ -246,8 +257,10 @@ async function saveMedia(urls = []) {
   if (downloading) return;
   downloading = true;
   const cache = await caches.open(MEDIA);
+  const absent = await caches.open(ABSENT);
   let done = 0;
   let failed = 0;
+  let notOnServer = 0;
 
   try {
     for (let i = 0; i < urls.length; i += BATCH) {
@@ -255,9 +268,16 @@ async function saveMedia(urls = []) {
       await Promise.all(slice.map(async (u) => {
         try {
           if (await cache.match(u)) return;
+          if (await absent.match(u)) { notOnServer += 1; return; }
           const res = await fetch(u, { cache: 'no-cache' });
-          if (isGoodMedia(new URL(u, self.location.href), res)) await cache.put(u, res.clone());
-          else failed += 1;
+          if (isGoodMedia(new URL(u, self.location.href), res)) {
+            await cache.put(u, res.clone());
+          } else if (res.status === 404) {
+            notOnServer += 1;
+            await absent.put(u, new Response(null, { status: 204 }));
+          } else {
+            failed += 1;
+          }
         } catch {
           failed += 1;
         }
@@ -265,7 +285,7 @@ async function saveMedia(urls = []) {
       done += slice.length;
       await tellEveryone({ type: 'MEDIA_PROGRESS', done, total: urls.length });
     }
-    await tellEveryone({ type: 'MEDIA_SAVED', total: urls.length, failed });
+    await tellEveryone({ type: 'MEDIA_SAVED', total: urls.length, failed, notOnServer });
   } finally {
     downloading = false;
   }
