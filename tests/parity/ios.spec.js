@@ -33,10 +33,15 @@ async function boot(page, saved = { langs: ['en', 'bn'], lang: 'en', chosen: tru
 function recordSound() {
   window.__sound = [];
   const active = () => (navigator.userActivation ? navigator.userActivation.isActive : null);
-  const log = (kind, what) => window.__sound.push({ kind, what, active: active() });
+  const log = (kind, what, el) => window.__sound.push({ kind, what, el, active: active() });
   const play = HTMLMediaElement.prototype.play;
+  let ids = 0;
   HTMLMediaElement.prototype.play = function () {
-    log('clip', this.src.split('/').slice(-2).join('/'));
+    if (!this.__id) this.__id = ++ids;
+    /* The moment of silence the app plays on the first touch, to unlock
+       its one audio element. */
+    if (this.src.startsWith('data:')) log('unlock', 'silence', this.__id);
+    else log('clip', this.src.split('/').slice(-2).join('/'), this.__id);
     return play.call(this);
   };
   if ('speechSynthesis' in window) {
@@ -94,9 +99,13 @@ test.describe('iOS Safari', () => {
       expect(s.active, `${s.kind} ${s.what} started outside a tap`).toBe(true);
     }
     /* The word clip after a letter starts from the first clip's `ended`
-       event, a moment after the tap. WebKit here still counts that as
-       inside the gesture; a real iPhone may not. Logged, not failed. */
+       event, a moment after the tap. iOS allows that only on an element
+       that has already played from a tap, so it must be the same one. */
     const followOn = sound.filter((s) => s.kind === 'clip' && s !== first);
+    expect(followOn.length, 'a Bangla letter is followed by its word').toBeGreaterThan(0);
+    for (const s of followOn) {
+      expect(s.el, `${s.what} plays on a different audio element than the letter`).toBe(first.el);
+    }
     info.annotations.push({
       type: 'ios-audio',
       description: `follow-on clips: ${followOn.map((s) => `${s.what} (gesture ${s.active})`).join(', ') || 'none'}; English: ${english.map((s) => `${s.kind} ${s.what}`).join(', ')}`,
@@ -106,9 +115,8 @@ test.describe('iOS Safari', () => {
   test('tiles and tabs are big enough to tap', async ({ page }) => {
     await boot(page);
     const MIN = 44; // Apple's minimum, in points
-    /* Grown-up controls known to be under 44 points today. A new small
-       control fails the test; these are tracked by the test.fail below. */
-    const KNOWN_SMALL = new Set(['soundBtn', 'focusToggleBtn', 'parentBtn', 'seg', 'repeatAsk']);
+    /* Controls allowed under 44 points. None, since phase 1. */
+    const KNOWN_SMALL = new Set([]);
     for (const screen of SCREENS) {
       await page.tap(`[data-screen="${screen}"]`);
       await page.waitForTimeout(250);
@@ -130,11 +138,10 @@ test.describe('iOS Safari', () => {
   });
 
   test('grown-up buttons reach 44 points', async ({ page }) => {
-    test.fail(true, 'Known gap: sound, focus and parent buttons are 42 pt; language and quiz switches 33 to 37 pt tall');
     await boot(page);
     await page.tap('[data-screen="play"]');
     const sizes = await page.evaluate(() =>
-      [...document.querySelectorAll('#soundBtn, #focusToggleBtn, #parentBtn, .seg')]
+      [...document.querySelectorAll('#soundBtn, #focusToggleBtn, #parentBtn, .seg, #repeatAsk')]
         .filter((e) => e.offsetParent)
         .map((e) => Math.min(e.getBoundingClientRect().width, e.getBoundingClientRect().height)));
     expect(Math.min(...sizes)).toBeGreaterThanOrEqual(44);
@@ -199,7 +206,7 @@ test.describe('iOS Safari', () => {
     expect(errors).toEqual([]);
   });
 
-  test('top and bottom bars respect the safe area', async ({ page }) => {
+  test('the page respects the safe area on all four sides', async ({ page }) => {
     await page.goto('/');
     const uses = await page.evaluate(() => {
       const found = new Set();
@@ -211,22 +218,27 @@ test.describe('iOS Safari', () => {
       }
       return [...found].sort();
     });
-    expect(uses).toEqual(expect.arrayContaining(['bottom', 'top']));
+    expect(uses).toEqual(['bottom', 'left', 'right', 'top']);
   });
 
   test('landscape iPhone keeps clear of the Dynamic Island', async ({ page }, info) => {
     test.skip(!info.project.name.endsWith('iphone-15-pro-max-landscape'), 'iPhone landscape only');
-    test.fail(true, 'Known gap: no safe-area-inset-left/right, so the rail can sit under the Dynamic Island in landscape');
     await page.goto('/');
-    const sides = await page.evaluate(() => {
-      const found = new Set();
+    /* WebKit here reports every inset as 0, so this checks the rule
+       itself: the whole app is padded by the left and right insets. */
+    const app = await page.evaluate(() => {
       for (const sheet of document.styleSheets) {
         let rules; try { rules = sheet.cssRules; } catch { continue; }
-        for (const r of rules) for (const m of (r.cssText || '').matchAll(/safe-area-inset-(left|right)/g)) found.add(m[1]);
+        for (const r of rules) {
+          if (r.selectorText === '.app') {
+            return { left: r.style.getPropertyValue('padding-left'), right: r.style.getPropertyValue('padding-right') };
+          }
+        }
       }
-      return [...found];
+      return null;
     });
-    expect(sides.length).toBeGreaterThan(0);
+    expect(app?.left).toContain('safe-area-inset-left');
+    expect(app?.right).toContain('safe-area-inset-right');
   });
 
   test('the whole offline download fits and stays in the cache', async ({ page }, info) => {
@@ -257,6 +269,19 @@ test.describe('iOS Safari', () => {
     expect(result.notCached, 'files that exist but were not cached').toBe(result.absent);
     // Light budget: the whole download stays well under 100 MB.
     if (result.usage) expect(result.usage).toBeLessThan(100 * 1024 * 1024);
+  });
+
+  test('the download asks Safari to keep it', async ({ page }) => {
+    await page.addInitScript(() => {
+      window.__persist = 0;
+      if (navigator.storage) {
+        navigator.storage.persist = () => { window.__persist += 1; return Promise.resolve(true); };
+      }
+    });
+    await boot(page);
+    await page.evaluate(() => navigator.serviceWorker.ready);
+    await page.evaluate(() => document.getElementById('offlineBtn').click());
+    expect(await page.evaluate(() => window.__persist)).toBe(1);
   });
 
   test('download says done when only never-recorded files are left', async ({ page }, info) => {

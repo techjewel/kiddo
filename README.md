@@ -506,7 +506,14 @@ switched on, and of those only the ones spoken from files, so a household with
 files come with the board because English is always on; Español and Français
 add theirs only when those languages are switched on.
 
-**Releasing a change.** Bump the `?v=` on both tags in `index.html` *and*
+**Releasing a change.** Since phase 1, kiddo.page serves the Vite build
+(see Build and test), and the build names every script, stylesheet and font
+after its contents, so there is nothing to bump. The new worker, built from
+`app/src/sw.ts`, names its shell cache after that list and keeps the
+`magnet-media`, `magnet-fonts` and `magnet-absent` caches by name, so a
+download made under the old site survives the move. The rest of this
+paragraph is about running the repo root on its own, as `test:legacy` does:
+bump the `?v=` on both tags in `index.html` *and*
 `VERSION` in `sw.js` to the same number, and update `SHELL_URLS` to match. A new
 `VERSION` throws away the cached CSS and JS; the media cache is deliberately not
 versioned, because an 8 MB download shouldn't be discarded over a CSS fix.
@@ -582,14 +589,21 @@ address sits beside it.
 
 ## Build and test
 
-The live app is still the static files in the repo root. Nothing below changes
-what kiddo.page serves.
+kiddo.page serves `dist/`, the Vite build of `app/` (phase 1). Cloudflare
+builds it on every deploy: `wrangler.jsonc` has a `build.command`, and its
+`assets.directory` is `./dist`. You still edit `index.html`, `app.js` and
+`styles.css` in the repo root; the build reads them.
 
-`app/` is the next version, built with Vue 3, TypeScript, Vite, Pinia and
-vite-plugin-pwa. This is phase 0 of the move to a framework. Right now the
-build is the old app passed through Vite, plus a hidden Vue mount that only
-reads the saved settings. Cloudflare does not deploy it: `app` is listed in
-`.assetsignore` and the deploy still uploads the repo root.
+`app/` is built with Vue 3, TypeScript, Vite, Pinia and vite-plugin-pwa.
+What the build changes compared with the repo root:
+
+- the fonts are our own files from the `@fontsource` packages, not Google
+  Fonts (`app/src/fonts.css`, written by `app/scripts/make-fonts-css.mjs`);
+- `styles.css` and `app.js` are served from `/assets/` under hashed names;
+- `/sw.js` is built from `app/src/sw.ts`, with the same caches and messages
+  as the old `sw.js`, and precaches the page, the scripts, the styles, the
+  fonts and the icons;
+- a hidden Vue mount that only reads the saved settings (from phase 0).
 
 Set up once (Node 20.19 or newer):
 
@@ -605,8 +619,8 @@ Run:
 ```bash
 python3 -m http.server 8080     # the live app, as it is today
 npm run app:dev                 # the new app, with hot reload
-npm run app:build               # type check, then build app/dist
-npm run app:preview             # serve app/dist on http://localhost:8081
+npm run app:build               # type check, then build dist/
+npm run app:preview             # serve dist/ on http://localhost:8081
 ```
 
 `app:dev` and `app:build` first copy the old app's files into
@@ -618,7 +632,7 @@ Test:
 ```bash
 npm run test:unit               # Vitest unit tests in app/tests/unit
 npm run test:legacy             # Playwright parity tests, against the live app
-npm run test:next               # the same tests, against the app/dist build
+npm run test:next               # the same tests, against the dist/ build
 npm run test:parity             # both, one after the other
 npm run test:all                # unit tests, then both parity runs
 npm run test:ios                # only the iPhone and iPad projects
@@ -651,7 +665,12 @@ points at 2x.
 - no screen scrolls sideways, and the tab bar stays on screen;
 - the home-screen tags, the 180 x 180 icon and the manifest;
 - that the app opens cleanly with `navigator.standalone`;
-- safe-area padding on the top and bottom bars;
+- every grown-up button and switch is at least 44 points too;
+- safe-area padding on all four sides, so landscape keeps clear of the
+  notch or Dynamic Island;
+- the Bangla word after a letter plays on the same audio element as the
+  letter, the one the tap unlocked;
+- the download asks Safari to keep it (`navigator.storage.persist()`);
 - the whole offline download lands in the cache;
 - a light speed budget on the iPhone.
 
@@ -674,16 +693,22 @@ To turn it on, move it to `.github/workflows/ci.yml`.
 ## Deploying
 
 Cloudflare Workers static assets, on the `jewel-lab` account, at
-[kiddo.page](https://kiddo.page):
+[kiddo.page](https://kiddo.page). Workers Builds deploys `master` on every
+push. By hand:
 
 ```bash
-npx wrangler deploy
+npx wrangler deploy             # runs the build first, then uploads dist/
 ```
+
+`tests/parity/phase1.spec.js` (on the `next` target) checks the fonts are
+our own and walks a tablet from the old site to the new build: the
+download and the progress stay, the old shell cache goes, and the app
+opens offline.
 
 The account and the apex are both in `wrangler.jsonc`. The `custom_domain` route
 needs `kiddo.page` to be a zone on that account — Cloudflare writes the DNS
 record and issues the certificate itself, so there is nothing to set up by hand.
-Everything in `.assetsignore` stays out of the upload.
+Only `dist/` is uploaded.
 
 The domain is written down in four other places, all in `index.html`: the
 canonical link, `og:url`, and the two image URLs. Moving the app means changing
@@ -701,13 +726,14 @@ there are no accounts, servers, or ads.
 - `index.html` — structure
 - `styles.css` — the fridge door, the magnets, the panels
 - `app.js` — content, the language table, speech, sounds, the game
-- `sw.js` — the service worker: offline, and the download
+- `sw.js` — the old service worker, for running the repo root on its own. The
+  deployed one is built from `app/src/sw.ts`
 - `manifest.webmanifest` — name, icons, screenshots, shortcuts
 - `_headers` — what Cloudflare is allowed to cache and for how long
 - `favicon.ico` — the path browsers ask for unprompted; generated, see `brand/`
 - `icons/`, `apple-touch-icon.png`, `og.png` — generated; see `brand/`
 - `brand/` — the artwork sources and the render script. Not deployed.
-- `app/` — the Vue + Vite version in progress. Not deployed yet; see Build and test
+- `app/` — the Vue + Vite build that kiddo.page serves; see Build and test
 - `tests/parity/` — Playwright tests that run against the live app and the new build
 - `404.html` — what a missing page or file gets, with a real 404
 - `photos/` — the fruit, animal, bird, flower, household and job photographs,

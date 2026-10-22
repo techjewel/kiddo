@@ -1,7 +1,7 @@
 {
   "name": "kiddo-magnet-board",
   "version": "1.0.0",
-  "description": "Kiddo. The live app is the static files in the repo root; app/ is the Vue + Vite build in progress.",
+  "description": "Kiddo. kiddo.page serves dist/, the Vite build in app/ of the files in the repo root.",
   "scripts": {
     "test": "playwright test",
     "test:legacy": "playwright test",

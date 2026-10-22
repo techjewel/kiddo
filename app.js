@@ -1895,8 +1895,31 @@ const ANIMAL_SOUNDS = new Set([
   'zebra', 'donkey', 'bear', 'goose', 'fox', 'turkey',
 ]);
 
-const soundCache = new Map();
+/* One audio element for every clip, its source swapped each time.
+   iOS lets a media element start only from inside a tap, and it
+   remembers: once an element has played from a tap, that same element
+   may play again later, from an `ended` handler say. A new element made
+   in that handler has not been unlocked, so on an iPhone the word after
+   a Bangla letter (ক, then কলা) would stay silent. One element also
+   means one decoder, where there used to be one per clip heard. */
+const player = typeof Audio === 'function' ? new Audio() : null;
+if (player) player.preload = 'auto';
+/* The clip that is current, as a number: the element is always the same
+   one, so "is this still my clip" has to be asked of something else. */
 let playingSound = null;
+let clipSeq = 0;
+
+/* The first touch anywhere unlocks the player with a moment of silence,
+   so a sound the app starts by itself later (the next question in the
+   game) is allowed too. */
+const SILENCE = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=';
+function unlockPlayer() {
+  ['touchend', 'click'].forEach((t) => document.removeEventListener(t, unlockPlayer, true));
+  if (!player || playingSound) return;
+  player.src = SILENCE;
+  player.play().catch(() => {});
+}
+['touchend', 'click'].forEach((t) => document.addEventListener(t, unlockPlayer, true));
 
 function hasSound(name) {
   return ANIMAL_SOUNDS.has(name.toLowerCase());
@@ -1904,7 +1927,7 @@ function hasSound(name) {
 
 function stopSound() {
   if (playingSound) {
-    playingSound.pause();
+    player.pause();
     playingSound = null;
   }
 }
@@ -1920,29 +1943,21 @@ function stopSound() {
    of আট. The `playingSound` check is the same guard from the other side:
    if we're no longer the current sound, we have nothing to say. */
 function playClip(key, src, onFail, onEnd) {
-  if (state.muted) return;
+  if (state.muted || !player) return;
   stopSound();
   /* A clip always wins over whatever the voice was still saying —
      otherwise walking from Numbers to বাংলা plays "seven" over সাত. */
   if ('speechSynthesis' in window) speechSynthesis.cancel();
-  let audio = soundCache.get(key);
-  if (!audio) {
-    audio = new Audio(src);
-    audio.preload = 'auto';
-    soundCache.set(key, audio);
-  }
-  audio.currentTime = 0;
-  /* Assigned, not added: a cached clip played twice would otherwise
-     collect a second listener and say the word twice. Cleared first so
-     a clip that once had a follow-on doesn't keep it forever. */
-  audio.onended = null;
-  if (onEnd) {
-    audio.onended = () => { if (playingSound === audio) onEnd(); };
-  }
-  playingSound = audio;
-  audio.play().catch((err) => {
+  const mine = ++clipSeq;
+  if (player.src !== new URL(src, location.href).href) player.src = src;
+  else player.currentTime = 0;
+  /* Assigned, not added, so a clip that once had a follow-on doesn't
+     keep it forever. */
+  player.onended = onEnd ? () => { if (playingSound === mine) onEnd(); } : null;
+  playingSound = mine;
+  player.play().catch((err) => {
     const benign = err && (err.name === 'NotAllowedError' || err.name === 'AbortError');
-    if (onFail && !benign && playingSound === audio) onFail();
+    if (onFail && !benign && playingSound === mine) onFail();
   });
 }
 
@@ -3320,6 +3335,11 @@ if ('serviceWorker' in navigator) {
 
 offlineBtn.addEventListener('click', () => {
   if (!sw) return;
+  /* Ask the browser to keep the download. Safari, on an iPhone or iPad,
+     otherwise counts it as clearable website data. It says yes most
+     readily to an app added to the home screen. Nothing changes if it
+     says no. */
+  if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
   setOfflineNote('Starting…', { busy: true });
   sw.postMessage({ type: 'SAVE_MEDIA', urls: mediaUrls() });
 });

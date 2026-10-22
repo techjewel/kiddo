@@ -12,3 +12,4 @@ Thumbs.db
 
 # Wrangler local state
 .wrangler/
+dist/
