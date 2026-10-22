@@ -7,3 +7,7 @@ README.md
 node_modules
 .wrangler
 brand
+
+# The Vue + Vite build in progress. Not served until the cutover.
+app
+ci

@@ -1,0 +1,4 @@
+node_modules/
+dist/
+# Filled by scripts/sync-legacy.mjs from the repo root on every build.
+legacy-public/

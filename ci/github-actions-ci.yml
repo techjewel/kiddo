@@ -1,0 +1,41 @@
+name: CI
+
+# Runs on every PR and on master. Nothing here deploys: Cloudflare
+# deploys master by itself.
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            app/package-lock.json
+      - run: npm ci
+      - run: npm ci
+        working-directory: app
+      - run: npx playwright install --with-deps chromium
+      - name: Unit tests (Vitest)
+        run: npm run test:unit
+      - name: Type check and build the new app
+        run: npm run app:build
+      - name: Parity, legacy app
+        run: npx playwright test
+        env: { CI: '1' }
+      - name: Parity, new build
+        run: npx playwright test
+        env: { CI: '1', KIDDO_TARGET: next }
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-results
+          path: test-results/

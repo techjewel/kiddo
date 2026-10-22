@@ -1,11 +1,20 @@
 {
   "name": "kiddo-magnet-board",
   "version": "1.0.0",
-  "description": "Browser tests for Magnet Board",
+  "description": "Kiddo. The live app is the static files in the repo root; app/ is the Vue + Vite build in progress.",
   "scripts": {
     "test": "playwright test",
+    "test:legacy": "playwright test",
+    "test:next": "KIDDO_TARGET=next playwright test",
+    "test:parity": "playwright test && KIDDO_TARGET=next playwright test",
+    "test:unit": "npm --prefix app test",
+    "test:all": "npm run test:unit && npm run test:parity",
     "test:ui": "playwright test --ui",
-    "test:debug": "playwright test --debug"
+    "test:debug": "playwright test --debug",
+    "app:install": "npm --prefix app ci",
+    "app:dev": "npm --prefix app run dev",
+    "app:build": "npm --prefix app run build",
+    "app:preview": "npm --prefix app run preview"
   },
   "devDependencies": {
     "@playwright/test": "^1.40.0"

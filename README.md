@@ -580,6 +580,62 @@ not the country, which is why 🇬🇧 fronts an app that says "colours". The ra
 below is the seven screens, in the order `index.html` lists them, and the
 address sits beside it.
 
+## Build and test
+
+The live app is still the static files in the repo root. Nothing below changes
+what kiddo.page serves.
+
+`app/` is the next version, built with Vue 3, TypeScript, Vite, Pinia and
+vite-plugin-pwa. This is phase 0 of the move to a framework. Right now the
+build is the old app passed through Vite, plus a hidden Vue mount that only
+reads the saved settings. Cloudflare does not deploy it: `app` is listed in
+`.assetsignore` and the deploy still uploads the repo root.
+
+Set up once (Node 20.19 or newer):
+
+```bash
+npm ci                          # Playwright, for the parity tests
+npm run app:install             # Vue, Vite, Vitest and friends, in app/
+npx playwright install chromium
+```
+
+Run:
+
+```bash
+python3 -m http.server 8080     # the live app, as it is today
+npm run app:dev                 # the new app, with hot reload
+npm run app:build               # type check, then build app/dist
+npm run app:preview             # serve app/dist on http://localhost:8081
+```
+
+`app:dev` and `app:build` first copy the old app's files into
+`app/legacy-public/` (see `app/scripts/sync-legacy.mjs`). That folder is
+generated and not committed, so edit the files in the repo root, not there.
+
+Test:
+
+```bash
+npm run test:unit               # Vitest unit tests in app/tests/unit
+npm run test:legacy             # Playwright parity tests, against the live app
+npm run test:next               # the same tests, against the app/dist build
+npm run test:parity             # both, one after the other
+npm run test:all                # unit tests, then both parity runs
+```
+
+The parity tests live in `tests/parity/`. Every test must pass against both
+targets. `KIDDO_TARGET=next` picks the new build; leaving it out picks the
+live app. `content.spec.js` compares the letters, numbers, pictures and
+colours with `tests/parity/fixtures/items.json`. If you change content on
+purpose, refresh that file with:
+
+```bash
+UPDATE_SNAPSHOT=1 npx playwright test -g snapshot
+```
+
+A ready CI workflow is in `ci/github-actions-ci.yml`. It runs the unit tests,
+the build and both parity runs on every pull request, and it does not deploy.
+To turn it on, move it to `.github/workflows/ci.yml`.
+
 ## Deploying
 
 Cloudflare Workers static assets, on the `jewel-lab` account, at
@@ -616,6 +672,9 @@ there are no accounts, servers, or ads.
 - `favicon.ico` — the path browsers ask for unprompted; generated, see `brand/`
 - `icons/`, `apple-touch-icon.png`, `og.png` — generated; see `brand/`
 - `brand/` — the artwork sources and the render script. Not deployed.
+- `app/` — the Vue + Vite version in progress. Not deployed yet; see Build and test
+- `tests/parity/` — Playwright tests that run against the live app and the new build
+- `404.html` — what a missing page or file gets, with a real 404
 - `photos/` — the fruit, animal, bird, flower, household and job photographs,
   and their credits
 - `sounds/` — animal recordings and their credits
