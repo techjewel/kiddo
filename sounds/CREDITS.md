@@ -829,9 +829,9 @@ License: CC0
 Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D8%A7.wav
 
 **باء** — `arabic/names/2.m4a`  
-From *حروف الأبجدية العربية Arabic alphabet.ogg* by Ibraheem alex (the old split recitation, kept until a free recording turns up)  
-License: GNU Free Documentation License 1.2+  
-Source: https://commons.wikimedia.org/wiki/File:%D8%AD%D8%B1%D9%88%D9%81_%D8%A7%D9%84%D8%A3%D8%A8%D8%AC%D8%AF%D9%8A%D8%A9_%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9_Arabic_alphabet.ogg
+From *LL-Q13955 (ara)-Zinou2go-ب.wav* by Zinou2go (Lingua Libre)  
+License: CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0/). Trimmed and levelled; this clip is shared under the same license.  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-%D8%A8.wav
 
 **تاء** — `arabic/names/3.m4a`  
 From *LL-Q13955 (ara)-AlNatiq-ت.wav* by AlNatiq  
@@ -859,9 +859,9 @@ License: CC0
 Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D8%AE.wav
 
 **دال** — `arabic/names/8.m4a`  
-From *حروف الأبجدية العربية Arabic alphabet.ogg* by Ibraheem alex (the old split recitation, kept until a free recording turns up)  
-License: GNU Free Documentation License 1.2+  
-Source: https://commons.wikimedia.org/wiki/File:%D8%AD%D8%B1%D9%88%D9%81_%D8%A7%D9%84%D8%A3%D8%A8%D8%AC%D8%AF%D9%8A%D8%A9_%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9_Arabic_alphabet.ogg
+From *LL-Q13955 (ara)-Zinou2go-د.wav* by Zinou2go (Lingua Libre)  
+License: CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0/). Trimmed and levelled; this clip is shared under the same license.  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-%D8%AF.wav
 
 **ذال** — `arabic/names/9.m4a`  
 From *LL-Q13955 (ara)-AlNatiq-ذ.wav* by AlNatiq  
@@ -954,14 +954,16 @@ License: CC0
 Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D9%87.wav
 
 **واو** — `arabic/names/27.m4a`  
-From *حروف الأبجدية العربية Arabic alphabet.ogg* by Ibraheem alex (the old split recitation, kept until a free recording turns up)  
-License: GNU Free Documentation License 1.2+  
-Source: https://commons.wikimedia.org/wiki/File:%D8%AD%D8%B1%D9%88%D9%81_%D8%A7%D9%84%D8%A3%D8%A8%D8%AC%D8%AF%D9%8A%D8%A9_%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9_Arabic_alphabet.ogg
+From *LL-Q13955 (ara)-Zinou2go-و.wav* by Zinou2go (Lingua Libre)  
+License: CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0/). Trimmed and levelled; this clip is shared under the same license.  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-%D9%88.wav
 
 **ياء** — `arabic/names/28.m4a`  
 From *LL-Q13955 (ara)-AlNatiq-ي.wav* by AlNatiq  
 License: CC0  
 Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D9%8A.wav
 
-The older 28-clip split of the same recitation is still in
-`sounds/arabic/letters/` and no longer referenced.
+The older 28-clip set in `sounds/arabic/letters/` is no longer
+referenced. It was split from *حروف الأبجدية العربية Arabic alphabet.ogg*
+by Ibraheem alex, GNU Free Documentation License 1.2+,
+https://commons.wikimedia.org/wiki/File:%D8%AD%D8%B1%D9%88%D9%81_%D8%A7%D9%84%D8%A3%D8%A8%D8%AC%D8%AF%D9%8A%D8%A9_%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9_Arabic_alphabet.ogg
