@@ -817,13 +817,153 @@ License: CC0
 Source: https://commons.wikimedia.org/wiki/File:LL-Q9610_(ben)-Titodutta-%E0%A6%B6%E0%A6%BF%E0%A6%AE.wav
 
 ## Arabic letters
-The 28 letter names in `sounds/arabic/letters/` are split from one
-Wikimedia Commons recitation of the alphabet, أ to ي, in dictionary
-order. Trimmed to the name, a breath of silence at each end, and
-levelled to the other clips on the board. There is no second file —
-Arabic on this board speaks the letter's name, not a word it starts.
+The 28 letter names in `sounds/arabic/names/` are one Lingua Libre
+recording per letter, by native speakers, from Wikimedia Commons.
+Trimmed to the name, a short silence at each end, and levelled to
+the other clips on the board. Arabic on this board speaks the
+letter's name, not a word it starts.
 
-**أ to ي** — `arabic/letters/1.m4a` through `arabic/letters/28.m4a`  
-From *حروف الأبجدية العربية Arabic alphabet.ogg* by Ibraheem alex  
-License: GNU Free Documentation License 1.2+  
-Source: https://commons.wikimedia.org/wiki/File:%D8%AD%D8%B1%D9%88%D9%81_%D8%A7%D9%84%D8%A3%D8%A8%D8%AC%D8%AF%D9%8A%D8%A9_%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9_Arabic_alphabet.ogg
+**ألف** — `arabic/names/1.m4a`  
+From *LL-Q13955 (ara)-AlNatiq-ا.wav* by AlNatiq  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D8%A7.wav
+
+**باء** — `arabic/names/2.m4a`  
+From *LL-Q13955 (ara)-Zinou2go-ب.wav* by Zinou2go (Lingua Libre)  
+License: CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0/). Trimmed and levelled; this clip is shared under the same license.  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-%D8%A8.wav
+
+**تاء** — `arabic/names/3.m4a`  
+From *LL-Q13955 (ara)-AlNatiq-ت.wav* by AlNatiq  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D8%AA.wav
+
+**ثاء** — `arabic/names/4.m4a`  
+From *LL-Q13955 (ara)-AlNatiq-ث.wav* by AlNatiq  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D8%AB.wav
+
+**جيم** — `arabic/names/5.m4a`  
+From *LL-Q13955 (ara)-AlNatiq-ج.wav* by AlNatiq  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D8%AC.wav
+
+**حاء** — `arabic/names/6.m4a`  
+From *LL-Q13955 (ara)-AlNatiq-ح.wav* by AlNatiq  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D8%AD.wav
+
+**خاء** — `arabic/names/7.m4a`  
+From *LL-Q13955 (ara)-AlNatiq-خ.wav* by AlNatiq  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D8%AE.wav
+
+**دال** — `arabic/names/8.m4a`  
+From *LL-Q13955 (ara)-Zinou2go-د.wav* by Zinou2go (Lingua Libre)  
+License: CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0/). Trimmed and levelled; this clip is shared under the same license.  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-%D8%AF.wav
+
+**ذال** — `arabic/names/9.m4a`  
+From *LL-Q13955 (ara)-AlNatiq-ذ.wav* by AlNatiq  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D8%B0.wav
+
+**راء** — `arabic/names/10.m4a`  
+From *LL-Q13955 (ara)-AlNatiq-ر.wav* by AlNatiq  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D8%B1.wav
+
+**زاي** — `arabic/names/11.m4a`  
+From *LL-Q13955 (ara)-Rashed Aljahdali-ز.wav* by Rashed Aljahdali  
+License: CC BY 4.0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Rashed_Aljahdali-%D8%B2.wav
+
+**سين** — `arabic/names/12.m4a`  
+From *LL-Q13955 (ara)-AlNatiq-س.wav* by AlNatiq  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D8%B3.wav
+
+**شين** — `arabic/names/13.m4a`  
+From *LL-Q13955 (ara)-AlNatiq-ش.wav* by AlNatiq  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D8%B4.wav
+
+**صاد** — `arabic/names/14.m4a`  
+From *LL-Q13955 (ara)-AlNatiq-ص.wav* by AlNatiq  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D8%B5.wav
+
+**ضاد** — `arabic/names/15.m4a`  
+From *LL-Q13955 (ara)-AlNatiq-ض.wav* by AlNatiq  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D8%B6.wav
+
+**طاء** — `arabic/names/16.m4a`  
+From *LL-Q13955 (ara)-AlNatiq-ط.wav* by AlNatiq  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D8%B7.wav
+
+**ظاء** — `arabic/names/17.m4a`  
+From *LL-Q13955 (ara)-Rashed Aljahdali-ظ.wav* by Rashed Aljahdali  
+License: CC BY 4.0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Rashed_Aljahdali-%D8%B8.wav
+
+**عين** — `arabic/names/18.m4a`  
+From *LL-Q13955 (ara)-AlNatiq-ع.wav* by AlNatiq  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D8%B9.wav
+
+**غين** — `arabic/names/19.m4a`  
+From *LL-Q13955 (ara)-AlNatiq-غ.wav* by AlNatiq  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D8%BA.wav
+
+**فاء** — `arabic/names/20.m4a`  
+From *LL-Q13955 (ara)-AlNatiq-ف.wav* by AlNatiq  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D9%81.wav
+
+**قاف** — `arabic/names/21.m4a`  
+From *LL-Q13955 (ara)-AlNatiq-ق.wav* by AlNatiq  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D9%82.wav
+
+**كاف** — `arabic/names/22.m4a`  
+From *LL-Q13955 (ara)-AlNatiq-ك.wav* by AlNatiq  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D9%83.wav
+
+**لام** — `arabic/names/23.m4a`  
+From *LL-Q13955 (ara)-AlNatiq-ل.wav* by AlNatiq  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D9%84.wav
+
+**ميم** — `arabic/names/24.m4a`  
+From *LL-Q13955 (ara)-AlNatiq-م.wav* by AlNatiq  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D9%85.wav
+
+**نون** — `arabic/names/25.m4a`  
+From *LL-Q13955 (ara)-AlNatiq-ن.wav* by AlNatiq  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D9%86.wav
+
+**هاء** — `arabic/names/26.m4a`  
+From *LL-Q13955 (ara)-AlNatiq-ه.wav* by AlNatiq  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D9%87.wav
+
+**واو** — `arabic/names/27.m4a`  
+From *LL-Q13955 (ara)-Zinou2go-و.wav* by Zinou2go (Lingua Libre)  
+License: CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0/). Trimmed and levelled; this clip is shared under the same license.  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-%D9%88.wav
+
+**ياء** — `arabic/names/28.m4a`  
+From *LL-Q13955 (ara)-AlNatiq-ي.wav* by AlNatiq  
+License: CC0  
+Source: https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-AlNatiq-%D9%8A.wav
+
+The older 28-clip set in `sounds/arabic/letters/` is no longer
+referenced. It was split from *حروف الأبجدية العربية Arabic alphabet.ogg*
+by Ibraheem alex, GNU Free Documentation License 1.2+,
+https://commons.wikimedia.org/wiki/File:%D8%AD%D8%B1%D9%88%D9%81_%D8%A7%D9%84%D8%A3%D8%A8%D8%AC%D8%AF%D9%8A%D8%A9_%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9_Arabic_alphabet.ogg
