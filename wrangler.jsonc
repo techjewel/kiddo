@@ -6,7 +6,10 @@
   "assets": {
     "directory": "./",
     "html_handling": "auto-trailing-slash",
-    "not_found_handling": "single-page-application"
+    // A missing file is a 404, never the app. With the single-page
+    // fallback a missing sound came back as index.html with a 200, and
+    // the service worker filed it as that sound for good.
+    "not_found_handling": "404-page"
   },
   // The apex is the address on the card and in the og: tags. A custom
   // domain needs kiddo.page to be a zone on this account; Cloudflare
