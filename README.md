@@ -596,7 +596,8 @@ Set up once (Node 20.19 or newer):
 ```bash
 npm ci                          # Playwright, for the parity tests
 npm run app:install             # Vue, Vite, Vitest and friends, in app/
-npx playwright install chromium
+npx playwright install chromium webkit
+# on Linux, WebKit also needs: sudo npx playwright install-deps webkit
 ```
 
 Run:
@@ -620,6 +621,7 @@ npm run test:legacy             # Playwright parity tests, against the live app
 npm run test:next               # the same tests, against the app/dist build
 npm run test:parity             # both, one after the other
 npm run test:all                # unit tests, then both parity runs
+npm run test:ios                # only the iPhone and iPad projects
 ```
 
 The parity tests live in `tests/parity/`. Every test must pass against both
@@ -631,6 +633,39 @@ purpose, refresh that file with:
 ```bash
 UPDATE_SNAPSHOT=1 npx playwright test -g snapshot
 ```
+
+### iPhone and iPad
+
+The reference devices are an iPhone 15 Pro Max and an iPad Air. Every
+parity test runs on Playwright WebKit as both, in portrait and landscape,
+plus Desktop Chrome. Pick one with `--project`, for example
+`npx playwright test --project=legacy-ipad-air-landscape`. Playwright has
+no iPad Air descriptor, so `playwright.config.js` defines one: 820 x 1180
+points at 2x.
+
+`tests/parity/ios.spec.js` checks what WebKit can show:
+
+- no sound before the first tap, and every clip, voice and beep starts
+  inside a tap;
+- tiles, tabs and quiz answers are at least 44 points;
+- no screen scrolls sideways, and the tab bar stays on screen;
+- the home-screen tags, the 180 x 180 icon and the manifest;
+- that the app opens cleanly with `navigator.standalone`;
+- safe-area padding on the top and bottom bars;
+- the whole offline download lands in the cache;
+- a light speed budget on the iPhone.
+
+`test.fail()` marks a known gap. It stays green while the gap is there and
+turns red once someone fixes it, so the marker gets removed.
+
+WebKit on Linux is not iOS. It does not block audio before a tap, has no
+home-screen mode, never evicts storage and reports every safe-area inset
+as 0. Check these on the real devices before a release:
+
+1. Sound on the first tap after a cold start, with the ring switch on and off.
+2. Bangla letters: the word after the letter still plays.
+3. Add to Home Screen, then open it in flight mode after the download.
+4. Landscape on the iPhone: nothing under the Dynamic Island.
 
 A ready CI workflow is in `ci/github-actions-ci.yml`. It runs the unit tests,
 the build and both parity runs on every pull request, and it does not deploy.
