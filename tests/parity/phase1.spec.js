@@ -42,7 +42,13 @@ test.describe('phase 1 build', () => {
    A tablet that has the live site (the legacy v35 worker, a full or
    half download, progress in localStorage) opens kiddo.page after the
    cutover. One server on one origin serves the old tree, then the new
-   build, as Cloudflare will. */
+   build, as Cloudflare will.
+
+   It answers the way Cloudflare does, too. With html_handling
+   "auto-trailing-slash", /index.html is a 307 to /. A worker that files
+   that redirected answer as its offline page cannot use it for a page
+   load: the browser refuses a redirected response for a navigation, and
+   the app does not open without a signal. */
 
 const TYPES = {
   '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.mjs': 'text/javascript',
@@ -58,6 +64,11 @@ function twoReleases(oldDir, newDir) {
     /* "No signal": the connection drops without an answer. */
     if (down) { req.socket.destroy(); return; }
     const path = decodeURIComponent(new URL(req.url, 'http://x').pathname);
+    /* Cloudflare's auto-trailing-slash. */
+    if (path.endsWith('/index.html')) {
+      res.writeHead(307, { location: path.slice(0, -'index.html'.length), 'cache-control': 'no-cache' }).end();
+      return;
+    }
     let file = normalize(join(dir, path));
     if (!file.startsWith(dir)) { res.writeHead(403).end(); return; }
     if (existsSync(file) && statSync(file).isDirectory()) file = join(file, 'index.html');
@@ -72,7 +83,15 @@ function twoReleases(oldDir, newDir) {
   return {
     server,
     use(which) { dir = which === 'old' ? oldDir : newDir; },
-    offline(on) { down = on; },
+    /* Losing the signal also drops the connections already open, as a
+       tablet leaving the wifi does. Leaving them pooled and resetting
+       each request on them instead trips a libsoup assertion in
+       Playwright's Linux WebKit ("This is a WebKit bug"), which then
+       loses the worker and the caches for the rest of the page load. */
+    offline(on) {
+      down = on;
+      if (on) server.closeAllConnections();
+    },
   };
 }
 
@@ -97,8 +116,34 @@ test.describe('upgrade from the live site', () => {
 
   test('keeps the download and the progress, drops the old shell, works offline', async ({ page }, info) => {
     test.skip(!isNext, 'Checks the Vite build only');
-    test.skip(!/(-chromium|-iphone-15-pro-max)$/.test(info.project.name), 'Chromium and iPhone portrait');
+    test.skip(!/(-chromium|-iphone-15-pro-max|-ipad-air)$/.test(info.project.name), 'Chromium, iPhone and iPad portrait');
     test.setTimeout(120000);
+
+    /* The new page has booted: the board script ran and drew the letters. */
+    const booted = async (what) => {
+      await page.waitForFunction(() => typeof LETTERS_BY_LANG !== 'undefined', null, { timeout: 20000 })
+        .catch(() => { throw new Error(`${what}: the app did not start (blank or unstyled page)`); });
+      await expect(page.locator('#screen-letters .magnet').first(), what).toBeVisible();
+      expect(await page.evaluate(() => document.querySelector('script[src*="/assets/app-"]') !== null), `${what}: new build`).toBe(true);
+    };
+    /* Opening without a signal: the new build, in Bangla, with its fonts
+       and a downloaded photo. */
+    const opensOffline = async (what, photo) => {
+      site.offline(true);
+      try {
+        await page.reload();
+        await booted(what);
+        const offline = await page.evaluate(async (p) => ({
+          bangla: (await document.fonts.load('800 40px "Baloo Da 2"', 'অ')).length,
+          photo: (await fetch(p)).ok,
+        }), photo);
+        expect(offline.bangla, `${what}: Bangla font offline`).toBe(1);
+        expect(offline.photo, `${what}: a downloaded photo offline`).toBe(true);
+        return offline;
+      } finally {
+        site.offline(false);
+      }
+    };
 
     // 1. The live site, as a tablet has it today.
     site.use('old');
@@ -121,48 +166,72 @@ test.describe('upgrade from the live site', () => {
       navigator.serviceWorker.controller.postMessage({ type: 'SAVE_MEDIA', urls });
     }), stale);
     expect(saved.length, 'files downloaded under the old site').toBe(24);
+    /* A font of ours already on the device, and one of Google's from
+       the old page. The fonts cache outlives the release; Google's
+       copies go. */
+    await page.evaluate(async () => {
+      const fonts = await caches.open('magnet-fonts');
+      await fonts.put('/assets/kept-by-upgrade-test.woff2', new Response('x', { headers: { 'content-type': 'font/woff2' } }));
+      await fonts.put('https://fonts.gstatic.com/s/upgrade-test.woff2', new Response('x'));
+    });
     const before = await page.evaluate(() => caches.keys());
     expect(before).toContain('magnet-shell-v35');
+    expect(before).toContain('magnet-media');
 
-    // 2. The cutover: same origin, the new build.
+    // 2. The cutover: same origin, the new build. The tablet opens it once
+    //    with a signal, and the new worker takes over.
     site.use('new');
+    const navigations = [];
+    page.on('framenavigated', (f) => { if (f === page.mainFrame()) navigations.push(f.url()); });
     await page.reload();
+    await booted('first open after the cutover');
     await expect.poll(async () => {
       await page.evaluate(() => navigator.serviceWorker.getRegistration().then((r) => r && r.update())).catch(() => {});
       return page.evaluate(async () => {
         const reg = await navigator.serviceWorker.getRegistration();
         const names = await caches.keys();
         return reg?.active?.state === 'activated' && !reg.installing && !reg.waiting
+          && /\/sw\.js$/.test(navigator.serviceWorker.controller?.scriptURL || '')
+          && reg.active.scriptURL === navigator.serviceWorker.controller.scriptURL
           && !names.includes('magnet-shell-v35');
       });
     }, { timeout: 60000 }).toBe(true);
-    const after = await page.evaluate(() => caches.keys());
-    expect(after.some((n) => /^magnet-shell-[0-9a-f]{8}$/.test(n)), `new shell cache in ${after}`).toBe(true);
-    await page.reload();
-    await page.waitForFunction(() => typeof LETTERS_BY_LANG !== 'undefined');
-    expect(await page.evaluate(() => document.querySelector('script[src*="/assets/app-"]') !== null)).toBe(true);
+    /* No reload loop: the one reload above, and nothing after it. */
+    await page.waitForTimeout(1500);
+    expect(navigations.length, `page loads after the cutover: ${navigations}`).toBe(1);
 
-    const kept = await page.evaluate(async (urls) => {
+    const after = await page.evaluate(async (urls) => {
+      const names = await caches.keys();
       const media = await caches.open('magnet-media');
-      let n = 0;
-      for (const u of urls) if (await media.match(u)) n += 1;
-      return n;
+      let kept = 0;
+      for (const u of urls) if (await media.match(u)) kept += 1;
+      const fonts = await caches.open('magnet-fonts');
+      const fontKeys = (await fonts.keys()).map((r) => r.url);
+      const shellName = names.find((n) => /^magnet-shell-[0-9a-f]{8}$/.test(n));
+      const shell = shellName ? await caches.open(shellName) : null;
+      const shellRedirected = [];
+      if (shell) for (const r of await shell.keys()) if ((await shell.match(r)).redirected) shellRedirected.push(r.url);
+      return { names, kept, fontKeys, shellName, shellRedirected };
     }, saved);
-    expect(kept, 'downloaded files still on the device').toBe(saved.length);
+    expect(after.shellName, `new shell cache in ${after.names}`).toBeTruthy();
+    expect(after.kept, 'downloaded files still on the device').toBe(saved.length);
+    expect(after.fontKeys.some((u) => u.endsWith('/assets/kept-by-upgrade-test.woff2')), 'fonts cache kept').toBe(true);
+    expect(after.fontKeys.some((u) => u.includes('/assets/baloo-da-2-bengali-800')), 'new fonts cached').toBe(true);
+    expect(after.fontKeys.filter((u) => !u.startsWith(base)), 'Google font copies dropped').toEqual([]);
+    expect(after.shellRedirected, 'redirected answers in the shell cache').toEqual([]);
     expect(await page.evaluate(() => localStorage.getItem('magnet-board-v1'))).toBe(progress);
 
-    // 3. No signal: the new build still opens, in Bangla, with its fonts.
-    site.offline(true);
+    // 3. The next time the tablet opens, there is no signal. Nothing has
+    //    loaded the page under the new worker yet, so this is the offline
+    //    copy the new worker filed when it installed.
+    const firstOffline = await opensOffline('first open with no signal after the upgrade', saved[0]);
+
+    // 4. Back online, then offline again: still the new build, still the
+    //    download and the progress.
     await page.reload();
-    await page.waitForFunction(() => typeof LETTERS_BY_LANG !== 'undefined');
-    await expect(page.locator('#screen-letters .magnet').first()).toBeVisible();
-    const offline = await page.evaluate(async (photo) => ({
-      bangla: (await document.fonts.load('800 40px "Baloo Da 2"', 'অ')).length,
-      photo: (await fetch(photo)).ok,
-    }), saved[0]);
-    site.offline(false);
-    info.annotations.push({ type: 'upgrade', description: JSON.stringify({ before, after, kept, offline }) });
-    expect(offline.bangla, 'Bangla font offline').toBe(1);
-    expect(offline.photo, 'a downloaded photo offline').toBe(true);
+    await booted('back online');
+    expect(await page.evaluate(() => localStorage.getItem('magnet-board-v1'))).toBe(progress);
+    const secondOffline = await opensOffline('offline again', saved[saved.length - 1]);
+    info.annotations.push({ type: 'upgrade', description: JSON.stringify({ before, after, firstOffline, secondOffline }) });
   });
 });

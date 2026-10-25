@@ -76,6 +76,29 @@ async function purgeBadMedia(): Promise<number> {
   return dropped;
 }
 
+/* kiddo.page answers /index.html with a 307 to / (Cloudflare's
+   auto-trailing-slash), so fetching it gives a response marked as
+   redirected. A browser will not take a redirected response from a
+   worker for a page load: Safari says "Response served by service
+   worker has redirections", Chrome fails with ERR_FAILED. Filed as the
+   offline page, it stopped the app opening without a signal until the
+   page had been loaded once more with one. Keep the body and headers,
+   drop the redirect. */
+async function unredirected(res: Response): Promise<Response> {
+  if (!res.redirected) return res;
+  return new Response(await res.blob(), {
+    status: res.status,
+    statusText: res.statusText,
+    headers: res.headers,
+  });
+}
+
+/* The cached page, for a page load with no signal. */
+async function offlinePage(): Promise<Response> {
+  const hit = (await caches.match('./index.html')) || (await caches.match('./'));
+  return hit ? unredirected(hit) : Response.error();
+}
+
 /* ---------- Install / activate -------------------------------- */
 
 self.addEventListener('install', (e) => {
@@ -86,7 +109,10 @@ self.addEventListener('install', (e) => {
        the app with no worker at all. A font already on the device is
        not fetched again; its name changes when its contents do. */
     await Promise.all([
-      ...SHELL_URLS.map((u) => shell.add(new Request(u, { cache: 'reload' })).catch(() => {})),
+      ...SHELL_URLS.map((u) => (async () => {
+        const res = await fetch(new Request(u, { cache: 'reload' }));
+        if (res.ok) await shell.put(u, await unredirected(res));
+      })().catch(() => {})),
       ...FONT_URLS.map(async (u) => {
         if (await fonts.match(u)) return;
         await fonts.add(new Request(u, { cache: 'reload' })).catch(() => {});
@@ -138,9 +164,7 @@ self.addEventListener('fetch', (e) => {
         }
         return fresh;
       } catch {
-        return (await caches.match('./index.html'))
-          || (await caches.match('./'))
-          || Response.error();
+        return offlinePage();
       }
     })());
     return;
