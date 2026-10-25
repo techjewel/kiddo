@@ -95,6 +95,12 @@ function twoReleases(oldDir, newDir) {
   };
 }
 
+/* The tree kiddo.page served before the cutover: the repo root with the
+   v35 worker, master at 3a56187. Pinned, because once this branch is
+   merged master is the new build and no longer the release a tablet is
+   upgrading from. */
+const LIVE_RELEASE = '3a5618766fc03ea6e7cf388c4015426b3fc149e0';
+
 test.describe('upgrade from the live site', () => {
   let site;
   let base;
@@ -103,7 +109,7 @@ test.describe('upgrade from the live site', () => {
   test.beforeAll(async () => {
     if (!isNext) return;
     oldDir = mkdtempSync(join(tmpdir(), 'kiddo-live-'));
-    execSync(`git archive origin/master | tar -x -C ${oldDir}`);
+    execSync(`git archive ${LIVE_RELEASE} | tar -x -C ${oldDir}`);
     site = twoReleases(oldDir, join(process.cwd(), 'dist'));
     await new Promise((r) => site.server.listen(0, '127.0.0.1', r));
     base = `http://127.0.0.1:${site.server.address().port}`;
