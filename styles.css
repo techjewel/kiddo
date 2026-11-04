@@ -47,6 +47,7 @@
   --lit: #E24A3F;
 
   --rail-h: 60px;
+  /* Room under the last row for the floating 🐢 🎤 buttons. */
   --nav-h: 76px;
   --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -151,8 +152,6 @@ button {
 
 .app.is-tinted .screen--colors .screen-hint { color: var(--page-ct); opacity: 0.82; }
 
-/* The nav is dark ink, which vanishes on a black door. */
-.app.is-tinted .nav { box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.22), 0 8px 24px rgba(33, 37, 44, 0.3); }
 
 /* ---------- Top magnetic strip ------------------------------- */
 
@@ -1091,83 +1090,6 @@ button {
   100% { transform: rotate(0deg) scale(1); }
 }
 
-/* ---------- Bottom nav ---------------------------------------- */
-
-.nav {
-  position: absolute;
-  left: 50%;
-  bottom: calc(14px + env(safe-area-inset-bottom));
-  transform: translateX(-50%);
-  display: flex;
-  gap: 4px;
-  padding: 6px;
-  border-radius: 999px;
-  background: var(--ink);
-  box-shadow: 0 8px 24px rgba(33, 37, 44, 0.30);
-}
-
-/* Seven tabs. On a phone the symbol is the whole button — bigger
-   targets, and a child who can't read navigates by symbol anyway.
-   The words come back as soon as there's room. */
-.tab {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  padding: 9px 15px;
-  border-radius: 999px;
-  font-size: 14.5px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.62);
-  transition: color 0.15s ease, background-color 0.15s ease;
-}
-
-.tab-label { display: none; }
-
-.tab-mark {
-  display: grid;
-  place-items: center;
-  width: 28px; height: 28px;
-  border-radius: 9px;
-  font-size: 16px;
-  font-weight: 800;
-  background: rgba(255, 255, 255, 0.14);
-  color: rgba(255, 255, 255, 0.75);
-}
-
-.tab-mark--emoji { font-family: var(--font-emoji); font-size: 15px; }
-
-.tab.is-on { color: #fff; background: rgba(255, 255, 255, 0.14); }
-.tab.is-on .tab-mark { background: var(--m2); color: #40260A; }
-
-/* Seven tabs is one more than a narrow phone has room for at the
-   comfortable padding, so the bar tightens rather than spilling off
-   the screen. The 28px symbol — the actual target — doesn't shrink.
-   It was eight until language stopped being a tab of its own. */
-@media (max-width: 560px) {
-  .nav { gap: 1px; padding: 5px; }
-  .tab { padding: 9px 8px; }
-}
-
-/* The narrowest phones still in use. The pill is centred and clipped
-   rather than scrollable, so an overflow doesn't hide the last tab —
-   it shaves the first and the last. Squeeze the space between the
-   symbols; the 28px symbol itself, which is what a finger aims at,
-   never gets smaller. */
-@media (max-width: 400px) {
-  .nav { gap: 0; padding: 4px; }
-  .tab { padding: 9px 5px; }
-}
-
-/* A worded bar this wide ran past a 768px tablet — the pill is centred
-   and unscrollable, so overflowing doesn't hide a tab, it drags the
-   whole page sideways. Words wait until there's honestly room. */
-@media (min-width: 900px) {
-  .tab { padding: 10px 14px; }
-  .tab-label { display: inline; }
-  .tab-mark { width: 23px; height: 23px; border-radius: 7px; font-size: 13px; }
-  .tab-mark--emoji { font-size: 12px; }
-}
-
 .count-item {
   font-family: var(--font-emoji);
   font-size: 24px;
@@ -1780,7 +1702,8 @@ button {
   display: none;
 }
 
-.app.is-focus-mode .nav {
+.app.is-focus-mode .back-btn,
+.app.is-focus-mode .speak-bar {
   display: none;
 }
 
@@ -1789,3 +1712,318 @@ button {
 .app.is-focus-mode .screen-hint {
   display: none;
 }
+
+/* ---------- Home menu, shelf list, game list -------------------
+   Big cards, two or three to a row. The picture or symbol is what a
+   child picks by; the word under it is for the grown-up. */
+
+.home-grid,
+.shelf-menu,
+.play-menu {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 760px;
+  margin: 4px auto 0;
+}
+
+@media (min-width: 700px) {
+  .home-grid, .shelf-menu, .play-menu { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+}
+
+.home-card,
+.shelf-card,
+.game-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 140px;
+  padding: 14px 10px 12px;
+  border-radius: 26px;
+  color: #fff;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--c) 100%, white 26%),
+    var(--c) 52%,
+    color-mix(in srgb, var(--c) 100%, black 12%));
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -4px 0 rgba(0, 0, 0, 0.18),
+    0 4px 0 color-mix(in srgb, var(--c) 100%, black 30%),
+    0 8px 14px rgba(33, 37, 44, 0.2);
+  transition: transform 0.15s var(--ease-pop);
+}
+.home-card:active, .shelf-card:active, .game-card:active { transform: scale(0.95); }
+
+.home-card--wide { grid-column: 1 / -1; min-height: 110px; flex-direction: row; gap: 16px; }
+
+.home-mark,
+.game-mark {
+  font-weight: 800;
+  font-size: clamp(48px, 13vw, 72px);
+  line-height: 1;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.16);
+}
+.home-mark--emoji,
+.game-mark--emoji { font-family: var(--font-emoji); text-shadow: none; }
+
+.home-label,
+.menu-label {
+  font-weight: 800;
+  font-size: 19px;
+  line-height: 1.1;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.18);
+}
+
+/* A shelf card is a photograph on a white face, like a picture magnet. */
+.shelf-card { padding: 10px 10px 10px; }
+.shelf-photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 18px;
+  background: #fff;
+}
+.shelf-photo.is-fallback {
+  display: grid;
+  place-items: center;
+  font-family: var(--font-emoji);
+  font-size: 64px;
+}
+
+/* Pictures: the shelf list, or one open shelf — never both. */
+#screen-pictures.is-menu > :not(.shelf-menu) { display: none !important; }
+#screen-pictures:not(.is-menu) > .shelf-menu { display: none; }
+
+/* ---------- Back button ---------------------------------------- */
+
+.rail .back-btn {
+  width: 52px; height: 52px;
+  font-size: 28px;
+  font-weight: 800;
+  color: #40260A;
+  background: linear-gradient(180deg, #FFCF52, var(--m2));
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -2px 0 rgba(140, 78, 0, 0.22),
+    0 2px 5px rgba(33, 37, 44, 0.18);
+}
+/* The score moves over to make room beside it. */
+.rail .back-btn:not(.is-hidden) + .score { margin-right: auto; margin-left: 2px; }
+
+/* ---------- Hold to open --------------------------------------- */
+
+#parentBtn, #focusToggleBtn {
+  position: relative;
+  touch-action: none;
+  -webkit-touch-callout: none;
+}
+
+#parentBtn.is-holding::before,
+#focusToggleBtn.is-holding::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 16px;
+  background: conic-gradient(var(--m2) calc(var(--p, 0) * 1turn), transparent 0);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 0);
+  mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 0);
+  animation: hold-fill var(--hold, 1.2s) linear forwards;
+}
+
+@property --p { syntax: "<number>"; inherits: false; initial-value: 0; }
+@keyframes hold-fill { to { --p: 1; } }
+
+[data-tip].show-tip::after {
+  content: attr(data-tip);
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 50;
+  padding: 6px 10px;
+  border-radius: 10px;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--ink);
+  box-shadow: 0 4px 12px rgba(33, 37, 44, 0.25);
+  animation: pop-in 0.2s var(--ease-pop);
+  pointer-events: none;
+}
+
+/* ---------- 🐢 and 🎤 ------------------------------------------
+   Floating at the bottom, where a thumb is, and out of the way of
+   the grid. One bar per screen; it hides with its screen. */
+
+.speak-bar {
+  position: fixed;
+  left: calc(12px + env(safe-area-inset-left));
+  right: calc(14px + env(safe-area-inset-right));
+  bottom: calc(14px + env(safe-area-inset-bottom));
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+}
+.speak-bar > * { pointer-events: auto; }
+.app.is-muted .speak-bar { display: none; }
+
+.speak-btn {
+  position: relative;
+  flex: none;
+  width: 64px; height: 64px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-family: var(--font-emoji);
+  font-size: 32px;
+  background: #fff;
+  box-shadow:
+    inset 0 0 0 1px rgba(33, 37, 44, 0.08),
+    0 3px 0 rgba(33, 37, 44, 0.12),
+    0 8px 18px rgba(33, 37, 44, 0.22);
+  transition: transform 0.15s var(--ease-pop);
+}
+.speak-btn:active { transform: scale(0.9); }
+.speak-bar.no-mic .speak-btn--mic { display: none; }
+
+/* Listening: red, and a ring that grows with his voice. */
+.speak-bar.is-asking .speak-btn--mic { opacity: 0.6; }
+.speak-bar.is-rec .speak-btn--mic {
+  background: #E24A3F;
+  box-shadow:
+    0 0 0 calc(6px + var(--level, 0) * 22px) rgba(226, 74, 63, 0.28),
+    0 8px 18px rgba(33, 37, 44, 0.22);
+  animation: rec-pulse 1s ease-in-out infinite;
+  transition: box-shadow 0.06s linear;
+}
+@keyframes rec-pulse { 50% { transform: scale(1.06); } }
+.speak-bar.is-playing .speak-btn--mic { background: #FFE9A8; }
+
+.speak-btn[data-tip].show-tip::after { top: auto; bottom: calc(100% + 8px); }
+
+/* The beats: one chip per beat, lit with the drum, then glowing as a
+   wave while the word is said slowly. */
+.beats {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  pointer-events: none;
+}
+.beat {
+  padding: 8px 14px;
+  border-radius: 14px;
+  font-weight: 800;
+  font-size: clamp(22px, 6vw, 32px);
+  line-height: 1;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 4px 12px rgba(33, 37, 44, 0.18);
+  opacity: 0.35;
+  transform: scale(0.9);
+  transition: opacity 0.15s, transform 0.2s var(--ease-pop), background-color 0.2s;
+}
+.beat.is-on { opacity: 1; transform: scale(1); animation: beat-hit 0.35s var(--ease-pop); }
+@keyframes beat-hit { 40% { transform: scale(1.25) translateY(-6px); } }
+.beats.is-saying .beat { background: #FFE9A8; animation: beat-wave 0.9s ease-in-out infinite; }
+.beats.is-saying .beat:nth-child(2) { animation-delay: 0.15s; }
+.beats.is-saying .beat:nth-child(3) { animation-delay: 0.3s; }
+.beats.is-saying .beat:nth-child(4) { animation-delay: 0.45s; }
+.beats.is-saying .beat:nth-child(5) { animation-delay: 0.6s; }
+@keyframes beat-wave { 50% { transform: translateY(-5px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .beat.is-on, .beats.is-saying .beat, .speak-bar.is-rec .speak-btn--mic { animation: none; }
+}
+
+/* ---------- Word screens: actions, feelings, opposites, where ----
+   The panel's picture is the lesson here — a frown, a ball under a
+   table — so it is bigger than the photo on the Pictures panel. */
+
+.showcase--word { gap: 16px; flex-wrap: nowrap; }
+
+.sc-art {
+  flex: none;
+  display: flex;
+  gap: 8px;
+  width: 120px;
+  height: 120px;
+}
+.sc-art--pair { width: 200px; height: 96px; }
+
+@media (min-width: 700px) {
+  .sc-art { width: 160px; height: 160px; }
+  .sc-art--pair { width: 280px; height: 136px; }
+}
+
+.sc-art-img {
+  display: block;
+  flex: 1 1 0;
+  min-width: 0;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  background: #F4F6F9;
+}
+.sc-art-img.is-fallback {
+  display: grid;
+  place-items: center;
+  font-family: var(--font-emoji);
+  font-size: 56px;
+  background: none;
+}
+.sc-art-img.is-dim { opacity: 0.38; filter: saturate(0.6); transform: scale(0.88); }
+.sc-art-img.is-lit { box-shadow: 0 0 0 4px var(--c, var(--m2)); }
+
+.word-art { display: grid; place-items: center; background: #F7F9FC; }
+.word-art svg { display: block; width: 100%; height: 100%; }
+.magnet-photo.word-art { padding: 6%; }
+
+.showcase--word .sc-word { font-size: clamp(26px, 7vw, 38px); }
+
+.grid--words { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+
+/* Opposites sit in pairs: two columns on a phone, four on a tablet,
+   so a word always has its opposite right beside it. */
+.grid--pairs { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 560px; column-gap: 12px; }
+@media (min-width: 700px) {
+  .grid--pairs { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 820px; }
+  .grid--pairs > :nth-child(4n + 2) { margin-right: 14px; }
+}
+
+.magnet--wordart .magnet-cap { color: color-mix(in srgb, var(--c) 100%, black 26%); text-shadow: none; }
+.magnet--wordart.is-known::after { background: color-mix(in srgb, var(--c) 100%, white 20%); box-shadow: none; }
+.choices .magnet--wordart { padding: 12px; }
+
+/* ---------- Your voice ------------------------------------------
+   ⏺ shows only when a grown-up has switched it on in the panel. It is
+   red-ringed so it never passes for the child's 🎤. */
+.speak-btn--own { display: none; font-size: 26px; color: #E24A3F; box-shadow: inset 0 0 0 3px #E24A3F, 0 8px 18px rgba(33, 37, 44, 0.22); }
+.app.is-recording-own .speak-btn--own { display: grid; }
+.speak-bar.no-mic .speak-btn--own { display: none; }
+.speak-bar.is-rec.is-own .speak-btn--mic { background: #fff; animation: none; box-shadow: inset 0 0 0 1px rgba(33, 37, 44, 0.08), 0 8px 18px rgba(33, 37, 44, 0.22); }
+.speak-bar.is-rec.is-own .speak-btn--own {
+  background: #E24A3F;
+  color: #fff;
+  box-shadow: 0 0 0 calc(6px + var(--level, 0) * 22px) rgba(226, 74, 63, 0.28), 0 8px 18px rgba(33, 37, 44, 0.22);
+  animation: rec-pulse 1s ease-in-out infinite;
+}
+
+.voice-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  font-weight: 600;
+}
+.voice-row input { width: 24px; height: 24px; accent-color: var(--m1); }
+.rec-dot { width: 22px; height: 22px; border-radius: 50%; background: #E24A3F; }
+.speak-bar.is-rec.is-own .rec-dot { background: #fff; border-radius: 5px; }
+/* "says /b/" is a note for the grown-up beside the letter, not a headline. */
+.sc-latin.sc-latin--sound { font-family: var(--font-letter); font-size: 18px; font-weight: 700; opacity: 0.7; align-self: center; }

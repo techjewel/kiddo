@@ -56,7 +56,33 @@ function recordSound() {
   }
 }
 
-const SCREENS = ['letters', 'numbers', 'pictures', 'colors', 'shapes', 'body', 'play'];
+const SCREENS = ['letters', 'numbers', 'pictures', 'colors', 'shapes', 'body',
+  'actions', 'feelings', 'opposites', 'where', 'play'];
+
+/* Back up to the home menu, then open a module from its card. */
+async function openScreen(page, screen) {
+  while (await page.locator('#backBtn').isVisible()) await page.tap('#backBtn');
+  await page.tap(`.home-card[data-screen="${screen}"]`);
+}
+
+/* Every level a child can stand on: the home menu, each module, and
+   one open shelf and one running game. */
+async function eachPlace(page, check) {
+  await check('home');
+  for (const screen of SCREENS) {
+    await openScreen(page, screen);
+    await page.waitForTimeout(250);
+    await check(screen);
+  }
+  await openScreen(page, 'pictures');
+  await page.tap('.shelf-card[data-group="animal"]');
+  await page.waitForTimeout(250);
+  await check('animal shelf');
+  await openScreen(page, 'play');
+  await page.tap('.game-card[data-set="letters"]');
+  await page.waitForTimeout(250);
+  await check('letters game');
+}
 
 test.describe('iOS Safari', () => {
   test.beforeEach(({ browserName }) => {
@@ -75,6 +101,7 @@ test.describe('iOS Safari', () => {
     await boot(page, { langs: ['en', 'bn'], lang: 'bn', chosen: true });
 
     // Bangla letters are recorded clips: letter, then the word.
+    await page.tap('.home-card[data-screen="letters"]');
     await page.locator('#screen-letters .magnet').first().tap();
     await page.waitForTimeout(2500);
     const bangla = await page.evaluate(() => window.__sound);
@@ -85,6 +112,7 @@ test.describe('iOS Safari', () => {
     });
     await page.reload();
     await page.waitForFunction(() => typeof LETTERS_BY_LANG !== 'undefined');
+    await page.tap('.home-card[data-screen="letters"]');
     await page.locator('#screen-letters .magnet').first().tap();
     await page.waitForTimeout(800);
     const english = await page.evaluate(() => window.__sound);
@@ -117,9 +145,7 @@ test.describe('iOS Safari', () => {
     const MIN = 44; // Apple's minimum, in points
     /* Controls allowed under 44 points. None, since phase 1. */
     const KNOWN_SMALL = new Set([]);
-    for (const screen of SCREENS) {
-      await page.tap(`[data-screen="${screen}"]`);
-      await page.waitForTimeout(250);
+    await eachPlace(page, async (screen) => {
       const small = await page.evaluate((min) => {
         const out = [];
         for (const e of document.querySelectorAll('button, a[href], [role="button"], .magnet')) {
@@ -134,14 +160,15 @@ test.describe('iOS Safari', () => {
       }, MIN);
       const unexpected = small.filter((s) => !KNOWN_SMALL.has(s.key));
       expect(unexpected, `small targets on ${screen}`).toEqual([]);
-    }
+    });
   });
 
   test('grown-up buttons reach 44 points', async ({ page }) => {
     await boot(page);
-    await page.tap('[data-screen="play"]');
+    await openScreen(page, 'play');
+    await page.tap('.game-card[data-set="letters"]');
     const sizes = await page.evaluate(() =>
-      [...document.querySelectorAll('#soundBtn, #focusToggleBtn, #parentBtn, .seg, #repeatAsk')]
+      [...document.querySelectorAll('#soundBtn, #focusToggleBtn, #parentBtn, #backBtn, #repeatAsk')]
         .filter((e) => e.offsetParent)
         .map((e) => Math.min(e.getBoundingClientRect().width, e.getBoundingClientRect().height)));
     expect(Math.min(...sizes)).toBeGreaterThanOrEqual(44);
@@ -149,17 +176,20 @@ test.describe('iOS Safari', () => {
 
   test('every screen fits without sideways scrolling', async ({ page }) => {
     await boot(page);
-    for (const screen of SCREENS) {
-      await page.tap(`[data-screen="${screen}"]`);
-      await page.waitForTimeout(250);
-      const fit = await page.evaluate(() => ({
-        overflowX: document.documentElement.scrollWidth - innerWidth,
-        navBottom: document.querySelector('.nav').getBoundingClientRect().bottom,
-        height: innerHeight,
-      }));
+    await eachPlace(page, async (screen) => {
+      const fit = await page.evaluate(() => {
+        const bar = [...document.querySelectorAll('.speak-bar')].find((b) => b.offsetParent || b.getClientRects().length);
+        return {
+          overflowX: document.documentElement.scrollWidth - innerWidth,
+          barBottom: bar ? bar.getBoundingClientRect().bottom : 0,
+          backTop: document.getElementById('backBtn').getBoundingClientRect().top,
+          height: innerHeight,
+        };
+      });
       expect(fit.overflowX, `${screen} scrolls sideways`).toBeLessThanOrEqual(0);
-      expect(fit.navBottom, `${screen} tab bar is off screen`).toBeLessThanOrEqual(fit.height);
-    }
+      expect(fit.barBottom, `${screen} speak buttons are off screen`).toBeLessThanOrEqual(fit.height);
+      expect(fit.backTop, `${screen} back button is off screen`).toBeGreaterThanOrEqual(0);
+    });
   });
 
   test('ready for the home screen', async ({ page, request }) => {
@@ -311,7 +341,7 @@ test.describe('iOS Safari', () => {
   test('light speed budget on iPhone', async ({ page }, info) => {
     test.skip(!info.project.name.endsWith('-iphone-15-pro-max'), 'iPhone portrait only');
     await boot(page);
-    await expect(page.locator('#screen-letters .magnet').first()).toBeVisible();
+    await expect(page.locator('.home-card').first()).toBeVisible();
     const t = await page.evaluate(() => {
       const nav = performance.getEntriesByType('navigation')[0];
       const res = performance.getEntriesByType('resource');
@@ -320,7 +350,10 @@ test.describe('iOS Safari', () => {
     });
     info.annotations.push({ type: 'speed', description: JSON.stringify(t) });
     expect(t.dcl, 'DOMContentLoaded on a local server, ms').toBeLessThan(2000);
-    expect(t.js, 'JS, uncompressed bytes').toBeLessThan(260 * 1024);
+    /* 300 KB since the word screens, letter sounds and your-voice
+       recording (app.js 141 KB -> 190 KB, 61 KB gzipped). The build
+       does not minify app.js yet; doing so would win most of it back. */
+    expect(t.js, 'JS, uncompressed bytes').toBeLessThan(300 * 1024);
     expect(t.css, 'CSS, uncompressed bytes').toBeLessThan(80 * 1024);
   });
 });

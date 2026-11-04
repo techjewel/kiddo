@@ -68,7 +68,7 @@ export default defineConfig({
     { name: `${target}-iphone-15-pro-max-landscape`, use: { ...devices['iPhone 15 Pro Max landscape'] } },
     { name: `${target}-ipad-air`, use: { ...ipadAir } },
     { name: `${target}-ipad-air-landscape`, use: { ...ipadAirLandscape } },
-    { name: `${target}-chromium`, use: { ...devices['Desktop Chrome'] } },
+    { name: `${target}-chromium`, use: { ...devices['Desktop Chrome'], launchOptions: { args: ['--mute-audio'] } } },
   ],
   webServer: {
     command: server.command,

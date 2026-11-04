@@ -129,7 +129,7 @@ test.describe('upgrade from the live site', () => {
     const booted = async (what) => {
       await page.waitForFunction(() => typeof LETTERS_BY_LANG !== 'undefined', null, { timeout: 20000 })
         .catch(() => { throw new Error(`${what}: the app did not start (blank or unstyled page)`); });
-      await expect(page.locator('#screen-letters .magnet').first(), what).toBeVisible();
+      await expect(page.locator('.home-card[data-screen="letters"]'), what).toBeVisible();
       expect(await page.evaluate(() => document.querySelector('script[src*="/assets/app-"]') !== null), `${what}: new build`).toBe(true);
     };
     /* Opening without a signal: the new build, in Bangla, with its fonts
@@ -188,7 +188,9 @@ test.describe('upgrade from the live site', () => {
     //    with a signal, and the new worker takes over.
     site.use('new');
     const navigations = [];
-    page.on('framenavigated', (f) => { if (f === page.mainFrame()) navigations.push(f.url()); });
+    /* Real page loads only. framenavigated also fires for the app's own
+       history.pushState / replaceState, which are not reloads. */
+    page.on('load', () => navigations.push(page.url()));
     await page.reload();
     await booted('first open after the cutover');
     await expect.poll(async () => {

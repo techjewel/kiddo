@@ -64,6 +64,11 @@
 
   <!-- Magnetic strip along the top: score, sound, parent controls -->
   <header class="rail">
+    <!-- Back one level: a shelf to its shelf list, a game to the game
+         list, a module to the home menu. Hidden on the home menu. -->
+    <button class="icon-btn back-btn is-hidden" id="backBtn" aria-label="Back" title="Back">
+      <span aria-hidden="true">←</span>
+    </button>
     <div class="score" id="score" aria-live="polite">
       <span class="score-star" aria-hidden="true">★</span>
       <span class="score-num" id="scoreNum">0</span>
@@ -88,12 +93,35 @@
 
   <!-- The fridge door -->
   <main class="board" id="board">
+    <!-- The home menu. One big card per module; a card opens it, and
+         the back button in the rail comes back here. -->
+    <section class="screen screen--home" id="screen-home" aria-label="Home">
+      <div class="home-grid">
+        <button class="home-card" data-screen="letters" style="--c: var(--m1)"><span class="home-mark" aria-hidden="true">Aa</span><span class="home-label">Letters</span></button>
+        <button class="home-card" data-screen="numbers" style="--c: var(--m2)"><span class="home-mark" aria-hidden="true">123</span><span class="home-label">Numbers</span></button>
+        <button class="home-card" data-screen="pictures" style="--c: var(--m3)"><span class="home-mark home-mark--emoji" aria-hidden="true">🍎</span><span class="home-label">Pictures</span></button>
+        <button class="home-card" data-screen="colors" style="--c: var(--m4)"><span class="home-mark home-mark--emoji" aria-hidden="true">🌈</span><span class="home-label">Colors</span></button>
+        <button class="home-card" data-screen="shapes" style="--c: var(--m5)"><span class="home-mark home-mark--emoji" aria-hidden="true">🔷</span><span class="home-label">Shapes</span></button>
+        <button class="home-card" data-screen="body" style="--c: var(--m6)"><span class="home-mark home-mark--emoji" aria-hidden="true">🙋</span><span class="home-label">Body</span></button>
+        <button class="home-card" data-screen="actions" style="--c: var(--m3)"><span class="home-mark home-mark--emoji" aria-hidden="true">🏃</span><span class="home-label">Actions</span></button>
+        <button class="home-card" data-screen="feelings" style="--c: var(--m4)"><span class="home-mark home-mark--emoji" aria-hidden="true">😊</span><span class="home-label">Feelings</span></button>
+        <button class="home-card" data-screen="opposites" style="--c: var(--m5)"><span class="home-mark home-mark--emoji" aria-hidden="true">↕️</span><span class="home-label">Opposites</span></button>
+        <button class="home-card" data-screen="where" style="--c: var(--m1)"><span class="home-mark home-mark--emoji" aria-hidden="true">📦</span><span class="home-label">Where?</span></button>
+        <button class="home-card home-card--wide" data-screen="play" style="--c: var(--m2)"><span class="home-mark" aria-hidden="true">★</span><span class="home-label">Play</span></button>
+      </div>
+    </section>
 
-    <section class="screen" id="screen-letters" aria-label="Letters">
+    <section class="screen is-hidden" id="screen-letters" aria-label="Letters">
       <!-- Filled in by app.js from the languages switched on, and
            hidden altogether when there is only one of them. -->
       <div class="pics-switch">
         <div class="segmented segmented--lang" role="group" aria-label="Language"></div>
+        <!-- Letter names or letter sounds. English only: the other
+             alphabets have no sound list here. -->
+        <div class="segmented segmented--mode" role="group" aria-label="Names or sounds" id="letterModeSwitch">
+          <button class="seg is-on" data-mode="name" aria-label="Letter names">ABC</button>
+          <button class="seg" data-mode="sound" aria-label="Letter sounds">a·b·c sounds</button>
+        </div>
         <p class="screen-hint" id="lettersHint">Tap a letter to hear it.</p>
       </div>
       <button class="showcase" id="letterView" aria-live="polite">
@@ -127,18 +155,9 @@
     </section>
 
     <section class="screen is-hidden" id="screen-pictures" aria-label="Fruits, vegetables, clothes, vehicles, animals, birds, flowers, things at home and jobs">
-      <div class="pics-switch">
-        <div class="segmented segmented--pics" role="group" aria-label="What to look at">
-          <button class="seg is-on" data-group="fruit" aria-label="Fruits" title="Fruits"><span aria-hidden="true">🍎</span></button>
-          <button class="seg" data-group="veg" aria-label="Vegetables" title="Vegetables"><span aria-hidden="true">🥕</span></button>
-          <button class="seg" data-group="clothes" aria-label="Clothes" title="Clothes"><span aria-hidden="true">👕</span></button>
-          <button class="seg" data-group="vehicle" aria-label="Vehicles" title="Vehicles"><span aria-hidden="true">🚗</span></button>
-          <button class="seg" data-group="animal" aria-label="Animals" title="Animals"><span aria-hidden="true">🐱</span></button>
-          <button class="seg" data-group="bird" aria-label="Birds" title="Birds"><span aria-hidden="true">🐦</span></button>
-          <button class="seg" data-group="flower" aria-label="Flowers" title="Flowers"><span aria-hidden="true">🌸</span></button>
-          <button class="seg" data-group="home" aria-label="At home" title="At home"><span aria-hidden="true">🏠</span></button>
-          <button class="seg" data-group="job" aria-label="Jobs" title="Jobs"><span aria-hidden="true">👷</span></button>
-        </div>
+      <!-- The shelf list: one photo card per shelf. Built by app.js. -->
+      <div class="shelf-menu" id="shelfMenu" role="group" aria-label="What to look at"></div>
+      <div class="pics-switch pics-shelf-bar">
         <p class="screen-hint" id="picsHint">Tap a fruit to hear its name.</p>
         <!-- A shelf never moves, so it gets learned as an order: the
              apple is first and top-left every single time, and after a
@@ -211,16 +230,9 @@
     </section>
 
     <section class="screen is-hidden" id="screen-play" aria-label="Play">
-      <div class="play">
-        <div class="segmented segmented--play" role="group" aria-label="What to practise">
-          <button class="seg is-on" data-set="letters">Letters</button>
-          <button class="seg" data-set="numbers">Numbers</button>
-          <button class="seg" data-set="pictures">Pictures</button>
-          <button class="seg" data-set="colors">Colors</button>
-          <button class="seg" data-set="shapes">Shapes</button>
-          <button class="seg" data-set="body">Body</button>
-          <button class="seg" data-set="all">All</button>
-        </div>
+      <!-- The game list. Built by app.js. -->
+      <div class="play-menu" id="playMenu" role="group" aria-label="What to play"></div>
+      <div class="play is-hidden" id="playGame">
 
         <div class="dots" id="dots" aria-hidden="true"></div>
 
@@ -235,29 +247,6 @@
 
   </main>
 
-  <nav class="nav" aria-label="Sections">
-    <button class="tab is-on" data-screen="letters" aria-label="Letters">
-      <span class="tab-mark" aria-hidden="true">A</span><span class="tab-label" aria-hidden="true">Letters</span>
-    </button>
-    <button class="tab" data-screen="numbers" aria-label="Numbers">
-      <span class="tab-mark" aria-hidden="true">1</span><span class="tab-label" aria-hidden="true">Numbers</span>
-    </button>
-    <button class="tab" data-screen="pictures" aria-label="Fruits, vegetables, clothes, vehicles, animals, birds, flowers, things at home and jobs">
-      <span class="tab-mark tab-mark--emoji" aria-hidden="true">🍓</span><span class="tab-label" aria-hidden="true">Pictures</span>
-    </button>
-    <button class="tab" data-screen="colors" aria-label="Colors">
-      <span class="tab-mark tab-mark--emoji" aria-hidden="true">🌈</span><span class="tab-label" aria-hidden="true">Colors</span>
-    </button>
-    <button class="tab" data-screen="shapes" aria-label="Shapes">
-      <span class="tab-mark tab-mark--emoji" aria-hidden="true">🔷</span><span class="tab-label" aria-hidden="true">Shapes</span>
-    </button>
-    <button class="tab" data-screen="body" aria-label="Body">
-      <span class="tab-mark tab-mark--emoji" aria-hidden="true">🙋</span><span class="tab-label" aria-hidden="true">Body</span>
-    </button>
-    <button class="tab" data-screen="play" aria-label="Play">
-      <span class="tab-mark" aria-hidden="true">★</span><span class="tab-label" aria-hidden="true">Play</span>
-    </button>
-  </nav>
 
 </div>
 
@@ -271,7 +260,7 @@
     <h2 class="cheer-title" id="cheerTitle">You did it!</h2>
     <p class="cheer-sub" id="cheerSub">10 out of 10</p>
     <button class="big-btn" id="againBtn">Play again</button>
-    <button class="text-btn" id="cheerDone">Back to letters</button>
+    <button class="text-btn" id="cheerDone">Pick another game</button>
   </div>
 </div>
 
@@ -329,6 +318,20 @@
       <div class="offline-bar"><i id="offlineFill"></i></div>
       <button class="soft-btn" id="offlineBtn">Download the photos and sounds</button>
     </div>
+
+    <!-- Your voice: record a word once and the board says it in your
+         voice from then on. Kept on this device only. -->
+    <h3 class="panel-sub">Your voice</h3>
+    <label class="voice-row">
+      <input type="checkbox" id="ownVoiceToggle">
+      <span>Show the red ● record button</span>
+    </label>
+    <p class="panel-note" id="ownVoiceNote">
+      Turn this on, open any screen, tap a tile, then tap the red ● and say its
+      name. From then on that tile speaks in your voice. Letter sounds
+      ("buh", "sss") sound much better recorded by you.
+    </p>
+    <button class="soft-btn is-hidden" id="ownVoiceClear">Delete my recordings</button>
 
     <button class="danger-btn" id="resetBtn">Reset progress</button>
     <button class="text-btn" id="parentClose">Close</button>

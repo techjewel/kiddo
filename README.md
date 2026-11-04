@@ -31,6 +31,14 @@ hidden until you serve the folder.
 
 ## What's in it
 
+**It opens like an app.** The first screen is a home menu: one big card for
+each module — Letters, Numbers, Pictures, Colors, Shapes, Body, Actions,
+Feelings, Opposites, Where? and Play. A card
+opens its module. The yellow ← in the top-left corner goes back one level.
+Pictures and Play have one more level: Pictures opens on a list of nine shelves,
+each with a photograph, and Play opens on a list of games. The browser's back
+button and Android's back gesture do the same as ←.
+
 **Languages.** The board speaks four: English, বাংলা, Español and Français.
 Letters, numbers and the body screen are in whichever one is chosen, one at a
 time, with a switch across the top; the switch only appears when more than one
@@ -100,6 +108,12 @@ leaves the corner count on the page. Every line is about the job rather than
 the person in the photograph, because the photograph is one plumber and the
 word is all of them.
 
+Every shelf is opened from the shelf list, by its photograph — an apple for
+the fruit, a lion for the animals. Nine small emoji in a strip were too small
+to aim at and too alike to tell apart, and the bird emoji draws as a grey blob
+on some devices. A photograph is what the shelf holds, so it is what he picks.
+The nine cover photos load when Pictures opens, not when the board does.
+
 Each shelf has a **Shuffle** button beside the hint. A shelf that never moves
 gets learned as an order rather than as a set of pictures — the apple is first
 and top-left every time, and a child who has met it twenty times can find it
@@ -129,13 +143,84 @@ and the numbers puts the whole screen into another language — নাক, হ�
 files when the device has no voice of its own — and the choice is the board's,
 remembered across all three screens.
 
+**Actions** — 15 photographs of animals doing something: a dog running, a
+squirrel eating, a cat asleep, two monkeys hugging. Tap one and it says the
+word — "Running." — with "The dog is running." printed under it for a grown-up
+to read out. Verbs are what turn "dog" into "dog running", the two- and
+three-word sentences a three-year-old is building. Animals, not people, so that
+none of the photographs is somebody else's child.
+
+**Feelings** — seven drawn faces: happy, sad, angry, scared, surprised, sleepy,
+silly. Drawn, like the shapes, because a frown has to be a frown at any size,
+and a photograph of a crying child is not something to tap for fun.
+
+**Opposites** — eight pairs, each word beside its opposite on the grid: big and
+small, fast and slow (the elephant, the mouse, the rabbit and the turtle from
+the shelves), up and down, full and empty, open and closed, long and short, hot
+and cold, day and night. The panel shows the word with its partner dimmed next
+to it, because "big" only means something beside "small".
+
+**Where?** — a red ball in six places: in the box, on the table, under the
+table, next to the box, behind the box, in front of the box. "On" and "under"
+use a table, because under a box sitting on the floor is nowhere. This one says
+the whole phrase — "Under the table." — because "under" on its own is a word a
+child can't picture.
+
+**Letter sounds.** The letters screen has a second switch, ABC or *a·b·c
+sounds*. In sounds, B says "buh, buh, ball" instead of "bee, ball", and the
+panel shows *says /b/*. English only. The device voice reads a spelling of the
+sound, which is close but not right: "buh" has a vowel that /b/ doesn't. A
+grown-up recording fixes that (see *Your voice*).
+
+**Your voice.** In the grown-ups panel, *Show the red ● record button* puts a
+third button next to 🐢 and 🎤. Tap a tile, tap ●, say the word; from then on
+that tile speaks in your voice, and 🐢 slows your recording down instead of
+the device voice. The game still asks its questions in the device voice. One
+recording per tile per language, and letter
+sounds are kept apart from letter names. A child copies a parent better than a
+device, and only a person can say a letter sound cleanly. The recordings stay
+in this browser's storage (IndexedDB) and are never sent anywhere; *Delete my
+recordings* removes them all.
+
 **Play** — "Find the lion" with four big magnets to choose from. Ten rounds,
 each ending in confetti and a stretched "Yaaay!". Letters, numbers, pictures,
-colours, shapes, body, or all of them. Wrong taps just wiggle and cost nothing;
-there's no way to lose.
+colours, shapes, body, sounds, actions ("Who is sleeping?"), feelings ("Who
+is sad?"), opposites ("Which one is full?"), where ("Find the ball under the
+table"), or a mix. Wrong taps just wiggle and cost
+nothing; there's no way to lose. The game list shows a symbol on every card,
+because he can't read "Shapes".
+
+**Sounds** is the listening game. It plays a real recording — a moo, a quack, a
+crow — and asks "Who makes this sound?" with four photographs. It asks only
+about the animals and birds that have a recording; a spoken "moo" would be the
+answer said out loud. A right answer says the name and plays the sound again,
+so the two go together.
+
+**🐢 Say it slowly.** On every screen that names things, a turtle sits at the
+bottom right. It claps the word on the panel out in beats — *Ba · na · na*, a
+drum on each beat, a chip lighting up for each — and then says the whole word
+at half speed. Beats are what a three-year-old can hear and copy; a word at
+full speed is a blur. Only English has a beat list (`SYLLABLES` in `app.js`).
+The other languages get the same recording or voice at 60 % speed, with no
+beats. Any other tap puts the voice back to full speed.
+
+**🎤 Say it with me.** Next to the turtle. It beeps, records him, stops when he
+stops talking (or after four seconds), and plays his voice back, then the
+board's. That is the whole exercise: his word next to the model. Nothing is
+scored. Speech recognition is poor on toddler speech, and r, l, th, s, z, sh
+and v are not expected to be right until five to seven, so marking him wrong
+would be marking him three. Each take earns a star. The take is kept in memory
+for one playback; nothing is saved or sent. The mic is let go of as soon as the
+take ends, because on an iPhone an open mic moves the sound to the quiet
+earpiece. The 🎤 is hidden where the browser can't record — opened from
+`file://`, or a browser with no `MediaRecorder` — and both buttons hide when
+the sound is off.
 
 The ⚙ button shows stars earned and how much of each set has been explored,
-plus a reset.
+plus a reset. It opens only when **held** for a second — a ring fills while it
+is held. The 👁 focus button works the same way. A tap shows "Hold me" and does
+nothing else. Both sit at the top of a screen a child pokes all day, and one
+tap used to open the reset or hide the way out. A child taps; a grown-up holds.
 
 ## Deliberate choices
 
@@ -153,7 +238,7 @@ takes the room, with the name underneath the boy where a caption goes.
 beside Letters and Numbers. That works for exactly two languages and then runs
 out of room — eight tabs was already the most a phone could carry, and a third
 language would have been a ninth. So language stopped being a place and became a
-dimension inside the screens that have it. Seven tabs now, and adding a language
+dimension inside the screens that have it. Seven modules now, and adding a language
 costs none.
 
 The rule this was protecting is untouched, because the rule was never "separate
@@ -661,8 +746,9 @@ points at 2x.
 
 - no sound before the first tap, and every clip, voice and beep starts
   inside a tap;
-- tiles, tabs and quiz answers are at least 44 points;
-- no screen scrolls sideways, and the tab bar stays on screen;
+- tiles, menu cards and quiz answers are at least 44 points;
+- no screen scrolls sideways, and the back button and the 🐢 🎤 buttons stay
+  on screen — on the home menu, every module, a shelf and a game;
 - the home-screen tags, the 180 x 180 icon and the manifest;
 - that the app opens cleanly with `navigator.standalone`;
 - every grown-up button and switch is at least 44 points too;
