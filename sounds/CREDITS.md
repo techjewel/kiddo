@@ -188,6 +188,12 @@ English uses *en_US-amy-medium*. Spanish uses *es_ES-davefx-medium*.
 French uses *fr_FR-siwis-medium*. Piper and those voices are MIT-licensed.
 Each clip was levelled the same way as the animal recordings.
 
+The English files for the action, feeling, opposite and place words,
+the letter sounds ("buh. buh. Ball.") and "Who makes this sound?" were
+added later the same way: Piper 1.3 with *en_US-amy-medium*, length
+scale 1.1 to match the pace of the first set, trimmed, and levelled to
+−20 LUFS like the rest.
+
 ## Reusing these
 
 The CC BY and CC BY-SA files require attribution if you redistribute

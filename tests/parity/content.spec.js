@@ -73,6 +73,7 @@ test('each language with recordings plays its own clip for a letter', async ({ p
 
 test('a tapped letter is saved in the magnet-board-v1 shape', async ({ page }) => {
   await boot(page, { stars: 3, seen: [], muted: true, focusMode: false, langs: ['en'], lang: 'en', chosen: true });
+  await page.click('.home-card[data-screen="letters"]');
   await page.locator('#lettersGrid .magnet').first().click();
   await page.waitForTimeout(300);
   const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('magnet-board-v1')));

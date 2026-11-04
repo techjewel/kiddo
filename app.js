@@ -1120,10 +1120,123 @@ const bodyItems = BODY.map((b, i) => ({
 
 const bodyByKey = new Map(bodyItems.map((it) => [it.key, it]));
 
+/* ---------- Words: actions, feelings, opposites, where -------
+   The words a three-year-old needs to make a sentence of three or
+   four: what someone is doing, how they feel, how big or full a
+   thing is, and where it is. Nouns alone don't make sentences.
+
+   Actions are photographs of animals doing the thing — a dog running,
+   a cat asleep. An animal shows a verb as clearly as a person does,
+   and none of them is somebody else's child. Feelings, opposites and
+   places are drawn, like the shapes: a frown has to be a frown at any
+   size, and a ball has to be exactly *under* the box, not near it.
+   -------------------------------------------------------------- */
+
+const ACTIONS = [
+  { word: 'Running',  slug: 'action-run',   emoji: '🏃', line: 'The dog is running.' },
+  { word: 'Jumping',  slug: 'action-jump',  emoji: '🐸', line: 'The dog is jumping.' },
+  { word: 'Swimming', slug: 'action-swim',  emoji: '🏊', line: 'The dog is swimming.' },
+  { word: 'Flying',   slug: 'action-fly',   emoji: '🕊️', line: 'The bird is flying.' },
+  { word: 'Eating',   slug: 'action-eat',   emoji: '🐿️', line: 'The squirrel is eating.' },
+  { word: 'Drinking', slug: 'action-drink', emoji: '🐈', line: 'The cat is drinking.' },
+  { word: 'Sleeping', slug: 'action-sleep', emoji: '😴', line: 'The cat is sleeping.' },
+  { word: 'Climbing', slug: 'action-climb', emoji: '🧗', line: 'The cat is climbing.' },
+  { word: 'Walking',  slug: 'action-walk',  emoji: '🐘', line: 'The elephant is walking.' },
+  { word: 'Digging',  slug: 'action-dig',   emoji: '🐕', line: 'The dog is digging.' },
+  { word: 'Washing',  slug: 'action-wash',  emoji: '🐘', line: 'The elephant is washing.' },
+  { word: 'Playing',  slug: 'action-play',  emoji: '🐶', line: 'The puppies are playing.' },
+  { word: 'Sitting',  slug: 'action-sit',   emoji: '🐕', line: 'The dog is sitting.' },
+  { word: 'Rolling',  slug: 'action-roll',  emoji: '🐕', line: 'The dog is rolling.' },
+  { word: 'Hugging',  slug: 'action-hug',   emoji: '🐒', line: 'The monkeys are hugging.' },
+];
+
+/* Each face is a few parameters, drawn by makeFaceArt. */
+const FEELINGS = [
+  { word: 'Happy',     face: 'happy',     line: 'A big smile.' },
+  { word: 'Sad',       face: 'sad',       line: 'A frown and a tear.' },
+  { word: 'Angry',     face: 'angry',     line: 'Cross eyebrows, red cheeks.' },
+  { word: 'Scared',    face: 'scared',    line: 'Eyes wide, mouth wobbly.' },
+  { word: 'Surprised', face: 'surprised', line: 'Oh! A round mouth.' },
+  { word: 'Sleepy',    face: 'sleepy',    line: 'Eyes closing. Yawn.' },
+  { word: 'Silly',     face: 'silly',     line: 'Tongue out, one eye shut.' },
+];
+
+/* In pairs, side by side on the grid, so each word sits next to its
+   opposite. Big and small, fast and slow are the photographs already
+   on the shelves; the rest are drawn. */
+const OPPOSITES = [
+  { word: 'Big',    pair: 'Small',  photo: 'elephant', emoji: '🐘', line: 'The elephant is big.' },
+  { word: 'Small',  pair: 'Big',    photo: 'mouse',    emoji: '🐭', line: 'The mouse is small.' },
+  { word: 'Fast',   pair: 'Slow',   photo: 'rabbit',   emoji: '🐇', line: 'The rabbit is fast.' },
+  { word: 'Slow',   pair: 'Fast',   photo: 'turtle',   emoji: '🐢', line: 'The turtle is slow.' },
+  { word: 'Up',     pair: 'Down',   art: 'up',     line: 'The balloon goes up.' },
+  { word: 'Down',   pair: 'Up',     art: 'down',   line: 'The ball falls down.' },
+  { word: 'Full',   pair: 'Empty',  art: 'full',   line: 'The glass is full.' },
+  { word: 'Empty',  pair: 'Full',   art: 'empty',  line: 'The glass is empty.' },
+  { word: 'Open',   pair: 'Closed', art: 'open',   line: 'The door is open.' },
+  { word: 'Closed', pair: 'Open',   art: 'closed', line: 'The door is closed.' },
+  { word: 'Long',   pair: 'Short',  art: 'long',   line: 'A long pencil.' },
+  { word: 'Short',  pair: 'Long',   art: 'short',  line: 'A short pencil.' },
+  { word: 'Hot',    pair: 'Cold',   art: 'hot',    line: 'The sun is hot.' },
+  { word: 'Cold',   pair: 'Hot',    art: 'cold',   line: 'The snow is cold.' },
+  { word: 'Day',    pair: 'Night',  art: 'day',    line: 'The sun is out. It is day.' },
+  { word: 'Night',  pair: 'Day',    art: 'night',  line: 'The moon is out. It is night.' },
+];
+
+/* One red ball and six places. "On" and "under" use a table, because
+   under a box sitting on the floor is nowhere; the rest use a box.
+   The phrases are the ones a child hears anyway — under the table, in
+   the box. */
+const PLACES = [
+  { word: 'In',       place: 'in',     thing: 'box',   say: 'In the box.' },
+  { word: 'On',       place: 'on',     thing: 'table', say: 'On the table.' },
+  { word: 'Under',    place: 'under',  thing: 'table', say: 'Under the table.' },
+  { word: 'Next to',  place: 'next',   thing: 'box',   say: 'Next to the box.' },
+  { word: 'Behind',   place: 'behind', thing: 'box',   say: 'Behind the box.' },
+  { word: 'In front', place: 'front',  thing: 'box',   say: 'In front of the box.' },
+];
+
+function wordItems(rows, group, prefix, ask) {
+  return rows.map((r, i) => {
+    const item = {
+      ...r,
+      kind: 'word',
+      group,
+      id: prefix + i,
+      index: i,
+      caption: r.word,
+      line: r.line || (r.say ? `The ball is ${r.say.toLowerCase()}` : ''),
+      say: r.say || `${r.word}.`,
+      ...ask(r),
+    };
+    if (r.photo) item.slug = r.photo;
+    return item;
+  });
+}
+
+const actionItems = wordItems(ACTIONS, 'action', 'X',
+  (r) => ({ askPrefix: 'Who is ', askFace: r.word.toLowerCase(), askSuffix: '?' }));
+const feelingItems = wordItems(FEELINGS, 'feeling', 'E',
+  (r) => ({ askPrefix: 'Who is ', askFace: r.word.toLowerCase(), askSuffix: '?' }));
+const oppositeItems = wordItems(OPPOSITES, 'opposite', 'O',
+  (r) => ({ askPrefix: 'Which one is ', askFace: r.word.toLowerCase(), askSuffix: '?' }));
+const placeItems = wordItems(PLACES, 'place', 'P',
+  (r) => ({ askPrefix: 'Find the ball ', askFace: r.say.replace(/ the \w+\.$/, '').toLowerCase(), askSuffix: ` the ${r.thing}` }));
+
+/* Which screen each group of words lives on. */
+const WORD_SCREENS = {
+  actions:   { group: 'action',   list: actionItems,   title: 'Actions',   hint: 'Tap to hear what they are doing.' },
+  feelings:  { group: 'feeling',  list: feelingItems,  title: 'Feelings',  hint: 'Tap a face. How does it feel?' },
+  opposites: { group: 'opposite', list: oppositeItems, title: 'Opposites', hint: 'Big and small, up and down. Tap one.' },
+  where:     { group: 'place',    list: placeItems,    title: 'Where?',    hint: 'Where is the ball? Tap to hear.' },
+};
+const WORD_SCREEN_OF = Object.fromEntries(Object.entries(WORD_SCREENS).map(([k, v]) => [v.group, k]));
+
 const allItems = [
   ...LANG_CODES.flatMap((c) => LETTERS_BY_LANG[c]),
   ...LANG_CODES.flatMap((c) => NUMBERS_BY_LANG[c]),
   ...pictureAll, ...colorItems, ...shapeItems, ...bodyItems,
+  ...actionItems, ...feelingItems, ...oppositeItems, ...placeItems,
 ];
 const byId = new Map(allItems.map((it) => [it.id, it]));
 
@@ -1133,6 +1246,7 @@ function listFor(item) {
   if (item.kind === 'color') return colorItems;
   if (item.kind === 'shape') return shapeItems;
   if (item.kind === 'body') return bodyItems;
+  if (item.kind === 'word') return WORD_SCREENS[WORD_SCREEN_OF[item.group]].list;
   return PICTURE_GROUPS[item.group].list;
 }
 
@@ -1235,13 +1349,18 @@ const state = {
      on every visit is how a second language ends up unused. */
   lang: saved.lang,
   chosen: saved.chosen,
-  screen: 'letters',
+  /* Null until the first navigation, so the home menu is drawn by it. */
+  screen: null,
+  /* The open shelf on Pictures. The shelf list shows when none is open. */
+  picGroup: 'fruit',
   letterItem: null,
   numberItem: null,
   pictureItem: null,
   colorItem: null,
   shapeItem: null,
   bodyItem: null,
+  /* The last word tapped on each word screen, by screen. */
+  wordItem: {},
   game: null,
 };
 
@@ -1346,6 +1465,10 @@ function voiceClipFor(text) {
    A TV browser often has no speechSynthesis, or has the API and an
    empty voice list. English must still speak, so the matching file
    plays when there is no usable voice. Mute still wins. */
+/* 1 normally. The 🐢 button sets it below 1 for the one thing it
+   replays; any other tap puts it back (see the speak bar). */
+let slowFactor = 1;
+
 function speak(text, opts = {}) {
   const { rate = 0.82, pitch = 1.12, then, lang = 'en-US', voice } = opts;
   if (state.muted) {
@@ -1365,7 +1488,7 @@ function speak(text, opts = {}) {
   }
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
-  u.rate = rate;
+  u.rate = rate * slowFactor;
   u.pitch = pitch;
   u.lang = lang;
   if (v) u.voice = v;
@@ -1447,12 +1570,14 @@ const PALETTE = ['--m1', '--m2', '--m3', '--m4', '--m5', '--m6'];
 const SEED_OFFSET = {
   fruit: 4, veg: 7, clothes: 8, vehicle: 2, animal: 1, bird: 5, flower: 0, home: 3, job: 6,
   color: 3, shape: 5, body: 2,
+  action: 1, feeling: 0, opposite: 4, place: 2,
 };
 
 function seedFor(item) {
   if (item.kind === 'letter') return item.index + LANGS[item.lang].seedLetter;
   if (item.kind === 'number') return item.index + LANGS[item.lang].seedNumber;
-  return item.index + SEED_OFFSET[item.kind === 'picture' ? item.group : item.kind];
+  const key = item.kind === 'picture' || item.kind === 'word' ? item.group : item.kind;
+  return item.index + SEED_OFFSET[key];
 }
 
 function colorFor(item) {
@@ -1641,6 +1766,143 @@ function makePhoto(item, cls) {
   return img;
 }
 
+/* ---------- Drawing the words ---------------------------------
+   Feelings, opposites and places are SVG, drawn from a few shapes so
+   they stay sharp at tile size and at panel size. Each returns the
+   inside of an <svg>; makeWordArt wraps it. */
+
+const INK = '#33261F';
+const BALL = '<circle cx="0" cy="0" r="11" fill="#E24A3F"/><ellipse cx="-4" cy="-4" rx="3.5" ry="2.5" fill="#fff" opacity="0.7"/>';
+const ball = (x, y) => `<g transform="translate(${x} ${y})">${BALL}</g>`;
+
+const FACE_PARTS = {
+  happy: `<path d="M28 34 Q36 28 44 34 M56 34 Q64 28 72 34"/>
+    <ellipse cx="36" cy="45" rx="4.5" ry="6" fill="${INK}" stroke="none"/><ellipse cx="64" cy="45" rx="4.5" ry="6" fill="${INK}" stroke="none"/>
+    <ellipse cx="26" cy="60" rx="6" ry="4" fill="#F28C8C" opacity="0.6" stroke="none"/><ellipse cx="74" cy="60" rx="6" ry="4" fill="#F28C8C" opacity="0.6" stroke="none"/>
+    <path d="M30 60 Q50 86 70 60 Z" fill="#A8322D"/>`,
+  sad: `<path d="M28 37 L44 31 M56 31 L72 37"/>
+    <ellipse cx="36" cy="46" rx="4.5" ry="5.5" fill="${INK}" stroke="none"/><ellipse cx="64" cy="46" rx="4.5" ry="5.5" fill="${INK}" stroke="none"/>
+    <path d="M34 75 Q50 61 66 75"/>
+    <path d="M33 55 Q28 64 33 67 Q38 64 33 55 Z" fill="#5BB8F0" stroke="none"/>`,
+  angry: `<path d="M26 29 L45 38 M55 38 L74 29" stroke-width="5"/>
+    <ellipse cx="37" cy="47" rx="4.5" ry="5" fill="${INK}" stroke="none"/><ellipse cx="63" cy="47" rx="4.5" ry="5" fill="${INK}" stroke="none"/>
+    <ellipse cx="25" cy="61" rx="8" ry="5" fill="#E24A3F" opacity="0.45" stroke="none"/><ellipse cx="75" cy="61" rx="8" ry="5" fill="#E24A3F" opacity="0.45" stroke="none"/>
+    <path d="M35 73 Q50 63 65 73"/>`,
+  scared: `<path d="M27 29 L44 23 M56 23 L73 29"/>
+    <circle cx="36" cy="44" r="8.5" fill="#fff"/><circle cx="64" cy="44" r="8.5" fill="#fff"/>
+    <circle cx="36" cy="45" r="3" fill="${INK}" stroke="none"/><circle cx="64" cy="45" r="3" fill="${INK}" stroke="none"/>
+    <path d="M33 72 Q37.5 66 42 72 Q46.5 78 51 72 Q55.5 66 60 72 Q64 77 67 72"/>
+    <path d="M84 30 Q80 38 84 41 Q88 38 84 30 Z" fill="#5BB8F0" stroke="none"/>`,
+  surprised: `<path d="M27 27 Q36 19 45 27 M55 27 Q64 19 73 27"/>
+    <circle cx="36" cy="44" r="7.5" fill="#fff"/><circle cx="64" cy="44" r="7.5" fill="#fff"/>
+    <circle cx="36" cy="44" r="3.5" fill="${INK}" stroke="none"/><circle cx="64" cy="44" r="3.5" fill="${INK}" stroke="none"/>
+    <ellipse cx="50" cy="71" rx="8" ry="10" fill="#A8322D"/>`,
+  sleepy: `<path d="M28 36 Q36 34 44 37 M56 37 Q64 34 72 36"/>
+    <path d="M29 46 Q36 52 43 46 M57 46 Q64 52 71 46"/>
+    <ellipse cx="50" cy="70" rx="6" ry="7.5" fill="#A8322D"/>
+    <text x="72" y="24" font-size="13" font-weight="800" fill="#4A6FD8" stroke="none" font-family="sans-serif">z</text>
+    <text x="81" y="14" font-size="17" font-weight="800" fill="#4A6FD8" stroke="none" font-family="sans-serif">Z</text>`,
+  silly: `<path d="M28 33 Q36 28 44 33 M56 31 Q64 26 72 31"/>
+    <path d="M29 46 Q36 40 43 46"/>
+    <ellipse cx="64" cy="45" rx="4.5" ry="6" fill="${INK}" stroke="none"/>
+    <path d="M44 66 L44 76 Q44 84 50 84 Q56 84 56 76 L56 66 Z" fill="#F07A86"/>
+    <path d="M30 62 Q50 76 70 62"/>`,
+};
+
+function faceSvg(item) {
+  return `<svg viewBox="0 0 100 100" aria-hidden="true">
+    <circle cx="50" cy="52" r="41" fill="#FFD45C" stroke="#E0A82E" stroke-width="2.5"/>
+    <g fill="none" stroke="${INK}" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">${FACE_PARTS[item.face]}</g>
+  </svg>`;
+}
+
+const glass = (water) => `${water ? '<path d="M32.5 34 L67.5 34 L63 86 L37 86 Z" fill="#5BB8F0" opacity="0.85"/>' : ''}
+  <path d="M30 18 L70 18 L64 88 L36 88 Z" fill="${water ? 'none' : '#F3F8FC'}" fill-opacity="0.6" stroke="#7D8A99" stroke-width="3" stroke-linejoin="round"/>`;
+const pencil = (x0, x1) => `<g stroke="#8A5A2B" stroke-width="2" stroke-linejoin="round">
+  <rect x="${x0}" y="43" width="${x1 - x0}" height="14" rx="2" fill="#FFC93C"/>
+  <rect x="${x0 - 6}" y="43" width="8" height="14" rx="2" fill="#F07A86"/>
+  <path d="M${x1} 43 L${x1 + 12} 50 L${x1} 57 Z" fill="#F3D2A2"/></g>
+  <path d="M${x1 + 8} 48 L${x1 + 12} 50 L${x1 + 8} 52 Z" fill="${INK}"/>`;
+const arrow = (up) => `<path d="M14 ${up ? 78 : 22} L14 ${up ? 24 : 76} M6 ${up ? 32 : 68} L14 ${up ? 22 : 78} L22 ${up ? 32 : 68}" fill="none" stroke="#7D8A99" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`;
+const rays = Array.from({ length: 8 }, (_, i) => {
+  const a = (i * Math.PI) / 4;
+  const p = (r) => `${(50 + Math.cos(a) * r).toFixed(1)} ${(50 + Math.sin(a) * r).toFixed(1)}`;
+  return `M${p(27)} L${p(40)}`;
+}).join(' ');
+const flake = Array.from({ length: 6 }, (_, i) => {
+  const a = (i * Math.PI) / 3;
+  const pt = (r, da = 0) => `${(50 + Math.cos(a + da) * r).toFixed(1)} ${(50 + Math.sin(a + da) * r).toFixed(1)}`;
+  return `M50 50 L${pt(38)} M${pt(24)} L${pt(31, 0.35)} M${pt(24)} L${pt(31, -0.35)}`;
+}).join(' ');
+
+const OPPOSITE_ART = {
+  up: `${arrow(true)}<path d="M58 46 Q60 62 54 92" fill="none" stroke="#7D8A99" stroke-width="1.5"/>
+    <ellipse cx="58" cy="28" rx="15" ry="18" fill="#E24A3F"/><path d="M55 45 L61 45 L58 49 Z" fill="#C23A31"/>
+    <ellipse cx="52" cy="21" rx="4" ry="6" fill="#fff" opacity="0.55"/>`,
+  down: `${arrow(false)}<path d="M48 30 L48 48 M58 24 L58 50 M68 30 L68 48" stroke="#BCC5D0" stroke-width="3" stroke-linecap="round"/>
+    <g transform="translate(58 76) scale(1.4)">${BALL}</g><path d="M30 94 L86 94" stroke="#BCC5D0" stroke-width="3" stroke-linecap="round"/>`,
+  full: glass(true),
+  empty: glass(false),
+  open: `<rect x="24" y="10" width="52" height="84" fill="#2B2F45" stroke="#6B4423" stroke-width="4"/>
+    <path d="M24 10 L42 18 L42 88 L24 94 Z" fill="#C8873E" stroke="#8A5A2B" stroke-width="2.5" stroke-linejoin="round"/>
+    <circle cx="38" cy="54" r="2.5" fill="#FFD45C"/>`,
+  closed: `<rect x="24" y="10" width="52" height="84" fill="#C8873E" stroke="#6B4423" stroke-width="4"/>
+    <rect x="32" y="20" width="36" height="26" rx="2" fill="none" stroke="#8A5A2B" stroke-width="2"/>
+    <rect x="32" y="54" width="36" height="30" rx="2" fill="none" stroke="#8A5A2B" stroke-width="2"/>
+    <circle cx="68" cy="52" r="3.5" fill="#FFD45C" stroke="#8A5A2B"/>`,
+  long: pencil(10, 80),
+  short: pencil(40, 58),
+  hot: `<path d="${rays}" stroke="#F5A623" stroke-width="5" stroke-linecap="round"/><circle cx="50" cy="50" r="22" fill="#FFC93C" stroke="#F5A623" stroke-width="3"/>`,
+  cold: `<path d="${flake}" fill="none" stroke="#5BB8F0" stroke-width="4.5" stroke-linecap="round"/><circle cx="50" cy="50" r="5" fill="#5BB8F0"/>`,
+  day: `<rect x="4" y="6" width="92" height="88" rx="10" fill="#8FD3FF"/>
+    <rect x="4" y="72" width="92" height="22" rx="0" fill="#6CC070"/><path d="M4 84 L4 84" />
+    <circle cx="68" cy="30" r="13" fill="#FFC93C"/>
+    <path d="M18 40 q6 -8 14 -3 q6 -6 12 1 q6 2 2 8 h-26 q-6 -2 -2 -6 Z" fill="#fff"/>`,
+  night: `<rect x="4" y="6" width="92" height="88" rx="10" fill="#1F2A5A"/>
+    <rect x="4" y="72" width="92" height="22" fill="#2E4A3A"/>
+    <circle cx="66" cy="30" r="13" fill="#F6F1C7"/><circle cx="72" cy="25" r="12" fill="#1F2A5A"/>
+    <path d="M24 22 l2 5 5 0 -4 3 1.5 5 -4.5 -3 -4.5 3 1.5 -5 -4 -3 5 0 Z M40 42 l1.2 3 3 0 -2.4 1.8 1 3 -2.8 -1.8 -2.8 1.8 1 -3 -2.4 -1.8 3 0 Z" fill="#FFD45C"/>`,
+};
+
+function oppositeSvg(item) {
+  return `<svg viewBox="0 0 100 100" aria-hidden="true">${OPPOSITE_ART[item.art]}</svg>`;
+}
+
+/* The box: front, lid and side, sitting on the floor at y = 104. */
+const BOX_BACK_OPEN = '<path d="M30 62 L40 52 L100 52 L90 62 Z" fill="#5A3A1C"/>';
+const BOX_LID = '<path d="M30 62 L40 52 L100 52 L90 62 Z" fill="#E2AE6A" stroke="#8A5A2B" stroke-width="2" stroke-linejoin="round"/>';
+const BOX_BODY = `<path d="M90 62 L100 52 L100 94 L90 104 Z" fill="#A86E33" stroke="#8A5A2B" stroke-width="2" stroke-linejoin="round"/>
+  <rect x="30" y="62" width="60" height="42" fill="#C8873E" stroke="#8A5A2B" stroke-width="2"/>`;
+const TABLE = `<path d="M30 52 L30 96 M98 48 L98 92" stroke="#8A5A2B" stroke-width="4"/>
+  <path d="M18 56 L28 48 L104 48 L94 56 Z" fill="#E2AE6A" stroke="#8A5A2B" stroke-width="2" stroke-linejoin="round"/>
+  <rect x="18" y="56" width="76" height="6" fill="#C8873E" stroke="#8A5A2B" stroke-width="2"/>
+  <path d="M23 62 L23 104 M89 62 L89 104" stroke="#8A5A2B" stroke-width="5" stroke-linecap="round"/>`;
+const FLOOR = '<path d="M4 104.5 L122 104.5" stroke="#BCC5D0" stroke-width="2.5" stroke-linecap="round"/>';
+
+const PLACE_ART = {
+  in: `${BOX_BACK_OPEN}${ball(64, 56)}${BOX_BODY}`,
+  on: `${TABLE}${ball(58, 41)}`,
+  under: `${TABLE}${ball(56, 93)}`,
+  next: `${BOX_LID}${BOX_BODY}${ball(112, 93)}`,
+  /* Drawn before the box, so the lid hides its lower half: the ball
+     peeks over the back edge. */
+  behind: `<g transform="translate(70 47) scale(1.25)">${BALL}</g>${BOX_LID}${BOX_BODY}`,
+  front: `${BOX_LID}${BOX_BODY}${ball(54, 101)}`,
+};
+
+function placeSvg(item) {
+  return `<svg viewBox="0 0 126 116" aria-hidden="true">${FLOOR}${PLACE_ART[item.place]}</svg>`;
+}
+
+function makeWordArt(item, cls) {
+  if (item.slug) return makePhoto(item, cls);
+  const span = document.createElement('span');
+  span.className = `${cls} word-art`;
+  span.innerHTML = item.group === 'feeling' ? faceSvg(item)
+    : item.group === 'opposite' ? oppositeSvg(item) : placeSvg(item);
+  return span;
+}
+
 /* `caption` prints the name under the picture. On the browsing grid
    that builds word recognition; in the game it would give the answer
    away, so the game leaves it off. `quiz` is the game asking for a
@@ -1690,6 +1952,15 @@ function makeMagnet(item, { known = false, caption = false, quiz = false } = {})
       btn.lang = L.code;
       btn.dir = L.dir || '';
       btn.textContent = bodyName(item);
+    }
+  } else if (item.kind === 'word') {
+    btn.classList.add('magnet--pic', 'magnet--wordart');
+    btn.appendChild(makeWordArt(item, 'magnet-photo'));
+    if (caption) {
+      const cap = document.createElement('span');
+      cap.className = 'magnet-cap';
+      cap.textContent = item.caption;
+      btn.appendChild(cap);
     }
   } else if (item.kind === 'picture') {
     btn.classList.add('magnet--pic');
@@ -1768,6 +2039,7 @@ function buildGrids() {
   colorsGrid.replaceChildren(...colorItems.map((it) => makeMagnet(it, { known: true, caption: true })));
   shapesGrid.replaceChildren(...shapeItems.map((it) => makeMagnet(it, { known: true, caption: true })));
   buildBodyGrid();
+  buildWordScreens();
 }
 
 /* The three grids that carry a language have their own builders,
@@ -1852,10 +2124,9 @@ function shuffleShelf(group) {
   grid.classList.add('is-settling');
 }
 
-/* Which shelf the switch is left on — the fruit until something moves it. */
+/* The shelf last opened from the shelf list — the fruit until one is. */
 function currentPicGroup() {
-  const on = document.querySelector('.segmented--pics .seg.is-on');
-  return on ? on.dataset.group : 'fruit';
+  return state.picGroup || 'fruit';
 }
 
 function markSeen(item) {
@@ -1951,6 +2222,10 @@ function playClip(key, src, onFail, onEnd) {
   const mine = ++clipSeq;
   if (player.src !== new URL(src, location.href).href) player.src = src;
   else player.currentTime = 0;
+  /* Both, because a new src resets playbackRate to the default. The
+     pitch stays put: browsers keep it by default when slowing. */
+  player.defaultPlaybackRate = slowFactor;
+  player.playbackRate = slowFactor;
   /* Assigned, not added, so a clip that once had a follow-on doesn't
      keep it forever. */
   player.onended = onEnd ? () => { if (playingSound === mine) onEnd(); } : null;
@@ -2007,6 +2282,7 @@ function showItem(item) {
   if (item.kind === 'picture') return showPicture(item);
   if (item.kind === 'shape') return showShape(item);
   if (item.kind === 'body') return showBody(item);
+  if (item.kind === 'word') return showWord(item);
   return showLetter(item);
 }
 
@@ -2029,6 +2305,8 @@ function showLetter(item) {
    instead; a device with neither still gives the tap its pop and its
    tick. */
 function sayLetter(item) {
+  if (letterSounds(item)) return sayLetterSound(item);
+  if (ownVoice(item)) return;
   if (!LANGS[item.lang].clips) return speakIn(item.lang, item.say);
   playLetterClips(item, () => speakIn(item.lang, item.say, { rate: 0.8 }));
 }
@@ -2064,6 +2342,7 @@ function renderPicture(item) {
    tap in either place makes the same sound. */
 function sayPicture(item) {
   stopSound();
+  if (ownVoice(item)) return;
   /* Vegetables in বাংলা play a recording — devices almost never have a
      bn voice, the same reason the body and the numbers use files. */
   const code = curLang();
@@ -2112,7 +2391,7 @@ function showShape(item) {
   renderShape(item);
   bump(shapeView);
   stopSound();
-  speak(item.say);
+  if (!ownVoice(item)) speak(item.say);
 }
 
 /* ---------- The body -----------------------------------------
@@ -2144,6 +2423,7 @@ function showBody(item) {
   renderBody(item);
   bump(bodyView);
   stopSound();
+  if (ownVoice(item)) return;
   const code = curLang();
   const L = LANGS[code];
   const bodyClip = L.clips && L.clips.body && L.clips.body(item);
@@ -2184,8 +2464,10 @@ function renderLetter(item) {
   sub.classList.toggle('is-hidden', !L.hasCase);
 
   const latin = el('letterLatin');
-  latin.textContent = item.latin;
-  latin.classList.toggle('is-hidden', !item.latin);
+  const sound = letterSounds(item);
+  latin.textContent = sound ? `says /${item.face.toLowerCase()}/` : item.latin;
+  latin.classList.toggle('is-hidden', !item.latin && !sound);
+  latin.classList.toggle('sc-latin--sound', sound);
 
   el('letterEmoji').textContent = item.emoji;
   el('letterWord').textContent = item.word;
@@ -2272,6 +2554,7 @@ function showNumber(item) {
    seven in every script here, so "seven" is a right answer said in the
    wrong language; no English letter is অ, so "o" would just be wrong. */
 function sayNumber(item) {
+  if (ownVoice(item)) return;
   const L = LANGS[item.lang];
   const clip = L.clips && L.clips.number && L.clips.number(item);
   if (!clip) return speakIn(item.lang, item.word, { rate: 0.8 });
@@ -2304,6 +2587,82 @@ bodyView.addEventListener('click', (e) => {
   if (item) showBody(item);
 });
 
+/* ---------- The word screens ----------------------------------
+   Actions, Feelings, Opposites and Where? are one screen built four
+   times from WORD_SCREENS: a hint, a panel with the big picture and
+   the word, and a grid. Built here rather than written out four times
+   in index.html.
+   -------------------------------------------------------------- */
+
+function buildWordScreens() {
+  const play = el('screen-play');
+  Object.entries(WORD_SCREENS).forEach(([name, ws]) => {
+    const sec = document.createElement('section');
+    sec.className = 'screen is-hidden';
+    sec.id = `screen-${name}`;
+    sec.setAttribute('aria-label', ws.title);
+    sec.innerHTML = `<p class="screen-hint">${ws.hint}</p>
+      <button class="showcase showcase--word" aria-live="polite">
+        <span class="sc-art"></span>
+        <span class="sc-text"><span class="sc-word"></span><span class="sc-line"></span></span>
+      </button>
+      <div class="grid grid--words${ws.group === 'opposite' ? ' grid--pairs' : ''}"></div>`;
+    play.before(sec);
+    const grid = sec.querySelector('.grid');
+    grid.addEventListener('click', onGridTap);
+    const view = sec.querySelector('.showcase');
+    view.addEventListener('click', () => {
+      const it = state.wordItem[name];
+      if (it) showWord(it);
+    });
+    addSpeakBar(view);
+  });
+}
+
+/* Built the first time the screen opens, like a shelf of photos: the
+   actions are thirteen photographs nobody asked for until then. */
+function fillWordScreen(name) {
+  const ws = WORD_SCREENS[name];
+  const sec = el(`screen-${name}`);
+  const grid = sec.querySelector('.grid');
+  if (grid.childElementCount) return;
+  grid.replaceChildren(...ws.list.map((it) => makeMagnet(it, { known: true, caption: true })));
+  renderWord(state.wordItem[name] || ws.list[0], sec);
+}
+
+function renderWord(item, sec = el(`screen-${WORD_SCREEN_OF[item.group]}`)) {
+  const view = sec.querySelector('.showcase');
+  view.style.setProperty('--c', colorFor(item));
+  const art = sec.querySelector('.sc-art');
+  const mine = makeWordArt(item, 'sc-art-img');
+  if (item.group === 'opposite') {
+    /* An opposite is shown with its partner beside it, dimmed — the
+       word means something only next to the other one. */
+    const partner = oppositeItems.find((o) => o.word === item.pair);
+    const other = makeWordArt(partner, 'sc-art-img');
+    other.classList.add('is-dim');
+    mine.classList.add('is-lit');
+    const pair = item.index % 2 === 0 ? [mine, other] : [other, mine];
+    art.replaceChildren(...pair);
+    art.classList.add('sc-art--pair');
+  } else {
+    art.replaceChildren(mine);
+  }
+  if (mine.loading) mine.loading = 'eager';
+  sec.querySelector('.sc-word').textContent = item.word;
+  sec.querySelector('.sc-line').textContent = item.line;
+}
+
+function showWord(item) {
+  const name = WORD_SCREEN_OF[item.group];
+  markSeen(item);
+  state.wordItem[name] = item;
+  renderWord(item);
+  bump(el(`screen-${name}`).querySelector('.showcase'));
+  stopSound();
+  if (!ownVoice(item)) speak(item.say, { rate: 0.8 });
+}
+
 /* ---------- Colours -------------------------------------------
    The page itself takes the colour, the tapped tile is ringed, and
    the name is spoken on its own. Seeing "green" fill the whole door
@@ -2331,7 +2690,7 @@ function showColor(item) {
   el('colorName').textContent = item.word;
   bump(colorView);
   stopSound();
-  speak(item.word, { rate: 0.8 });
+  if (!ownVoice(item)) speak(item.word, { rate: 0.8 });
 }
 
 colorView.addEventListener('click', () => {
@@ -2350,12 +2709,21 @@ const CATEGORIES = {
   colors: colorItems,
   shapes: shapeItems,
   body: bodyItems,
+  actions: actionItems,
+  feelings: feelingItems,
+  opposites: oppositeItems,
+  where: placeItems,
 };
 
 /* Every round draws its four choices from one category. Asking a child
    to pick "red" from a letter, a lion and the number 7 isn't a choice,
    it's a riddle — so "All" varies the category per round instead of
    mixing them inside one. */
+/* "What makes that sound?" asks only about the animals and birds that
+   have a real recording. A spoken "moo" would be the answer said out
+   loud, so the ones without a recording are not asked about. */
+const SOUND_POOL = pictureAll.filter((it) => hasSound(it.word));
+
 function poolFor(setName) {
   if (setName !== 'all') return CATEGORIES[setName];
   const keys = Object.keys(CATEGORIES);
@@ -2393,12 +2761,22 @@ function nextRound() {
   stopSound();
   if (g.round >= ROUNDS_PER_GAME) return finishGame();
 
-  const pool = poolFor(g.set);
+  const pool = g.set === 'sounds' ? SOUND_POOL : poolFor(g.set);
   const picks = shuffled(pool).slice(0, 4);
   g.target = picks[Math.floor(Math.random() * picks.length)];
   g.locked = false;
 
   askEl.replaceChildren();
+  if (g.set === 'sounds') {
+    askEl.textContent = 'Who makes this sound?';
+    choicesBox.replaceChildren(...shuffled(picks).map((it, i) => {
+      const tile = makeMagnet(it, { quiz: true });
+      tile.style.setProperty('--c', `var(${PALETTE[i]})`);
+      return tile;
+    }));
+    speak('Who makes this sound?', { then: () => { if (state.game === g) playAnimal(g.target.word); } });
+    return;
+  }
   askEl.append(document.createTextNode(g.target.askPrefix));
   const strong = document.createElement('span');
   strong.className = 'ask-target';
@@ -2509,14 +2887,15 @@ choicesBox.addEventListener('click', (e) => {
        won't lengthen a vowel just because it's spelled long. Finding
        the cow is rewarded with an actual moo. */
     const roar = item.kind === 'picture' && hasSound(item.word);
-    speak(word, {
-      rate: 0.58,
-      pitch: 1.4,
-      then: () => (roar ? playAnimal(item.word) : speak(item.say, { rate: 0.86 })),
-    });
+    /* In the sound game the noise was the question, so the answer is
+       the name: "Cow." and then the moo once more, to pair them. */
+    const named = g.set === 'sounds'
+      ? () => speak(item.say, { rate: 0.86, then: () => playAnimal(item.word) })
+      : () => (roar ? playAnimal(item.word) : speak(item.say, { rate: 0.86 }));
+    speak(word, { rate: 0.58, pitch: 1.4, then: named });
     g.round += 1;
     renderDots();
-    setTimeout(() => { if (state.game === g) nextRound(); }, 2900);
+    setTimeout(() => { if (state.game === g) nextRound(); }, g.set === 'sounds' ? 4200 : 2900);
   } else {
     /* Wrong taps cost nothing — just a nudge to try again. */
     btn.classList.remove('is-wrong');
@@ -2528,26 +2907,95 @@ choicesBox.addEventListener('click', (e) => {
 });
 
 el('repeatAsk').addEventListener('click', () => {
-  const t = state.game && state.game.target;
-  if (t) speak(askOf(t));
+  const g = state.game;
+  const t = g && g.target;
+  if (!t) return;
+  if (g.set === 'sounds') playAnimal(t.word);
+  else speak(askOf(t));
 });
 
-document.querySelectorAll('.segmented--play .seg').forEach((seg) => {
-  seg.addEventListener('click', () => {
-    document.querySelectorAll('.segmented--play .seg')
-      .forEach((s) => s.classList.toggle('is-on', s === seg));
-    sfx.pop();
-    startGame(seg.dataset.set);
-  });
+/* ---------- The shelf list and the game list -----------------
+   Pictures and Play each open on a list of big cards, the same way the
+   home menu does. A card opens one shelf or one game; the back button
+   comes back to the list. A child who can't read picks by the picture,
+   so every card carries one: a photograph for a shelf, a symbol for a
+   game. The word under it is for the grown-up.
+   -------------------------------------------------------------- */
+
+const SHELVES = [
+  ['fruit', 'Fruits', 'Apple'], ['veg', 'Vegetables', 'Carrot'],
+  ['clothes', 'Clothes', 'T-shirt'], ['vehicle', 'Vehicles', 'Car'],
+  ['animal', 'Animals', 'Lion'], ['bird', 'Birds', 'Parrot'],
+  ['flower', 'Flowers', 'Sunflower'], ['home', 'At home', 'Chair'],
+  ['job', 'Jobs', 'Doctor'],
+];
+
+const GAMES = [
+  ['letters', 'Letters', 'A'], ['numbers', 'Numbers', '1'],
+  ['pictures', 'Pictures', '🍓'], ['colors', 'Colors', '🌈'],
+  ['shapes', 'Shapes', '🔷'], ['body', 'Body', '🙋'],
+  ['sounds', 'Sounds', '🐮'], ['actions', 'Actions', '🏃'],
+  ['feelings', 'Feelings', '😊'], ['opposites', 'Opposites', '↕️'],
+  ['where', 'Where?', '📦'], ['all', 'Mix', '★'],
+];
+
+const shelfMenu = el('shelfMenu');
+const playMenu = el('playMenu');
+
+function menuCard(cls, label, i) {
+  const b = document.createElement('button');
+  b.className = cls;
+  b.style.setProperty('--c', `var(${PALETTE[i % PALETTE.length]})`);
+  b.setAttribute('aria-label', label);
+  const cap = document.createElement('span');
+  cap.className = 'menu-label';
+  cap.setAttribute('aria-hidden', 'true');
+  cap.textContent = label;
+  return [b, cap];
+}
+
+/* Built on first sight, like a shelf: nine cover photos are asked for
+   when Pictures opens, not when the board does. */
+function buildShelfMenu() {
+  if (shelfMenu.childElementCount) return;
+  shelfMenu.replaceChildren(...SHELVES.map(([group, label, cover], i) => {
+    const [b, cap] = menuCard('shelf-card', label, i);
+    b.dataset.group = group;
+    const list = PICTURE_GROUPS[group].list;
+    const item = list.find((it) => it.word === cover) || list[0];
+    const photo = makePhoto(item, 'shelf-photo');
+    photo.loading = 'eager';
+    b.append(photo, cap);
+    return b;
+  }));
+}
+
+function buildPlayMenu() {
+  if (playMenu.childElementCount) return;
+  playMenu.replaceChildren(...GAMES.map(([set, label, mark], i) => {
+    const [b, cap] = menuCard('game-card', label, i);
+    b.dataset.set = set;
+    const m = document.createElement('span');
+    m.className = 'game-mark' + (/^[A-Z0-9★]$/.test(mark) ? '' : ' game-mark--emoji');
+    m.setAttribute('aria-hidden', 'true');
+    m.textContent = mark;
+    b.append(m, cap);
+    return b;
+  }));
+}
+
+shelfMenu.addEventListener('click', (e) => {
+  const b = e.target.closest('.shelf-card');
+  if (!b) return;
+  sfx.pop();
+  navigate({ screen: 'pictures', sub: b.dataset.group });
 });
 
-document.querySelectorAll('.segmented--pics .seg').forEach((seg) => {
-  seg.addEventListener('click', () => {
-    document.querySelectorAll('.segmented--pics .seg')
-      .forEach((s) => s.classList.toggle('is-on', s === seg));
-    sfx.pop();
-    showPictureGroup(seg.dataset.group);
-  });
+playMenu.addEventListener('click', (e) => {
+  const b = e.target.closest('.game-card');
+  if (!b) return;
+  sfx.pop();
+  navigate({ screen: 'play', sub: b.dataset.set });
 });
 
 el('shuffleBtn').addEventListener('click', () => {
@@ -2789,6 +3237,9 @@ function applyLang() {
   buildLetterGrid();
   buildNumberGrid();
   buildBodyGrid();
+  /* The names / sounds switch is English only. Skipped on the first
+     call, which runs before that part of the file has. */
+  if (booted) renderLetterMode();
 
   /* Alphabets are different lengths — 47 বর্ণ against 26 letters — so a
      position off the end of the shorter one lands on its last tile
@@ -3022,7 +3473,7 @@ el('againBtn').addEventListener('click', () => {
 
 el('cheerDone').addEventListener('click', () => {
   cheerWrap.classList.add('is-hidden');
-  showScreen('letters');
+  goBack();
 });
 
 /* ---------- Stars -------------------------------------------- */
@@ -3051,10 +3502,10 @@ function showScreen(name) {
   document.querySelectorAll('.screen').forEach((sec) => {
     sec.classList.toggle('is-hidden', sec.id !== 'screen-' + name);
   });
-  document.querySelectorAll('.tab').forEach((t) => {
-    t.classList.toggle('is-on', t.dataset.screen === name);
-  });
   el('board').scrollTop = 0;
+  /* A take in progress belongs to the screen it started on. */
+  cancelTurn();
+  clearBeats();
 
   /* Leaving Pictures drops focus mode so Letters/Numbers/etc. never
      inherit a half-hidden shelf. Coming back starts on the grid. */
@@ -3063,26 +3514,104 @@ function showScreen(name) {
   /* The door only wears a colour while he's on the colours screen. */
   appEl.classList.toggle('is-tinted', name === 'colors' && !!state.colorItem);
 
+  if (WORD_SCREENS[name]) fillWordScreen(name);
+
   /* Arriving before he's picked anything, the circle draws itself —
      the animation is the invitation to tap. */
   if (name === 'shapes' && !state.shapeItem) renderShape(shapeItems[0]);
 
-  /* The shelf he is arriving at, if it hasn't been built yet. */
-  if (name === 'pictures') buildPictureGrid(currentPicGroup());
-
-  if (name === 'play') {
-    const current = document.querySelector('.segmented--play .seg.is-on');
-    startGame(current ? current.dataset.set : 'letters');
-  } else {
+  if (name !== 'play') {
     state.game = null;
+    stopSound();
     if ('speechSynthesis' in window) speechSynthesis.cancel();
   }
 }
 
-document.querySelectorAll('.tab').forEach((tab) => {
-  tab.addEventListener('click', () => {
+/* ---------- Getting around ------------------------------------
+   Three levels, like an app: the home menu, a module, and inside
+   Pictures and Play one more — a shelf, a game. A place is
+   { screen, sub }. Going in pushes a history entry, so the back
+   button in the rail, the browser's back and Android's back gesture
+   all do the same thing: one level up.
+   -------------------------------------------------------------- */
+
+const backBtn = el('backBtn');
+const playScreen = el('screen-play');
+
+function setShelf(group) {
+  picsScreen.classList.toggle('is-menu', !group);
+  el('board').scrollTop = 0;
+  if (!group) {
+    exitFocusMode();
+    buildShelfMenu();
+    return;
+  }
+  state.picGroup = group;
+  showPictureGroup(group);
+}
+
+function setGame(set) {
+  playMenu.classList.toggle('is-hidden', !!set);
+  el('playGame').classList.toggle('is-hidden', !set);
+  el('board').scrollTop = 0;
+  if (!set) {
+    buildPlayMenu();
+    state.game = null;
+    stopSound();
+    if ('speechSynthesis' in window) speechSynthesis.cancel();
+    return;
+  }
+  startGame(set);
+}
+
+function here() {
+  const sub = state.screen === 'pictures' && !picsScreen.classList.contains('is-menu') ? state.picGroup
+    : state.screen === 'play' && state.game ? state.game.set : null;
+  return { screen: state.screen, sub };
+}
+
+function applyNav(where) {
+  const screen = (where && where.screen) || 'home';
+  const sub = (where && where.sub) || null;
+  if (screen !== state.screen) showScreen(screen);
+  if (screen === 'pictures') setShelf(sub);
+  if (screen === 'play') setGame(sub);
+  backBtn.classList.toggle('is-hidden', screen === 'home');
+}
+
+function navigate(where) {
+  const depth = (history.state && history.state.depth) || 0;
+  history.pushState({ kiddo: where, depth: depth + 1 }, '');
+  applyNav(where);
+}
+
+/* One level up. Uses the history entry when there is one, so a later
+   browser back doesn't land on the level just left. */
+function goBack() {
+  if (history.state && history.state.depth > 0) {
+    history.back();
+    return;
+  }
+  const at = here();
+  const up = at.sub ? { screen: at.screen } : { screen: 'home' };
+  history.replaceState({ kiddo: up, depth: 0 }, '');
+  applyNav(up);
+}
+
+window.addEventListener('popstate', (e) => {
+  cheerWrap.classList.add('is-hidden');
+  applyNav(e.state && e.state.kiddo);
+});
+
+backBtn.addEventListener('click', () => {
+  sfx.pop();
+  goBack();
+});
+
+document.querySelectorAll('.home-card').forEach((card) => {
+  card.addEventListener('click', () => {
     sfx.pop();
-    showScreen(tab.dataset.screen);
+    navigate({ screen: card.dataset.screen });
   });
 });
 
@@ -3092,6 +3621,8 @@ const soundBtn = el('soundBtn');
 
 function renderSound() {
   soundBtn.setAttribute('aria-pressed', String(state.muted));
+  /* Nothing to say slowly or to play back with the sound off. */
+  appEl.classList.toggle('is-muted', state.muted);
   soundBtn.title = state.muted ? 'Turn sound on' : 'Turn sound off';
 }
 
@@ -3124,13 +3655,532 @@ function renderFocusMode() {
   }
 }
 
-focusToggleBtn.addEventListener('click', () => {
+function toggleFocusMode() {
   state.focusMode = !state.focusMode;
   save();
   renderFocusMode();
   if (!state.muted) sfx.pop();
+}
+
+/* ---------- Hold to open --------------------------------------
+   The grown-up buttons sit at the top of a screen a three-year-old
+   pokes all day. One tap on ⚙ used to open the panel with the reset
+   in it, and one tap on 👁 hid the way out. Now both need a press held
+   for HOLD_MS; a ring fills while it is held. A tap shows "Hold me"
+   and does nothing else. A child taps; a grown-up can hold.
+   -------------------------------------------------------------- */
+
+const HOLD_MS = 1200;
+
+function showTip(btn, text) {
+  btn.dataset.tip = text;
+  btn.classList.remove('show-tip');
+  void btn.offsetWidth;
+  btn.classList.add('show-tip');
+  clearTimeout(btn._tipTimer);
+  btn._tipTimer = setTimeout(() => btn.classList.remove('show-tip'), 1800);
+}
+
+function holdToOpen(btn, run) {
+  let timer = null;
+  btn.style.setProperty('--hold', `${HOLD_MS}ms`);
+  const start = () => {
+    if (timer) return;
+    btn.classList.add('is-holding');
+    timer = setTimeout(() => {
+      timer = null;
+      btn.classList.remove('is-holding');
+      run();
+    }, HOLD_MS);
+  };
+  const stop = () => {
+    if (!timer) return;
+    clearTimeout(timer);
+    timer = null;
+    btn.classList.remove('is-holding');
+    showTip(btn, 'Hold me');
+  };
+  btn.addEventListener('pointerdown', (e) => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    start();
+  });
+  ['pointerup', 'pointercancel', 'pointerleave'].forEach((t) => btn.addEventListener(t, stop));
+  btn.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    e.preventDefault();
+    if (!e.repeat) start();
+  });
+  btn.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') stop();
+  });
+  /* A long press must not open the iOS callout or a context menu. */
+  btn.addEventListener('contextmenu', (e) => e.preventDefault());
+}
+
+holdToOpen(focusToggleBtn, toggleFocusMode);
+
+
+/* ---------- Say it slowly, say it with me ---------------------
+   A bar under the panel on every screen that names things, with two
+   buttons:
+
+   🐢 says the thing on the panel slowly. An English word is clapped
+   out in beats first — "Ba · na · na", a drum on each — and then said
+   at half speed while the beats light up. Beats are what a child of
+   three can hear and copy; a whole word at speed is a blur. Other
+   languages have no beat list here, so they get the same voice or
+   recording at 60 % speed.
+
+   🎤 records him. It beeps, listens until he stops talking (or four
+   seconds), and plays his voice back, then the board's. Nothing is
+   scored: speech recognition is poor on toddler speech, and r, l, th
+   and s are not expected to be right until five to seven. Hearing
+   himself next to the model is the whole exercise. The take is kept in
+   memory only, for one replay; nothing is stored or sent anywhere.
+   -------------------------------------------------------------- */
+
+/* Beats for every English word on the board with more than one. A word
+   not listed is one beat. */
+const SYLLABLES = Object.fromEntries(`Apple:Ap-ple|Elephant:El-e-phant|Ice cream:Ice-cream|Orange:Or-ange|Panda:Pan-da|Rainbow:Rain-bow|Umbrella:Um-brel-la|Violin:Vi-o-lin|Watermelon:Wa-ter-mel-on|Xylophone:Xy-lo-phone|Yo-yo:Yo-yo|Zebra:Ze-bra|seven:sev-en|eleven:e-lev-en|thirteen:thir-teen|fourteen:four-teen|fifteen:fif-teen|sixteen:six-teen|seventeen:sev-en-teen|eighteen:eigh-teen|nineteen:nine-teen|twenty:twen-ty|Banana:Ba-na-na|Strawberry:Straw-ber-ry|Pineapple:Pine-ap-ple|Mango:Man-go|Cherries:Cher-ries|Lemon:Lem-on|Kiwi:Ki-wi|Coconut:Co-co-nut|Melon:Mel-on|Blueberries:Blue-ber-ries|Avocado:Av-o-ca-do|Tomato:To-ma-to|Guava:Gua-va|Pomegranate:Pom-e-gran-ate|Pumpkin:Pump-kin|Jackfruit:Jack-fruit|Papaya:Pa-pa-ya|Lychee:Ly-chee|Eggplant:Egg-plant|Okra:Ok-ra|Potato:Po-ta-to|Cauliflower:Cau-li-flow-er|Cabbage:Cab-bage|Cucumber:Cu-cum-ber|Carrot:Car-rot|Radish:Rad-ish|Bottle Gourd:Bot-tle-Gourd|Bitter Gourd:Bit-ter-Gourd|Green Chili:Green-Chil-i|T-shirt:T-shirt|Shorts:Shorts|Sandal:San-dal|Jacket:Jack-et|Sweater:Sweat-er|Motorbike:Mo-tor-bike|Rickshaw:Rick-shaw|Helicopter:Hel-i-cop-ter|Ambulance:Am-bu-lance|Fire Truck:Fire-Truck|Tractor:Trac-tor|Scooter:Scoo-ter|Tiger:Ti-ger|Monkey:Mon-key|Rabbit:Rab-bit|Turtle:Tur-tle|Donkey:Don-key|Pigeon:Pig-eon|Sparrow:Spar-row|Chicken:Chick-en|Parrot:Par-rot|Myna:My-na|Cuckoo:Cuck-oo|Woodpecker:Wood-peck-er|Kingfisher:King-fish-er|Peacock:Pea-cock|Eagle:Ea-gle|Flamingo:Fla-min-go|Penguin:Pen-guin|Ostrich:Os-trich|Turkey:Tur-key|Sunflower:Sun-flow-er|Tulip:Tu-lip|Daisy:Dai-sy|Lily:Li-ly|Lotus:Lo-tus|Marigold:Mar-i-gold|Hibiscus:Hi-bis-cus|Jasmine:Jas-mine|Orchid:Or-chid|Daffodil:Daf-fo-dil|Lavender:Lav-en-der|Table:Ta-ble|Pillow:Pil-low|Sofa:So-fa|Window:Win-dow|Mirror:Mir-ror|Television:Tel-e-vi-sion|Kettle:Ket-tle|Fridge:Fridge|Toothbrush:Tooth-brush|Towel:Tow-el|Bucket:Buck-et|Scissors:Scis-sors|Basket:Bas-ket|Bottle:Bot-tle|Doctor:Doc-tor|Teacher:Teach-er|Dentist:Den-tist|Firefighter:Fire-fight-er|Police Officer:Po-lice-Of-fi-cer|Pilot:Pi-lot|Farmer:Farm-er|Engineer:En-gi-neer|Plumber:Plumb-er|Carpenter:Car-pen-ter|Electrician:E-lec-tri-cian|Mechanic:Me-chan-ic|Painter:Paint-er|Barber:Bar-ber|Fisherman:Fish-er-man|Scientist:Sci-en-tist|Astronaut:As-tro-naut|Yellow:Yel-low|Purple:Pur-ple|Circle:Cir-cle|Triangle:Tri-an-gle|Rectangle:Rec-tan-gle|Oval:O-val|Diamond:Di-a-mond|Pentagon:Pen-ta-gon|Hexagon:Hex-a-gon|Crescent:Cres-cent|Arrow:Ar-row|Shoulders:Shoul-ders|Elbows:El-bows|Fingers:Fin-gers|Tummy:Tum-my|Running:Run-ning|Jumping:Jump-ing|Swimming:Swim-ming|Flying:Fly-ing|Eating:Eat-ing|Drinking:Drink-ing|Sleeping:Sleep-ing|Climbing:Climb-ing|Walking:Walk-ing|Digging:Dig-ging|Washing:Wash-ing|Playing:Play-ing|Sitting:Sit-ting|Rolling:Roll-ing|Hugging:Hug-ging|Happy:Hap-py|Angry:An-gry|Surprised:Sur-prised|Sleepy:Sleep-y|Silly:Sil-ly|Empty:Emp-ty|Open:O-pen|under:un-der|Under:Un-der|behind:be-hind|Behind:Be-hind|table:ta-ble`
+  .split('|').map((pair) => pair.split(':')));
+
+/* T-shirt is the one hyphen that is not a beat break. */
+function beatsOf(word) {
+  if (word === 'T-shirt') return ['T', 'shirt'];
+  if (SYLLABLES[word]) return SYLLABLES[word].split('-');
+  /* A phrase — "under the table" — is its words' beats in a row. */
+  return word.split(' ').flatMap((w) => (SYLLABLES[w] || w).split('-'));
+}
+
+/* The English word on the panel, or null when the panel isn't English
+   — then 🐢 slows the voice down and skips the beats. */
+function slowWordFor(item) {
+  if (item.kind === 'letter' || item.kind === 'number') return item.lang === 'en' ? item.word : null;
+  if (item.kind === 'picture') return pictureUsesBangla(item) ? null : item.word;
+  if (item.kind === 'body') return curLang() === 'en' ? item.word : null;
+  if (item.kind === 'word' && item.group === 'place') return item.say.replace(/\.$/, '');
+  return item.word;
+}
+
+function panelItem() {
+  const t = keyboardTarget();
+  return t ? (t.item || t.list[0]) : null;
+}
+
+const SPEAK_ANCHORS = {
+  letters: letterView, numbers: numView, pictures: focusStage,
+  colors: colorView, shapes: shapeView, body: bodyView,
+};
+
+const canRecord = !!(window.isSecureContext && navigator.mediaDevices
+  && navigator.mediaDevices.getUserMedia && typeof MediaRecorder === 'function');
+
+Object.values(SPEAK_ANCHORS).forEach(addSpeakBar);
+
+function addSpeakBar(anchor) {
+  const bar = document.createElement('div');
+  bar.className = 'speak-bar' + (canRecord ? '' : ' no-mic');
+  bar.innerHTML =
+    '<span class="beats" aria-hidden="true"></span>'
+    + '<button class="speak-btn speak-btn--slow" type="button" aria-label="Say it slowly" title="Say it slowly"><span aria-hidden="true">🐢</span></button>'
+    + '<button class="speak-btn speak-btn--mic" type="button" aria-label="Say it with me" title="Say it with me"><span aria-hidden="true">🎤</span></button>'
+    + '<button class="speak-btn speak-btn--own" type="button" aria-label="Record my voice for this" title="Record my voice for this"><span class="rec-dot" aria-hidden="true"></span></button>';
+  anchor.after(bar);
+}
+
+let beatRun = 0;
+
+function clearBeats() {
+  beatRun += 1;
+  document.querySelectorAll('.speak-bar .beats').forEach((b) => {
+    b.replaceChildren();
+    b.classList.remove('is-saying');
+  });
+}
+
+document.addEventListener('keydown', () => { slowFactor = 1; }, true);
+
+/* Any tap that isn't the turtle puts the voice back to full speed and
+   takes the beats away, so the next tile doesn't come out slow. */
+document.addEventListener('click', (e) => {
+  if (e.target.closest && e.target.closest('.speak-btn--slow')) return;
+  if (slowFactor !== 1) slowFactor = 1;
+  if (!e.target.closest || !e.target.closest('.speak-bar')) clearBeats();
+}, true);
+
+const drum = () => { tone(150, 0.16, 'triangle', 0.22); tone(300, 0.06, 'square', 0.04); };
+
+function saySlow(bar) {
+  const item = panelItem();
+  if (!item) return;
+  clearBeats();
+  const run = beatRun;
+  slowFactor = 0.6;
+  const word = slowWordFor(item);
+  if (!word) {
+    showItem(item);
+    return;
+  }
+  stopSound();
+  if ('speechSynthesis' in window) speechSynthesis.cancel();
+  const box = bar.querySelector('.beats');
+  const chips = beatsOf(word).map((b) => {
+    const c = document.createElement('span');
+    c.className = 'beat';
+    c.textContent = b;
+    return c;
+  });
+  box.replaceChildren(...chips);
+  const GAP = 520;
+  chips.forEach((c, i) => setTimeout(() => {
+    if (run !== beatRun) return;
+    c.classList.add('is-on');
+    drum();
+  }, 200 + i * GAP));
+  setTimeout(() => {
+    if (run !== beatRun) return;
+    box.classList.add('is-saying');
+    const done = () => { if (run === beatRun) box.classList.remove('is-saying'); };
+    /* Your recording, slowed, beats the device voice slowed. */
+    if (!letterSounds(item) && ownVoice(item, done)) return;
+    speak(word, { rate: 0.85, then: done });
+  }, 200 + chips.length * GAP + 250);
+}
+
+let turn = null;
+let lastTake = null;
+
+function endTurnUi() {
+  document.querySelectorAll('.speak-bar').forEach((b) => b.classList.remove('is-rec', 'is-asking', 'is-own'));
+}
+
+/* Stop the take and throw it away — leaving the screen, mainly. */
+function cancelTurn() {
+  if (!turn) return;
+  turn.cancelled = true;
+  finishTurn();
+}
+
+function finishTurn() {
+  const t = turn;
+  if (!t) return;
+  clearInterval(t.poll);
+  clearTimeout(t.limit);
+  if (t.recorder && t.recorder.state !== 'inactive') {
+    t.recorder.stop(); /* onstop lets go of the mic and plays it back */
+  } else if (t.stream) {
+    /* Stopped in the beep, before anything was recorded. */
+    t.stream.getTracks().forEach((tr) => tr.stop());
+    if (t.source) t.source.disconnect();
+    if (turn === t) turn = null;
+  }
+  endTurnUi();
+}
+
+async function startTurn(bar, btn, mode = 'child') {
+  if (turn) {
+    /* A second tap on 🎤 while it listens means "I'm done". */
+    if (turn.bar === bar) finishTurn();
+    return;
+  }
+  const item = panelItem();
+  if (!item) return;
+  clearBeats();
+  stopSound();
+  if ('speechSynthesis' in window) speechSynthesis.cancel();
+
+  const t = { bar, item, mode, key: ownKey(item), heard: false, cancelled: false, screen: state.screen };
+  turn = t;
+  bar.classList.add('is-asking');
+  try {
+    t.stream = await navigator.mediaDevices.getUserMedia({
+      audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true },
+    });
+  } catch (err) {
+    turn = null;
+    endTurnUi();
+    showTip(btn, 'Mic is off');
+    return;
+  }
+  if (t.cancelled || state.screen !== t.screen) {
+    t.stream.getTracks().forEach((tr) => tr.stop());
+    if (turn === t) turn = null;
+    endTurnUi();
+    return;
+  }
+  bar.classList.remove('is-asking');
+
+  const chunks = [];
+  t.recorder = new MediaRecorder(t.stream);
+  t.recorder.ondataavailable = (e) => { if (e.data && e.data.size) chunks.push(e.data); };
+  t.recorder.onstop = () => {
+    /* Let go of the mic at once. On an iPhone an open mic moves the
+       sound to the quiet earpiece, and the playback must be loud. */
+    t.stream.getTracks().forEach((tr) => tr.stop());
+    if (t.source) t.source.disconnect();
+    if (turn === t) turn = null;
+    if (t.cancelled) return;
+    const blob = new Blob(chunks, { type: t.recorder.mimeType || 'audio/mp4' });
+    if (t.mode === 'own') keepOwnTake(blob, t);
+    else playTake(blob, t);
+  };
+
+  /* Listen for the end of his word: once something loud has been
+     heard, 0.8 s of quiet stops the take. Never connected to the
+     speakers, so there is no echo. */
+  const ac = ctx();
+  if (ac && ac.createMediaStreamSource) {
+    t.source = ac.createMediaStreamSource(t.stream);
+    const an = ac.createAnalyser();
+    an.fftSize = 1024;
+    t.source.connect(an);
+    const buf = new Float32Array(an.fftSize);
+    let lastLoud = 0;
+    t.poll = setInterval(() => {
+      an.getFloatTimeDomainData(buf);
+      let sum = 0;
+      for (let i = 0; i < buf.length; i++) sum += buf[i] * buf[i];
+      const rms = Math.sqrt(sum / buf.length);
+      bar.style.setProperty('--level', Math.min(1, rms * 10).toFixed(2));
+      const now = performance.now();
+      if (rms > 0.03) { t.heard = true; lastLoud = now; }
+      else if (t.heard && now - lastLoud > 800) finishTurn();
+    }, 60);
+  } else {
+    t.heard = true; /* no meter: trust him */
+  }
+
+  tone(880, 0.12, 'sine', 0.12);
+  setTimeout(() => {
+    if (turn !== t || t.cancelled) return;
+    t.recorder.start();
+    bar.classList.add('is-rec');
+    if (t.mode === 'own') bar.classList.add('is-own');
+    t.limit = setTimeout(finishTurn, 4000);
+  }, 180);
+}
+
+function playTake(blob, t) {
+  if (!t.heard || !blob.size) {
+    showTip(t.bar.querySelector('.speak-btn--mic'), 'Say it louder!');
+    return;
+  }
+  if (lastTake) URL.revokeObjectURL(lastTake);
+  lastTake = URL.createObjectURL(blob);
+  addStar();
+  sfx.right();
+  /* His voice, then the board's, so the two sit side by side. */
+  setTimeout(() => {
+    if (state.screen !== t.screen) return;
+    t.bar.classList.add('is-playing');
+    playClip('take', lastTake, () => t.bar.classList.remove('is-playing'), () => {
+      t.bar.classList.remove('is-playing');
+      setTimeout(() => { if (state.screen === t.screen) showItem(t.item); }, 350);
+    });
+  }, 450);
+}
+
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest && e.target.closest('.speak-btn');
+  if (!btn) return;
+  const bar = btn.closest('.speak-bar');
+  if (btn.classList.contains('speak-btn--slow')) {
+    cancelTurn();
+    saySlow(bar);
+  } else if (canRecord) {
+    startTurn(bar, btn, btn.classList.contains('speak-btn--own') ? 'own' : 'child');
+  }
 });
 
+/* ---------- Your voice ----------------------------------------
+   A grown-up can record any tile once — "apple", "buh", "under the
+   table" — and from then on that tile speaks in their voice. A child
+   copies a parent's voice better than a device's, and only a person
+   can say a letter sound cleanly: a speech engine handed "b" says
+   "bee", and handed "buh" adds a vowel the sound doesn't have.
+
+   The recordings live in IndexedDB on this device and nowhere else.
+   They load into memory at start-up as object URLs, so a tap can play
+   one at once, inside the tap, which is what iOS needs.
+   -------------------------------------------------------------- */
+
+const ownClips = new Map();
+let ownDbPromise = null;
+
+function ownDb() {
+  if (!ownDbPromise) {
+    ownDbPromise = new Promise((resolve, reject) => {
+      if (!('indexedDB' in window)) return reject(new Error('no IndexedDB'));
+      const req = indexedDB.open('kiddo-voice', 1);
+      req.onupgradeneeded = () => req.result.createObjectStore('clips');
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+  return ownDbPromise;
+}
+
+async function loadOwnVoices() {
+  try {
+    const db = await ownDb();
+    await new Promise((resolve) => {
+      const cur = db.transaction('clips').objectStore('clips').openCursor();
+      cur.onsuccess = () => {
+        const c = cur.result;
+        if (!c) return resolve();
+        const v = c.value;
+        const blob = v instanceof Blob ? v : new Blob([v.data], { type: v.type });
+        ownClips.set(c.key, URL.createObjectURL(blob));
+        c.continue();
+      };
+      cur.onerror = () => resolve();
+    });
+  } catch (err) { /* no storage: the board keeps its own voice */ }
+  renderOwnPanel();
+}
+
+/* One recording per tile per language, and letter sounds apart from
+   letter names. A picture's language is the one its name is shown in. */
+function ownKey(item) {
+  if (item.kind === 'letter' && letterSounds(item)) return `sound:${item.id}`;
+  if (item.kind === 'letter' || item.kind === 'number') return `${item.lang}:${item.id}`;
+  if (item.kind === 'picture') return `${pictureUsesBangla(item) ? 'bn' : 'en'}:${item.id}`;
+  if (item.kind === 'body') return `${curLang()}:${item.id}`;
+  return `en:${item.id}`;
+}
+
+/* Plays the grown-up's recording for this tile, if there is one, and
+   says so; the caller falls back to the board's own voice. */
+function ownVoice(item, then) {
+  const url = ownClips.get(ownKey(item));
+  if (!url || state.muted) return false;
+  playClip(`own-${ownKey(item)}`, url, then || null, then || null);
+  return true;
+}
+
+/* Stored as bytes and a type, not as a Blob: WebKit has had trouble
+   keeping Blobs in IndexedDB, and bytes always work. Resolves once the
+   write is really on disk, and rejects if it isn't. */
+async function saveOwnClip(key, blob) {
+  const data = await blob.arrayBuffer();
+  const db = await ownDb();
+  await new Promise((resolve, reject) => {
+    const tx = db.transaction('clips', 'readwrite');
+    tx.objectStore('clips').put({ type: blob.type, data }, key);
+    tx.oncomplete = resolve;
+    tx.onerror = () => reject(tx.error);
+    tx.onabort = () => reject(tx.error);
+  });
+}
+
+async function keepOwnTake(blob, t) {
+  if (!t.heard || !blob.size) {
+    showTip(t.bar.querySelector('.speak-btn--own'), 'Say it louder!');
+    return;
+  }
+  const old = ownClips.get(t.key);
+  if (old) URL.revokeObjectURL(old);
+  ownClips.set(t.key, URL.createObjectURL(blob));
+  try {
+    await saveOwnClip(t.key, blob);
+  } catch (err) {
+    showTip(t.bar.querySelector('.speak-btn--own'), 'Not saved');
+  }
+  renderOwnPanel();
+  sfx.right();
+  /* Play it back once, so the grown-up hears what was kept. */
+  setTimeout(() => { if (state.screen === t.screen) ownVoice(t.item); }, 400);
+}
+
+async function clearOwnVoices() {
+  ownClips.forEach((url) => URL.revokeObjectURL(url));
+  ownClips.clear();
+  try {
+    const db = await ownDb();
+    db.transaction('clips', 'readwrite').objectStore('clips').clear();
+  } catch (err) { /* nothing stored */ }
+  renderOwnPanel();
+}
+
+const OWN_PREF = 'kiddo-own-voice-button';
+
+function renderOwnPanel() {
+  const on = localStorage.getItem(OWN_PREF) === '1';
+  el('ownVoiceToggle').checked = on;
+  appEl.classList.toggle('is-recording-own', on && canRecord);
+  const n = ownClips.size;
+  const clear = el('ownVoiceClear');
+  clear.classList.toggle('is-hidden', !n);
+  clear.textContent = `Delete my recordings (${n})`;
+  if (!canRecord) el('ownVoiceNote').textContent = 'Recording needs the app opened from its web address (https), not from a file.';
+}
+
+el('ownVoiceToggle').addEventListener('change', (e) => {
+  localStorage.setItem(OWN_PREF, e.target.checked ? '1' : '0');
+  renderOwnPanel();
+});
+
+el('ownVoiceClear').addEventListener('click', () => {
+  if (!confirm(`Delete all ${ownClips.size} of your recordings?`)) return;
+  clearOwnVoices();
+});
+
+/* ---------- Letter sounds -------------------------------------
+   The letters screen can say what a letter *does* instead of what it
+   is called: "buh, buh, ball" rather than "bee, ball". English only —
+   the other alphabets have no sound list here. Without a recording,
+   the device voice reads a spelling of the sound. That is close, not
+   right: "buh" carries a vowel /b/ doesn't have, and a grown-up
+   recording is better. Remembered on this device. */
+
+const PHONICS = {
+  A: 'ah', B: 'buh', C: 'kuh', D: 'duh', E: 'eh', F: 'fuh', G: 'guh', H: 'huh',
+  I: 'ih', J: 'juh', K: 'kuh', L: 'luh', M: 'muh', N: 'nuh', O: 'aw', P: 'puh',
+  Q: 'kwuh', R: 'ruh', S: 'suh', T: 'tuh', U: 'uh', V: 'vuh', W: 'wuh', X: 'ks',
+  Y: 'yuh', Z: 'zuh',
+};
+
+const MODE_PREF = 'kiddo-letter-mode';
+let letterMode = localStorage.getItem(MODE_PREF) === 'sound' ? 'sound' : 'name';
+
+function letterSounds(item) {
+  return letterMode === 'sound' && item.kind === 'letter' && item.lang === 'en' && !!PHONICS[item.face];
+}
+
+function sayLetterSound(item) {
+  const word = () => speak(`${item.word}.`, { rate: 0.8 });
+  const url = ownClips.get(ownKey(item));
+  if (url && !state.muted) {
+    /* Your sound twice, then the word. */
+    playClip(`own-${ownKey(item)}`, url, word, () => {
+      setTimeout(() => playClip(`own2-${ownKey(item)}`, url, word, () => setTimeout(word, 250)), 250);
+    });
+    return;
+  }
+  const p = PHONICS[item.face];
+  speak(`${p}. ${p}. ${item.word}.`, { rate: 0.75 });
+}
+
+function renderLetterMode() {
+  const en = curLang() === 'en';
+  el('letterModeSwitch').classList.toggle('is-hidden', !en);
+  el('letterModeSwitch').querySelectorAll('.seg').forEach((b) => {
+    b.classList.toggle('is-on', b.dataset.mode === letterMode);
+  });
+  el('lettersHint').textContent = en && letterMode === 'sound'
+    ? 'Tap a letter to hear its sound.' : cur().hint.letters;
+  renderLetter(state.letterItem && state.letterItem.lang === curLang()
+    ? state.letterItem : LETTERS_BY_LANG[curLang()][0]);
+}
+
+el('letterModeSwitch').addEventListener('click', (e) => {
+  const b = e.target.closest('.seg');
+  if (!b) return;
+  letterMode = b.dataset.mode;
+  localStorage.setItem(MODE_PREF, letterMode);
+  sfx.pop();
+  renderLetterMode();
+});
 
 /* ---------- Grown-ups ---------------------------------------- */
 
@@ -3155,6 +4205,7 @@ function renderStats() {
   rows.push(['Colors explored', explored(colorItems)]);
   rows.push(['Shapes explored', explored(shapeItems)]);
   rows.push(['Body parts explored', explored(bodyItems)]);
+  Object.values(WORD_SCREENS).forEach((ws) => rows.push([`${ws.title} explored`, explored(ws.list)]));
 
   el('stats').replaceChildren(...rows.map(([term, value]) => {
     const row = document.createElement('div');
@@ -3174,7 +4225,7 @@ function explored(list) {
 
 function closeParent() { parentWrap.classList.add('is-hidden'); }
 
-el('parentBtn').addEventListener('click', openParent);
+holdToOpen(el('parentBtn'), openParent);
 el('parentClose').addEventListener('click', closeParent);
 el('parentScrim').addEventListener('click', closeParent);
 
@@ -3209,6 +4260,15 @@ function englishVoiceUrls() {
   LETTERS_BY_LANG.en.forEach((it) => { add(it.say); add(askOf(it)); });
   NUMBERS_BY_LANG.en.forEach((it) => { add(it.word); add(askOf(it)); });
   bodyItems.forEach((it) => { add(it.say); add(askOf(it)); });
+  [...actionItems, ...feelingItems, ...oppositeItems, ...placeItems].forEach((it) => {
+    add(it.say); add(askOf(it));
+  });
+  /* Letter sounds without a grown-up recording, and the sound game. */
+  LETTERS_BY_LANG.en.forEach((it) => {
+    const p = PHONICS[it.face];
+    if (p) add(`${p}. ${p}. ${it.word}.`);
+  });
+  add('Who makes this sound?');
   ['Yaaay!', 'Woohoo!', 'Hooray!', 'Yippee!', 'You did it! Well done!']
     .forEach(add);
   const seen = new Set();
@@ -3225,6 +4285,7 @@ function englishVoiceUrls() {
 function mediaUrls() {
   const urls = [];
   pictureAll.forEach((it) => urls.push(`photos/${it.slug}.jpg`));
+  actionItems.forEach((it) => urls.push(`photos/${it.slug}.jpg`));
   ANIMAL_SOUNDS.forEach((name) => urls.push(`sounds/${name}.m4a`));
   englishVoiceUrls().forEach((u) => urls.push(u));
   /* Only the languages that are switched on, and of those only the
@@ -3402,6 +4463,8 @@ function keyboardTarget() {
   if (state.screen === 'colors') return { list: colorItems, item: state.colorItem };
   if (state.screen === 'shapes') return { list: shapeItems, item: state.shapeItem };
   if (state.screen === 'body') return { list: bodyItems, item: state.bodyItem };
+  const ws = WORD_SCREENS[state.screen];
+  if (ws) return { list: ws.list, item: state.wordItem[state.screen] || null };
   return null;
 }
 
@@ -3509,6 +4572,8 @@ applyLang();
 el('scoreNum').textContent = state.stars;
 renderSound();
 renderFocusMode();
+renderLetterMode();
+loadOwnVoices();
 booted = true;
 shownLangs = activeLangs().join(',');
 shownAvail = availKey();
@@ -3520,8 +4585,9 @@ const params = new URLSearchParams(location.search);
 
 /* The home-screen icon can carry a long-press menu — see `shortcuts` in
    the manifest — and each entry is this same page with a ?screen= on
-   it. Anything the board doesn't have a tab for lands on the letters,
-   so a stale bookmark can't open an empty door.
+   it. It opens on top of the home menu, so back goes home. Anything
+   the board has no module for stays on the home menu, so a stale
+   bookmark can't open an empty door.
 
    ?screen=bangla is one such stale bookmark, and a real one: it is
    what the বাংলা shortcut pointed at while Bangla was a tab of its
@@ -3535,5 +4601,8 @@ const wanted = asked === 'bangla' ? 'letters' : asked;
 const askedLang = asked === 'bangla' ? 'bn' : params.get('lang');
 if (askedLang && activeLangs().includes(askedLang)) setLang(askedLang);
 
-const known = [...document.querySelectorAll('.tab')].map((t) => t.dataset.screen);
-showScreen(known.includes(wanted) ? wanted : 'letters');
+const known = [...document.querySelectorAll('.home-card')].map((t) => t.dataset.screen);
+/* Always start on the home menu, so back from a shortcut lands there. */
+history.replaceState({ kiddo: { screen: 'home' }, depth: 0 }, '');
+applyNav({ screen: 'home' });
+if (known.includes(wanted)) navigate({ screen: wanted });

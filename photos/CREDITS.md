@@ -805,3 +805,87 @@ Everyday kids clothing for the Clothes shelf. Square ~512px crops from Wikimedia
 **Sock** — `sock.jpg` — From *Socks.jpg*  
 **Jacket** — `jacket.jpg` — From *Denim_jacket.jpg*  
 **Sweater** — `sweater.jpg` — From *Sweater.jpg*  
+
+## Actions
+
+Photographs of animals doing the thing, one action each, picked by hand
+from Wikimedia Commons for the household rule: one ordinary animal, big
+in the frame, the action obvious at a glance. Animals rather than people
+so that none of them is somebody else's child. Most crops are offset to
+keep the whole animal and the action in frame; the hug is cropped from
+the top of its original.
+
+**Run** — `action-run.jpg`  
+From *2020-09-22 Shiba Inu running.jpg* by whity  
+License: CC BY 2.0  
+Source: https://commons.wikimedia.org/wiki/File:2020-09-22_Shiba_Inu_running.jpg
+
+**Jump** — `action-jump.jpg`  
+From *ACD obedience.jpg* by Eva holderegger walser  
+License: CC BY-SA 3.0  
+Source: https://commons.wikimedia.org/wiki/File:ACD_obedience.jpg
+
+**Swim** — `action-swim.jpg`  
+From *20180711-FS-PJK-5274 TONED (43446072521).jpg* by U.S. Department of Agriculture Preston Keres/Office of Communications-Photography Services Center  
+License: Public domain  
+Source: https://commons.wikimedia.org/wiki/File:20180711-FS-PJK-5274_TONED_(43446072521).jpg
+
+**Fly** — `action-fly.jpg`  
+From *Flying Seagull.jpg* by KeepActive Australia from Melbourne, VIC, Australia  
+License: CC BY-SA 4.0  
+Source: https://commons.wikimedia.org/wiki/File:Flying_Seagull.jpg
+
+**Eat** — `action-eat.jpg`  
+From *Nut Pose - geograph.org.uk - 2913175.jpg* by Peter Trimming  
+License: CC BY-SA 2.0  
+Source: https://commons.wikimedia.org/wiki/File:Nut_Pose_-_geograph.org.uk_-_2913175.jpg
+
+**Drink** — `action-drink.jpg`  
+From *2015-04-05 Drinking cat.jpg* by Mussi Katz  
+License: Public domain  
+Source: https://commons.wikimedia.org/wiki/File:2015-04-05_Drinking_cat.jpg
+
+**Sleep** — `action-sleep.jpg`  
+From *77 105 Sleepy Pete (152926109).jpeg* by Matthew Bellemare  
+License: CC BY-SA 3.0  
+Source: https://commons.wikimedia.org/wiki/File:77_105_Sleepy_Pete_(152926109).jpeg
+
+**Climb** — `action-climb.jpg`  
+From *Tabby cat clinging to a tree-Hisashi-01 (2009; cropped 2026).jpg* by Hisashi from Japan  
+License: CC BY-SA 2.0  
+Source: https://commons.wikimedia.org/wiki/File:Tabby_cat_clinging_to_a_tree-Hisashi-01_(2009;_cropped_2026).jpg
+
+**Walk** — `action-walk.jpg`  
+From *Elephant Walking in High Grass.jpg* by Eric Kilby  
+License: CC BY-SA 2.0  
+Source: https://commons.wikimedia.org/wiki/File:Elephant_Walking_in_High_Grass.jpg
+
+**Dig** — `action-dig.jpg`  
+From *Digging it (8566272318).jpg* by David Burn from Austin, TX, USA  
+License: CC BY-SA 2.0  
+Source: https://commons.wikimedia.org/wiki/File:Digging_it_(8566272318).jpg
+
+**Wash** — `action-wash.jpg`  
+From *African bush elephant (Loxodonta africana) spraying water.jpg* by Charles J. Sharp  
+License: CC BY-SA 4.0  
+Source: https://commons.wikimedia.org/wiki/File:African_bush_elephant_(Loxodonta_africana)_spraying_water.jpg
+
+**Play** — `action-play.jpg`  
+From *Jamnik Dachshund puppies.jpg* by Bartłomiej Derski  
+License: CC BY-SA 4.0  
+Source: https://commons.wikimedia.org/wiki/File:Jamnik_Dachshund_puppies.jpg
+
+**Sit** — `action-sit.jpg`  
+From *11.10.2015 Samoyed (cropped).jpg* by Alexander Patrikeev  
+License: CC BY-SA 4.0  
+Source: https://commons.wikimedia.org/wiki/File:11.10.2015_Samoyed_(cropped).jpg
+
+**Roll** — `action-roll.jpg`  
+From *Golden Retriever Wurftreffen Lightning Dreams (10576700306).jpg* by Dirk Vorderstraße  
+License: CC BY 2.0  
+Source: https://commons.wikimedia.org/wiki/File:Golden_Retriever_Wurftreffen_Lightning_Dreams_(10576700306).jpg
+
+**Hug** — `action-hug.jpg`  
+From *Hugging gray langur.jpg* by Akil Aki  
+License: CC BY-SA 4.0  
+Source: https://commons.wikimedia.org/wiki/File:Hugging_gray_langur.jpg
